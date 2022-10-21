@@ -18,25 +18,19 @@ class AppConfig {
   bool developmentMode;
   String appName;
   String baseApiLayer;
-  String baseGraphQLUrl;
-  String onesignalAppID;
 
   AppConfig(
     this.envName,
     this.developmentMode,
     this.appName,
     this.baseApiLayer,
-    this.baseGraphQLUrl,
-    this.onesignalAppID,
   );
 
   AppConfig.from(Map<String, dynamic> env)
       : envName = env[Env.environment],
         developmentMode = env[Env.developmentMode],
         appName = env[Env.appName],
-        baseApiLayer = env[Env.baseApiLayer],
-        baseGraphQLUrl = env[Env.baseGraphQLUrl],
-        onesignalAppID = env[Env.onesignalAppID];
+        baseApiLayer = env[Env.baseApiLayer];
 
   bool get isDevBuild => envName == Env.devEnvName;
 

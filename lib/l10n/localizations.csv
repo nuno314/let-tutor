@@ -1,0 +1,38 @@
+key,vi,en
+appName,Diva Customer,Diva Customer
+inform,Thông báo,Information
+ok,Ok,Ok
+cancel,Hủy,Cancel
+delete,Xóa,Xóa
+error,Error,Error
+warning,Chú Ý,Warning
+confirm,Xác Nhận,Confirm
+ignore,Bỏ Qua,Ignore
+noInternet,"Connection errors.
+Please check your network connection and try again","Connection errors.
+Please check your network connection and try again"
+technicalIssues,"Oops! .There seems to be a technical problem.
+Please check your connection or try again later","Oops! .There seems to be a technical problem.
+Please check your connection or try again later"
+serverMaintenance,Server is unavailable at this time. Please try again later.,Server is unavailable at this time. Please try again later.
+connectionTimeout,Connection timmed out.,Connection timmed out.
+loading,Loading,Loading
+requiredLoginMsg,Please login to use this feature,Please login to use this feature
+sessionExpired,Your session is expired. Please log in again!,Your session is expired. Please log in again!
+skip,Bỏ qua,Skip
+noData,Không có dữ liệu,No data
+failed,Thất bại,Failed
+search,Tìm kiếm,Search
+loginRequired,Yêu cầu đăng nhập,Login required
+login,Đăng nhập,Login
+dismiss,Bỏ qua,Dismiss
+unknownError,Lỗi không rõ,Unknown error
+processing,Đang xử lý,Processing
+vietnamese,Tiếng Việt,Vietnamese
+english,Tiếng Anh,English
+emailAddress,Địa chỉ email,Email
+password,Mật khẩu,Password
+forgetPassword,Quên mật khẩu,Forget password
+orContinueWith,Hoặc tiếp tục với,Or continue with
+noAccount,Chưa có tài khoản?,No account?
+signUp,Đăng ký,Sign up

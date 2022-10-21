@@ -15,33 +15,6 @@ extension StateBaseExtention on StateBase {
     );
   }
 
-  String? genderFromText(String? text) {
-    final trans = translate(context);
-    if (text == trans.male) {
-      return ServerGender.male;
-    }
-    if (text == trans.female) {
-      return ServerGender.female;
-    }
-    if (text == trans.otherGender) {
-      return ServerGender.other;
-    }
-    return null;
-  }
-
-  String? textFromGender(String? gender) {
-    final trans = translate(context);
-    switch (gender) {
-      case ServerGender.male:
-        return trans.male;
-      case ServerGender.female:
-        return trans.female;
-      case ServerGender.other:
-        return trans.otherGender;
-      default:
-        return null;
-    }
-  }
 }
 
 void showToast(String message) {

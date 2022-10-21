@@ -20,7 +20,7 @@ class SplashBloc extends AppBlocBase<SplashEvent, SplashState> {
   ) async {
     await _configServices();
     // await _configRepo.getAppSetting();
-    emitter(SplashFinishState(RouteList.dashBoardRoute));
+    emitter(SplashFinishState(RouteList.signIn));
   }
 
   Future<void> _configServices() async {

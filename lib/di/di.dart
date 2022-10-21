@@ -4,7 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'di.config.dart';
 
-GetIt injector = GetIt.instance;
+GetIt coreInjector = GetIt.instance;
+
+GetIt get injector => coreInjector;
+
 @InjectableInit(
   initializerName: r'$initGetIt',
   preferRelativeImports: true,

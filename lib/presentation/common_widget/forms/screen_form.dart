@@ -13,6 +13,7 @@ class ScreenForm extends StatefulWidget {
   final Color? headerColor;
   final bool showHeaderImage;
   final List<Widget> actions;
+  final Widget? iconTitle;
   final void Function()? onBack;
   final bool? resizeToAvoidBottomInset;
   final Widget? extentions;
@@ -26,6 +27,7 @@ class ScreenForm extends StatefulWidget {
     this.bgColor,
     this.showHeaderImage = true,
     this.actions = const <Widget>[],
+    this.iconTitle,
     this.headerColor,
     this.onBack,
     this.resizeToAvoidBottomInset,
@@ -113,22 +115,24 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
               ),
             const SizedBox(width: 4),
             Expanded(
-              child: Padding(
+              child: Container(
                 padding: EdgeInsets.only(
                   right: widget.actions.isEmpty ? 24 : 8,
                   top: 4,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
-                    Text(
-                      widget.title ?? '',
-                      style: _theme.textTheme.headline3?.copyWith(
-                        color: textColor,
-                        fontSize: 24,
-                      ),
-                    ),
+                    widget.iconTitle != null
+                        ? widget.iconTitle!
+                        : Text(
+                            widget.title ?? '',
+                            style: _theme.textTheme.headline3?.copyWith(
+                              color: textColor,
+                              fontSize: 24,
+                            ),
+                          ),
                     if (widget.des?.isNotEmpty == true)
                       const SizedBox(height: 4),
                     if (widget.des?.isNotEmpty == true)

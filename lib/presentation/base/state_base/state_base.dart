@@ -120,16 +120,8 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  Future<void> openWeb({String? title, String? url, String? html}) async {
-    await Navigator.of(context).pushNamed(
-      RouteList.webview,
-      arguments: WebviewArgs(
-        title: title,
-        html: html,
-        url: url,
-      ),
-    );
-  }
+  
+  
 
   String get languageCode =>
       context.read<AppDataBloc>().state?.locale.languageCode ??
