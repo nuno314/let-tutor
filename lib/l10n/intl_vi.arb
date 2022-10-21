@@ -31,5 +31,9 @@
   "forgetPassword": "Quên mật khẩu",
   "orContinueWith": "Hoặc tiếp tục với",
   "noAccount": "Chưa có tài khoản?",
-  "signUp": "Đăng ký"
+  "signUp": "Đăng ký",
+  "haveAccount": "Đã có tài khoản",
+  "resetPassword": "Đặt Lại Mật Khẩu",
+  "pleaseEnterEmailToResetPassword": "Vui lòng nhập email để tìm kiếm tài khoản của bạn.",
+  "checkMail": "Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn."
 }

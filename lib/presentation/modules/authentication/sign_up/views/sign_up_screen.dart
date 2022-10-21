@@ -10,20 +10,10 @@ import 'package:let_tutor/presentation/theme/theme_button.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../extentions/extention.dart';
-import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
-import '../bloc/sign_in_bloc.dart';
+import '../sign_up.dart';
 
-part 'sign_in.action.dart';
-
-class DropdownLanguageArgs {
-  String title;
-  String iconPath;
-  DropdownLanguageArgs({
-    required this.title,
-    required this.iconPath,
-  });
-}
+part 'sign_up.action.dart';
 
 class LoginOptionArgs {
   String iconPath;
@@ -34,16 +24,16 @@ class LoginOptionArgs {
   });
 }
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends StateBase<SignInScreen> {
+class _SignUpScreenState extends StateBase<SignUpScreen> {
   @override
-  SignInBloc get bloc => BlocProvider.of(context);
+  SignUpBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 
@@ -57,7 +47,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
     _themeData = Theme.of(context);
     trans = translate(context);
     final _size = MediaQuery.of(context).size;
-    return BlocConsumer<SignInBloc, SignInState>(
+    return BlocConsumer<SignUpBloc, SignUpState>(
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
@@ -141,7 +131,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           width: double.infinity,
         ),
         Text(
-          trans.login,
+          trans.signUp,
           style: textTheme.bodyText1?.copyWith(
             color: AppColor.primaryColor,
             fontSize: 30,
@@ -191,7 +181,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: onResetPassword,
+            onTap: () {},
             child: Text(
               trans.forgetPassword,
               style: textTheme.bodyText2?.copyWith(
@@ -206,9 +196,8 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           ThemeButton.bottomButton(
             context,
             isWithShadown: false,
-            buttonTitle: trans.login.toUpperCase(),
+            buttonTitle: trans.signUp.toUpperCase(),
             padding: EdgeInsets.all(0),
-            onTap: onSignIn,
           ),
         ],
       ),
@@ -256,12 +245,12 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                trans.noAccount,
+                trans.haveAccount,
               ),
               InkWell(
-                onTap: onSignUp,
+                onTap: onSignIn,
                 child: Text(
-                  trans.signUp,
+                  trans.login,
                   style: textTheme.bodyText2?.copyWith(
                     color: AppColor.primaryColor,
                   ),

@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../common/constants.dart';
 import '../../../common/utils.dart';
+import '../../../generated/assets.dart';
 import '../../theme/theme_color.dart';
 import '../export.dart';
+
+class DropdownLanguageArgs {
+  String title;
+  String iconPath;
+  DropdownLanguageArgs({
+    required this.title,
+    required this.iconPath,
+  });
+}
 
 class ScreenForm extends StatefulWidget {
   final String? title;
@@ -18,6 +29,7 @@ class ScreenForm extends StatefulWidget {
   final bool? resizeToAvoidBottomInset;
   final Widget? extentions;
   final bool showBackButton;
+  final dynamic trans;
 
   const ScreenForm({
     Key? key,
@@ -33,6 +45,7 @@ class ScreenForm extends StatefulWidget {
     this.resizeToAvoidBottomInset,
     this.extentions,
     this.showBackButton = true,
+    required this.trans,
   }) : super(key: key);
 
   @override
@@ -146,12 +159,58 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 ),
               ),
             ),
+            _buildLanguageSelection(),
             ...widget.actions,
           ],
         ),
         if (widget.extentions != null) widget.extentions!,
         const SizedBox(height: 16),
       ],
+    );
+  }
+
+  Widget _buildLanguageSelection() {
+    final languageList = [
+      DropdownLanguageArgs(
+        title: widget.trans.vietnamese,
+        iconPath: Assets.svg.icVietnam,
+      ),
+      DropdownLanguageArgs(
+        title: widget.trans.english,
+        iconPath: Assets.svg.icUs,
+      ),
+    ];
+    var _selectedLanguage = languageList[0];
+
+    return DropdownButtonHideUnderline(
+      child: ButtonTheme(
+        alignedDropdown: true,
+        child: DropdownButton<DropdownLanguageArgs>(
+          value: _selectedLanguage,
+          items: languageList
+              .map(
+                (e) => DropdownMenuItem<DropdownLanguageArgs>(
+                  child: Container(
+                    width: 100,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(e.title),
+                        Spacer(),
+                        SvgPicture.asset(
+                          e.iconPath,
+                          height: 35,
+                        ),
+                      ],
+                    ),
+                  ),
+                  value: e,
+                ),
+              )
+              .toList(),
+          onChanged: (value) {},
+        ),
+      ),
     );
   }
 }
