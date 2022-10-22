@@ -18,6 +18,7 @@ class AppColor {
   static const Color transparent = Colors.transparent;
   static const Color greyE5 = const Color(0xFFE5E5E5);
   static const Color grey64 = Color.fromARGB(255, 225, 225, 230);
+  static const Color greenB7EB8F = const Color(0xffb7eb8f);
 
   static const Color inactiveColor = Color(0xFF111111);
   static const Color activeColor = primaryColor;

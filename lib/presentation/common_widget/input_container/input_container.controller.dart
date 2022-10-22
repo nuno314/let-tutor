@@ -29,7 +29,10 @@ class InputContainerController extends ValueNotifier<InputContainerProperties> {
   InputContainerController({InputContainerProperties? value})
       : super(value ?? InputContainerProperties());
 
-  String get text => value.tdController.text;
+  set text(String? v) {
+    value.tdController.text = v ?? '';
+    resetValidation();
+  }
 
   void resetValidation() {
     value.validation = null;

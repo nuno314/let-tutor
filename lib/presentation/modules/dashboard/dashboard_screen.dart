@@ -484,8 +484,6 @@ class _DashboardScreenState extends StateBase<DashboardScreen> {
         name: 'Keegan',
         rating: 5,
         country: 'France',
-        countryUrl:
-            '	https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/4x3/fr.svg',
         avatarUrl:
             'https://api.app.lettutor.com/avatar/4d54d3d7-d2a9-42e5-97a2-5ed38af5789aavatar1627913015850.00',
         description:
