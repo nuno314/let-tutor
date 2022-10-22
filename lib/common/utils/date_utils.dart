@@ -31,7 +31,7 @@ class DateUtils {
     D,
     ', ',
     dd,
-    ' thg ',
+    ' Thg ',
     mm,
     ', ',
     yyyy
@@ -69,10 +69,13 @@ extension DateUtilsExtention on DateTime {
     );
   }
 
-  String serverToDateOfWeek() {
+  String serverToDateOfWeek(BuildContext context) {
     return formatDate(
       toLocal(),
       DateUtils.dateOfWeekFormat,
+      locale: Localizations.localeOf(context).languageCode == 'en'
+          ? const EnglishDateLocale()
+          : const VietnameseDateLocale(),
     );
   }
 
@@ -82,4 +85,8 @@ extension DateUtilsExtention on DateTime {
       DateUtils.normalUTCFormat,
     );
   }
+
+  // String toVietnameseNormalDateFormat() {
+  //   return formatDate(date, formats),
+  // }
 }

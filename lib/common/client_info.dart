@@ -1,3 +1,5 @@
+import 'constants/app_locale.dart';
+
 class ClientInfo {
   static String model = '';
   static String osversion = '';
@@ -5,5 +7,5 @@ class ClientInfo {
   static String appVersionCode = '1';
   static String get appVersion => '$appVersionName($appVersionCode)';
   static String? identifier;
-  static String languageCode = '';
+  static String languageCode = AppLocale.defaultLocale.languageCode;
 }

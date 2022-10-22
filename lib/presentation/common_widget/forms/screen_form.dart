@@ -5,6 +5,7 @@ import '../../../common/constants.dart';
 import '../../../common/utils.dart';
 import '../../../generated/assets.dart';
 import '../../theme/theme_color.dart';
+import '../app_drawer.dart';
 import '../export.dart';
 
 class DropdownLanguageArgs {
@@ -24,12 +25,13 @@ class ScreenForm extends StatefulWidget {
   final Color? headerColor;
   final bool showHeaderImage;
   final List<Widget> actions;
-  final Widget? iconTitle;
   final void Function()? onBack;
   final bool? resizeToAvoidBottomInset;
   final Widget? extentions;
   final bool showBackButton;
   final dynamic trans;
+  final Widget? floatingActionButton;
+  final GlobalKey<ScaffoldState>? drawerKey;
 
   const ScreenForm({
     Key? key,
@@ -39,13 +41,14 @@ class ScreenForm extends StatefulWidget {
     this.bgColor,
     this.showHeaderImage = true,
     this.actions = const <Widget>[],
-    this.iconTitle,
     this.headerColor,
     this.onBack,
     this.resizeToAvoidBottomInset,
     this.extentions,
     this.showBackButton = true,
+    this.floatingActionButton,
     required this.trans,
+    this.drawerKey,
   }) : super(key: key);
 
   @override
@@ -83,8 +86,12 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
     );
 
     return Scaffold(
+      key: widget.drawerKey,
       backgroundColor: widget.bgColor,
+      endDrawer: AppDrawer(),
       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+      floatingActionButton: widget.floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       body: GestureDetector(
         onTap: () => CommonFunction.hideKeyBoard(context),
         child: widget.showHeaderImage == true
@@ -136,16 +143,18 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 8),
-                    widget.iconTitle != null
-                        ? widget.iconTitle!
-                        : Text(
-                            widget.title ?? '',
-                            style: _theme.textTheme.headline3?.copyWith(
-                              color: textColor,
-                              fontSize: 24,
-                            ),
-                          ),
+                    SvgPicture.asset(
+                      Assets.svg.icLogo,
+                      height: 40,
+                    ),
+                    if (widget.title != null)
+                      Text(
+                        widget.title ?? '',
+                        style: _theme.textTheme.headline3?.copyWith(
+                          color: textColor,
+                          fontSize: 24,
+                        ),
+                      ),
                     if (widget.des?.isNotEmpty == true)
                       const SizedBox(height: 4),
                     if (widget.des?.isNotEmpty == true)

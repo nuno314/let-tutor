@@ -29,6 +29,7 @@ class InputContainer extends StatefulWidget {
   final TextAlign textAlign;
   final int? maxLength;
   final bool showBorder;
+  final BorderRadius? borderRadius;
 
   const InputContainer({
     Key? key,
@@ -55,6 +56,7 @@ class InputContainer extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.maxLength,
     this.showBorder = true,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -114,8 +116,8 @@ class _InputContainerState extends State<InputContainer> {
           decoration: InputDecoration(
             filled: !widget.enable || widget.fillColor != null,
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 6,
+              horizontal: 16,
+              vertical: 8,
             ),
             hintText: widget.hint,
             hintStyle: widget.hintStyle ?? themeData.textTheme.subtitle2,
@@ -199,14 +201,16 @@ class _InputContainerState extends State<InputContainer> {
                   ? OutlineInputBorder(
                       borderSide: widget.borderSide ??
                           const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius:
+                          widget.borderRadius ?? BorderRadius.circular(6.0),
                     )
                   : InputBorder.none,
               enabledBorder: widget.showBorder
                   ? OutlineInputBorder(
                       borderSide: widget.borderSide ??
                           const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius:
+                          widget.borderRadius ?? BorderRadius.circular(6.0),
                     )
                   : InputBorder.none,
             ),

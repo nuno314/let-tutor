@@ -52,10 +52,6 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
         return ScreenForm(
           trans: trans,
           showHeaderImage: false,
-          iconTitle: SvgPicture.asset(
-            Assets.svg.icLogo,
-            height: 40,
-          ),
           child: Padding(
             padding: const EdgeInsets.all(32),
             child: Column(

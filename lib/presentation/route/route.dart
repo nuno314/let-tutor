@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:let_tutor/presentation/modules/authentication/reset_password/reset_password.dart';
 import 'package:let_tutor/presentation/modules/authentication/sign_in/sign_in_route.dart';
 import 'package:let_tutor/presentation/modules/authentication/sign_up/sign_up.dart';
+import 'package:let_tutor/presentation/modules/profile/profile.dart';
 
 import '../common_widget/text_scale_fixed.dart';
 import '../modules/dashboard/dashboard_route.dart';
@@ -14,6 +15,7 @@ class RouteGenerator {
         ...SignInRoute.getAll(settings),
         ...SignUpRoute.getAll(settings),
         ...ResetPasswordRoute.getAll(settings),
+        ...ProfileRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

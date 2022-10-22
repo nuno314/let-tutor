@@ -7,4 +7,6 @@ class RouteList {
   static const String signUp = '/signUp';
   static const String resetPassword = '/resetPassword';
   static const String resetPasswordConfirm = '/resetPasswordConfirm';
+  static const String teacherList = '/teacherList';
+  static const String profile = '/profile';
 }

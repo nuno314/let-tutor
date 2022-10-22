@@ -17,7 +17,7 @@ class AppColor {
   static const Color scaffoldBackgroundColor = Color(0xFFF1F3F7);
   static const Color transparent = Colors.transparent;
   static const Color greyE5 = const Color(0xFFE5E5E5);
-
+  static const Color grey64 = Color.fromARGB(255, 225, 225, 230);
 
   static const Color inactiveColor = Color(0xFF111111);
   static const Color activeColor = primaryColor;
@@ -29,7 +29,8 @@ class AppColor {
   static const Color orange = Color(0xFFff9b1a);
   static const Color darkBlue = Color(0xFF002d41);
   static const Color grayAD = const Color(0xFFADADAD);
-
+  static const Color yellowFADB14 = const Color(0xfffadb14);
+  static const Color bluecee8f0 = const Color(0xffcee8f0);
 
   //light
   static const Color primaryText = Colors.black;

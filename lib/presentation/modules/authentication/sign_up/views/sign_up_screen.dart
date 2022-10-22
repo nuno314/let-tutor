@@ -54,10 +54,6 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
           trans: trans,
           showHeaderImage: false,
           showBackButton: false,
-          iconTitle: SvgPicture.asset(
-            Assets.svg.icLogo,
-            height: 40,
-          ),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(

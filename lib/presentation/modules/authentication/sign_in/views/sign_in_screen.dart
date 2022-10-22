@@ -64,10 +64,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           trans: trans,
           showHeaderImage: false,
           showBackButton: false,
-          iconTitle: SvgPicture.asset(
-            Assets.svg.icLogo,
-            height: 40,
-          ),
+         
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(

@@ -24,10 +24,6 @@ class _ResetPasswordConfirmScreenState
     return ScreenForm(
       trans: trans,
       showHeaderImage: false,
-      iconTitle: SvgPicture.asset(
-        Assets.svg.icLogo,
-        height: 40,
-      ),
       child: _buildConfirm(),
     );
   }

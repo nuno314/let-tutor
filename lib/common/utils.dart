@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
+import 'client_info.dart';
 import 'config.dart';
 
 part 'utils/common_function.dart';
