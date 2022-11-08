@@ -35,5 +35,11 @@
   "haveAccount": "Đã có tài khoản",
   "resetPassword": "Đặt Lại Mật Khẩu",
   "pleaseEnterEmailToResetPassword": "Vui lòng nhập email để tìm kiếm tài khoản của bạn.",
-  "checkMail": "Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn."
+  "checkMail": "Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn.",
+  "tutor": "Gia sư",
+  "schedule": "Lịch học",
+  "history": "Lịch sử",
+  "courses": "Khóa học",
+  "myCourses": "Khóa học của tôi",
+  "account": "Tài khoản"
 }

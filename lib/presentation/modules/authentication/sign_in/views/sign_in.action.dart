@@ -4,7 +4,8 @@ extension SignInAction on _SignInScreenState {
   void _blocListener(BuildContext context, SignInState state) {}
 
   void onSignIn() {
-    Navigator.pushNamed(context, RouteList.dashBoardRoute);
+    print('go');
+    Navigator.pushNamed(context, RouteList.dashboard);
   }
 
   void onSignUp() {

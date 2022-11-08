@@ -5,14 +5,14 @@ import 'package:let_tutor/presentation/modules/authentication/sign_up/sign_up.da
 import 'package:let_tutor/presentation/modules/profile/profile.dart';
 
 import '../common_widget/text_scale_fixed.dart';
-import '../modules/dashboard/dashboard_route.dart';
+import '../modules/main/main_route.dart';
 import '../modules/welcome/welcome_route.dart';
 
 class RouteGenerator {
   static Map<String, WidgetBuilder> _getAll(RouteSettings settings) => {
         ...WelcomeRoute.getAll(settings),
-        ...DashboardRoute.getAll(settings),
         ...SignInRoute.getAll(settings),
+        ...MainRoute.getAll(settings),
         ...SignUpRoute.getAll(settings),
         ...ResetPasswordRoute.getAll(settings),
         ...ProfileRoute.getAll(settings),

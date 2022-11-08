@@ -17,6 +17,7 @@ class SvgAssets {
   final String icKey = 'assets/images/svg/ic_key.svg';
   final String icLogo = 'assets/images/svg/ic_logo.svg';
   final String icLogout = 'assets/images/svg/ic_logout.svg';
+  final String icPerson = 'assets/images/svg/ic_person.svg';
   final String icPhone = 'assets/images/svg/ic_phone.svg';
   final String icSchedule = 'assets/images/svg/ic_schedule.svg';
   final String icScheduleCheck = 'assets/images/svg/ic_schedule_check.svg';

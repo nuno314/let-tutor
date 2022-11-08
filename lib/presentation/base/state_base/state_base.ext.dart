@@ -11,10 +11,9 @@ extension StateBaseExtention on StateBase {
 
   void backToHome() {
     Navigator.of(context).popUntil(
-      ModalRoute.withName(RouteList.dashBoardRoute),
+      ModalRoute.withName(RouteList.dashboard),
     );
   }
-
 }
 
 void showToast(String message) {

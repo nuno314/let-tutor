@@ -2,17 +2,20 @@ import 'dart:math';
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../common/utils.dart';
 import '../theme/shadow.dart';
 import '../theme/theme_color.dart';
-import 'cache_network_image_wrapper.dart';
+import 'smart_image.dart';
 
 class BottomBarItemData {
   final String? label;
-  final String? icon;
-  final String? selectedIcon;
+
+  /// [icon] supported [String, IconData, Widget]
+  final dynamic icon;
+
+  /// [selectedIcon] supported [String, IconData, Widget, NULL]
+  final dynamic selectedIcon;
   final bool? isOver;
   final int? badgeCount;
 
@@ -144,7 +147,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
 class BottomItem extends StatelessWidget {
   final BottomBarItemData item;
-  final Function()? onPressed;
+  final void Function()? onPressed;
   final bool selected;
   final double iconSize;
 
@@ -158,6 +161,17 @@ class BottomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(
+      item.icon is String || item.icon is IconData || item.icon is Widget,
+      'BottomBarItemData.icon supported [String, IconData, Widget]',
+    );
+    assert(
+      item.selectedIcon == null ||
+          item.selectedIcon is String ||
+          item.selectedIcon is IconData ||
+          item.selectedIcon is Widget,
+      '''BottomBarItemData.selectedIcon supported [String, IconData, Widget, NULL]''',
+    );
     final count = item.badgeCount ?? 0;
     final theme = Theme.of(context);
     return InkWell(
@@ -196,43 +210,40 @@ class BottomItem extends StatelessWidget {
   }
 
   Widget _buildIcon() {
-    final icon = selected == true ? item.selectedIcon! : item.icon!;
-    if (icon.contains('http')) {
-      return CachedNetworkImageWrapper(
-        url: icon,
-        width: iconSize,
-        height: iconSize,
-        fit: BoxFit.cover,
+    final icon =
+        (selected == true ? item.selectedIcon : item.icon) ?? item.icon;
+    if (icon is Widget) {
+      return icon;
+    }
+    if (icon is IconData) {
+      return Icon(
+        icon,
+        size: iconSize,
+        color: selected ? AppColor.primaryColor : Colors.grey,
       );
     }
-    if (icon.contains('svg')) {
-      return SvgPicture.asset(
-        icon,
-        width: iconSize,
-        height: iconSize,
-        fit: BoxFit.cover,
-      );
-    } else {
-      return Image.asset(
-        icon,
-        fit: BoxFit.cover,
-        width: iconSize,
-        height: iconSize,
-      );
+    if (icon is! String) {
+      return const SizedBox();
     }
+    return SmartImage(
+      image: icon,
+      width: iconSize,
+      height: iconSize,
+      fit: BoxFit.cover,
+    );
   }
 
   TextStyle _getTextStyle(BuildContext context) {
     final theme = Theme.of(context);
     if (selected) {
       return theme.textTheme.subtitle1!.copyWith(
-          color: theme.colorScheme.secondary,
-          fontSize: 10,
-          fontWeight: FontWeight.bold);
+        color: AppColor.primaryColor,
+        fontWeight: FontWeight.w600,
+      );
     } else {
       return theme.textTheme.subtitle1!.copyWith(
-        color: AppColor.primaryText,
-        fontSize: 10,
+        color: const Color(0xff8C8C8C),
+        fontWeight: FontWeight.w400,
       );
     }
   }

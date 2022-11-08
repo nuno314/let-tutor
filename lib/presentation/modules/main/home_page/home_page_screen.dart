@@ -7,31 +7,28 @@ import 'package:let_tutor/generated/assets.dart';
 
 import 'package:let_tutor/presentation/base/base.dart';
 import 'package:let_tutor/presentation/common_widget/date_picker/cupertino_date_picker_custom.dart';
-import 'package:let_tutor/presentation/common_widget/date_picker/flutter_datetime_picker/src/date_format.dart';
-import 'package:let_tutor/presentation/modules/app.dart';
-import 'package:let_tutor/presentation/modules/dashboard/bloc/dashboard_bloc.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
-import '../../../common/utils.dart';
-import '../../common_widget/export.dart';
-import '../../common_widget/smart_refresher_wrapper.dart';
-import '../../common_widget/teacher_item.dart';
-import '../../extentions/extention.dart';
+import '../../../../common/utils.dart';
+import '../../../common_widget/export.dart';
+import '../../../common_widget/smart_refresher_wrapper.dart';
+import '../../../common_widget/teacher_item.dart';
+import '../../../extentions/extention.dart';
+import 'bloc/home_page_bloc.dart';
 
-class DashboardScreen extends StatefulWidget {
-  DashboardScreen({Key? key}) : super(key: key);
+class HomePageScreen extends StatefulWidget {
+  const HomePageScreen({Key? key}) : super(key: key);
 
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _HomePageScreenState createState() => _HomePageScreenState();
 }
 
-class _DashboardScreenState extends StateBase<DashboardScreen> {
+class _HomePageScreenState extends StateBase<HomePageScreen> {
   final _refreshController = RefreshController(initialRefresh: false);
   ScrollController _controller = new ScrollController();
 
   @override
-  // TODO: implement bloc
-  DashboardBloc get bloc => BlocProvider.of(context);
+  HomePageBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 

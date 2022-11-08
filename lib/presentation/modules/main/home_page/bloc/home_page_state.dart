@@ -1,8 +1,6 @@
-part of 'dashboard_bloc.dart';
-
+part of 'home_page_bloc.dart';
 
 class _ViewModel {
-  //TODO: Update to your model
   final List<Teacher> teachers;
   final bool canLoadMore;
 
@@ -12,7 +10,6 @@ class _ViewModel {
   });
 
   _ViewModel copyWith({
-    //TODO: Update to your model
     List<Teacher>? teachers,
     bool? canLoadMore,
   }) {
@@ -23,22 +20,22 @@ class _ViewModel {
   }
 }
 
-abstract class DashboardState {
+abstract class HomePageState {
   final _ViewModel viewModel;
 
-  DashboardState(this.viewModel);
+  HomePageState(this.viewModel);
 
-  T copyWith<T extends DashboardState>({
+  T copyWith<T extends HomePageState>({
     _ViewModel? viewModel,
   }) {
-    return _factories[T == DashboardState ? runtimeType : T]!(
+    return _factories[T == HomePageState ? runtimeType : T]!(
       viewModel ?? this.viewModel,
     );
   }
 }
 
-class DashboardInitial extends DashboardState {
-  DashboardInitial({
+class HomePageInitial extends HomePageState {
+  HomePageInitial({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -48,7 +45,7 @@ final _factories = <
     Function(
   _ViewModel viewModel,
 )>{
-  DashboardInitial: (viewModel) => DashboardInitial(
+  HomePageInitial: (viewModel) => HomePageInitial(
         viewModel: viewModel,
       ),
 };
