@@ -1,16 +1,14 @@
 part of 'sign_in_screen.dart';
 
+
 extension SignInAction on _SignInScreenState {
   void _blocListener(BuildContext context, SignInState state) {
     if (state is LoginSuccessState) {
+      hideLoading();
       Navigator.of(context).pushReplacementNamed(
         RouteList.dashboard,
       );
     }
-
-    // if (state is LoginFailedState) {
-    //   showErrorDialog(trans.incorrectEmailOrPassword);
-    // }
   }
 
   void onSignIn(String? email, String? password) {
@@ -31,6 +29,7 @@ extension SignInAction on _SignInScreenState {
   void onLoginWithGoogle() {}
 
   void onLoginWithFacebook() {
+    showLoading();
     FacebookAuth.instance.login(
       permissions: ['public_profile', 'email'],
     ).then(

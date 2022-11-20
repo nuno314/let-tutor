@@ -28,8 +28,6 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
 
     if (response?.success == true) {
       emit(LoginSuccessState());
-    } else {
-      emit(LoginFailedState());
     }
   }
 

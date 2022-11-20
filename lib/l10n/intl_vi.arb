@@ -53,5 +53,7 @@
   "invalidPassword": "Mật khẩu không phù hợp",
   "incorrectEmailOrPassword": "Email hoặc mật khẩu không đúng",
   "loginByPhoneNumber": "Đăng Nhập Bằng Số Điện Thoại",
-  "verifyPassword": "Xác thực mật khẩu"
+  "verifyPassword": "Xác thực mật khẩu",
+  "enterPhoneNumber": "Nhập số điện thoại",
+  "enterPassword": "Nhập mật khẩu"
 }

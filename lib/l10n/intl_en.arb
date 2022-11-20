@@ -53,5 +53,7 @@
   "invalidPassword": "The input is not valid password",
   "incorrectEmailOrPassword": "Incorrect email or password",
   "loginByPhoneNumber": "Login By Phone Number",
-  "verifyPassword": "Verify password"
+  "verifyPassword": "Verify password",
+  "enterPhoneNumber": "Enter phone number",
+  "enterPassword": "Nhập mật khẩu"
 }

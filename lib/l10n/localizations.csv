@@ -58,3 +58,5 @@ invalidPassword,Mật khẩu không phù hợp,The input is not valid password
 incorrectEmailOrPassword,Email hoặc mật khẩu không đúng,Incorrect email or password
 loginByPhoneNumber,Đăng Nhập Bằng Số Điện Thoại,Login By Phone Number
 verifyPassword,Xác thực mật khẩu,Verify password
+enterPhoneNumber,Nhập số điện thoại,Enter phone number
+enterPassword,Nhập mật khẩu,Nhập mật khẩu
