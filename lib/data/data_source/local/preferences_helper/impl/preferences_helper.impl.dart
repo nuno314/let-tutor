@@ -5,6 +5,52 @@ class PreferencesHelperImpl extends PreferencesHelper {
   late final SharedPreferences _prefs = injector.get();
 
   @override
+  String? get accessToken {
+    final token = _prefs.getString(PreferencesKey.accessToken);
+
+    if (token.isNullOrEmpty) {
+      return null;
+    }
+
+    return token;
+  }
+
+  @override
+  String? get refreshToken {
+    final token = _prefs.getString(PreferencesKey.refreshToken);
+
+    if (token.isNullOrEmpty) {
+      return null;
+    }
+
+    return token;
+  }
+
+  @override
+  Future<bool?> setAccessToken(AccessToken? value) {
+    LogUtils.i('setAccessToken', value);
+    if (value == null) {
+      return _prefs.remove(PreferencesKey.accessToken);
+    }
+    return _prefs.setString(
+      PreferencesKey.accessToken,
+      value.token!,
+    );
+  }
+
+  @override
+  Future<bool?> setRefreshToken(RefreshToken? value) {
+    LogUtils.i('setRefreshToken', value);
+    if (value == null) {
+      return _prefs.remove(PreferencesKey.refreshToken);
+    }
+    return _prefs.setString(
+      PreferencesKey.refreshToken,
+      value.token!,
+    );
+  }
+
+  @override
   SupportedTheme getTheme() {
     final theme = _prefs.getString(PreferencesKey.theme);
     if (theme == null || theme == SupportedTheme.light.name) {

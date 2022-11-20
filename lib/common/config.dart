@@ -33,8 +33,4 @@ class AppConfig {
         baseApiLayer = env[Env.baseApiLayer];
 
   bool get isDevBuild => envName == Env.devEnvName;
-
-  bool get isStagBuild => envName == Env.stagingEnvName;
-
-  bool get isProdBuild => envName == Env.prodEnvName;
 }

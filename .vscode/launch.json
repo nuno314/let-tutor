@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "let_tutor",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "let_tutor (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "let_tutor (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "module_generator",
+            "cwd": "tools\\module_generator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "module_generator (profile mode)",
+            "cwd": "tools\\module_generator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "module_generator (release mode)",
+            "cwd": "tools\\module_generator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

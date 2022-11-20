@@ -28,6 +28,19 @@ class SignInInitial extends SignInState {
   }) : super(viewModel);
 }
 
+class LoginSuccessState extends SignInState {
+  LoginSuccessState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class LoginFailedState extends SignInState {
+  LoginFailedState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+
 final _factories = <
     Type,
     Function(

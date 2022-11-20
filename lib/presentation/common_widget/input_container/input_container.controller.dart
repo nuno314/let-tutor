@@ -54,6 +54,8 @@ class InputContainerController extends ValueNotifier<InputContainerProperties> {
 
   bool get isShowPass => value.isShowPassword;
 
+  String? get text => value.tdController.text;
+
   void showOrHidePass() {
     value.isShowPassword = !value.isShowPassword;
     notifyListeners();

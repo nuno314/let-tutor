@@ -10,7 +10,6 @@ class TeacherItem extends StatelessWidget {
   final Teacher teacher;
   final TextTheme textTheme;
   const TeacherItem({
-    super.key,
     required this.teacher,
     required this.textTheme,
   });

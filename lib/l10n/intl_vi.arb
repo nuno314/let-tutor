@@ -41,5 +41,16 @@
   "history": "Lịch sử",
   "courses": "Khóa học",
   "myCourses": "Khóa học của tôi",
-  "account": "Tài khoản"
+  "account": "Tài khoản",
+  "bookALesson": "Đặt lịch",
+  "name": "Tên",
+  "latestBook": "Sách mới nhất",
+  "noSession": "Chưa có lịch học nào!",
+  "description": "Mô tả",
+  "emptyEmail": "Vui lòng nhập Email",
+  "invalidEmail": "Email không phù hợp",
+  "emptyPassword": "Vui lòng nhập mật khẩu",
+  "invalidPassword": "Mật khẩu không phù hợp",
+  "incorrectEmailOrPassword": "Email hoặc mật khẩu không đúng",
+  "loginByPhoneNumber": "Đăng Nhập Bằng Số Điện Thoại"
 }

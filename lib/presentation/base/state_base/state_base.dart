@@ -120,8 +120,18 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
     );
   }
 
-  
-  
+  Future<void> _cleanUp() async {
+    await injector.get<AuthService>().signOut();
+    await injector.get<LocalDataManager>().clearData();
+  }
+
+  Future<void> doLogout() async {
+    showLoading();
+    await Future.delayed(const Duration(milliseconds: 200));
+    LogUtils.i('doLogout');
+    await _cleanUp();
+    hideLoading();
+  }
 
   String get languageCode =>
       context.read<AppDataBloc>().state?.locale.languageCode ??

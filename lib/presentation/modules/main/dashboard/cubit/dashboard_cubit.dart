@@ -22,7 +22,6 @@ class DashboardCubit extends Cubit<DashboardState> {
     } else if (idx == DashboardPage.courses.index) {
       emit(DashboardCourses());
     } else if (idx == DashboardPage.account.index) {
-      print('awd');
       emit(DashboardAccount());
     } else {
       assert(false, 'Page with idx $idx not found!');

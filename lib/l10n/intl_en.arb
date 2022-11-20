@@ -41,5 +41,16 @@
   "history": "History",
   "courses": "Courses",
   "myCourses": "My courses",
-  "account": "Account"
+  "account": "Account",
+  "bookALesson": "Book a lesson",
+  "name": "Name",
+  "latestBook": "Latest book",
+  "noSession": "There is no lesson schedule yet!",
+  "description": "Description",
+  "emptyEmail": "Please input your Email",
+  "invalidEmail": "The input is not valid Email",
+  "emptyPassword": "Please input your password",
+  "invalidPassword": "The input is not valid password",
+  "incorrectEmailOrPassword": "Incorrect email or password",
+  "loginByPhoneNumber": "Login By Phone Number"
 }

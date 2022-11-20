@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:let_tutor/presentation/modules/main/home_page/home_page_screen.dart';
+import 'package:let_tutor/presentation/modules/schedule/bloc/schedule_bloc.dart';
+import 'package:let_tutor/presentation/modules/schedule/views/schedule_screen.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../base/base.dart';
@@ -13,6 +15,8 @@ import '../../../common_widget/keep_alive_widget.dart';
 import '../../../common_widget/smart_image.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
+import '../account/account_screen.dart';
+import '../account/bloc/account_bloc.dart';
 import '../home_page/bloc/home_page_bloc.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'dashboard_constant.dart';
@@ -85,10 +89,20 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                     child: const HomePageScreen(),
                   ),
                 ),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => ScheduleBloc(),
+                    child: const ScheduleScreen(),
+                  ),
+                ),
                 Container(),
                 Container(),
-                Container(),
-                Container(),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => AccountBloc(),
+                    child: const AccountScreen(),
+                  ),
+                ),
               ],
             ),
           ),

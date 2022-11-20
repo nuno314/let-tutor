@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../common/services/auth_service.dart';
+import '../../../../../di/di.dart';
 import '../../../../base/base.dart';
 import '../../../../route/route_list.dart';
 
@@ -9,6 +11,7 @@ part 'splash_state.dart';
 
 class SplashBloc extends AppBlocBase<SplashEvent, SplashState> {
   // late final _configRepo = injector.get<ConfigRepository>();
+  late final _authService = injector.get<AuthService>();
 
   SplashBloc() : super(SplashInitialState()) {
     on<SplashInitialEvent>(initial);
@@ -20,16 +23,15 @@ class SplashBloc extends AppBlocBase<SplashEvent, SplashState> {
   ) async {
     await _configServices();
     // await _configRepo.getAppSetting();
-    emitter(SplashFinishState(RouteList.signIn));
+    emitter(SplashFinishState(
+      isLoggedIn ? RouteList.dashboard : RouteList.signIn,
+    ));
   }
 
   Future<void> _configServices() async {
-    // final notificationService = injector.get<NotificationService>();
-    // injector.get<NotificationManager>().registerService(notificationService);
-    // await Future.wait([
-    //   injector.get<LocalDataManager>().init(),
-    //   injector.get<AuthService>().init(),
-    //   notificationService.init(),
-    // ]);
+    await _authService.init();
+    if (_authService.isSignedIn) {
+      await _authService.refreshToken();
+    }
   }
 }

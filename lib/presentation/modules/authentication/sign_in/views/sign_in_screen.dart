@@ -1,18 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 
+import '../../../../../common/components/navigation/navigation_observer.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../extentions/extention.dart';
 import '../../../../route/route_list.dart';
 import '../../../../theme/theme_color.dart';
 import '../bloc/sign_in_bloc.dart';
+import '../../../../../common/utils.dart';
 
 part 'sign_in.action.dart';
 
@@ -49,14 +52,15 @@ class _SignInScreenState extends StateBase<SignInScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
+
+  final _emailController = InputContainerController();
+  final _passwordController = InputContainerController();
 
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    final _size = MediaQuery.of(context).size;
     return BlocConsumer<SignInBloc, SignInState>(
       listener: _blocListener,
       builder: (context, state) {
@@ -64,7 +68,6 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           trans: trans,
           showHeaderImage: false,
           showBackButton: false,
-         
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
@@ -135,13 +138,16 @@ class _SignInScreenState extends StateBase<SignInScreen> {
       children: [
         Image.asset(
           Assets.image.imgLogin,
-          width: double.infinity,
+          height: 250,
+        ),
+        const SizedBox(
+          height: 16,
         ),
         Text(
           trans.login,
           style: textTheme.bodyText1?.copyWith(
             color: AppColor.primaryColor,
-            fontSize: 30,
+            fontSize: 24,
           ),
         ),
         Padding(
@@ -149,7 +155,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           child: Text(
             'Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.',
             style: textTheme.bodyText1?.copyWith(
-              fontSize: 16,
+              fontSize: 14,
             ),
             maxLines: 3,
             textAlign: TextAlign.center,
@@ -160,9 +166,6 @@ class _SignInScreenState extends StateBase<SignInScreen> {
   }
 
   Widget _buildLoginForm() {
-    final _emailController = InputContainerController();
-    final _passwordController = InputContainerController();
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -171,6 +174,9 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             title: trans.emailAddress,
             hint: 'mail@example.com',
             controller: _emailController,
+          ),
+          SizedBox(
+            height: 8,
           ),
           InputContainer(
             title: trans.password,
@@ -192,7 +198,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             child: Text(
               trans.forgetPassword,
               style: textTheme.bodyText2?.copyWith(
-                fontSize: 16,
+                fontSize: 14,
                 color: AppColor.primaryColor,
               ),
             ),
@@ -205,7 +211,10 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             isWithShadown: false,
             buttonTitle: trans.login.toUpperCase(),
             padding: EdgeInsets.all(0),
-            onTap: onSignIn,
+            onTap: () => onSignIn(
+              _emailController.text,
+              _passwordController.text,
+            ),
           ),
         ],
       ),
@@ -254,6 +263,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             children: [
               Text(
                 trans.noAccount,
+                style: textTheme.bodyText2,
               ),
               InkWell(
                 onTap: onSignUp,

@@ -8,8 +8,11 @@ class SvgAssets {
   SvgAssets();
   final String icBookMedical = 'assets/images/svg/ic_book_medical.svg';
   final String icBookOpen = 'assets/images/svg/ic_book_open.svg';
+  final String icBooking = 'assets/images/svg/ic_booking.svg';
+  final String icCall = 'assets/images/svg/ic_call.svg';
   final String icChalkboardTeacher =
       'assets/images/svg/ic_chalkboard_teacher.svg';
+  final String icEmptySchedule = 'assets/images/svg/ic_empty_schedule.svg';
   final String icFacebook = 'assets/images/svg/ic_facebook.svg';
   final String icGoogle = 'assets/images/svg/ic_google.svg';
   final String icGraduationCap = 'assets/images/svg/ic_graduation_cap.svg';

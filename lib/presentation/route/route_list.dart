@@ -11,4 +11,6 @@ class RouteList {
   static const String teacherList = '/teacherList';
   static const String profile = '/profile';
   static const String account = '/account';
+  static const String schedule = '/schedule';
+  static const String signInByPhoneNumber = '/signInByPhoneNumber';
 }

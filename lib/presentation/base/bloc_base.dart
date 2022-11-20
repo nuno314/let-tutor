@@ -3,6 +3,8 @@ part of 'base.dart';
 abstract class AppBlocBase<E, S> extends Bloc<E, S> {
   Function(ErrorData)? errorHandler;
 
+  bool get isLoggedIn => injector.get<AuthService>().isSignedIn;
+
   LocalDataManager get localDataManager => injector.get();
 
   AppBlocBase(S s) : super(s);

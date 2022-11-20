@@ -1,18 +1,57 @@
-import 'package:injectable/injectable.dart';
+import 'dart:async';
 
+import '../../../common/utils.dart';
 import '../../../di/di.dart';
 import '../../../presentation/theme/theme_data.dart';
+import '../../models/token.dart';
+import '../../models/user.dart';
 import 'preferences_helper/preferences_helper.dart';
 
-@Singleton()
-class LocalDataManager implements AppPreferenceData {
+class LocalDataManager extends AppPreferenceData {
   late final PreferencesHelper _preferencesHelper = injector.get();
 
-  Future<void> init() async {}
+  static Future<LocalDataManager> init() async {
+    return Future.value(LocalDataManager());
+  }
+
+  final _userChangedController = StreamController<User?>.broadcast();
+  User? _currentUser;
+
+  Stream<User?> get onUserChanged {
+    return _userChangedController.stream;
+  }
+
+  User? get currentUser {
+    return _currentUser;
+  }
+
+  void notifyUserChanged(User? user) {
+    LogUtils.d('_notifyUserChanged: ${user?.id}');
+    _userChangedController.add(user);
+    _currentUser = user;
+  }
 
   ////////////////////////////////////////////////////////
   ///             Preferences helper
   ///
+  ///
+  /// /// Token
+  @override
+  String? get accessToken => _preferencesHelper.accessToken;
+
+  @override
+  String? get refreshToken => _preferencesHelper.refreshToken;
+
+  @override
+  Future<bool?> setAccessToken(AccessToken? value) {
+    return _preferencesHelper.setAccessToken(value);
+  }
+
+  @override
+  Future<bool?> setRefreshToken(RefreshToken? value) {
+    return _preferencesHelper.setRefreshToken(value);
+  }
+
   @override
   SupportedTheme getTheme() {
     return _preferencesHelper.getTheme();

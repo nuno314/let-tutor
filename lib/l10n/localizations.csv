@@ -46,3 +46,14 @@ history,Lịch sử,History
 courses,Khóa học,Courses
 myCourses,Khóa học của tôi,My courses
 account,Tài khoản,Account
+bookALesson,Đặt lịch,Book a lesson
+name,Tên,Name
+latestBook,Sách mới nhất,Latest book
+noSession,Chưa có lịch học nào!,There is no lesson schedule yet!
+description,Mô tả,Description
+emptyEmail,Vui lòng nhập Email,Please input your Email
+invalidEmail,Email không phù hợp,The input is not valid Email
+emptyPassword,Vui lòng nhập mật khẩu,Please input your password
+invalidPassword,Mật khẩu không phù hợp,The input is not valid password
+incorrectEmailOrPassword,Email hoặc mật khẩu không đúng,Incorrect email or password
+loginByPhoneNumber,Đăng Nhập Bằng Số Điện Thoại,Login By Phone Number

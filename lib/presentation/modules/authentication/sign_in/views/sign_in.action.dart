@@ -1,11 +1,30 @@
 part of 'sign_in_screen.dart';
 
 extension SignInAction on _SignInScreenState {
-  void _blocListener(BuildContext context, SignInState state) {}
+  void _blocListener(BuildContext context, SignInState state) {
+    if (state is LoginSuccessState) {
+      if (myNavigatorObserver.constaintRoute(RouteList.dashboard)) {
+        Navigator.pop(context, true);
+      } else {
+        Navigator.of(context).pushReplacementNamed(
+          RouteList.dashboard,
+        );
+      }
+    }
 
-  void onSignIn() {
-    print('go');
-    Navigator.pushNamed(context, RouteList.dashboard);
+    if (state is LoginFailedState) {
+      showErrorDialog(trans.incorrectEmailOrPassword);
+    }
+  }
+
+  void onSignIn(String? email, String? password) {
+    if (validateAccount() == false) {
+      return;
+    }
+    bloc.add(SignInByEmailEvent(
+      email: email,
+      password: password,
+    ));
   }
 
   void onSignUp() {
@@ -14,11 +33,50 @@ extension SignInAction on _SignInScreenState {
 
   void onLoginWithGoogle() {}
 
-  void onLoginWithFacebook() {}
+  void onLoginWithFacebook() {
+    FacebookAuth.instance.login(
+      permissions: ['public_profile', 'email'],
+    ).then(
+      (value) {
+        if (value.accessToken?.token != null) {
+          bloc.add(
+            SignInByFacebookEvent(
+              accessToken: value.accessToken!.token,
+            ),
+          );
+        }
+        FacebookAuth.instance.getUserData().then(
+          (value) async {
+            print(value);
+          },
+        );
+      },
+    );
+  }
 
-  void onLoginWithPhoneNumber() {}
+  void onLoginWithPhoneNumber() {
+    Navigator.pushNamed(context, RouteList.signInByPhoneNumber);
+  }
 
   void onResetPassword() {
     Navigator.pushNamed(context, RouteList.resetPassword);
+  }
+
+  bool validateAccount() {
+    if (_emailController.text?.isEmpty == true) {
+      _emailController.setError(trans.emptyEmail);
+      return false;
+    }
+
+    if (_emailController.text?.isEmail() == false) {
+      _emailController.setError(trans.invalidEmail);
+      return false;
+    }
+    if (_passwordController.text?.isEmpty == true) {
+      _passwordController.setError(trans.emptyPassword);
+      return false;
+    }
+
+    return true;
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart' as f_picker;
 import 'package:flutter/foundation.dart';
 

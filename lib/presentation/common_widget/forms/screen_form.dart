@@ -31,7 +31,6 @@ class ScreenForm extends StatefulWidget {
   final bool showBackButton;
   final dynamic trans;
   final Widget? floatingActionButton;
-  final GlobalKey<ScaffoldState>? drawerKey;
 
   const ScreenForm({
     Key? key,
@@ -39,7 +38,7 @@ class ScreenForm extends StatefulWidget {
     this.des,
     this.child,
     this.bgColor,
-    this.showHeaderImage = true,
+    this.showHeaderImage = false,
     this.actions = const <Widget>[],
     this.headerColor,
     this.onBack,
@@ -48,7 +47,6 @@ class ScreenForm extends StatefulWidget {
     this.showBackButton = true,
     this.floatingActionButton,
     required this.trans,
-    this.drawerKey,
   }) : super(key: key);
 
   @override
@@ -75,7 +73,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
     final main = Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: padding.top + 16),
+          padding: EdgeInsets.only(top: padding.top),
           color: widget.headerColor ?? Colors.transparent,
           child: _buildAppBar(),
         ),
@@ -86,9 +84,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
     );
 
     return Scaffold(
-      key: widget.drawerKey,
       backgroundColor: widget.bgColor,
-      endDrawer: AppDrawer(),
       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
@@ -168,7 +164,6 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 ),
               ),
             ),
-            _buildLanguageSelection(),
             ...widget.actions,
           ],
         ),

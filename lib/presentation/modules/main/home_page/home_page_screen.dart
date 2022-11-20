@@ -46,7 +46,6 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
     _themeData = Theme.of(context);
     trans = translate(context);
     return ScreenForm(
-      drawerKey: _scaffoldKey,
       trans: trans,
       showHeaderImage: false,
       showBackButton: false,
@@ -60,14 +59,6 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
           ),
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            _scaffoldKey.currentState?.openEndDrawer();
-          },
-          icon: Icon(Icons.menu),
-        ),
-      ],
       floatingActionButton: IconButton(
         constraints: const BoxConstraints(minHeight: 84, minWidth: 84),
         icon: Container(
