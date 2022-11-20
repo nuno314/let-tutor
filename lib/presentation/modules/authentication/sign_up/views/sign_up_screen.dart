@@ -32,6 +32,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends StateBase<SignUpScreen> {
+  final _emailController = InputContainerController();
+  final _passwordController = InputContainerController();
+  final _verifyPasswordController = InputContainerController();
+
   @override
   SignUpBloc get bloc => BlocProvider.of(context);
 
@@ -149,9 +153,6 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
   }
 
   Widget _buildLoginForm() {
-    final _emailController = InputContainerController();
-    final _passwordController = InputContainerController();
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -161,9 +162,21 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
             hint: 'mail@example.com',
             controller: _emailController,
           ),
+          const SizedBox(
+            height: 8,
+          ),
           InputContainer(
             title: trans.password,
             controller: _passwordController,
+            isPassword: true,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          InputContainer(
+            title: trans.verifyPassword,
+            controller: _verifyPasswordController,
+            isPassword: true,
           ),
         ],
       ),

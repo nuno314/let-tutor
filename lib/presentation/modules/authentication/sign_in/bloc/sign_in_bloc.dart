@@ -14,7 +14,7 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
 
   SignInBloc() : super(SignInInitial(viewModel: const _ViewModel())) {
     on<SignInByEmailEvent>(_onSignInByEmailEvent);
-    // on<SignInByFacebookEvent>(_onSignInByFacebookEvent);
+    on<SignInByFacebookEvent>(_onSignInByFacebookEvent);
   }
 
   Future<void> _onSignInByEmailEvent(
@@ -33,16 +33,17 @@ class SignInBloc extends AppBlocBase<SignInEvent, SignInState> {
     }
   }
 
-  // Future<void> _onSignInByFacebookEvent(
-  //   SignInByFacebookEvent event,
-  //   Emitter<SignInState> emit,
-  // ) async {
-  //   final response = await _authService.loginByFacebook(event.accessToken);
+  Future<void> _onSignInByFacebookEvent(
+    SignInByFacebookEvent event,
+    Emitter<SignInState> emit,
+  ) async {
+    final response =
+        await _authService.loginWithFacebook(token: event.accessToken);
 
-  //   if (response == true) {
-  //     emit(LoginSuccessState());
-  //   } else {
-  //     emit(LoginFailedState());
-  //   }
-  // }
+    if (response?.success == true) {
+      emit(LoginSuccessState());
+    } else {
+      emit(LoginFailedState());
+    }
+  }
 }

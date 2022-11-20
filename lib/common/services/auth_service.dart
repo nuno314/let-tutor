@@ -10,6 +10,10 @@ abstract class AuthService {
   Future<LoginResponse?> loginWithEmail(
       {required String email, required String password});
 
+  Future<LoginResponse?> loginWithFacebook({
+    required String token,
+  });
+
   Future<void> signOut();
 
   Future<String?> refreshToken();

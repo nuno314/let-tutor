@@ -7,7 +7,7 @@ extension SignUpAction on _SignUpScreenState {
     Navigator.pop(context);
   }
 
-  void onSingUp() {}
+  void onSignUp() {}
 
   void onLoginWithGoogle() {}
 

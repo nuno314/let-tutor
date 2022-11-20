@@ -1,10 +1,10 @@
 key,vi,en
-appName,Diva Customer,Diva Customer
+appName,Let Tutor,Let Tutor
 inform,Thông báo,Information
-ok,Ok,Ok
+ok,Đồng Ý,Ok
 cancel,Hủy,Cancel
-delete,Xóa,Xóa
-error,Error,Error
+delete,Xóa,Delete
+error,Lỗi,Error
 warning,Chú Ý,Warning
 confirm,Xác Nhận,Confirm
 ignore,Bỏ Qua,Ignore
@@ -57,3 +57,4 @@ emptyPassword,Vui lòng nhập mật khẩu,Please input your password
 invalidPassword,Mật khẩu không phù hợp,The input is not valid password
 incorrectEmailOrPassword,Email hoặc mật khẩu không đúng,Incorrect email or password
 loginByPhoneNumber,Đăng Nhập Bằng Số Điện Thoại,Login By Phone Number
+verifyPassword,Xác thực mật khẩu,Verify password

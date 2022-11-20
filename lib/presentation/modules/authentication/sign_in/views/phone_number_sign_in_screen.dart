@@ -5,8 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../extentions/extention.dart';
 
 class PhoneNumberSignInScreen extends StatefulWidget {
-  const PhoneNumberSignInScreen({super.key});
-
   @override
   State<PhoneNumberSignInScreen> createState() =>
       _PhoneNumberSignInScreenState();

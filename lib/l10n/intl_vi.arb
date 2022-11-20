@@ -1,10 +1,10 @@
 {
-  "appName": "Diva Customer",
+  "appName": "Let Tutor",
   "inform": "Thông báo",
-  "ok": "Ok",
+  "ok": "Đồng Ý",
   "cancel": "Hủy",
   "delete": "Xóa",
-  "error": "Error",
+  "error": "Lỗi",
   "warning": "Chú Ý",
   "confirm": "Xác Nhận",
   "ignore": "Bỏ Qua",
@@ -52,5 +52,6 @@
   "emptyPassword": "Vui lòng nhập mật khẩu",
   "invalidPassword": "Mật khẩu không phù hợp",
   "incorrectEmailOrPassword": "Email hoặc mật khẩu không đúng",
-  "loginByPhoneNumber": "Đăng Nhập Bằng Số Điện Thoại"
+  "loginByPhoneNumber": "Đăng Nhập Bằng Số Điện Thoại",
+  "verifyPassword": "Xác thực mật khẩu"
 }

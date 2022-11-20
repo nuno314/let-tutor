@@ -71,6 +71,21 @@ class AppAuthService implements AuthService {
 
     return res?.accessToken;
   }
+
+  @override
+  Future<LoginResponse?> loginWithFacebook({required String token}) async {
+    final result = await _authRepo.client.authFacebookLogin({
+      'access_token': token,
+    });
+
+    _localDataManager.notifyUserChanged(result?.user);
+
+    _localDataManager.setAccessToken(result?.token?.accessToken);
+
+    _localDataManager.setRefreshToken(result?.token?.refreshToken);
+
+    return result;
+  }
 }
 
 class RefreshTokenException implements Exception {

@@ -3,24 +3,21 @@ part of 'sign_in_screen.dart';
 extension SignInAction on _SignInScreenState {
   void _blocListener(BuildContext context, SignInState state) {
     if (state is LoginSuccessState) {
-      if (myNavigatorObserver.constaintRoute(RouteList.dashboard)) {
-        Navigator.pop(context, true);
-      } else {
-        Navigator.of(context).pushReplacementNamed(
-          RouteList.dashboard,
-        );
-      }
+      Navigator.of(context).pushReplacementNamed(
+        RouteList.dashboard,
+      );
     }
 
-    if (state is LoginFailedState) {
-      showErrorDialog(trans.incorrectEmailOrPassword);
-    }
+    // if (state is LoginFailedState) {
+    //   showErrorDialog(trans.incorrectEmailOrPassword);
+    // }
   }
 
   void onSignIn(String? email, String? password) {
     if (validateAccount() == false) {
       return;
     }
+    showLoading();
     bloc.add(SignInByEmailEvent(
       email: email,
       password: password,

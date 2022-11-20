@@ -1,9 +1,9 @@
 {
-  "appName": "Diva Customer",
+  "appName": "Let Tutor",
   "inform": "Information",
   "ok": "Ok",
   "cancel": "Cancel",
-  "delete": "Xóa",
+  "delete": "Delete",
   "error": "Error",
   "warning": "Warning",
   "confirm": "Confirm",
@@ -52,5 +52,6 @@
   "emptyPassword": "Please input your password",
   "invalidPassword": "The input is not valid password",
   "incorrectEmailOrPassword": "Incorrect email or password",
-  "loginByPhoneNumber": "Login By Phone Number"
+  "loginByPhoneNumber": "Login By Phone Number",
+  "verifyPassword": "Verify password"
 }

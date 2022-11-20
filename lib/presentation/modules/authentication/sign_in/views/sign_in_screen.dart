@@ -58,6 +58,23 @@ class _SignInScreenState extends StateBase<SignInScreen> {
   final _passwordController = InputContainerController();
 
   @override
+  void onLogicError(String? message) {
+    print('error');
+    print(message);
+    if (message?.toLowerCase().contains('invalid') == true) {
+      showNoticeDialog(
+        context: context,
+        message: trans.incorrectEmailOrPassword,
+        title: trans.inform,
+        titleBtn: trans.confirm,
+        onClose: onCloseErrorDialog,
+      );
+    } else {
+      super.onLogicError(message);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
@@ -84,54 +101,54 @@ class _SignInScreenState extends StateBase<SignInScreen> {
     );
   }
 
-  Widget _buildLanguageSelection() {
-    final languageList = [
-      DropdownLanguageArgs(
-        title: trans.vietnamese,
-        iconPath: Assets.svg.icVietnam,
-      ),
-      DropdownLanguageArgs(
-        title: trans.english,
-        iconPath: Assets.svg.icUs,
-      ),
-    ];
-    var _selectedLanguage = languageList[0];
+  // Widget _buildLanguageSelection() {
+  //   final languageList = [
+  //     DropdownLanguageArgs(
+  //       title: trans.vietnamese,
+  //       iconPath: Assets.svg.icVietnam,
+  //     ),
+  //     DropdownLanguageArgs(
+  //       title: trans.english,
+  //       iconPath: Assets.svg.icUs,
+  //     ),
+  //   ];
+  //   var _selectedLanguage = languageList[0];
 
-    return DropdownButtonHideUnderline(
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButton<DropdownLanguageArgs>(
-          value: _selectedLanguage,
-          items: languageList
-              .map(
-                (e) => DropdownMenuItem<DropdownLanguageArgs>(
-                  child: Container(
-                    width: 100,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(e.title),
-                        Spacer(),
-                        SvgPicture.asset(
-                          e.iconPath,
-                          height: 35,
-                        ),
-                      ],
-                    ),
-                  ),
-                  value: e,
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            setState(() {
-              _selectedLanguage = value as DropdownLanguageArgs;
-            });
-          },
-        ),
-      ),
-    );
-  }
+  //   return DropdownButtonHideUnderline(
+  //     child: ButtonTheme(
+  //       alignedDropdown: true,
+  //       child: DropdownButton<DropdownLanguageArgs>(
+  //         value: _selectedLanguage,
+  //         items: languageList
+  //             .map(
+  //               (e) => DropdownMenuItem<DropdownLanguageArgs>(
+  //                 child: Container(
+  //                   width: 100,
+  //                   child: Row(
+  //                     mainAxisSize: MainAxisSize.min,
+  //                     children: [
+  //                       Text(e.title),
+  //                       Spacer(),
+  //                       SvgPicture.asset(
+  //                         e.iconPath,
+  //                         height: 35,
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //                 value: e,
+  //               ),
+  //             )
+  //             .toList(),
+  //         onChanged: (value) {
+  //           setState(() {
+  //             _selectedLanguage = value as DropdownLanguageArgs;
+  //           });
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildLoginBanner() {
     return Column(

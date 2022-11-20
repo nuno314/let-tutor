@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../common/client_info.dart';
-import '../../common/constants.dart';
 import '../../common/constants/app_locale.dart';
 import '../../common/services/auth_service.dart';
 import '../../common/utils.dart';
@@ -17,6 +16,7 @@ import '../common_bloc/app_data_bloc.dart';
 import '../common_widget/export.dart';
 import '../extentions/extention.dart';
 import '../route/route_list.dart';
+import 'package:dio/dio.dart';
 
 part 'bloc_base.dart';
 part 'state_base/state_base.dart';

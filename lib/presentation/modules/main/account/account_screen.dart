@@ -35,5 +35,4 @@ class _AccountScreenState extends StateBase<AccountScreen> {
   @override
   AccountBloc? get bloc => BlocProvider.of(context);
 
-  
 }
