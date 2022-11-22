@@ -101,8 +101,6 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
       context: context,
       message: trans.loginRequired,
       title: trans.inform,
-      titleBtnDone: trans.login,
-      titleBtnCancel: trans.dismiss,
       onCanceled: onSkip,
       onConfirmed: () {
         _showLoginScreen(onSuccess, onSkip);

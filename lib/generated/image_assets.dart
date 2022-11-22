@@ -6,6 +6,7 @@ part of 'assets.dart';
 
 class ImageAssets {
   ImageAssets();
+  final String icAvatar = 'assets/images/png/ic_avatar.png';
   final String imgLogin = 'assets/images/png/img_login.png';
   final String imgLogo = 'assets/images/png/img_logo.png';
 }

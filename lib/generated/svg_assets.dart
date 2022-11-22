@@ -24,6 +24,7 @@ class SvgAssets {
   final String icPhone = 'assets/images/svg/ic_phone.svg';
   final String icSchedule = 'assets/images/svg/ic_schedule.svg';
   final String icScheduleCheck = 'assets/images/svg/ic_schedule_check.svg';
+  final String icSettings = 'assets/images/svg/ic_settings.svg';
   final String icUs = 'assets/images/svg/ic_us.svg';
   final String icUserGraduate = 'assets/images/svg/ic_user_graduate.svg';
   final String icVietnam = 'assets/images/svg/ic_vietnam.svg';

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import '../../di/di.dart';
-
 AppColor get themeColor => AppColor();
 
 class AppColor {
@@ -19,6 +17,7 @@ class AppColor {
   static const Color greyE5 = const Color(0xFFE5E5E5);
   static const Color grey64 = Color.fromARGB(255, 225, 225, 230);
   static const Color greenB7EB8F = const Color(0xffb7eb8f);
+  static const Color scaffoldColor = const Color(0xffF7F7F7);
 
   static const Color inactiveColor = Color(0xFF111111);
   static const Color activeColor = primaryColor;

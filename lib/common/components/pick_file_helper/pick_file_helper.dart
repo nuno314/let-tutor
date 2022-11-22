@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart' as f_picker;
 import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'picked_file.dart';
 
@@ -56,6 +59,15 @@ class PickFileHelper {
       lockParentWindow: lockParentWindow,
     );
 
-    return [...?result?.files.map((e) => FilePicked.fromPlatFormFile(e))];
+    return [...?result?.files.map(FilePicked.fromPlatFormFile)];
+  }
+
+  static Future<FilePicked?> takePicture() async {
+    final picker = ImagePicker();
+    final result = await picker.pickImage(
+      source: ImageSource.camera,
+    );
+
+    return result != null ? FilePicked.fromXFile(result) : null;
   }
 }

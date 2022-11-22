@@ -3,12 +3,14 @@ import 'package:flutter_svg/svg.dart';
 
 import 'cache_network_image_wrapper.dart';
 
+
 class SmartImage extends StatelessWidget {
   final String image;
   final double? width;
   final double? height;
   final BoxFit? fit;
   final Color? color;
+  final Alignment alignment;
 
   const SmartImage({
     Key? key,
@@ -17,6 +19,7 @@ class SmartImage extends StatelessWidget {
     this.height,
     this.fit,
     this.color,
+    this.alignment = Alignment.center,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,8 @@ class SmartImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        color: color,
+        alignment: alignment,
       );
     }
     if (image.contains('svg')) {
@@ -35,6 +40,7 @@ class SmartImage extends StatelessWidget {
         width: width,
         height: height,
         color: color,
+        alignment: alignment,
       );
     }
 
@@ -44,6 +50,7 @@ class SmartImage extends StatelessWidget {
       height: height,
       fit: fit,
       color: color,
+      alignment: alignment,
     );
   }
 }

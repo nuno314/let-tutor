@@ -66,5 +66,10 @@
   "passwordNotMatch": "Mật khẩu không trùng khớp",
   "emailAlreadyTaken": "Email đã được sử dụng",
   "registerSuccessfully": "Đăng ký tài khoản thành công",
-  "bannerSlogan": "Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn."
+  "bannerSlogan": "Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.",
+  "buyLessons": "Mua buổi học",
+  "logout": "Đăng xuất",
+  "becomeATutor": "Đăng ký làm gia sư",
+  "settings": "Cài đặt",
+  "changeAvatar": "Đổi ảnh đại diện"
 }

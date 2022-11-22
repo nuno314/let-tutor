@@ -12,8 +12,9 @@ import '../common/services/auth_service.dart' as _i4;
 import '../common/services/implementation/app_auth_service.dart' as _i5;
 import '../data/data_source/local/preferences_helper/preferences_helper.dart'
     as _i6;
-import '../data/data_source/remote/app_api_service.dart'
-    as _i3; // ignore_for_file: unnecessary_lambdas
+import '../data/data_source/remote/app_api_service.dart' as _i3;
+import '../presentation/theme/theme_dialog.dart'
+    as _i7; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -30,5 +31,6 @@ _i1.GetIt $initGetIt(
   gh.factory<_i3.AppApiService>(() => _i3.AppApiService());
   gh.singleton<_i4.AuthService>(_i5.AppAuthService());
   gh.factory<_i6.PreferencesHelper>(() => _i6.PreferencesHelperImpl());
+  gh.factory<_i7.ThemeDialog>(() => _i7.ThemeDialog());
   return get;
 }

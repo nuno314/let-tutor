@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
+import '../../../../common/utils/image_picker.dart';
 import '../../../../data/models/user.dart';
 import '../../../base/base.dart';
 import '../../../extentions/extention.dart';
@@ -13,8 +16,7 @@ import '../bloc/profile_bloc.dart';
 part 'profile.action.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final User user;
-  const ProfileScreen({Key? key, required this.user}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -24,14 +26,13 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   @override
   ProfileBloc get bloc => BlocProvider.of(context);
 
+  double get avatarSize => 96;
+
   late ThemeData _themeData;
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
-
-  User get user => widget.user;
 
   final _nameController = InputContainerController();
   final _emailController = InputContainerController();
@@ -39,33 +40,43 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   final _phoneNumberController = InputContainerController();
   final _dobController = InputContainerController();
   final _levelController = InputContainerController();
+  File? newAvatar;
+
+  final avatarValue = ValueNotifier<String?>(null);
 
   @override
   void initState() {
-    loadData();
     super.initState();
+    loadData();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.user);
     _themeData = Theme.of(context);
     trans = translate(context);
-    return ScreenForm(
-      trans: trans,
-      showHeaderImage: false,
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            _buildProfileInfo(widget.user),
-          ],
-        ),
-      ),
+    return BlocConsumer<ProfileBloc, ProfileState>(
+      listener: _blocListener,
+      builder: (context, state) {
+        return ScreenForm(
+          headerColor: AppColor.primaryColor,
+          bgColor: AppColor.scaffoldColor,
+          title: trans.account,
+          showHeaderImage: false,
+          trans: trans,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                _buildProfileInfo(state.user),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildProfileInfo(User user) {
+  Widget _buildProfileInfo(User? user) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 16,
@@ -80,36 +91,40 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
         color: Colors.white,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
             child: Stack(
+              alignment: AlignmentDirectional.bottomCenter,
               children: [
-                ClipOval(
-                  child: CachedNetworkImageWrapper.item(
-                    url: user.avatarUrl ?? '',
-                    fit: BoxFit.cover,
-                    width: 150,
-                    height: 150,
-                  ),
-                ),
-                Positioned(
-                  right: -10,
-                  bottom: 0,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColor.primaryColor,
+                GestureDetector(
+                  onTap: tapEditAvatar,
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      ValueListenableBuilder<String?>(
+                        valueListenable: avatarValue,
+                        builder: (context, avatar, snapshot) {
+                          print(avatar);
+                          return CircleImageOutline(
+                            image: avatar ?? '',
+                            borderColor: AppColor.primaryColor,
+                          );
+                        },
                       ),
-                      child: Icon(
-                        Icons.edit,
-                        size: 20,
-                        color: AppColor.white,
-                      ),
-                    ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColor.primaryColorLight,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: const EdgeInsets.all(6),
+                        child: Icon(
+                          Icons.camera_alt_rounded,
+                          size: 18,
+                          color: AppColor.primaryColor,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -119,30 +134,30 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
             height: 10,
           ),
           Text(
-            user.name ?? '--',
+            user?.name ?? '',
             style: textTheme.bodyText1?.copyWith(
-              fontSize: 20,
+              fontSize: 14,
             ),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            'ID: ${user.id}',
-            style: textTheme.bodyText2?.copyWith(),
+            user?.id ?? '',
+            style: textTheme.bodyText2?.copyWith(fontSize: 12),
           ),
           SizedBox(
             height: 10,
           ),
-          InkWell(
-            onTap: () {},
-            child: Text(
-              'Người khác đánh giá bạn,',
-              style: textTheme.bodyText2?.copyWith(
-                color: AppColor.primaryColor,
-              ),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {},
+          //   child: Text(
+          //     'Người khác đánh giá bạn,',
+          //     style: textTheme.bodyText2?.copyWith(
+          //       color: AppColor.primaryColor,
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: 20,
           ),
@@ -152,7 +167,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     );
   }
 
-  List<Widget> _buildInfoForm(User user) {
+  List<Widget> _buildInfoForm(User? user) {
     return [
       Container(
         padding: EdgeInsets.symmetric(
@@ -199,7 +214,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
         controller: _phoneNumberController,
         title: 'Số điện thoại',
       ),
-      if (user.phoneNumberValidate == true) ...[
+      if (user?.isPhoneActivated == true) ...[
         SizedBox(
           height: 4,
         ),
@@ -250,25 +265,25 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
               ),
               color: AppColor.transparent,
               borderRadius: BorderRadius.circular(12)),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: user.wantToLearn!
-                .map((e) => Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                      color: AppColor.greyE5,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(e),
-                          Icon(
-                            Icons.cancel_outlined,
-                          ),
-                        ],
-                      ),
-                    ))
-                .toList(),
-          ),
+          // child: Wrap(
+          //   spacing: 8,
+          //   runSpacing: 8,
+          //   children: user.wantToLearn!
+          //       .map((e) => Container(
+          //             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          //             color: AppColor.greyE5,
+          //             child: Row(
+          //               mainAxisSize: MainAxisSize.min,
+          //               children: [
+          //                 Text(e),
+          //                 Icon(
+          //                   Icons.cancel_outlined,
+          //                 ),
+          //               ],
+          //             ),
+          //           ))
+          //       .toList(),
+          // ),
         ),
         SizedBox(
           height: 20,
@@ -307,5 +322,16 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     ];
   }
 
-  
+  void tapEditAvatar() async {
+    final file = await ImagePicker(
+      context,
+      trans.changeAvatar,
+      crop: true,
+    ).show();
+    if (file != null) {
+      print(file);
+      avatarValue.value = file.path;
+      newAvatar = file;
+    }
+  }
 }

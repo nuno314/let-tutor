@@ -32,7 +32,13 @@ class LoginResponse {
 @JsonSerializable()
 class ResponseData {
   String? message;
-  ResponseData({this.message});
+  @JsonKey(name: 'user')
+  User? user;
+
+  ResponseData({
+    this.message,
+    this.user,
+  });
 
   factory ResponseData.fromJson(Map<String, dynamic> json) =>
       _$ResponseDataFromJson(json);

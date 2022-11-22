@@ -115,9 +115,10 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 padding: const EdgeInsets.only(top: 2),
                 child: IconButton(
                   onPressed: widget.onBack ?? () => Navigator.pop(context),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.chevron_left_outlined,
                     size: 18,
+                    color: textColor,
                   ),
                 ),
               ),
@@ -130,6 +131,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (widget.showHeaderImage)
                       SvgPicture.asset(
@@ -137,13 +139,16 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                         height: 40,
                       ),
                     if (widget.title != null)
-                      Text(
-                        widget.title ?? '',
-                        style: _theme.textTheme.headline3?.copyWith(
-                          color: textColor,
-                          fontSize: 24,
-                        ),
+                      SizedBox(
+                        height: 7,
                       ),
+                    Text(
+                      widget.title ?? '',
+                      style: _theme.textTheme.headline3?.copyWith(
+                        color: textColor,
+                        fontSize: 24,
+                      ),
+                    ),
                     if (widget.des?.isNotEmpty == true)
                       const SizedBox(height: 4),
                     if (widget.des?.isNotEmpty == true)

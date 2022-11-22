@@ -1,15 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:let_tutor/generated/assets.dart';
 
 import 'loading.dart';
+import 'smart_image.dart';
 
 class CachedNetworkImageWrapper extends CachedNetworkImage {
   CachedNetworkImageWrapper({
+    Key? key,
     required String url,
     double? width,
     double? height,
     BoxFit? fit,
+    Alignment alignment = Alignment.center,
   }) : super(
+          key: key,
+          alignment: alignment,
           imageUrl: url,
           width: width,
           height: height,
@@ -22,11 +28,15 @@ class CachedNetworkImageWrapper extends CachedNetworkImage {
         );
 
   CachedNetworkImageWrapper.avatar({
+    Key? key,
     required String url,
     double? width,
     double? height,
     BoxFit? fit,
+    Alignment alignment = Alignment.center,
   }) : super(
+          key: key,
+          alignment: alignment,
           imageUrl: url,
           width: width,
           height: height,
@@ -35,52 +45,105 @@ class CachedNetworkImageWrapper extends CachedNetworkImage {
             brightness: Brightness.light,
             radius: 10,
           ),
-          errorWidget: (context, url, error) => Icon(
-            Icons.person,
-            size: width,
+          errorWidget: (context, url, error) => SmartImage(
+            image: Assets.image.icAvatar,
+            width: width ?? 40,
+            height: height ?? 40,
           ),
         );
 
   CachedNetworkImageWrapper.item({
+    Key? key,
     required String url,
     double? width,
     double? height,
     BoxFit? fit,
+    Color? color,
+    String? placeHolder,
+    Alignment alignment = Alignment.center,
   }) : super(
+          key: key,
+          alignment: alignment,
           imageUrl: url,
           width: width,
           height: height,
           fit: fit,
-          placeholder: (context, url) => const Loading(
-            brightness: Brightness.light,
-            radius: 10,
-          ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          color: color,
+          maxHeightDiskCache: 200,
+          maxWidthDiskCache: 200,
+          placeholder: (context, url) {
+            if (placeHolder == null) {
+              return const Loading(
+                brightness: Brightness.light,
+                radius: 10,
+              );
+            }
+            return SmartImage(
+              image: placeHolder,
+              width: width,
+              height: height,
+              fit: fit,
+            );
+          },
+          errorWidget: (context, url, error) {
+            return SmartImage(
+              image: placeHolder ?? Assets.image.icAvatar,
+              width: width,
+              height: height,
+              fit: fit,
+            );
+          },
         );
 
   CachedNetworkImageWrapper.banner({
+    Key? key,
     required String url,
     double? width,
     double? height,
     BoxFit? fit,
+    String? placeHolder,
+    Alignment alignment = Alignment.center,
   }) : super(
+          key: key,
+          alignment: alignment,
           imageUrl: url,
           width: width,
           height: height,
           fit: fit,
-          placeholder: (context, url) => const Loading(
-            brightness: Brightness.light,
-            radius: 10,
-          ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          placeholder: (context, url) {
+            if (placeHolder == null) {
+              return const Loading(
+                brightness: Brightness.light,
+                radius: 10,
+              );
+            }
+            return SmartImage(
+              image: placeHolder,
+              width: width,
+              height: height,
+              fit: fit,
+            );
+          },
+          errorWidget: (context, url, error) {
+            return SmartImage(
+              image: placeHolder ?? Assets.image.icAvatar,
+              width: width,
+              height: height,
+              fit: fit,
+            );
+          },
         );
 
   CachedNetworkImageWrapper.background({
+    Key? key,
     required String url,
     double? width,
     double? height,
     BoxFit? fit,
+    Alignment alignment = Alignment.center,
   }) : super(
+          key: key,
+          alignment: alignment,
           imageUrl: url,
           width: width,
           height: height,

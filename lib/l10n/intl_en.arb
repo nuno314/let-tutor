@@ -66,5 +66,10 @@
   "passwordNotMatch": "Password does not match",
   "emailAlreadyTaken": "Email has already been taken",
   "registerSuccessfully": "Register account successfully",
-  "bannerSlogan": "Become fluent faster through one on one video chat lessons tailored to your goals."
+  "bannerSlogan": "Become fluent faster through one on one video chat lessons tailored to your goals.",
+  "buyLessons": "Buy Lessons",
+  "logout": "Logout",
+  "becomeATutor": "Become A Tutor",
+  "settings": "Settings",
+  "changeAvatar": "Change avatar"
 }

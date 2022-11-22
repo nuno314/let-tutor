@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:let_tutor/data/data_source/remote/rest_api_repository/api_contract.dart';
 import 'package:let_tutor/data/models/login_response.dart';
+import 'package:let_tutor/data/models/user.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'rest_api_repository.g.dart';
@@ -48,4 +49,7 @@ abstract class RestApiRepository {
 
   @POST(ApiContract.forgotPassword)
   Future<ResponseData?> forgotPassword(@Body() Map<String, dynamic> body);
+  
+  @GET(ApiContract.userInfo)
+  Future<ResponseData?> getUserInfomation(@Body() Map<String, dynamic> body);
 }
