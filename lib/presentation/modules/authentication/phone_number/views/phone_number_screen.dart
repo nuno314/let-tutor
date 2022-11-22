@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:let_tutor/presentation/base/base.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../generated/assets.dart';
 import '../../../../extentions/extention.dart';
+import '../../../../route/route_list.dart';
 import '../../../../theme/theme_button.dart';
 import '../../../../theme/theme_color.dart';
+import '../../reset_password/views/reset_password_screen.dart';
+import '../bloc/phone_number_bloc.dart';
+import '../../../../../common/utils.dart';
+
+part 'phone_number.action.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
   const PhoneNumberScreen({Key? key}) : super(key: key);
@@ -13,26 +21,47 @@ class PhoneNumberScreen extends StatefulWidget {
   State<PhoneNumberScreen> createState() => _PhoneNumberScreenState();
 }
 
-class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+class _PhoneNumberScreenState extends StateBase<PhoneNumberScreen> {
   final _phoneController = InputContainerController();
   final _passwordController = InputContainerController();
   late AppLocalizations trans;
   late ThemeData _themeData;
 
-  var onLogin;
+  @override
+  void onLogicError(String? message) {
+    if (message?.toLowerCase().contains('incorrect') == true) {
+      showNoticeDialog(
+        context: context,
+        message: trans.incorrectPhoneNumberOrPassword,
+        title: trans.inform,
+        titleBtn: trans.confirm,
+        onClose: onCloseErrorDialog,
+      );
+    } else {
+      super.onLogicError(message);
+    }
+  }
 
   TextTheme get textTheme => _themeData.textTheme;
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    return ScreenForm(
-      trans: trans,
-      child: Column(children: [
-        _buildLoginBanner(),
-        _buildLoginForm(),
-        _buildButtons(),
-      ]),
+    return BlocConsumer<PhoneNumberBloc, PhoneNumberState>(
+      listener: _blocListener,
+      builder: (context, state) {
+        return ScreenForm(
+          trans: trans,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(children: [
+              _buildLoginBanner(),
+              _buildLoginForm(),
+              _buildButtons(),
+            ]),
+          ),
+        );
+      },
     );
   }
 
@@ -74,7 +103,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
       child: Column(
         children: [
           InputContainer(
-            title: trans.loginByPhoneNumber,
+            title: trans.phoneNumber,
             hint: trans.enterPhoneNumber,
             controller: _phoneController,
           ),
@@ -84,6 +113,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           InputContainer(
             title: trans.password,
             controller: _passwordController,
+            isPassword: true,
+            onSubmitted: (p1) => onSignIn(),
           ),
         ],
       ),
@@ -97,7 +128,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: onLogin,
+            onTap: onForgotPassword,
             child: Text(
               trans.forgetPassword,
               style: textTheme.bodyText2?.copyWith(
@@ -114,13 +145,13 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             isWithShadown: false,
             buttonTitle: trans.login.toUpperCase(),
             padding: EdgeInsets.all(0),
-            // onTap: () => onSignIn(
-            //   _phoneController.text,
-            //   _passwordController.text,
-            // ),
+            onTap: () => onSignIn(),
           ),
         ],
       ),
     );
   }
+
+  @override
+  PhoneNumberBloc get bloc => BlocProvider.of(context);
 }

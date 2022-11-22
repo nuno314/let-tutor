@@ -1,6 +1,5 @@
 part of 'sign_in_screen.dart';
 
-
 extension SignInAction on _SignInScreenState {
   void _blocListener(BuildContext context, SignInState state) {
     if (state is LoginSuccessState) {
@@ -26,7 +25,22 @@ extension SignInAction on _SignInScreenState {
     Navigator.pushNamed(context, RouteList.signUp);
   }
 
-  void onLoginWithGoogle() {}
+  void onLoginWithGoogle() async {
+    showLoading();
+    try {
+      await _googleSignIn.signIn().then(
+            (value) => value?.authentication.then(
+              (value) => bloc.add(
+                SignInByGoogleEvent(
+                  accessToken: value.accessToken!,
+                ),
+              ),
+            ),
+          );
+    } catch (error) {
+      print(error);
+    }
+  }
 
   void onLoginWithFacebook() {
     showLoading();
@@ -55,7 +69,13 @@ extension SignInAction on _SignInScreenState {
   }
 
   void onResetPassword() {
-    Navigator.pushNamed(context, RouteList.resetPassword);
+    Navigator.pushNamed(
+      context,
+      RouteList.resetPassword,
+      arguments: ResetPasswordScreenArgs(
+        email: _emailController.text,
+      ),
+    );
   }
 
   bool validateAccount() {

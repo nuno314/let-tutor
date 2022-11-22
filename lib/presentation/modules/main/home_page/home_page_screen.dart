@@ -16,6 +16,8 @@ import '../../../common_widget/teacher_item.dart';
 import '../../../extentions/extention.dart';
 import 'bloc/home_page_bloc.dart';
 
+part 'home_page.action.dart';
+
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
@@ -47,15 +49,20 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
     trans = translate(context);
     return ScreenForm(
       trans: trans,
-      showHeaderImage: false,
+      // showHeaderImage: false,
       showBackButton: false,
       child: SmartRefresherWrapper.build(
         enablePullDown: false,
         controller: _refreshController,
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: Column(
-            children: _buildListing(),
+          child: BlocConsumer<HomePageBloc, HomePageState>(
+            listener: _blocListener,
+            builder: (context, state) {
+              return Column(
+                children: _buildListing(),
+              );
+            },
           ),
         ),
       ),

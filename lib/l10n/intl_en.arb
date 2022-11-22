@@ -32,7 +32,7 @@
   "orContinueWith": "Or continue with",
   "noAccount": "No account?",
   "signUp": "Sign up",
-  "haveAccount": "Already have an account?",
+  "haveAccount": "Already have an account? ",
   "resetPassword": "Reset Password",
   "pleaseEnterEmailToResetPassword": "Please enter your email address to search for your account.",
   "checkMail": "Check your inbox for a link to reset your password.",
@@ -55,5 +55,16 @@
   "loginByPhoneNumber": "Login By Phone Number",
   "verifyPassword": "Verify password",
   "enterPhoneNumber": "Enter phone number",
-  "enterPassword": "Nhập mật khẩu"
+  "enterPassword": "Nhập mật khẩu",
+  "invalidPhoneNumber": "Invalid phone number",
+  "incorrectPhoneNumberOrPassword": "Incorrect phone number or password",
+  "phoneNumberNotExist": " Phone number does not exist",
+  "phoneNumber": "Phone number",
+  "pleaseEnterPhoneNumberToResetPassword": "Please enter phone number to reset password",
+  "emailSendSuccess": "Email sent successfully",
+  "emailNotExist": "Email does not exist",
+  "passwordNotMatch": "Password does not match",
+  "emailAlreadyTaken": "Email has already been taken",
+  "registerSuccessfully": "Register account successfully",
+  "bannerSlogan": "Become fluent faster through one on one video chat lessons tailored to your goals."
 }

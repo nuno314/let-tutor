@@ -28,6 +28,12 @@ class PhoneNumberInitial extends PhoneNumberState {
   }) : super(viewModel);
 }
 
+class SignInSuccess extends PhoneNumberState {
+  SignInSuccess({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(

@@ -13,4 +13,5 @@ class RouteList {
   static const String account = '/account';
   static const String schedule = '/schedule';
   static const String signInByPhoneNumber = '/signInByPhoneNumber';
+  static const String forgotPassword = '/forgotPassword';
 }

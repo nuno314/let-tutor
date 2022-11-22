@@ -14,3 +14,9 @@ class SignInByFacebookEvent extends SignInEvent {
 
   SignInByFacebookEvent({required this.accessToken});
 }
+
+class SignInByGoogleEvent extends SignInEvent {
+  final String accessToken;
+
+  SignInByGoogleEvent({required this.accessToken});
+}

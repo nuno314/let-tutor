@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:let_tutor/di/di.dart';
 
 import 'package:let_tutor/presentation/common_widget/export.dart';
+import 'package:let_tutor/presentation/modules/authentication/reset_password/reset_password.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 
-import '../../../../../common/components/navigation/navigation_observer.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../extentions/extention.dart';
@@ -45,6 +47,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends StateBase<SignInScreen> {
+  late GoogleSignInAccount? account;
+
+  final _googleSignIn = injector.get<GoogleSignIn>();
+
   @override
   SignInBloc get bloc => BlocProvider.of(context);
 
@@ -58,10 +64,19 @@ class _SignInScreenState extends StateBase<SignInScreen> {
   final _passwordController = InputContainerController();
 
   @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((event) {
+      setState(() {
+        account = event;
+      });
+    });
+    _googleSignIn.signInSilently();
+  }
+
+  @override
   void onLogicError(String? message) {
-    print('error');
-    print(message);
-    if (message?.toLowerCase().contains('invalid') == true) {
+    if (message?.toLowerCase().contains('incorrect') == true) {
       showNoticeDialog(
         context: context,
         message: trans.incorrectEmailOrPassword,
@@ -170,7 +185,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.',
+            trans.bannerSlogan,
             style: textTheme.bodyText1?.copyWith(
               fontSize: 14,
             ),

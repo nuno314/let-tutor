@@ -15,7 +15,7 @@ abstract class RestApiRepository {
   factory RestApiRepository(Dio dio, {String baseUrl}) = _RestApiRepository;
 
   @POST(ApiContract.registerByEmail)
-  Future<LoginResponse?> registerByEmail(@Body() Map<String, dynamic> body);
+  Future<ResponseData?> registerByEmail(@Body() Map<String, dynamic> body);
 
   @POST(ApiContract.authEmailLogin)
   Future<LoginResponse?> authEmailLogin(@Body() Map<String, dynamic> body);
@@ -41,11 +41,11 @@ abstract class RestApiRepository {
       @Body() Map<String, dynamic> body);
 
   @POST(ApiContract.resendOTP)
-  Future<LoginResponse?> resendOTP(@Body() Map<String, dynamic> body);
+  Future<ResponseData?> resendOTP(@Body() Map<String, dynamic> body);
 
   @POST(ApiContract.activatePhoneNumber)
   Future<LoginResponse?> activatePhoneNumber(@Body() Map<String, dynamic> body);
 
   @POST(ApiContract.forgotPassword)
-  Future<LoginResponse?> forgotPassword(@Body() Map<String, dynamic> body);
+  Future<ResponseData?> forgotPassword(@Body() Map<String, dynamic> body);
 }

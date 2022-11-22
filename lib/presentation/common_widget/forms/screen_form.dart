@@ -38,7 +38,7 @@ class ScreenForm extends StatefulWidget {
     this.des,
     this.child,
     this.bgColor,
-    this.showHeaderImage = false,
+    this.showHeaderImage = true,
     this.actions = const <Widget>[],
     this.headerColor,
     this.onBack,
@@ -73,7 +73,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
     final main = Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: padding.top),
+          padding: EdgeInsets.only(top: padding.top - 20),
           color: widget.headerColor ?? Colors.transparent,
           child: _buildAppBar(),
         ),
@@ -90,25 +90,17 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       body: GestureDetector(
         onTap: () => CommonFunction.hideKeyBoard(context),
-        child: widget.showHeaderImage == true
-            ? Stack(
-                children: [
-                  Image.asset(
-                    ImageConstant.imgBGHeader,
-                    fit: BoxFit.cover,
-                    width: mediaQueryData.size.width,
-                  ),
-                  main,
-                ],
-              )
-            : main,
+        child: main,
       ),
     );
   }
 
   Widget _buildAppBar() {
-    final textColor =
-        widget.showHeaderImage == true ? Colors.white : Colors.black;
+    final textColor = widget.showHeaderImage == true
+        ? Colors.white
+        : widget.headerColor != null
+            ? Colors.white
+            : Colors.black;
 
     final desTextColor =
         widget.showHeaderImage == true ? Colors.white.withOpacity(0.7) : null;
@@ -139,10 +131,11 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(
-                      Assets.svg.icLogo,
-                      height: 40,
-                    ),
+                    if (widget.showHeaderImage)
+                      SvgPicture.asset(
+                        Assets.svg.icLogo,
+                        height: 40,
+                      ),
                     if (widget.title != null)
                       Text(
                         widget.title ?? '',

@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:let_tutor/generated/assets.dart';
+import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:package_info/package_info.dart';
 
 import '../../../../common/client_info.dart';
 import '../../../../common/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../base/base.dart';
-import '../../../common_widget/after_layout.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
 import 'bloc/splash_bloc.dart';
@@ -26,6 +28,8 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
     getClientInfo();
   }
 
+  late AppLocalizations trans;
+
   @override
   SplashBloc get bloc => BlocProvider.of<SplashBloc>(context);
 
@@ -36,6 +40,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
+    trans = translate(context);
     return Scaffold(
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
@@ -56,7 +61,9 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(ImageConstant.logoImage),
+                  Image.asset(
+                    Assets.image.imgLogo,
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     translate(context).appName.toUpperCase(),

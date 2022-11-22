@@ -1,10 +1,13 @@
 part of 'reset_password_bloc.dart';
 
 class _ViewModel {
-  const _ViewModel();
+  final String? message;
+  const _ViewModel({this.message});
 
-  _ViewModel copyWith() {
-    return const _ViewModel();
+  _ViewModel copyWith({String? message}) {
+    return _ViewModel(
+      message: message ?? this.message,
+    );
   }
 }
 
@@ -20,10 +23,18 @@ abstract class ResetPasswordState {
       viewModel ?? this.viewModel,
     );
   }
+
+  String? get message => viewModel.message;
 }
 
 class ResetPasswordInitial extends ResetPasswordState {
   ResetPasswordInitial({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class ResponseState extends ResetPasswordState {
+  ResponseState({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -34,6 +45,9 @@ final _factories = <
   _ViewModel viewModel,
 )>{
   ResetPasswordInitial: (viewModel) => ResetPasswordInitial(
+        viewModel: viewModel,
+      ),
+  ResponseState: (viewModel) => ResponseState(
         viewModel: viewModel,
       ),
 };

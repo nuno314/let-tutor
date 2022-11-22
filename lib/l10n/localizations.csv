@@ -36,7 +36,7 @@ forgetPassword,Quên mật khẩu,Forget password
 orContinueWith,Hoặc tiếp tục với,Or continue with
 noAccount,Chưa có tài khoản?,No account?
 signUp,Đăng ký,Sign up
-haveAccount,Đã có tài khoản,Already have an account?
+haveAccount,Đã có tài khoản? ,Already have an account? 
 resetPassword,Đặt Lại Mật Khẩu,Reset Password
 pleaseEnterEmailToResetPassword,Vui lòng nhập email để tìm kiếm tài khoản của bạn.,Please enter your email address to search for your account.
 checkMail,Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn.,Check your inbox for a link to reset your password.
@@ -60,3 +60,14 @@ loginByPhoneNumber,Đăng Nhập Bằng Số Điện Thoại,Login By Phone Numb
 verifyPassword,Xác thực mật khẩu,Verify password
 enterPhoneNumber,Nhập số điện thoại,Enter phone number
 enterPassword,Nhập mật khẩu,Nhập mật khẩu
+invalidPhoneNumber,Số điện thoại không hợp lệ,Invalid phone number
+incorrectPhoneNumberOrPassword,Số điện thoại hoặc mật khẩu không đúng,Incorrect phone number or password
+phoneNumberNotExist,Số điện thoại không tồn tại, Phone number does not exist
+phoneNumber,Số điện thoại,Phone number
+pleaseEnterPhoneNumberToResetPassword,Vui lòng nhập số điện thoại để đặt lại mật khẩu,Please enter phone number to reset password
+emailSendSuccess,Gửi Email thành công,Email sent successfully
+emailNotExist,Email không tồn tại,Email does not exist
+passwordNotMatch,Mật khẩu không trùng khớp,Password does not match
+emailAlreadyTaken,Email đã được sử dụng,Email has already been taken
+registerSuccessfully,Đăng ký tài khoản thành công,Register account successfully
+bannerSlogan,Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.,Become fluent faster through one on one video chat lessons tailored to your goals.

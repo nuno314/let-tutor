@@ -128,6 +128,7 @@ abstract class StateBase<T extends StatefulWidget> extends State<T> {
   Future<void> doLogout() async {
     showLoading();
     await Future.delayed(const Duration(milliseconds: 200));
+    injector.get<GoogleSignIn>().signOut();
     LogUtils.i('doLogout');
     await _cleanUp();
     hideLoading();

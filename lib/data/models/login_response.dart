@@ -28,3 +28,14 @@ class LoginResponse {
 
   String? get refreshToken => token?.refreshToken?.token;
 }
+
+@JsonSerializable()
+class ResponseData {
+  String? message;
+  ResponseData({this.message});
+
+  factory ResponseData.fromJson(Map<String, dynamic> json) =>
+      _$ResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ResponseDataToJson(this);
+}

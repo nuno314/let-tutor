@@ -28,12 +28,21 @@ class SignUpInitial extends SignUpState {
   }) : super(viewModel);
 }
 
+class RegisterAccountSuccess extends SignUpState {
+  RegisterAccountSuccess({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   SignUpInitial: (viewModel) => SignUpInitial(
+        viewModel: viewModel,
+      ),
+  RegisterAccountSuccess: (viewModel) => RegisterAccountSuccess(
         viewModel: viewModel,
       ),
 };

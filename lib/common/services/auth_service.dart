@@ -14,6 +14,15 @@ abstract class AuthService {
     required String token,
   });
 
+  Future<LoginResponse?> loginWithPhoneNumber({
+    required String phoneNumber,
+    required String password,
+  });
+
+  Future<LoginResponse?> loginWithGoogle({
+    required String token,
+  });
+
   Future<void> signOut();
 
   Future<String?> refreshToken();

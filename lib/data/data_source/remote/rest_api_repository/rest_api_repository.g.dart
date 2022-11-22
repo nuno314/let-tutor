@@ -17,14 +17,14 @@ class _RestApiRepository implements RestApiRepository {
   String? baseUrl;
 
   @override
-  Future<LoginResponse?> registerByEmail(body) async {
+  Future<ResponseData?> registerByEmail(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseData>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -37,7 +37,7 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        _result.data == null ? null : LoginResponse.fromJson(_result.data!);
+        _result.data == null ? null : ResponseData.fromJson(_result.data!);
     return value;
   }
 
@@ -217,14 +217,14 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<LoginResponse?> resendOTP(body) async {
+  Future<ResponseData?> resendOTP(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseData>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -237,7 +237,7 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        _result.data == null ? null : LoginResponse.fromJson(_result.data!);
+        _result.data == null ? null : ResponseData.fromJson(_result.data!);
     return value;
   }
 
@@ -267,14 +267,14 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<LoginResponse?> forgotPassword(body) async {
+  Future<ResponseData?> forgotPassword(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseData>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -287,7 +287,7 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value =
-        _result.data == null ? null : LoginResponse.fromJson(_result.data!);
+        _result.data == null ? null : ResponseData.fromJson(_result.data!);
     return value;
   }
 

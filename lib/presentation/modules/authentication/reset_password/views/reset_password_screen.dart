@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:let_tutor/presentation/route/route_list.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 
-import '../../../../../generated/assets.dart';
 import '../../../../base/base.dart';
 import '../../../../common_widget/export.dart';
 import '../../../../extentions/extention.dart';
 import '../bloc/reset_password_bloc.dart';
+import '../../../../../common/utils.dart';
 
 part 'reset_password.action.dart';
-part 'reset_password_confirm_screen.dart';
 
-class DropdownLanguageArgs {
-  String title;
-  String iconPath;
-  DropdownLanguageArgs({
-    required this.title,
-    required this.iconPath,
+class ResetPasswordScreenArgs {
+  final String? email;
+  final String? phoneNumber;
+
+  ResetPasswordScreenArgs({
+    this.email = null,
+    this.phoneNumber = null,
   });
 }
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({Key? key}) : super(key: key);
+  final ResetPasswordScreenArgs args;
+  const ResetPasswordScreen({Key? key, required this.args}) : super(key: key);
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
 class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
+  final _emailController = InputContainerController();
+  final _phoneNumberController = InputContainerController();
   @override
   ResetPasswordBloc get bloc => BlocProvider.of(context);
 
@@ -38,8 +39,23 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
+
+  bool get isEmail => widget.args.email != null;
+
+  @override
+  void onLogicError(String? message) {
+    if (message?.toLowerCase().contains('exist') == true) {
+      showNoticeDialog(
+        context: context,
+        message: trans.emailNotExist,
+        title: trans.inform,
+        titleBtn: trans.confirm,
+        onClose: onCloseErrorDialog,
+      );
+    } else
+      super.onLogicError(message);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +74,13 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _buildTitle(),
-                _buildForm(),
+                if (isEmail) ...[
+                  _buildEmailTitle(),
+                  _buildEmailForm(),
+                ] else ...[
+                  _buildPhoneNumberTitle(),
+                  _buildPhoneNumberForm(),
+                ],
               ],
             ),
           ),
@@ -68,52 +89,7 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
     );
   }
 
-  Widget _buildLanguageSelection() {
-    final languageList = [
-      DropdownLanguageArgs(
-        title: trans.vietnamese,
-        iconPath: Assets.svg.icVietnam,
-      ),
-      DropdownLanguageArgs(
-        title: trans.english,
-        iconPath: Assets.svg.icUs,
-      ),
-    ];
-    var _selectedLanguage = languageList[0];
-
-    return DropdownButtonHideUnderline(
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButton<DropdownLanguageArgs>(
-          value: _selectedLanguage,
-          items: languageList
-              .map(
-                (e) => DropdownMenuItem<DropdownLanguageArgs>(
-                  child: Container(
-                    width: 100,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(e.title),
-                        Spacer(),
-                        SvgPicture.asset(
-                          e.iconPath,
-                          height: 35,
-                        ),
-                      ],
-                    ),
-                  ),
-                  value: e,
-                ),
-              )
-              .toList(),
-          onChanged: (value) {},
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTitle() {
+  Widget _buildEmailTitle() {
     return Column(
       children: [
         Text(
@@ -134,11 +110,52 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
     );
   }
 
-  Widget _buildForm() {
+  Widget _buildPhoneNumberTitle() {
+    return Column(
+      children: [
+        Text(
+          trans.resetPassword,
+          style: textTheme.bodyText1?.copyWith(fontSize: 30),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          trans.pleaseEnterPhoneNumberToResetPassword,
+          style: textTheme.bodyText2?.copyWith(
+            fontSize: 18,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEmailForm() {
     return Column(
       children: [
         InputContainer(
           title: trans.emailAddress,
+          controller: _emailController,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        ThemeButton.primary(
+          context: context,
+          title: trans.confirm,
+          onPressed: onSubmitEmail,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPhoneNumberForm() {
+    return Column(
+      children: [
+        InputContainer(
+          title: trans.phoneNumber,
+          controller: _phoneNumberController,
         ),
         SizedBox(
           height: 20,

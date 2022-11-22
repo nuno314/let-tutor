@@ -12,6 +12,7 @@ import '../../../../base/base.dart';
 import '../../../../extentions/extention.dart';
 import '../../../../theme/theme_color.dart';
 import '../sign_up.dart';
+import '../../../../../common/utils.dart';
 
 part 'sign_up.action.dart';
 
@@ -43,8 +44,22 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
+
+  @override
+  void onLogicError(String? message) {
+    if (message?.toLowerCase().contains('already') == true) {
+      showNoticeDialog(
+        context: context,
+        message: trans.emailAlreadyTaken,
+        title: trans.inform,
+        titleBtn: trans.confirm,
+        onClose: onCloseErrorDialog,
+      );
+    } else {
+      super.onLogicError(message);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +80,26 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
                 _buildLoginBanner(),
                 _buildLoginForm(),
                 _buildButtons(),
-                _buildLoginOptions()
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      trans.haveAccount,
+                    ),
+                    InkWell(
+                      onTap: onSignIn,
+                      child: Text(
+                        trans.login,
+                        style: textTheme.bodyText2?.copyWith(
+                          color: AppColor.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
@@ -74,61 +108,12 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
     );
   }
 
-  Widget _buildLanguageSelection() {
-    final languageList = [
-      DropdownLanguageArgs(
-        title: trans.vietnamese,
-        iconPath: Assets.svg.icVietnam,
-      ),
-      DropdownLanguageArgs(
-        title: trans.english,
-        iconPath: Assets.svg.icUs,
-      ),
-    ];
-    var _selectedLanguage = languageList[0];
-
-    return DropdownButtonHideUnderline(
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButton<DropdownLanguageArgs>(
-          value: _selectedLanguage,
-          items: languageList
-              .map(
-                (e) => DropdownMenuItem<DropdownLanguageArgs>(
-                  child: Container(
-                    width: 100,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(e.title),
-                        Spacer(),
-                        SvgPicture.asset(
-                          e.iconPath,
-                          height: 35,
-                        ),
-                      ],
-                    ),
-                  ),
-                  value: e,
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            setState(() {
-              _selectedLanguage = value as DropdownLanguageArgs;
-            });
-          },
-        ),
-      ),
-    );
-  }
-
   Widget _buildLoginBanner() {
     return Column(
       children: [
         Image.asset(
           Assets.image.imgLogin,
-          width: double.infinity,
+          height: 250,
         ),
         Text(
           trans.signUp,
@@ -142,7 +127,7 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
           child: Text(
             'Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.',
             style: textTheme.bodyText1?.copyWith(
-              fontSize: 16,
+              fontSize: 14,
             ),
             maxLines: 3,
             textAlign: TextAlign.center,
@@ -189,100 +174,14 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InkWell(
-            onTap: () {},
-            child: Text(
-              trans.forgetPassword,
-              style: textTheme.bodyText2?.copyWith(
-                fontSize: 16,
-                color: AppColor.primaryColor,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
           ThemeButton.bottomButton(
             context,
             isWithShadown: false,
             buttonTitle: trans.signUp.toUpperCase(),
             padding: EdgeInsets.all(0),
+            onTap: onSignUp,
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildLoginOptions() {
-    final loginOptions = [
-      LoginOptionArgs(
-        iconPath: Assets.svg.icFacebook,
-        onTap: onLoginWithFacebook,
-      ),
-      LoginOptionArgs(
-        iconPath: Assets.svg.icGoogle,
-        onTap: onLoginWithGoogle,
-      ),
-      LoginOptionArgs(
-        iconPath: Assets.svg.icPhone,
-        onTap: onLoginWithPhoneNumber,
-      ),
-    ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 32,
-      ),
-      child: Column(
-        children: [
-          Text(trans.orContinueWith),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: loginOptions
-                .map((e) => _buildLoginOptionIcon(
-                      e.iconPath,
-                      e.onTap,
-                    ))
-                .toList(),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                trans.haveAccount,
-              ),
-              InkWell(
-                onTap: onSignIn,
-                child: Text(
-                  trans.login,
-                  style: textTheme.bodyText2?.copyWith(
-                    color: AppColor.primaryColor,
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLoginOptionIcon(
-    String iconPath,
-    void Function() onTap,
-  ) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        child: SvgPicture.asset(
-          iconPath,
-          width: 50,
-        ),
       ),
     );
   }

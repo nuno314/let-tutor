@@ -8,13 +8,14 @@ import 'views/reset_password_screen.dart';
 class ResetPasswordRoute {
   static Map<String, WidgetBuilder> getAll(RouteSettings settings) => {
         RouteList.resetPassword: (context) {
+          final args = settings.arguments as ResetPasswordScreenArgs;
           return BlocProvider(
             create: (context) => ResetPasswordBloc(),
-            child: const ResetPasswordScreen(),
+            child: ResetPasswordScreen(
+              args: args,
+            ),
           );
         },
-        RouteList.resetPasswordConfirm: (context) {
-          return ResetPasswordConfirmScreen();
-        },
+       
       };
 }

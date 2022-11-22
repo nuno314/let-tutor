@@ -86,6 +86,42 @@ class AppAuthService implements AuthService {
 
     return result;
   }
+
+  @override
+  Future<LoginResponse?> loginWithGoogle({
+    required String token,
+  }) async {
+    final result = await _authRepo.client.authGoogleLogin({
+      'access_token': token,
+    });
+
+    _localDataManager.notifyUserChanged(result?.user);
+
+    _localDataManager.setAccessToken(result?.token?.accessToken);
+
+    _localDataManager.setRefreshToken(result?.token?.refreshToken);
+
+    return result;
+  }
+
+  @override
+  Future<LoginResponse?> loginWithPhoneNumber({
+    required String phoneNumber,
+    required String password,
+  }) async {
+    final result = await _authRepo.client.authPhoneNumberLogin({
+      'phone': phoneNumber,
+      'password': password,
+    });
+
+    _localDataManager.notifyUserChanged(result?.user);
+
+    _localDataManager.setAccessToken(result?.token?.accessToken);
+
+    _localDataManager.setRefreshToken(result?.token?.refreshToken);
+
+    return result;
+  }
 }
 
 class RefreshTokenException implements Exception {
