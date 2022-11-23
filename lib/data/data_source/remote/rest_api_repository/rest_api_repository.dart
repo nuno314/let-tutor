@@ -49,7 +49,10 @@ abstract class RestApiRepository {
 
   @POST(ApiContract.forgotPassword)
   Future<ResponseData?> forgotPassword(@Body() Map<String, dynamic> body);
-  
+
   @GET(ApiContract.userInfo)
   Future<ResponseData?> getUserInfomation(@Body() Map<String, dynamic> body);
+
+  @PUT(ApiContract.userInfo)
+  Future<ResponseData?> updateUserInfomation(@Body() Map<String, dynamic> body);
 }

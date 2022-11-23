@@ -179,7 +179,8 @@ class _InputContainerState extends State<InputContainer> {
           ),
           keyboardType: widget.keyboardType,
           textCapitalization: widget.textCapitalization,
-          style: widget.textStyle ?? themeData.textTheme.bodyText2,
+          style: widget.textStyle ??
+              themeData.textTheme.bodyText2?.copyWith(fontSize: 14),
           obscureText:
               widget.isPassword && widget.controller?.isShowPass != true,
           onChanged: (text) {
@@ -205,7 +206,10 @@ class _InputContainerState extends State<InputContainer> {
                     text: widget.titleStyle != null
                         ? widget.title!
                         : widget.title!.toUpperCase(),
-                    style: widget.titleStyle ?? themeData.textTheme.subtitle1,
+                    style: widget.titleStyle ??
+                        themeData.textTheme.bodyText1?.copyWith(
+                          fontSize: 12,
+                        ),
                     children: [
                       if (widget.required == true)
                         TextSpan(

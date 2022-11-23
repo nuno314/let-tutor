@@ -1,3 +1,5 @@
+import 'package:let_tutor/data/models/user.dart';
+
 part 'constants/url_constants.dart';
 part 'constants/image_constants.dart';
 part 'constants/server_constants.dart';

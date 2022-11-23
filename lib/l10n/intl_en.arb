@@ -79,5 +79,12 @@
   "level": "Level",
   "testPreparation": "Test preparation",
   "wantToLearn": "Want to learn",
-  "subjects": "Subjects"
+  "subjects": "Subjects",
+  "saveChanges": "Save changes",
+  "scheduleHint": "Note the time of the week you want to study on LetTutor",
+  "invalidName": "Please input your name",
+  "invalidCountry": "Please select your country",
+  "invalidBirthday": "Please select your birthday",
+  "invalidLevel": "Please select your level",
+  "invalidWantToLearn": "Please select at least one subject"
 }

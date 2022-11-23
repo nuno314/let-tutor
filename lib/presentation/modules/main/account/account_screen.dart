@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:let_tutor/data/models/user.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
 
@@ -68,9 +69,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
                     itemBorder: ItemBorder.top,
                     iconPath: Assets.svg.icPerson,
                     title: trans.account,
-                    callback: () {
-                      Navigator.pushNamed(context, RouteList.profile);
-                    },
+                    callback: onProfile,
                   ),
                   _settingItem(
                     divider: ItemDivider.line,
@@ -130,6 +129,8 @@ class _AccountScreenState extends StateBase<AccountScreen> {
         );
       },
     );
+
+   
   }
 
   Widget _settingItem({

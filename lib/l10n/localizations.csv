@@ -84,3 +84,10 @@ level,Trình độ,Level
 testPreparation,Luyện thi,Test preparation
 wantToLearn,Muốn học,Want to learn
 subjects,Môn học,Subjects
+saveChanges,Lưu thay đổi,Save changes
+scheduleHint,Ghi chú thời gian trong tuần mà bạn muốn học trên LetTutor,Note the time of the week you want to study on LetTutor
+invalidName,Vui lòng nhập tên,Please input your name
+invalidCountry,Vui lòng chọn quốc gia,Please select your country
+invalidBirthday,Vui lòng chọn ngày sinh,Please select your birthday
+invalidLevel,Vui lòng chọn trình độ,Please select your level
+invalidWantToLearn,Vui lòng chọn ít nhất một môn học,Please select at least one subject

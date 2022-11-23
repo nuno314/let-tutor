@@ -37,12 +37,21 @@ class ProfileInitial extends ProfileState {
   }) : super(viewModel);
 }
 
+class UpdateProfileSuccess extends ProfileState {
+  UpdateProfileSuccess({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
   _ViewModel viewModel,
 )>{
   ProfileInitial: (viewModel) => ProfileInitial(
+        viewModel: viewModel,
+      ),
+  UpdateProfileSuccess: (viewModel) => UpdateProfileSuccess(
         viewModel: viewModel,
       ),
 };

@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:countries_utils/countries_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:let_tutor/common/constants.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
@@ -11,9 +14,8 @@ import '../../../../data/models/user.dart';
 import '../../../base/base.dart';
 import '../../../common_widget/custom_cupertino_date_picker.dart';
 import '../../../extentions/extention.dart';
-import '/common/utils.dart';
-
 import '../bloc/profile_bloc.dart';
+import '/common/utils.dart';
 
 part 'profile.action.dart';
 
@@ -43,9 +45,12 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   final _dobController = InputContainerController();
   final _levelController = InputContainerController();
   final _wantToLearnController = InputContainerController();
+  final _scheduleController = InputContainerController();
 
   File? newAvatar;
   DateTime? _pickBirthday;
+  List<LearnTopic> learnTopics = [];
+  List<Test> testPreparations = [];
 
   final avatarValue = ValueNotifier<String?>(null);
 
@@ -69,9 +74,6 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
           showHeaderImage: false,
           trans: trans,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
@@ -164,135 +166,132 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
 
   Widget _buildInfoForm(User? user) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          controller: _nameController,
-          title: trans.name,
-          required: true,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          fillColor: AppColor.greyE5,
-          readOnly: true,
-          controller: _emailController,
-          title: trans.emailAddress,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          controller: _countryController,
-          title: trans.country,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          required: true,
-          controller: _phoneNumberController,
-          title: trans.phoneNumber,
-          onTextChanged: (p0) {
-            if (p0 != user?.phoneNumber) {
-              setState(() {
-                user?.isPhoneActivated = false;
-              });
-            } else {
-              setState(() {
-                user?.isPhoneActivated = true;
-              });
-            }
-          },
-        ),
-        if (user?.isPhoneActivated == true) ...[
-          SizedBox(
-            height: 4,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColor.green,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
               ),
-              color: AppColor.greenB7EB8F,
-            ),
-            child: Text(
-              trans.verified,
-              style: textTheme.bodyText1?.copyWith(
-                color: AppColor.green,
+              InputContainer(
+                controller: _nameController,
+                title: trans.name,
+                required: true,
               ),
-            ),
-          ),
-        ],
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          required: true,
-          title: trans.dateOfBirth,
-          controller: _dobController,
-          onTap: _showBirthdayPicker,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          required: true,
-          title: trans.level,
-          controller: _levelController,
-          onTap: showLevelDialog,
-          readOnly: true,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        InputContainer(
-          controller: _wantToLearnController,
-          title: trans.wantToLearn,
-          required: true,
-          readOnly: true,
-          onTap: showWantToLearnDialog,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          'Lịch học',
-          style: textTheme.bodyText1?.copyWith(),
-        ),
-        InputContainer(
-          hint: 'Ghi chú thời gian trong tuần mà bạn muốn học trên LetTutor',
-          maxLines: 3,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: InkWell(
-            onTap: saveChanges,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColor.primaryColor,
+              SizedBox(
+                height: 20,
               ),
-              child: Text(
-                'Lưu thay đổi',
-                style: textTheme.bodyText2?.copyWith(
-                  color: AppColor.white,
+              InputContainer(
+                fillColor: AppColor.greyE5,
+                readOnly: true,
+                controller: _emailController,
+                title: trans.emailAddress,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputContainer(
+                required: true,
+                readOnly: true,
+                controller: _countryController,
+                title: trans.country,
+                onTap: showSelectNationDialog,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputContainer(
+                required: true,
+                controller: _phoneNumberController,
+                title: trans.phoneNumber,
+                onTextChanged: (p0) {
+                  if (p0 != user?.phoneNumber) {
+                    setState(() {
+                      user?.isPhoneActivated = false;
+                    });
+                  } else {
+                    setState(() {
+                      user?.isPhoneActivated = true;
+                    });
+                  }
+                },
+              ),
+              if (user?.isPhoneActivated == true) ...[
+                SizedBox(
+                  height: 4,
                 ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColor.green,
+                    ),
+                    color: AppColor.greenB7EB8F,
+                  ),
+                  child: Text(
+                    trans.verified,
+                    style: textTheme.bodyText1?.copyWith(
+                      color: AppColor.green,
+                    ),
+                  ),
+                ),
+              ],
+              SizedBox(
+                height: 20,
               ),
-            ),
+              InputContainer(
+                required: true,
+                title: trans.dateOfBirth,
+                controller: _dobController,
+                onTap: _showBirthdayPicker,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputContainer(
+                required: true,
+                title: trans.level,
+                controller: _levelController,
+                onTap: showLevelDialog,
+                readOnly: true,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputContainer(
+                controller: _wantToLearnController,
+                title: trans.wantToLearn,
+                required: true,
+                readOnly: true,
+                onTap: showWantToLearnDialog,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputContainer(
+                title: trans.schedule,
+                controller: _scheduleController,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                hint: trans.scheduleHint,
+                maxLines: 3,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
+        ),
+        ThemeButton.bottomButton(
+          context,
+          isWithShadown: false,
+          buttonTitle: trans.saveChanges,
+          onTap: () => saveChanges(user),
         ),
       ],
     );

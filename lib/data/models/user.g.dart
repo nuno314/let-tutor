@@ -16,6 +16,13 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       isPhoneActivated: json['isPhoneActivated'] as bool?,
       birthday: json['birthday'] as String?,
       level: json['level'] as String?,
+      learnTopics: (json['learnTopics'] as List<dynamic>?)
+          ?.map((e) => LearnTopic.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      testPreparations: (json['testPreparations'] as List<dynamic>?)
+          ?.map((e) => Test.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      requireNote: json['requireNote'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -28,4 +35,32 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'isPhoneActivated': instance.isPhoneActivated,
       'birthday': instance.birthday,
       'level': instance.level,
+      'learnTopics': instance.learnTopics,
+      'testPreparations': instance.testPreparations,
+      'requireNote': instance.requireNote,
+    };
+
+LearnTopic _$LearnTopicFromJson(Map<String, dynamic> json) => LearnTopic(
+      id: json['id'] as int?,
+      key: json['key'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$LearnTopicToJson(LearnTopic instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'key': instance.key,
+      'name': instance.name,
+    };
+
+Test _$TestFromJson(Map<String, dynamic> json) => Test(
+      id: json['id'] as int?,
+      key: json['key'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$TestToJson(Test instance) => <String, dynamic>{
+      'id': instance.id,
+      'key': instance.key,
+      'name': instance.name,
     };

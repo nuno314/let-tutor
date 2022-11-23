@@ -70,3 +70,78 @@ class ScanProductMode {
   static const String barCode = 'barCode';
   static const String all = 'all';
 }
+
+enum LevelEnum {
+  beginner,
+  higherBeginner,
+  preIntermediate,
+  intermediate,
+  upperIntermediate,
+  advanced,
+  proficiency,
+}
+
+extension LevelEnumEtx on LevelEnum {
+  String toJson() {
+    switch (this) {
+      case LevelEnum.beginner:
+        return 'BEGINNER';
+      case LevelEnum.higherBeginner:
+        return 'HIGHER_BEGINNER';
+      case LevelEnum.preIntermediate:
+        return 'PRE_INTERMEDIATE';
+      case LevelEnum.intermediate:
+        return 'INTERMEDIATE';
+      case LevelEnum.upperIntermediate:
+        return 'UPPER_INTERMEDIATE';
+      case LevelEnum.advanced:
+        return 'ADVANCED';
+      case LevelEnum.proficiency:
+        return 'PROFICIENCY';
+    }
+  }
+
+  String description() {
+    switch (this) {
+      case LevelEnum.beginner:
+        return 'Pre A1 (Beginner)';
+      case LevelEnum.higherBeginner:
+        return 'A1 (High Beginner)';
+      case LevelEnum.preIntermediate:
+        return 'A2 (Pre-Intermediate)';
+      case LevelEnum.intermediate:
+        return 'B1 (Intermediate)';
+      case LevelEnum.upperIntermediate:
+        return 'B2 (Upper-Intermediate)';
+      case LevelEnum.advanced:
+        return 'C1 (Advanced)';
+      case LevelEnum.proficiency:
+        return 'C2(Proficiency)';
+    }
+  }
+}
+
+extension LearnTopicEtx on LearnTopic {
+  static List<LearnTopic> getAll() {
+    return [
+      LearnTopic(id: 1, key: '', name: 'English for Kids'),
+      LearnTopic(id: 2, key: '', name: 'Business English'),
+      LearnTopic(id: 3, key: '', name: 'Conversational English')
+    ];
+  }
+}
+
+extension TestPreparations on Test {
+  static List<Test> getAll() {
+    return [
+      Test(id: 1, key: 'starters', name: 'STARTERS'),
+      Test(id: 2, key: 'movers', name: 'MOVERS'),
+      Test(id: 3, key: 'flyers', name: 'FLYERS'),
+      Test(id: 4, key: 'ket', name: 'KET'),
+      Test(id: 5, key: 'pet', name: 'PET'),
+      Test(id: 6, key: 'ielts', name: 'IELTS'),
+      Test(id: 7, key: 'toefl', name: 'TOEFL'),
+      Test(id: 8, key: 'toeic', name: 'TOEIC'),
+    ];
+  }
+}

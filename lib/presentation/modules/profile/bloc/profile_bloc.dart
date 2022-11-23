@@ -15,6 +15,7 @@ class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
 
   ProfileBloc() : super(ProfileInitial(viewModel: _ViewModel())) {
     on<GetProfileEvent>(_onProfileEvent);
+    on<UpdateProfileEvent>(_onUpdateProfileEvent);
   }
 
   Future<void> _onProfileEvent(
@@ -29,5 +30,23 @@ class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onUpdateProfileEvent(
+    UpdateProfileEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    final res = await _restApi.client.updateUserInfomation(
+      event.user.toBody(),
+    );
+    if (res?.user != null) {
+      emit(
+        UpdateProfileSuccess(
+          viewModel: _ViewModel(
+            user: res!.user,
+          ),
+        ),
+      );
+    }
   }
 }

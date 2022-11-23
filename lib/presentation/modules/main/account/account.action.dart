@@ -11,6 +11,14 @@ extension AccountAction on _AccountScreenState {
     bloc.add(GetDataEvent());
   }
 
+  void onProfile() {
+    Navigator.pushNamed(context, RouteList.profile).then((value) {
+      if (value is User) {
+        _refreshController.requestRefresh();
+      }
+    });
+  }
+
   void logout() {
     doLogout().then(
       (value) {

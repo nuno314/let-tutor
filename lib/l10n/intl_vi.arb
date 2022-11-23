@@ -79,5 +79,12 @@
   "level": "Trình độ",
   "testPreparation": "Luyện thi",
   "wantToLearn": "Muốn học",
-  "subjects": "Môn học"
+  "subjects": "Môn học",
+  "saveChanges": "Lưu thay đổi",
+  "scheduleHint": "Ghi chú thời gian trong tuần mà bạn muốn học trên LetTutor",
+  "invalidName": "Vui lòng nhập tên",
+  "invalidCountry": "Vui lòng chọn quốc gia",
+  "invalidBirthday": "Vui lòng chọn ngày sinh",
+  "invalidLevel": "Vui lòng chọn trình độ",
+  "invalidWantToLearn": "Vui lòng chọn ít nhất một môn học"
 }

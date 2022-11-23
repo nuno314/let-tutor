@@ -288,6 +288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
+  countries_utils:
+    dependency: "direct main"
+    description:
+      name: countries_utils
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   cross_file:
     dependency: transitive
     description:

@@ -8,7 +8,14 @@ extension ProfileAction on _ProfileScreenState {
     _phoneNumberController.text = state.user?.phoneNumber;
     _dobController.text = state.user?.birthday;
     _levelController.text = state.user?.level;
+    _wantToLearnController.text = state.user?.wantToLearn;
     avatarValue.value = state.user?.avatar;
+    _scheduleController.text = state.user?.requireNote;
+
+    if (state is UpdateProfileSuccess) {
+      hideLoading();
+      Navigator.pop(context, state.user);
+    }
   }
 
   void _showBirthdayPicker() {
@@ -28,15 +35,6 @@ extension ProfileAction on _ProfileScreenState {
   }
 
   void showLevelDialog() {
-    List<String> levels = [
-      'Pre A1 (Beginner)',
-      'A1 (High Beginner)',
-      'A2 (Pre-Intermediate)',
-      'B1 (Intermediate)',
-      'B2 (Upper-Intermediate)',
-      'C1 (Advanced)',
-      'C2(Proficiency)',
-    ];
     showDialog(
       useRootNavigator: true,
       useSafeArea: true,
@@ -49,7 +47,7 @@ extension ProfileAction on _ProfileScreenState {
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: levels.map((e) {
+              children: LevelEnum.values.map((e) {
                 return InkWell(
                   onTap: () => Navigator.pop(context, e),
                   child: Container(
@@ -67,7 +65,7 @@ extension ProfileAction on _ProfileScreenState {
                       color: AppColor.white,
                     ),
                     child: Text(
-                      e,
+                      e.description(),
                       style: textTheme.bodyText1?.copyWith(
                         color: AppColor.primaryColor,
                         fontSize: 12,
@@ -80,30 +78,21 @@ extension ProfileAction on _ProfileScreenState {
           ),
         ),
       ),
-    ).then((value) => _levelController.text = value);
+    ).then((value) {
+      if (value is LevelEnum) {
+        _levelController.text = value.toJson();
+      }
+    });
   }
 
   void showWantToLearnDialog() {
-    List<String> subjects = [
-      'English for Kids',
-      'Business English',
-      'Conversational English',
-    ];
+    List<LearnTopic> subjects = LearnTopicEtx.getAll();
     List<bool> selectedSubjects = [
       false,
       false,
       false,
     ];
-    List<String> testPreparations = [
-      'STARTERS',
-      'MOVERS',
-      'FLYERS',
-      'KET',
-      'PET',
-      'IELTS',
-      'TOEFL',
-      'TOEIC',
-    ];
+    List<Test> testPreparationsList = TestPreparations.getAll();
     List<bool> selectedTest = [
       false,
       false,
@@ -161,7 +150,7 @@ extension ProfileAction on _ProfileScreenState {
                               : AppColor.white,
                         ),
                         child: Text(
-                          e,
+                          e.name!,
                           style: textTheme.bodyText1?.copyWith(
                             color: selectedSubjects[index]
                                 ? AppColor.white
@@ -189,8 +178,8 @@ extension ProfileAction on _ProfileScreenState {
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: testPreparations.map((e) {
-                    final index = testPreparations.indexOf(e);
+                  children: testPreparationsList.map((e) {
+                    final index = testPreparationsList.indexOf(e);
                     return InkWell(
                       onTap: () {
                         setState(() {
@@ -214,7 +203,7 @@ extension ProfileAction on _ProfileScreenState {
                               : AppColor.white,
                         ),
                         child: Text(
-                          e,
+                          e.name!,
                           style: textTheme.bodyText1?.copyWith(
                             color: selectedTest[index]
                                 ? AppColor.white
@@ -254,8 +243,21 @@ extension ProfileAction on _ProfileScreenState {
                               if (cnt != 0) {
                                 wantToLearn += ', ';
                               }
-                              wantToLearn += sj;
+                              wantToLearn += sj.name!;
                               cnt++;
+                              learnTopics.add(sj);
+                            }
+                          }
+                          for (final test in testPreparationsList) {
+                            if (selectedTest[
+                                    testPreparationsList.indexOf(test)] ==
+                                true) {
+                              if (cnt != 0) {
+                                wantToLearn += ', ';
+                              }
+                              wantToLearn += test.name!;
+                              cnt++;
+                              testPreparations.add(test);
                             }
                           }
                           _wantToLearnController.text = wantToLearn;
@@ -273,7 +275,96 @@ extension ProfileAction on _ProfileScreenState {
     ).then((value) {});
   }
 
-  void saveChanges() {
-    Navigator.pop(context);
+  void showSelectNationDialog() {
+    final countries = Countries.all();
+    hideKeyBoard();
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return buildDialogSelection<Country>(
+          countries,
+          (item) => item.name!,
+          (p0) => _countryController.text = p0.name,
+        );
+      },
+    );
+  }
+
+  SelectionDialog buildDialogSelection<T>(
+    List<T> items,
+    String Function(T) getName,
+    Function(T) onSelected,
+  ) {
+    return SelectionDialog<T>(
+      items: items,
+      itemBuilder: (ctx, value) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: 4,
+          ),
+          child: Text(
+            getName(value),
+            style: textTheme.subtitle2?.copyWith(
+              color: Colors.black,
+            ),
+          ),
+        );
+      },
+      filterFn: (it, filter) {
+        return getName(it)
+            .toLowerCase()
+            .removeDiacritics
+            .contains(filter!.toLowerCase().removeDiacritics);
+      },
+      onSelected: (item) {
+        onSelected.call(item);
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  bool validate() {
+    if (_nameController.text.isNullOrEmpty) {
+      _nameController.setError(trans.invalidName);
+      return false;
+    }
+    if (_countryController.text.isNullOrEmpty) {
+      _countryController.setError(trans.invalidCountry);
+      return false;
+    }
+    if (_dobController.text.isNullOrEmpty) {
+      _dobController.setError(trans.invalidBirthday);
+      return false;
+    }
+    if (_levelController.text.isNullOrEmpty) {
+      _levelController.setError(trans.invalidLevel);
+      return false;
+    }
+    if (_wantToLearnController.text.isNullOrEmpty) {
+      _wantToLearnController.setError(trans.invalidWantToLearn);
+      return false;
+    }
+    return true;
+  }
+
+  void saveChanges(User? user) {
+    if (validate() == true) {
+      showLoading();
+      bloc.add(
+        UpdateProfileEvent(
+          user!.copyWith(
+            name: _nameController.text,
+            country: _countryController.text,
+            phoneNumber: _phoneNumberController.text,
+            birthday: _dobController.text,
+            level: _levelController.text,
+            learnTopics: learnTopics,
+            testPreparations: testPreparations,
+            requireNote: _scheduleController.text,
+          ),
+        ),
+      );
+    }
   }
 }
