@@ -1,4 +1,11 @@
-part of '../utils.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../constants/locale/app_locale.dart';
+import '../constants/locale/date_locale.dart';
+import '../constants/locale/datetime/en.dart';
+import '../constants/locale/datetime/vi.dart';
+import '../utils.dart';
 
 extension ExtendedIterable<E> on Iterable<E> {
   /// Like Iterable<T>.map but callback have index as second argument
@@ -56,6 +63,16 @@ extension StringExt on String {
     final hasLetter = contains(RegExp(r'[a-zA-Z]'));
     final hasNumber = contains(RegExp(r'[0-9]'));
     final isValid = (length >= 8) && hasLetter && hasNumber;
+    return isValid;
+  }
+
+  bool get isValidStaffPassword {
+    final length = this.length;
+    final hasLowerCase = contains(RegExp(r'[a-z]'));
+    final hasUpperCase = contains(RegExp(r'[A-Z]'));
+    final hasSpecialChar = contains(RegExp(r'[.,*?!@#\$&*~]'));
+    final isValid =
+        (length >= 6) && hasLowerCase && hasUpperCase && hasSpecialChar;
     return isValid;
   }
 
@@ -219,3 +236,23 @@ extension WeightExt on int {
   }
 }
 
+extension ContextExt on BuildContext {
+  AppDateLocale get appDateLocale {
+    return Localizations.localeOf(this).languageCode ==
+            AppLocale.en.languageCode
+        ? ENDateLocale().toAppDateLocale
+        : VIDateLocale().toAppDateLocale;
+  }
+}
+
+extension DurationExt on Duration {
+  String twoDigits(int n) => n.toString().padLeft(2, '0');
+  String get hhmm {
+    final twoDigitMinutes = twoDigits(inMinutes.remainder(60));
+    return '${twoDigits(inHours)}:$twoDigitMinutes';
+  }
+
+  String get hhmmss {
+    return toString().split('.').first.padLeft(8, '0');
+  }
+}

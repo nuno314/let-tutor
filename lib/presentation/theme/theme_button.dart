@@ -56,7 +56,7 @@ class ThemeButton {
                 text: title,
                 style: getTextStyle(context)!.copyWith(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 14,
                 ),
               )
             ],
@@ -317,6 +317,40 @@ class ThemeButton {
           title,
           style: getTextStyle(context)!.copyWith(
             color: textColor ?? AppColor.primaryColor,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      );
+  static Widget outline({
+    required BuildContext context,
+    required String title,
+    void Function()? onPressed,
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16),
+    BoxConstraints constraints = const BoxConstraints(minHeight: 48.0),
+    bool enable = true,
+    Color bgBtnColor = Colors.white,
+    Color? textColor,
+    BorderRadiusGeometry? borderRadius,
+    Color? borderColor,
+  }) =>
+      RawMaterialButton(
+        fillColor: enable ? bgBtnColor : Colors.grey[400],
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius ?? BorderRadius.circular(8),
+          side: BorderSide(
+            color: borderColor ?? AppColor.primaryColor,
+            width: 1,
+          ),
+        ),
+        onPressed: enable ? onPressed : null,
+        elevation: 0,
+        padding: padding,
+        constraints: constraints,
+        child: Text(
+          title,
+          style: getTextStyle(context)!.copyWith(
+            color: textColor ?? AppColor.primaryColor,
+            fontSize: 14,
           ),
           textAlign: TextAlign.center,
         ),

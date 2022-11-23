@@ -126,9 +126,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      dateTime.toLocal().serverToDateOfWeek(
-                                context,
-                              ) +
+                      dateTime.toLocal().serverToDateOfWeek() +
                           ' 00:00 - 00:25',
                       style: textTheme.bodyText2?.copyWith(
                         color: AppColor.white,
@@ -238,7 +236,6 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
               fontSize: 14,
               color: AppColor.grayAD,
             ),
-            borderRadius: BorderRadius.circular(30),
           ),
         ),
         SizedBox(

@@ -13,23 +13,31 @@ class InputContainer extends StatefulWidget {
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final TextCapitalization textCapitalization;
-  final Function()? onTap;
-  final Function(String)? onTextChanged;
-  final Function(String)? onSubmitted;
+  final void Function()? onTap;
+  final void Function(String)? onTextChanged;
+  final void Function(String)? onSubmitted;
   final int? maxLines;
   final List<TextInputFormatter>? inputFormatters;
   final bool enable;
   final String? title;
-  final bool isRequired;
+  final TextStyle? titleStyle;
+  final bool required;
   final Color? fillColor;
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
   final BorderSide? borderSide;
+  final BorderSide? focusedBorderSide;
   final TextAlign textAlign;
   final int? maxLength;
   final bool showBorder;
-  final BorderRadius? borderRadius;
+  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? prefixIconPadding;
+  final EdgeInsetsGeometry? suffixIconPadding;
+  final TextInputAction? textInputAction;
+  final void Function()? onEditingComplete;
+  final double prefixIconSize;
+  final double suffixIconSize;
 
   const InputContainer({
     Key? key,
@@ -47,16 +55,26 @@ class InputContainer extends StatefulWidget {
     this.onSubmitted,
     this.enable = true,
     this.title,
-    this.isRequired = false,
+    this.titleStyle,
+    this.required = false,
     this.fillColor,
     this.prefixIcon,
     this.hintStyle,
     this.textStyle,
     this.borderSide,
+    this.focusedBorderSide,
     this.textAlign = TextAlign.start,
     this.maxLength,
     this.showBorder = true,
-    this.borderRadius,
+    this.contentPadding = const EdgeInsets.symmetric(
+      horizontal: 16,
+    ),
+    this.suffixIconPadding,
+    this.prefixIconPadding,
+    this.onEditingComplete,
+    this.textInputAction,
+    this.prefixIconSize = 16.0,
+    this.suffixIconSize = 16.0,
   }) : super(key: key);
 
   @override
@@ -68,11 +86,11 @@ class _InputContainerState extends State<InputContainer> {
 
   bool get hasSuffixIcon => widget.isPassword || widget.suffixIcon != null;
 
-  double get suffixIconSize => hasSuffixIcon ? 16 : 0;
+  double get suffixIconSize => hasSuffixIcon ? widget.suffixIconSize : 0;
 
   bool get hasPrefixIcon => widget.prefixIcon != null;
 
-  double get prefixIconSize => hasPrefixIcon ? 16 : 0;
+  double get prefixIconSize => hasPrefixIcon ? widget.prefixIconSize : 0;
 
   @override
   void initState() {
@@ -115,10 +133,11 @@ class _InputContainerState extends State<InputContainer> {
           maxLength: widget.maxLength,
           decoration: InputDecoration(
             filled: !widget.enable || widget.fillColor != null,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
+            contentPadding: widget.contentPadding ??
+                const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 6,
+                ),
             hintText: widget.hint,
             hintStyle: widget.hintStyle ?? themeData.textTheme.subtitle2,
             errorText: value.validation,
@@ -127,28 +146,36 @@ class _InputContainerState extends State<InputContainer> {
               fontSize: value.validation?.isNotEmpty == true ? null : 1,
             ),
             errorMaxLines: 2,
-            suffixIcon: Padding(
-              padding: EdgeInsets.symmetric(horizontal: suffixIconSize),
-              child: _getSuffixIcon(),
-            ),
-            suffixIconConstraints: BoxConstraints(
-              minHeight: suffixIconSize,
-              minWidth: suffixIconSize,
-            ),
+            suffixIcon: hasSuffixIcon
+                ? Padding(
+                    padding: widget.suffixIconPadding ??
+                        EdgeInsets.symmetric(horizontal: suffixIconSize / 2),
+                    child: _getSuffixIcon(),
+                  )
+                : null,
+            suffixIconConstraints: hasSuffixIcon
+                ? BoxConstraints(
+                    minHeight: prefixIconSize,
+                    minWidth: prefixIconSize,
+                  )
+                : null,
             prefixIcon: hasPrefixIcon
                 ? Padding(
-                    padding: EdgeInsets.symmetric(horizontal: prefixIconSize),
+                    padding: widget.prefixIconPadding ??
+                        EdgeInsets.symmetric(horizontal: prefixIconSize / 2),
                     child: widget.prefixIcon,
                   )
                 : null,
             prefixIconConstraints: hasPrefixIcon
                 ? BoxConstraints(
-                    minHeight: suffixIconSize,
-                    minWidth: suffixIconSize,
+                    minHeight: prefixIconSize,
+                    minWidth: prefixIconSize,
                   )
                 : null,
             fillColor: widget.enable ? widget.fillColor : null,
-            counterStyle: themeData.textTheme.subtitle1,
+            counterStyle: themeData.textTheme.subtitle1?.copyWith(
+              color: Colors.grey,
+            ),
           ),
           keyboardType: widget.keyboardType,
           textCapitalization: widget.textCapitalization,
@@ -161,10 +188,12 @@ class _InputContainerState extends State<InputContainer> {
             }
             widget.onTextChanged?.call(text);
           },
+          onEditingComplete: widget.onEditingComplete,
           maxLines: widget.maxLines,
           inputFormatters: widget.inputFormatters,
           onTap: widget.onTap,
           onSubmitted: widget.onSubmitted,
+          textInputAction: widget.textInputAction,
         );
         if (widget.title?.isNotEmpty == true) {
           body = Column(
@@ -173,13 +202,17 @@ class _InputContainerState extends State<InputContainer> {
                 alignment: Alignment.centerLeft,
                 child: RichText(
                   text: TextSpan(
-                    text: widget.title!.toUpperCase(),
-                    style: themeData.textTheme.headline6,
+                    text: widget.titleStyle != null
+                        ? widget.title!
+                        : widget.title!.toUpperCase(),
+                    style: widget.titleStyle ?? themeData.textTheme.subtitle1,
                     children: [
-                      if (widget.isRequired == true)
+                      if (widget.required == true)
                         TextSpan(
                           text: ' *',
-                          style: themeData.textTheme.headline6,
+                          style: themeData.textTheme.headline6!.copyWith(
+                            color: Colors.red,
+                          ),
                         ),
                     ],
                   ),
@@ -192,27 +225,29 @@ class _InputContainerState extends State<InputContainer> {
         } else {
           body = textField;
         }
+
+        final border = widget.showBorder
+            ? OutlineInputBorder(
+                borderSide: widget.borderSide ??
+                    BorderSide(color: Colors.grey[300]!, width: 1),
+                borderRadius: BorderRadius.circular(6.0),
+              )
+            : InputBorder.none;
+        final focusedBorder = widget.showBorder
+            ? OutlineInputBorder(
+                borderSide: widget.focusedBorderSide ??
+                    BorderSide(color: AppColor.primaryColor, width: 1),
+                borderRadius: BorderRadius.circular(6.0),
+              )
+            : InputBorder.none;
         return Theme(
           data: themeData.copyWith(
             primaryColor: themeData.colorScheme.secondary,
             primaryColorDark: themeData.colorScheme.secondary,
             inputDecorationTheme: InputDecorationTheme(
-              border: widget.showBorder
-                  ? OutlineInputBorder(
-                      borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(6.0),
-                    )
-                  : InputBorder.none,
-              enabledBorder: widget.showBorder
-                  ? OutlineInputBorder(
-                      borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(6.0),
-                    )
-                  : InputBorder.none,
+              border: border,
+              enabledBorder: border,
+              focusedBorder: focusedBorder,
             ),
           ),
           child: body,
@@ -233,11 +268,15 @@ class _InputContainerState extends State<InputContainer> {
   }
 
   Widget _getPasswordIcon() {
-    return Icon(
-      Icons.remove_red_eye,
-      size: suffixIconSize,
-      color:
-          _controller?.isShowPass == true ? AppColor.primaryColor : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Icon(
+        widget.controller?.isShowPass == true
+            ? Icons.visibility_off_outlined
+            : Icons.visibility_outlined,
+        size: 20,
+        color: Colors.grey,
+      ),
     );
   }
 }

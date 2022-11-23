@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
+import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
-import '../../../../common/utils/image_picker.dart';
 import '../../../../data/models/user.dart';
 import '../../../base/base.dart';
+import '../../../common_widget/custom_cupertino_date_picker.dart';
 import '../../../extentions/extention.dart';
-import '../../../theme/shadow.dart';
+import '/common/utils.dart';
+
 import '../bloc/profile_bloc.dart';
 
 part 'profile.action.dart';
@@ -40,7 +42,10 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   final _phoneNumberController = InputContainerController();
   final _dobController = InputContainerController();
   final _levelController = InputContainerController();
+  final _wantToLearnController = InputContainerController();
+
   File? newAvatar;
+  DateTime? _pickBirthday;
 
   final avatarValue = ValueNotifier<String?>(null);
 
@@ -64,10 +69,14 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
           showHeaderImage: false,
           trans: trans,
           child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 _buildProfileInfo(state.user),
+                _buildInfoForm(state.user),
               ],
             ),
           ),
@@ -77,213 +86,180 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   }
 
   Widget _buildProfileInfo(User? user) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 16,
-      ),
-      padding: EdgeInsets.symmetric(
-        vertical: 50,
-        horizontal: 20,
-      ),
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        boxShadow: boxShadowlight,
-        color: Colors.white,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: [
-                GestureDetector(
-                  onTap: tapEditAvatar,
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children: [
-                      ValueListenableBuilder<String?>(
-                        valueListenable: avatarValue,
-                        builder: (context, avatar, snapshot) {
-                          print(avatar);
-                          return CircleImageOutline(
-                            image: avatar ?? '',
-                            borderColor: AppColor.primaryColor,
-                          );
-                        },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Center(
+          child: Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: [
+              GestureDetector(
+                onTap: tapEditAvatar,
+                child: Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    ValueListenableBuilder<String?>(
+                      valueListenable: avatarValue,
+                      builder: (context, avatar, snapshot) {
+                        print(avatar);
+                        return CircleImageOutline(
+                          image: avatar ?? '',
+                          borderColor: AppColor.primaryColor,
+                        );
+                      },
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryColorLight,
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.primaryColorLight,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        padding: const EdgeInsets.all(6),
-                        child: Icon(
-                          Icons.camera_alt_rounded,
-                          size: 18,
-                          color: AppColor.primaryColor,
-                        ),
-                      )
-                    ],
-                  ),
+                      padding: const EdgeInsets.all(6),
+                      child: Icon(
+                        Icons.camera_alt_rounded,
+                        size: 18,
+                        color: AppColor.primaryColor,
+                      ),
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            user?.name ?? '',
-            style: textTheme.bodyText1?.copyWith(
-              fontSize: 14,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            user?.id ?? '',
-            style: textTheme.bodyText2?.copyWith(fontSize: 12),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          // InkWell(
-          //   onTap: () {},
-          //   child: Text(
-          //     'Người khác đánh giá bạn,',
-          //     style: textTheme.bodyText2?.copyWith(
-          //       color: AppColor.primaryColor,
-          //     ),
-          //   ),
-          // ),
-          SizedBox(
-            height: 20,
-          ),
-          ..._buildInfoForm(user),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          user?.name ?? '',
+          style: textTheme.bodyText1?.copyWith(fontSize: 14),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          user?.id ?? '',
+          style: textTheme.bodyText2?.copyWith(fontSize: 12),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        // InkWell(
+        //   onTap: () {},
+        //   child: Text(
+        //     'Người khác đánh giá bạn,',
+        //     style: textTheme.bodyText2?.copyWith(
+        //       color: AppColor.primaryColor,
+        //     ),
+        //   ),
+        // ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 
-  List<Widget> _buildInfoForm(User? user) {
-    return [
-      Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 16,
-          horizontal: 16,
-        ),
-        width: double.infinity,
-        color: AppColor.greyE5,
-        child: Text(
-          'Tài khoản',
-          style: textTheme.bodyText2,
-        ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      InputContainer(
-        controller: _nameController,
-        title: 'Tên',
-        isRequired: true,
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      InputContainer(
-        fillColor: AppColor.greyE5,
-        readOnly: true,
-        controller: _emailController,
-        title: trans.emailAddress,
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      InputContainer(
-        controller: _countryController,
-        title: 'Quốc gia',
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      InputContainer(
-        isRequired: true,
-        fillColor: AppColor.greyE5,
-        controller: _phoneNumberController,
-        title: 'Số điện thoại',
-      ),
-      if (user?.isPhoneActivated == true) ...[
+  Widget _buildInfoForm(User? user) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         SizedBox(
-          height: 4,
+          height: 20,
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColor.green,
-            ),
-            color: AppColor.greenB7EB8F,
-          ),
-          child: Text(
-            'Đã xác thực',
-            style: textTheme.bodyText1?.copyWith(
-              color: AppColor.green,
-            ),
-          ),
+        InputContainer(
+          controller: _nameController,
+          title: trans.name,
+          required: true,
         ),
         SizedBox(
           height: 20,
         ),
         InputContainer(
-          isRequired: true,
-          title: 'Ngày sinh',
-          controller: _dobController,
+          fillColor: AppColor.greyE5,
+          readOnly: true,
+          controller: _emailController,
+          title: trans.emailAddress,
         ),
         SizedBox(
           height: 20,
         ),
         InputContainer(
-          isRequired: true,
-          title: 'Trình độ',
-          controller: _levelController,
+          controller: _countryController,
+          title: trans.country,
         ),
         SizedBox(
           height: 20,
         ),
-        Text(
-          '* Muốn học',
-          style: textTheme.bodyText1?.copyWith(),
+        InputContainer(
+          required: true,
+          controller: _phoneNumberController,
+          title: trans.phoneNumber,
+          onTextChanged: (p0) {
+            if (p0 != user?.phoneNumber) {
+              setState(() {
+                user?.isPhoneActivated = false;
+              });
+            } else {
+              setState(() {
+                user?.isPhoneActivated = true;
+              });
+            }
+          },
         ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
+        if (user?.isPhoneActivated == true) ...[
+          SizedBox(
+            height: 4,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
               border: Border.all(
-                color: AppColor.greyE5,
+                color: AppColor.green,
               ),
-              color: AppColor.transparent,
-              borderRadius: BorderRadius.circular(12)),
-          // child: Wrap(
-          //   spacing: 8,
-          //   runSpacing: 8,
-          //   children: user.wantToLearn!
-          //       .map((e) => Container(
-          //             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-          //             color: AppColor.greyE5,
-          //             child: Row(
-          //               mainAxisSize: MainAxisSize.min,
-          //               children: [
-          //                 Text(e),
-          //                 Icon(
-          //                   Icons.cancel_outlined,
-          //                 ),
-          //               ],
-          //             ),
-          //           ))
-          //       .toList(),
-          // ),
+              color: AppColor.greenB7EB8F,
+            ),
+            child: Text(
+              trans.verified,
+              style: textTheme.bodyText1?.copyWith(
+                color: AppColor.green,
+              ),
+            ),
+          ),
+        ],
+        SizedBox(
+          height: 20,
+        ),
+        InputContainer(
+          required: true,
+          title: trans.dateOfBirth,
+          controller: _dobController,
+          onTap: _showBirthdayPicker,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        InputContainer(
+          required: true,
+          title: trans.level,
+          controller: _levelController,
+          onTap: showLevelDialog,
+          readOnly: true,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        InputContainer(
+          controller: _wantToLearnController,
+          title: trans.wantToLearn,
+          required: true,
+          readOnly: true,
+          onTap: showWantToLearnDialog,
         ),
         SizedBox(
           height: 20,
@@ -319,7 +295,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
           ),
         ),
       ],
-    ];
+    );
   }
 
   void tapEditAvatar() async {

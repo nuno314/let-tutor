@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../common/constants.dart';
-import '../../../../common/utils.dart';
+import '../../../../common/utils/jwt_utils.dart';
 import '../rest_api_repository/api_contract.dart';
 
 class AuthInterceptor extends Interceptor {

@@ -71,5 +71,13 @@
   "logout": "Logout",
   "becomeATutor": "Become A Tutor",
   "settings": "Settings",
-  "changeAvatar": "Change avatar"
+  "changeAvatar": "Change avatar",
+  "fullname": "Fullname",
+  "country": "Country",
+  "verified": "Verified",
+  "dateOfBirth": "Date of birth",
+  "level": "Level",
+  "testPreparation": "Test preparation",
+  "wantToLearn": "Want to learn",
+  "subjects": "Subjects"
 }

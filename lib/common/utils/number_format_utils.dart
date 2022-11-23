@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:intl/intl.dart';
+import 'package:let_tutor/common/utils/extensions.dart';
 
-import '../utils.dart';
 
 class NumberFormatUtils {
   NumberFormatUtils._();

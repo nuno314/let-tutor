@@ -1,4 +1,6 @@
-part of '../utils.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 
 class CommonFunction {
   static void hideKeyBoard(BuildContext context) {

@@ -71,5 +71,13 @@
   "logout": "Đăng xuất",
   "becomeATutor": "Đăng ký làm gia sư",
   "settings": "Cài đặt",
-  "changeAvatar": "Đổi ảnh đại diện"
+  "changeAvatar": "Đổi ảnh đại diện",
+  "fullname": "Họ và tên",
+  "country": "Quốc gia",
+  "verified": "Đã xác thực",
+  "dateOfBirth": "Ngày sinh",
+  "level": "Trình độ",
+  "testPreparation": "Luyện thi",
+  "wantToLearn": "Muốn học",
+  "subjects": "Môn học"
 }
