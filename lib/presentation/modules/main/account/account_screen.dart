@@ -111,7 +111,7 @@ class _AccountScreenState extends StateBase<AccountScreen> {
                     itemBorder: ItemBorder.top,
                     iconPath: Assets.svg.icSettings,
                     title: trans.settings,
-                    callback: () {},
+                    callback: onSettings,
                   ),
                   _settingItem(
                     divider: ItemDivider.line,
@@ -129,8 +129,6 @@ class _AccountScreenState extends StateBase<AccountScreen> {
         );
       },
     );
-
-   
   }
 
   Widget _settingItem({

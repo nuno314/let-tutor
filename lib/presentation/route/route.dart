@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:let_tutor/presentation/common_widget/date_picker/flutter_datetime_picker/src/date_format.dart';
 import 'package:let_tutor/presentation/modules/authentication/authentication_route.dart';
 import 'package:let_tutor/presentation/modules/authentication/reset_password/reset_password.dart';
 import 'package:let_tutor/presentation/modules/profile/profile.dart';
+import 'package:let_tutor/presentation/modules/settings/settings_route.dart';
 
 import '../common_widget/text_scale_fixed.dart';
 import '../modules/main/main_route.dart';
@@ -14,6 +16,7 @@ class RouteGenerator {
         ...ResetPasswordRoute.getAll(settings),
         ...ProfileRoute.getAll(settings),
         ...AuthenticationRoute.getAll(settings),
+        ...SettingsRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

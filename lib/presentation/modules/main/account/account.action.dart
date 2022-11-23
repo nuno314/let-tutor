@@ -19,6 +19,13 @@ extension AccountAction on _AccountScreenState {
     });
   }
 
+  void onSettings() {
+    Navigator.pushNamed(
+      context,
+      RouteList.settings,
+    );
+  }
+
   void logout() {
     doLogout().then(
       (value) {

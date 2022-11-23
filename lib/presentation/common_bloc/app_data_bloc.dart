@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../common/client_info.dart';
 import '../../common/constants/app_locale.dart';
@@ -11,20 +12,22 @@ import '../../di/di.dart';
 import '../../domain/entities/app_data.dart';
 import '../../presentation/theme/theme_data.dart';
 
+@Singleton()
 class AppDataBloc extends Cubit<AppData?> {
-  AppDataBloc() : super(null);
+  AppDataBloc._(AppData data) : super(data);
 
   LocalDataManager get localDataManager => injector.get();
 
-  Future<void> initial() async {
-    if (!isInitialed) {
-      ClientInfo.languageCode =
-          localDataManager.getLocalization() ?? AppLocale.vi.languageCode;
-      emit(AppData(
-        localDataManager.getTheme(),
-        Locale(ClientInfo.languageCode),
-      ));
-    }
+  @factoryMethod
+  static Future<AppDataBloc> create() async {
+    final localDataManager = injector.get<LocalDataManager>();
+    ClientInfo.languageCode = localDataManager.getLocalization() ??
+        AppLocale.defaultLocale.languageCode;
+    final data = AppData(
+      localDataManager.getTheme(),
+      Locale(ClientInfo.languageCode),
+    );
+    return AppDataBloc._(data);
   }
 
   bool get isInitialed => state != null;
@@ -54,6 +57,7 @@ class AppDataBloc extends Cubit<AppData?> {
 
     if (await localDataManager.saveLocalization(locale.languageCode) == true) {
       emit(state?.copyWith(locale: locale));
+      print('emit');
       return true;
     } else {
       return false;

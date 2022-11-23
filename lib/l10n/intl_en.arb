@@ -86,5 +86,7 @@
   "invalidCountry": "Please select your country",
   "invalidBirthday": "Please select your birthday",
   "invalidLevel": "Please select your level",
-  "invalidWantToLearn": "Please select at least one subject"
+  "invalidWantToLearn": "Please select at least one subject",
+  "language": "Language",
+  "system": "System"
 }
