@@ -15,4 +15,5 @@ class RouteList {
   static const String signInByPhoneNumber = '/signInByPhoneNumber';
   static const String forgotPassword = '/forgotPassword';
   static const String settings = '/settings';
+  static const String changePassword = '/changePassword';
 }

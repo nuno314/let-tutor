@@ -63,7 +63,7 @@
   "pleaseEnterPhoneNumberToResetPassword": "Vui lòng nhập số điện thoại để đặt lại mật khẩu",
   "emailSendSuccess": "Gửi Email thành công",
   "emailNotExist": "Email không tồn tại",
-  "passwordNotMatch": "Mật khẩu không trùng khớp",
+  "passwordNotMatch": "Mật khẩu không khớp",
   "emailAlreadyTaken": "Email đã được sử dụng",
   "registerSuccessfully": "Đăng ký tài khoản thành công",
   "bannerSlogan": "Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.",
@@ -88,5 +88,14 @@
   "invalidLevel": "Vui lòng chọn trình độ",
   "invalidWantToLearn": "Vui lòng chọn ít nhất một môn học",
   "language": "Ngôn ngữ",
-  "system": "Hệ thống"
+  "system": "Hệ thống",
+  "currentPassword": "Mật khẩu hiện tại",
+  "incorrectCurrentPassword": "Mật khẩu hiện tại không đúng",
+  "newPassword": "Mật khẩu mới",
+  "enterCurrentPassword": "Nhập mật khẩu hiện tại",
+  "enterNewPassword": "Nhập mật khẩu mới",
+  "enterVerifyPassword": "Nhập lại mật khẩu mới",
+  "changePassword": "Đổi mật khẩu",
+  "pleaseEnterPassword": "Vui lòng nhập mật khẩu",
+  "pleaseEnterNewPassword": "Vui lòng nhập mật khẩu mới"
 }

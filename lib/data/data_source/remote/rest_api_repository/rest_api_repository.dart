@@ -55,4 +55,7 @@ abstract class RestApiRepository {
 
   @PUT(ApiContract.userInfo)
   Future<ResponseData?> updateUserInfomation(@Body() Map<String, dynamic> body);
+
+  @POST(ApiContract.changePassword)
+  Future<ResponseData?> changePassword(@Body() Map<String, dynamic> body);
 }

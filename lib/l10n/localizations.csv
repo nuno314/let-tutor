@@ -93,3 +93,13 @@ invalidLevel,Vui lòng chọn trình độ,Please select your level
 invalidWantToLearn,Vui lòng chọn ít nhất một môn học,Please select at least one subject
 language,Ngôn ngữ,Language
 system,Hệ thống,System
+currentPassword,Mật khẩu hiện tại,Current password
+incorrectCurrentPassword,Mật khẩu hiện tại không đúng,Incorrect current password
+newPassword,Mật khẩu mới,New password
+passwordNotMatch,Mật khẩu không khớp,Password not match
+enterCurrentPassword,Nhập mật khẩu hiện tại,Enter current password
+enterNewPassword,Nhập mật khẩu mới,Enter new password
+enterVerifyPassword,Nhập lại mật khẩu mới,Re-enter new password
+changePassword,Đổi mật khẩu,Change password
+pleaseEnterPassword,Vui lòng nhập mật khẩu,Please enter password
+pleaseEnterNewPassword,Vui lòng nhập mật khẩu mới,Please enter new password

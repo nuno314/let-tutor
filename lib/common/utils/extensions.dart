@@ -60,9 +60,9 @@ extension StringExt on String {
 
   bool get isValidPassword {
     final length = this.length;
-    final hasLetter = contains(RegExp(r'[a-zA-Z]'));
-    final hasNumber = contains(RegExp(r'[0-9]'));
-    final isValid = (length >= 8) && hasLetter && hasNumber;
+    // final hasLetter = contains(RegExp(r'[a-zA-Z]'));
+    // final hasNumber = contains(RegExp(r'[0-9]'));
+    final isValid = (length >= 6);
     return isValid;
   }
 

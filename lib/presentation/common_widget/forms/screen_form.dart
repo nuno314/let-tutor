@@ -138,26 +138,30 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                         Assets.svg.icLogo,
                         height: 40,
                       ),
-                    if (widget.title != null)
+                    if (widget.title != null) ...[
                       SizedBox(
                         height: 7,
                       ),
-                    Text(
-                      widget.title ?? '',
-                      style: _theme.textTheme.headline3?.copyWith(
-                        color: textColor,
-                        fontSize: 24,
+                      Text(
+                        widget.title!,
+                        style: _theme.textTheme.headline3?.copyWith(
+                          color: textColor,
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    if (widget.des?.isNotEmpty == true)
+                      SizedBox(
+                        height: 7,
+                      ),
+                    ],
+                    if (widget.des?.isNotEmpty == true) ...[
                       const SizedBox(height: 4),
-                    if (widget.des?.isNotEmpty == true)
                       Text(
                         widget.des ?? '',
                         style: _theme.textTheme.subtitle2?.copyWith(
                           color: desTextColor,
                         ),
                       ),
+                    ],
                   ],
                 ),
               ),
@@ -166,53 +170,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
           ],
         ),
         if (widget.extentions != null) widget.extentions!,
-        const SizedBox(height: 16),
       ],
-    );
-  }
-
-  Widget _buildLanguageSelection() {
-    final languageList = [
-      DropdownLanguageArgs(
-        title: widget.trans.vietnamese,
-        iconPath: Assets.svg.icVietnam,
-      ),
-      DropdownLanguageArgs(
-        title: widget.trans.english,
-        iconPath: Assets.svg.icUs,
-      ),
-    ];
-    var _selectedLanguage = languageList[0];
-
-    return DropdownButtonHideUnderline(
-      child: ButtonTheme(
-        alignedDropdown: true,
-        child: DropdownButton<DropdownLanguageArgs>(
-          value: _selectedLanguage,
-          items: languageList
-              .map(
-                (e) => DropdownMenuItem<DropdownLanguageArgs>(
-                  child: Container(
-                    width: 100,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(e.title),
-                        Spacer(),
-                        SvgPicture.asset(
-                          e.iconPath,
-                          height: 35,
-                        ),
-                      ],
-                    ),
-                  ),
-                  value: e,
-                ),
-              )
-              .toList(),
-          onChanged: (value) {},
-        ),
-      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:let_tutor/generated/assets.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
+import 'package:let_tutor/presentation/route/route_list.dart';
 import 'package:let_tutor/presentation/theme/shadow.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
@@ -20,7 +21,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends StateBase<SettingsScreen> {
-
   @override
   SettingsBloc get bloc => BlocProvider.of(context);
 
@@ -78,7 +78,7 @@ class _SettingsScreenState extends StateBase<SettingsScreen> {
           ),
         ),
         const SizedBox(height: 8),
-        SettingItem(title: trans.forgetPassword, onTap: () {}),
+        SettingItem(title: trans.changePassword, onTap: onChangePassword),
       ],
     );
   }

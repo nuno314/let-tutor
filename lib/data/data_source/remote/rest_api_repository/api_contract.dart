@@ -12,4 +12,5 @@ class ApiContract {
   static const String activatePhoneNumber = 'verify/phone-auth-verify/activate';
   static const String forgotPassword = 'user/forgotPassword';
   static const String userInfo = 'user/info';
+  static const String changePassword = 'auth/change-password';
 }

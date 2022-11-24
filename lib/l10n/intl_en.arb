@@ -63,7 +63,7 @@
   "pleaseEnterPhoneNumberToResetPassword": "Please enter phone number to reset password",
   "emailSendSuccess": "Email sent successfully",
   "emailNotExist": "Email does not exist",
-  "passwordNotMatch": "Password does not match",
+  "passwordNotMatch": "Password not match",
   "emailAlreadyTaken": "Email has already been taken",
   "registerSuccessfully": "Register account successfully",
   "bannerSlogan": "Become fluent faster through one on one video chat lessons tailored to your goals.",
@@ -88,5 +88,14 @@
   "invalidLevel": "Please select your level",
   "invalidWantToLearn": "Please select at least one subject",
   "language": "Language",
-  "system": "System"
+  "system": "System",
+  "currentPassword": "Current password",
+  "incorrectCurrentPassword": "Incorrect current password",
+  "newPassword": "New password",
+  "enterCurrentPassword": "Enter current password",
+  "enterNewPassword": "Enter new password",
+  "enterVerifyPassword": "Re-enter new password",
+  "changePassword": "Change password",
+  "pleaseEnterPassword": "Please enter password",
+  "pleaseEnterNewPassword": "Please enter new password"
 }

@@ -39,4 +39,8 @@ extension SettingsAction on _SettingsScreenState {
       ),
     );
   }
+
+  void onChangePassword() {
+    Navigator.pushNamed(context, RouteList.changePassword);
+  }
 }
