@@ -103,3 +103,18 @@ enterVerifyPassword,Nhập lại mật khẩu mới,Re-enter new password
 changePassword,Đổi mật khẩu,Change password
 pleaseEnterPassword,Vui lòng nhập mật khẩu,Please enter password
 pleaseEnterNewPassword,Vui lòng nhập mật khẩu mới,Please enter new password
+myWallet,Ví của tôi,My wallet
+totalLessons,Tổng số buổi học,Total lessons
+bonus,Tiền thưởng,Bonus
+referralCode,Mã giới thiệu,Referral code
+getCommission,Bạn và người được giới thiệu sẽ nhận được %s hoa hồng khi sử dụng mã này lúc thanh toán,You and your referrer will get %s commission when using this code at checkout
+copy,Sao chép,Copy
+yourReferral,Liên hệ của bạn,Your referral
+transactions,Giao dịch,Transactions
+lesson,Buổi học,Lesson
+viewAll,Xem tất cả,View all
+noReferral,Không có liên hệ nào,No referral
+noTransaction,Không có giao dịch nào,No transaction
+copiedToClipboard,Đã sao chép,Copied to clipboard
+book,Đặt lịch,Book
+cancelBooking,Hủy đặt,Cancel booking

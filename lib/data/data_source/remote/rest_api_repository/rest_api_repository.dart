@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:let_tutor/data/data_source/remote/rest_api_repository/api_contract.dart';
-import 'package:let_tutor/data/models/login_response.dart';
-import 'package:let_tutor/data/models/user.dart';
+import 'package:let_tutor/data/models/response.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../../../models/user.dart';
 
 part 'rest_api_repository.g.dart';
 
@@ -58,4 +61,14 @@ abstract class RestApiRepository {
 
   @POST(ApiContract.changePassword)
   Future<ResponseData?> changePassword(@Body() Map<String, dynamic> body);
+
+  @GET(ApiContract.paymentHistory)
+  Future<PaymentResponseData?> getPaymentHistory();
+
+  @GET(ApiContract.paymentStatistics)
+  Future<PaymentResponseData?> getPaymentStatistics();
+
+  @GET(ApiContract.referrals)
+  Future<List<User>?> getReferrals();
+
 }

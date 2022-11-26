@@ -145,3 +145,42 @@ extension TestPreparations on Test {
     ];
   }
 }
+
+enum PaymentType {
+  buy,
+  cancel,
+}
+
+extension PaymentTypeEtx on PaymentType {
+  static String? toJson(PaymentType? s) {
+    return s?.type;
+  }
+
+  String get type {
+    switch (this) {
+      case PaymentType.buy:
+        return 'buy';
+      case PaymentType.cancel:
+        return 'cancel';
+    }
+  }
+
+  static PaymentType? of(dynamic value) {
+    final type = asOrNull<String>(value);
+    for (final e in PaymentType.values) {
+      if (e.type == type) {
+        return e;
+      }
+    }
+    return null;
+  }
+
+  String localized(dynamic trans) {
+    switch (this) {
+      case PaymentType.buy:
+        return trans.book;
+      case PaymentType.cancel:
+        return trans.cancelBooking;
+    }
+  }
+}

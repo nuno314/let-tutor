@@ -97,5 +97,20 @@
   "enterVerifyPassword": "Nhập lại mật khẩu mới",
   "changePassword": "Đổi mật khẩu",
   "pleaseEnterPassword": "Vui lòng nhập mật khẩu",
-  "pleaseEnterNewPassword": "Vui lòng nhập mật khẩu mới"
+  "pleaseEnterNewPassword": "Vui lòng nhập mật khẩu mới",
+  "myWallet": "Ví của tôi",
+  "totalLessons": "Tổng số buổi học",
+  "bonus": "Tiền thưởng",
+  "referralCode": "Mã giới thiệu",
+  "getCommission": "Bạn và người được giới thiệu sẽ nhận được %s hoa hồng khi sử dụng mã này lúc thanh toán",
+  "copy": "Sao chép",
+  "yourReferral": "Liên hệ của bạn",
+  "transactions": "Giao dịch",
+  "lesson": "Buổi học",
+  "viewAll": "Xem tất cả",
+  "noReferral": "Không có liên hệ nào",
+  "noTransaction": "Không có giao dịch nào",
+  "copiedToClipboard": "Đã sao chép",
+  "book": "Đặt lịch",
+  "cancelBooking": "Hủy đặt"
 }

@@ -74,6 +74,13 @@ class _AccountScreenState extends StateBase<AccountScreen> {
                   _settingItem(
                     divider: ItemDivider.line,
                     itemBorder: ItemBorder.none,
+                    iconPath: Assets.svg.icWallet,
+                    title: trans.myWallet,
+                    callback: onMyWallet,
+                  ),
+                  _settingItem(
+                    divider: ItemDivider.line,
+                    itemBorder: ItemBorder.none,
                     iconPath: Assets.svg.icBookMedical,
                     title: trans.buyLessons,
                     callback: () {

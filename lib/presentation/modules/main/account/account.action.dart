@@ -19,6 +19,13 @@ extension AccountAction on _AccountScreenState {
     });
   }
 
+  void onMyWallet() {
+    Navigator.pushNamed(
+      context,
+      RouteList.wallet,
+    );
+  }
+
   void onSettings() {
     Navigator.pushNamed(
       context,

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
-import 'package:let_tutor/data/models/login_response.dart';
+import 'package:let_tutor/data/models/response.dart';
 
 import '../../../data/data_source/local/local_data_manager.dart';
 import '../../../di/di.dart';

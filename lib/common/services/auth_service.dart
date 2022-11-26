@@ -1,4 +1,4 @@
-import 'package:let_tutor/data/models/login_response.dart';
+import 'package:let_tutor/data/models/response.dart';
 
 abstract class AuthService {
   Future<void> init();

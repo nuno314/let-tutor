@@ -28,5 +28,6 @@ class SvgAssets {
   final String icUs = 'assets/images/svg/ic_us.svg';
   final String icUserGraduate = 'assets/images/svg/ic_user_graduate.svg';
   final String icVietnam = 'assets/images/svg/ic_vietnam.svg';
+  final String icWallet = 'assets/images/svg/ic_wallet.svg';
   final String icYoutube = 'assets/images/svg/ic_youtube.svg';
 }

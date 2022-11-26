@@ -97,5 +97,20 @@
   "enterVerifyPassword": "Re-enter new password",
   "changePassword": "Change password",
   "pleaseEnterPassword": "Please enter password",
-  "pleaseEnterNewPassword": "Please enter new password"
+  "pleaseEnterNewPassword": "Please enter new password",
+  "myWallet": "My wallet",
+  "totalLessons": "Total lessons",
+  "bonus": "Bonus",
+  "referralCode": "Referral code",
+  "getCommission": "You and your referrer will get %s commission when using this code at checkout",
+  "copy": "Copy",
+  "yourReferral": "Your referral",
+  "transactions": "Transactions",
+  "lesson": "Lesson",
+  "viewAll": "View all",
+  "noReferral": "No referral",
+  "noTransaction": "No transaction",
+  "copiedToClipboard": "Copied to clipboard",
+  "book": "Book",
+  "cancelBooking": "Cancel booking"
 }

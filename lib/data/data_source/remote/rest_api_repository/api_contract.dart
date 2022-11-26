@@ -13,4 +13,7 @@ class ApiContract {
   static const String forgotPassword = 'user/forgotPassword';
   static const String userInfo = 'user/info';
   static const String changePassword = 'auth/change-password';
+  static const String paymentHistory = 'payment/history';
+  static const String paymentStatistics = 'payment/statistics';
+  static const String referrals = 'user/referrals';
 }
