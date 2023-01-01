@@ -243,6 +243,10 @@ extension ContextExt on BuildContext {
         ? ENDateLocale().toAppDateLocale
         : VIDateLocale().toAppDateLocale;
   }
+
+  ThemeData get theme => Theme.of(this);
+
+  TextTheme get textTheme => theme.textTheme;
 }
 
 extension DurationExt on Duration {

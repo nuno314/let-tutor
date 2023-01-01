@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">@string/app_name</string>
+    <string name="app_name">Let Tutor</string>
     <string name="facebook_app_id">1496412177515784</string>
     <string name="fb_login_protocol_scheme">fb1496412177515784</string>
     <string name="facebook_client_token">0e6bba19f6b235c41c7a70e71acdedf2</string>

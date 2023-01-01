@@ -8,8 +8,8 @@ part of 'schedule.dart';
 
 Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
       id: json['id'] as String?,
-      startPeriod: json['startPeriod'] as String?,
-      endPeriod: json['endPeriod'] as String?,
+      startPeriodTimestamp: json['startPeriodTimestamp'] as int?,
+      endPeriodTimestamp: json['endPeriodTimestamp'] as int?,
       tutorInfo: json['tutorInfo'] == null
           ? null
           : User.fromJson(json['tutorInfo'] as Map<String, dynamic>),
@@ -17,7 +17,7 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
 
 Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
       'id': instance.id,
-      'startPeriod': instance.startPeriod,
-      'endPeriod': instance.endPeriod,
+      'startPeriodTimestamp': instance.startPeriodTimestamp,
+      'endPeriodTimestamp': instance.endPeriodTimestamp,
       'tutorInfo': instance.tutorInfo,
     };

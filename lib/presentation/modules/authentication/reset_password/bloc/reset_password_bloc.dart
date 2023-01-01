@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
-import 'package:let_tutor/data/data_source/remote/rest_api_repository/rest_api_repository.dart';
 import 'package:let_tutor/di/di.dart';
 
 import '../../../../base/base.dart';

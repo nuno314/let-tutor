@@ -39,122 +39,100 @@ class TeacherItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(),
-                    child: Stack(
-                      children: [
-                        ClipOval(
-                          child: CachedNetworkImageWrapper.item(
-                            url: teacher.avatarUrl ?? '',
-                            fit: BoxFit.cover,
-                            width: 100,
-                            height: 100,
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(),
+                  child: Stack(
+                    children: [
+                      ClipOval(
+                        child: CachedNetworkImageWrapper.item(
+                          url: teacher.avatar ?? '',
+                          fit: BoxFit.cover,
+                          width: 68,
+                          height: 68,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 5,
+                        left: 55,
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: teacher.isOnline == true
+                                ? Colors.green
+                                : Colors.grey,
+                            shape: BoxShape.circle,
                           ),
                         ),
-                        Positioned(
-                          bottom: 10,
-                          left: 75,
-                          child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                              )),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
+              const SizedBox(
+                width: 16,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        teacher.name ?? '--',
+                        style: textTheme.bodyText1?.copyWith(
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  if (teacher.country != null)
+                    Text(
+                      teacher.country!.toUpperCase().replaceAllMapped(
+                            RegExp(r'[A-Z]'),
+                            (match) => String.fromCharCode(
+                              match.group(0)!.codeUnitAt(0) + 127397,
+                            ),
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  const SizedBox(
+                    height: 0,
+                  ),
+                  if (teacher.rating != null)
+                    Row(
+                      children: List.generate(
+                        5,
+                        (index) => _buildRating(index < teacher.rating!.toInt()
+                            ? AppColor.yellowFADB14
+                            : Colors.grey),
+                      ),
+                    ),
+                ],
+              ),
+              Spacer(),
               Icon(
                 Icons.favorite_outline,
-                color: AppColor.primaryColor,
-                size: 40,
+                color: AppColor.red,
+                size: 30,
               )
             ],
           ),
-          Text(
-            teacher.name ?? '--',
-            style: textTheme.bodyText1?.copyWith(fontSize: 30),
-          ),
-          Row(
-            children: [
-              CachedNetworkImageWrapper.item(
-                url: teacher.countryUrl ?? '',
-                fit: BoxFit.cover,
-                width: 50,
-                height: 50,
-              ),
-              Text(
-                teacher.country ?? ' --',
-                style: textTheme.bodyText2?.copyWith(
-                  fontSize: 16,
-                  color: AppColor.grayAD,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.star,
-                color: AppColor.yellowFADB14,
-              ),
-              Icon(
-                Icons.star,
-                color: AppColor.yellowFADB14,
-              ),
-              Icon(
-                Icons.star,
-                color: AppColor.yellowFADB14,
-              ),
-              Icon(
-                Icons.star,
-                color: AppColor.yellowFADB14,
-              ),
-              Icon(
-                Icons.star,
-                color: AppColor.yellowFADB14,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: teacher.categories!
-                .map(
-                  (e) => Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: AppColor.bluecee8f0,
-                    ),
-                    child: Text(
-                      e,
-                      style: textTheme.bodyText2?.copyWith(
-                        color: AppColor.primaryColor,
-                      ),
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-          SizedBox(
-            height: 20,
+          Divider(
+            height: 32,
+            thickness: 1,
           ),
           Text(
-            teacher.description ?? '--',
+            teacher.bio ?? '--',
             style: textTheme.bodyText2?.copyWith(
-              fontSize: 18,
+              fontSize: 14,
             ),
           ),
           SizedBox(
@@ -196,6 +174,13 @@ class TeacherItem extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildRating(Color color) {
+    return Icon(
+      Icons.star,
+      color: color,
     );
   }
 }

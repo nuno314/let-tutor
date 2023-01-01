@@ -17,4 +17,5 @@ class RouteList {
   static const String settings = '/settings';
   static const String changePassword = '/changePassword';
   static const String wallet = '/wallet';
+  static const String tutorFilter = 'tutorFilter';
 }

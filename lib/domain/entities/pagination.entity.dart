@@ -15,6 +15,8 @@ class Pagination {
 
   int get currentPage => total ~/ limit;
 
+  int get firstPage => 1;
+
   int get nextPage => currentPage + 1;
 
   int get size => limit;

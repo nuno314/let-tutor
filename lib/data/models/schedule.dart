@@ -8,14 +8,15 @@ part 'schedule.g.dart';
 @JsonSerializable()
 class Schedule {
   String? id;
-  String? startPeriod;
-  String? endPeriod;
+  int? startPeriodTimestamp;
+  int? endPeriodTimestamp;
+
   User? tutorInfo;
-  
+
   Schedule({
     this.id,
-    this.startPeriod,
-    this.endPeriod,
+    this.startPeriodTimestamp,
+    this.endPeriodTimestamp,
     this.tutorInfo,
   });
 

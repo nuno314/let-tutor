@@ -118,3 +118,38 @@ noTransaction,Không có giao dịch nào,No transaction
 copiedToClipboard,Đã sao chép,Copied to clipboard
 book,Đặt lịch,Book
 cancelBooking,Hủy đặt,Cancel booking
+findATutor,Tìm kiếm gia sư,Find a tutor
+selectTutorNationality,Chọn quốc tịch gia sư,Select tutor nationality
+enterTutorName,Nhập tên gia sư...,Enter tutor name...
+selectAvailableTutoringTime,Chọn thời gian dạy kèm có lịch trống:,Select available tutoring time:
+selectADay,Chọn một ngày,Select a day
+startTime,Giờ bắt đầu,Start time
+endTime,Giờ kết thúc,End time
+resetFilter,Đặt lại bộ tìm kiếm,Reset filters
+recommendedTutors,Gia sư được đề xuất,Recommended Tutors
+upcomingLesson,Buổi học sắp diễn ra,Upcoming lesson
+enterLessonRoom,Vào buổi học,Enter lesson room
+foreignTutor,Gia Sư Nước Ngoài,Foreign Tutor
+vietnameseTutor,Gia Sư Việt Nam,Vietnamese Tutor
+nativeEnglishTutor,Gia Sư Tiếng Anh,Native English Tutor
+tutorFilter,Bộ Lọc Gia Sư,Tutor Filter
+reset,Đặt Lại,Reset
+apply,Áp Dụng,Apply
+selectDate,Chọn ngày,Select date
+day,Ngày,Day
+month,Tháng,Month
+year,Năm,Year
+fromDate,Từ ngày,From date
+toDate,Tới ngày,To date
+all,Tất cả,All
+englishForKids,Tiếng Anh cho trẻ em,English for kids
+englishForBusiness,Tiếng Anh cho công việc,English for business
+conversational,Giao tiếp,Conversational
+starters,STARTERS,STARTERS
+movers,MOVERS,MOVERS
+flyers,FLYERS,FLYTERS,
+ket,KET,KET
+pet,PET,PET
+ielts,IELTS,IELTS
+toefl,TOEFL,TOEFL
+toeic,TOEIC,TOEIC

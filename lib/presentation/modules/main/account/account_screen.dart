@@ -176,11 +176,12 @@ class _AccountScreenState extends StateBase<AccountScreen> {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(100),
             child: CachedNetworkImageWrapper.avatar(
               url: state.viewModel.user?.avatar ?? '',
               width: 60,
               height: 60,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 8),

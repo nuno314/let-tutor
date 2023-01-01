@@ -4,6 +4,7 @@ import 'package:let_tutor/presentation/modules/authentication/authentication_rou
 import 'package:let_tutor/presentation/modules/authentication/reset_password/reset_password.dart';
 import 'package:let_tutor/presentation/modules/profile/profile.dart';
 import 'package:let_tutor/presentation/modules/settings/settings_route.dart';
+import 'package:let_tutor/presentation/modules/tutor/tutor.dart';
 import 'package:let_tutor/presentation/modules/wallet/wallet.dart';
 
 import '../common_widget/text_scale_fixed.dart';
@@ -19,6 +20,7 @@ class RouteGenerator {
         ...AuthenticationRoute.getAll(settings),
         ...SettingsRoute.getAll(settings),
         ...WalletRoute.getAll(settings),
+        ...TutorRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

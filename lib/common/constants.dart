@@ -1,4 +1,3 @@
-import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/user.dart';
 
 import 'utils/data_checker.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:let_tutor/presentation/theme/theme_color.dart';
 
 class Loading extends StatelessWidget {
   final Brightness brightness;

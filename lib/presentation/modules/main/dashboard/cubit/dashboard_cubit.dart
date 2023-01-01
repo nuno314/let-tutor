@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 
-import '../../../../../data/data_source/local/local_data_manager.dart';
-import '../../../../../di/di.dart';
 import '../dashboard_constant.dart';
 
 part 'dashboard_state.dart';
@@ -48,12 +46,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     if (state == null) {
       return -1;
     }
-    final guestCanView = DashboardPageExt.guestCanView(state.index);
-    // if (isLoggedIn || guestCanView) {
     navigateTo(state.index);
     return 1;
-    // } else {
-    //   return 0;
-    // }
   }
 }

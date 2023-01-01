@@ -9,6 +9,7 @@ class SvgAssets {
   final String icBookMedical = 'assets/images/svg/ic_book_medical.svg';
   final String icBookOpen = 'assets/images/svg/ic_book_open.svg';
   final String icBooking = 'assets/images/svg/ic_booking.svg';
+  final String icCalendar = 'assets/images/svg/ic_calendar.svg';
   final String icCall = 'assets/images/svg/ic_call.svg';
   final String icChalkboardTeacher =
       'assets/images/svg/ic_chalkboard_teacher.svg';

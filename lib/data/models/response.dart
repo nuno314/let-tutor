@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
-import 'package:let_tutor/common/utils.dart';
 
+import 'package:let_tutor/common/utils.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/statistic.dart';
+import 'package:let_tutor/data/models/teacher.dart';
 import 'package:let_tutor/data/models/user.dart';
 
 import 'token.dart';
@@ -72,6 +73,7 @@ class PaymentResponse {
   List<Payment>? rows;
   List<Statistic>? statistics;
   List<User>? referrals;
+  List<BookingInfo>? bookingInfos;
   PaymentResponse({
     this.total,
     this.income,
@@ -80,6 +82,7 @@ class PaymentResponse {
     this.rows,
     this.statistics,
     this.referrals,
+    this.bookingInfos,
   });
 
   factory PaymentResponse.fromJson(Map<String, dynamic> json) =>
@@ -100,5 +103,61 @@ class PaymentResponse {
 @JsonSerializable()
 class TransactionResponse {
   int? count;
-  
+}
+
+@JsonSerializable()
+class ScheduleResponseData extends ResponseData {
+  ScheduleResponse? data;
+  ScheduleResponseData({
+    this.data,
+  });
+  factory ScheduleResponseData.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleResponseDataToJson(this);
+}
+
+@JsonSerializable()
+class ScheduleResponse {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<BookingInfo>? bookingInfos;
+  ScheduleResponse({
+    this.count,
+    this.bookingInfos = const [],
+  });
+
+  factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleResponseToJson(this);
+}
+
+@JsonSerializable()
+class TutorResponseData {
+  @JsonKey(name: 'tutors')
+  TutorResponse? tutors;
+  TutorResponseData({
+    this.tutors,
+  });
+  factory TutorResponseData.fromJson(Map<String, dynamic> json) =>
+      _$TutorResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TutorResponseDataToJson(this);
+}
+
+@JsonSerializable()
+class TutorResponse {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<Teacher>? tutors;
+  TutorResponse({
+    this.count,
+    this.tutors,
+  });
+
+  factory TutorResponse.fromJson(Map<String, dynamic> json) =>
+      _$TutorResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TutorResponseToJson(this);
 }

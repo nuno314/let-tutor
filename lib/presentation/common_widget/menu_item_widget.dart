@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../theme/shadow.dart';
-import '../theme/theme_color.dart';
 import 'item_devider.dart';
 
 class MenuItemWidget extends StatelessWidget {

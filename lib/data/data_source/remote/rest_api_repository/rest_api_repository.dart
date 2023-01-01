@@ -71,4 +71,19 @@ abstract class RestApiRepository {
   @GET(ApiContract.referrals)
   Future<List<User>?> getReferrals();
 
+  @GET(ApiContract.bookedClasses)
+  Future<ScheduleResponseData> getBookedClasses({
+    @Path() String page = '',
+    @Path() String perPage = '',
+    @Path() String from = '',
+    @Path() String to = '',
+    @Path() String orderBy = 'meeting',
+    @Path() String sortBy = 'desc',
+  });
+
+  @GET(ApiContract.tutorList)
+  Future<TutorResponseData> getTutorList({
+    @Path() String page = '',
+    @Path() String perPage = '',
+  });
 }

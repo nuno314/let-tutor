@@ -5,28 +5,27 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../base/base.dart';
 import '../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../extentions/extention.dart';
-import '../bloc/teacher_bloc.dart';
+import '../bloc/tutor_bloc.dart';
 
-part 'teacher.action.dart';
+part 'tutor.action.dart';
 
-class TeacherScreen extends StatefulWidget {
-  const TeacherScreen({Key? key}) : super(key: key);
+class TutorScreen extends StatefulWidget {
+  const TutorScreen({Key? key}) : super(key: key);
 
   @override
-  State<TeacherScreen> createState() => _TeacherScreenState();
+  State<TutorScreen> createState() => _TutorScreenState();
 }
 
-class _TeacherScreenState extends StateBase<TeacherScreen> {
+class _TutorScreenState extends StateBase<TutorScreen> {
   final _refreshController = RefreshController(initialRefresh: true);
 
   @override
-  TeacherBloc get bloc => BlocProvider.of(context);
+  TutorBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
 
   @override
@@ -41,7 +40,7 @@ class _TeacherScreenState extends StateBase<TeacherScreen> {
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    return BlocConsumer<TeacherBloc, TeacherState>(
+    return BlocConsumer<TutorBloc, TutorState>(
       listener: _blocListener,
       builder: (context, state) {
         return _buildListing(state);
@@ -49,7 +48,7 @@ class _TeacherScreenState extends StateBase<TeacherScreen> {
     );
   }
 
-  Widget _buildListing(TeacherState state) {
+  Widget _buildListing(TutorState state) {
     return SmartRefresherWrapper.build(
       enablePullDown: true,
       enablePullUp: state.viewModel.canLoadMore,
@@ -63,7 +62,7 @@ class _TeacherScreenState extends StateBase<TeacherScreen> {
         separatorBuilder: (context, index) {
           return const SizedBox(height: 16);
         },
-        itemCount: state.viewModel.teachers.length,
+        itemCount: state.viewModel.data.length,
       ),
     );
   }

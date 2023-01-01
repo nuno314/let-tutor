@@ -1,43 +1,43 @@
-part of 'teacher_bloc.dart';
+part of 'tutor_bloc.dart';
 
 class _ViewModel {
   //TODO: Update to your model
-  final List<Teacher> teachers;
+  final List<Teacher> data;
   final bool canLoadMore;
 
   const _ViewModel({
     this.canLoadMore = false,
-    this.teachers = const [],
+    this.data = const [],
   });
 
   _ViewModel copyWith({
     //TODO: Update to your model
-    List<Teacher>? teachers,
+    List<Teacher>? data,
     bool? canLoadMore,
   }) {
     return _ViewModel(
-      teachers: teachers ?? this.teachers,
+      data: data ?? this.data,
       canLoadMore: canLoadMore ?? this.canLoadMore,
     );
   }
 }
 
-abstract class TeacherState {
+abstract class TutorState {
   final _ViewModel viewModel;
 
-  TeacherState(this.viewModel);
+  TutorState(this.viewModel);
 
-  T copyWith<T extends TeacherState>({
+  T copyWith<T extends TutorState>({
     _ViewModel? viewModel,
   }) {
-    return _factories[T == TeacherState ? runtimeType : T]!(
+    return _factories[T == TutorState ? runtimeType : T]!(
       viewModel ?? this.viewModel,
     );
   }
 }
 
-class TeacherInitial extends TeacherState {
-  TeacherInitial({
+class TutorInitial extends TutorState {
+  TutorInitial({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -47,7 +47,7 @@ final _factories = <
     Function(
   _ViewModel viewModel,
 )>{
-  TeacherInitial: (viewModel) => TeacherInitial(
+  TutorInitial: (viewModel) => TutorInitial(
         viewModel: viewModel,
       ),
 };

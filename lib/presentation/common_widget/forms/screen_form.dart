@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../common/constants.dart';
 import '../../../common/utils.dart';
 import '../../../generated/assets.dart';
 import '../../theme/theme_color.dart';
-import '../app_drawer.dart';
 import '../export.dart';
 
 class DropdownLanguageArgs {

@@ -441,6 +441,62 @@ class _RestApiRepository implements RestApiRepository {
     return value;
   }
 
+  @override
+  Future<ScheduleResponseData> getBookedClasses({
+    page = '',
+    perPage = '',
+    from = '',
+    to = '',
+    orderBy = 'meeting',
+    sortBy = 'desc',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ScheduleResponseData>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/booking/list/student?page=$page&perPage=$perPage&dateTimeLte=$to&dateTimeGte=$from&orderBy=$orderBy&sortBy=$sortBy',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ScheduleResponseData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TutorResponseData> getTutorList({
+    page = '',
+    perPage = '',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TutorResponseData>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tutor/more?perPage=$perPage&page=$page',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TutorResponseData.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

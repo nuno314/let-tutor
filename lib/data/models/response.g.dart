@@ -69,6 +69,9 @@ PaymentResponse _$PaymentResponseFromJson(Map<String, dynamic> json) =>
       referrals: (json['referrals'] as List<dynamic>?)
           ?.map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
+      bookingInfos: (json['bookingInfos'] as List<dynamic>?)
+          ?.map((e) => BookingInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$PaymentResponseToJson(PaymentResponse instance) =>
@@ -80,6 +83,7 @@ Map<String, dynamic> _$PaymentResponseToJson(PaymentResponse instance) =>
       'rows': instance.rows,
       'statistics': instance.statistics,
       'referrals': instance.referrals,
+      'bookingInfos': instance.bookingInfos,
     };
 
 TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
@@ -89,4 +93,65 @@ Map<String, dynamic> _$TransactionResponseToJson(
         TransactionResponse instance) =>
     <String, dynamic>{
       'count': instance.count,
+    };
+
+ScheduleResponseData _$ScheduleResponseDataFromJson(
+        Map<String, dynamic> json) =>
+    ScheduleResponseData(
+      data: json['data'] == null
+          ? null
+          : ScheduleResponse.fromJson(json['data'] as Map<String, dynamic>),
+    )
+      ..message = json['message'] as String?
+      ..user = json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ScheduleResponseDataToJson(
+        ScheduleResponseData instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'user': instance.user,
+      'data': instance.data,
+    };
+
+ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) =>
+    ScheduleResponse(
+      count: json['count'] as int?,
+      bookingInfos: (json['rows'] as List<dynamic>?)
+              ?.map((e) => BookingInfo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$ScheduleResponseToJson(ScheduleResponse instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.bookingInfos,
+    };
+
+TutorResponseData _$TutorResponseDataFromJson(Map<String, dynamic> json) =>
+    TutorResponseData(
+      tutors: json['tutors'] == null
+          ? null
+          : TutorResponse.fromJson(json['tutors'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$TutorResponseDataToJson(TutorResponseData instance) =>
+    <String, dynamic>{
+      'tutors': instance.tutors,
+    };
+
+TutorResponse _$TutorResponseFromJson(Map<String, dynamic> json) =>
+    TutorResponse(
+      count: json['count'] as int?,
+      tutors: (json['rows'] as List<dynamic>?)
+          ?.map((e) => Teacher.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TutorResponseToJson(TutorResponse instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.tutors,
     };
