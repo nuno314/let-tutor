@@ -86,23 +86,6 @@ extension ProfileAction on _ProfileScreenState {
   }
 
   void showWantToLearnDialog() {
-    List<LearnTopic> subjects = LearnTopicEtx.getAll();
-    List<bool> selectedSubjects = [
-      false,
-      false,
-      false,
-    ];
-    List<Test> testPreparationsList = TestPreparations.getAll();
-    List<bool> selectedTest = [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ];
     showDialog(
       useRootNavigator: true,
       useSafeArea: true,
@@ -114,25 +97,17 @@ extension ProfileAction on _ProfileScreenState {
             constraints: BoxConstraints(maxHeight: 300),
             child: Column(
               children: [
-                Text(
-                  trans.subjects,
-                  style: textTheme.bodyText1?.copyWith(
-                    color: AppColor.grayAD,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
                   children: subjects.map((e) {
                     final index = subjects.indexOf(e);
                     return InkWell(
-                      onTap: () => setState(() {
-                        selectedSubjects[index] = !selectedSubjects[index];
-                      }),
+                      onTap: () => setState(
+                        () {
+                          selectedSubjects[index] = !selectedSubjects[index];
+                        },
+                      ),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 4,
@@ -150,7 +125,7 @@ extension ProfileAction on _ProfileScreenState {
                               : AppColor.white,
                         ),
                         child: Text(
-                          e.name!,
+                          e.localized(trans),
                           style: textTheme.bodyText1?.copyWith(
                             color: selectedSubjects[index]
                                 ? AppColor.white
@@ -162,62 +137,7 @@ extension ProfileAction on _ProfileScreenState {
                     );
                   }).toList(),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  trans.testPreparation,
-                  style: textTheme.bodyText1?.copyWith(
-                    color: AppColor.grayAD,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: testPreparationsList.map((e) {
-                    final index = testPreparationsList.indexOf(e);
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedTest[index] = !selectedTest[index];
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColor.primaryColor,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ),
-                          color: selectedTest[index]
-                              ? AppColor.primaryColor
-                              : AppColor.white,
-                        ),
-                        child: Text(
-                          e.name!,
-                          style: textTheme.bodyText1?.copyWith(
-                            color: selectedTest[index]
-                                ? AppColor.white
-                                : AppColor.primaryColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(
-                  height: 60,
-                ),
+                const Spacer(),
                 Row(
                   children: [
                     Expanded(
@@ -243,21 +163,9 @@ extension ProfileAction on _ProfileScreenState {
                               if (cnt != 0) {
                                 wantToLearn += ', ';
                               }
-                              wantToLearn += sj.name!;
+                              wantToLearn += sj.localized(trans);
                               cnt++;
-                              learnTopics.add(sj);
-                            }
-                          }
-                          for (final test in testPreparationsList) {
-                            if (selectedTest[
-                                    testPreparationsList.indexOf(test)] ==
-                                true) {
-                              if (cnt != 0) {
-                                wantToLearn += ', ';
-                              }
-                              wantToLearn += test.name!;
-                              cnt++;
-                              testPreparations.add(test);
+                              specialties.add(sj);
                             }
                           }
                           _wantToLearnController.text = wantToLearn;
@@ -359,8 +267,7 @@ extension ProfileAction on _ProfileScreenState {
             phoneNumber: _phoneNumberController.text,
             birthday: _dobController.text,
             level: _levelController.text,
-            learnTopics: learnTopics,
-            testPreparations: testPreparations,
+            specialties: specialties,
             requireNote: _scheduleController.text,
           ),
         ),

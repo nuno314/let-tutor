@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/teacher.dart';
+import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/generated/assets.dart';
 
 import 'package:let_tutor/presentation/base/base.dart';
@@ -28,6 +29,7 @@ class HomePageScreen extends StatefulWidget {
 
 class _HomePageScreenState extends StateBase<HomePageScreen> {
   final _refreshController = RefreshController(initialRefresh: false);
+  final _searchController = InputContainerController();
 
   @override
   HomePageBloc get bloc => BlocProvider.of(context);
@@ -42,6 +44,14 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
 
   final tutorNotifier = ValueNotifier<String?>(null);
 
+  late Debouncer _debouncer;
+
+  @override
+  void initState() {
+    _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
@@ -49,6 +59,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
     return ScreenForm(
       trans: trans,
       showBackButton: false,
+      resizeToAvoidBottomInset: false,
       extentions: const SizedBox(
         height: 10,
       ),
@@ -118,9 +129,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
       ).toTimeFormat();
       period = from + ' - ' + to;
     }
-    if (info == null) {
-      return const SizedBox();
-    }
+
     return Container(
       height: 230,
       width: double.infinity,
@@ -137,7 +146,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            trans.upcomingLesson,
+            info != null ? trans.upcomingLesson : trans.youHaveNoUpcomingLesson,
             style: textTheme.bodyText1?.copyWith(
               fontSize: 18,
               color: AppColor.white,
@@ -227,9 +236,6 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
               ),
             ),
           ],
-          SizedBox(
-            height: 8,
-          ),
         ],
       ),
     );
@@ -237,21 +243,28 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
 
   Widget _buildTutorList(HomePageState state) {
     final tutors = state.tutors;
-    print(tutors);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 16,
+          ),
+          _buildTutorSearch(),
+          SizedBox(
+            height: 16,
+          ),
           Text(
             trans.recommendedTutors,
             style: textTheme.bodyText1?.copyWith(
-              fontSize: 20,
+              fontSize: 14,
             ),
           ),
           ...tutors
               .map((e) => TeacherItem(
+                    onTapFavorite: () => onTapTutorFavorite(e),
                     teacher: e,
                     textTheme: textTheme,
                   ))
@@ -259,5 +272,31 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildTutorSearch() {
+    return InputContainer(
+      title: trans.findATutor,
+      controller: _searchController,
+      titleStyle: textTheme.bodyText1?.copyWith(
+        fontSize: 14,
+      ),
+      fillColor: AppColor.white,
+      onTextChanged: ((p0) => _debouncer.value = p0),
+      suffixIcon: InkWell(
+          onTap: () {
+            _searchController.setText = '';
+            _debouncer.value = '';
+          },
+          child: Icon(Icons.clear)),
+      suffixIconPadding: const EdgeInsets.only(
+        right: 14,
+        left: 12,
+      ),
+    );
+  }
+
+  void search(String? value) {
+    bloc.add(SearchTutorEvent(value));
   }
 }

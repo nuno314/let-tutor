@@ -8,7 +8,6 @@ import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:package_info/package_info.dart';
 
 import '../../../../common/client_info.dart';
-import '../../../../common/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../base/base.dart';
 import '../../../extentions/extention.dart';
@@ -62,7 +61,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    Assets.image.imgLogo,
+                    Assets.image.imgLogin,
                   ),
                   const SizedBox(height: 12),
                   Text(

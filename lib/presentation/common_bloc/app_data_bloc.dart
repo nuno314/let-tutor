@@ -57,7 +57,6 @@ class AppDataBloc extends Cubit<AppData?> {
 
     if (await localDataManager.saveLocalization(locale.languageCode) == true) {
       emit(state?.copyWith(locale: locale));
-      print('emit');
       return true;
     } else {
       return false;

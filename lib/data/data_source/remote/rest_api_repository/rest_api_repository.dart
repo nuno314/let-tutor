@@ -81,9 +81,21 @@ abstract class RestApiRepository {
     @Path() String sortBy = 'desc',
   });
 
-  @GET(ApiContract.tutorList)
-  Future<TutorResponseData> getTutorList({
-    @Path() String page = '',
-    @Path() String perPage = '',
+  @POST(ApiContract.tutorList)
+  Future<TutorResponse> getTutorList({
+    @Field() int page = 1,
+    @Field() int perPage = 12,
+    @Field() String? search,
+    @Field() Map<String, dynamic>? filters,
+  });
+
+  @GET(ApiContract.nextBookingSchedule)
+  Future<ScheduleResponseData> getNextBookingSchedule({
+    @Field() String? dateTime,
+  });
+
+  @POST(ApiContract.favoriteTutor)
+  Future<ManageResponse> favoriteTutor({
+    @Field() String? tutorId,
   });
 }

@@ -98,9 +98,9 @@ Map<String, dynamic> _$TransactionResponseToJson(
 ScheduleResponseData _$ScheduleResponseDataFromJson(
         Map<String, dynamic> json) =>
     ScheduleResponseData(
-      data: json['data'] == null
-          ? null
-          : ScheduleResponse.fromJson(json['data'] as Map<String, dynamic>),
+      bookingInfos: (json['data'] as List<dynamic>?)
+          ?.map((e) => BookingInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
     )
       ..message = json['message'] as String?
       ..user = json['user'] == null
@@ -112,22 +112,7 @@ Map<String, dynamic> _$ScheduleResponseDataToJson(
     <String, dynamic>{
       'message': instance.message,
       'user': instance.user,
-      'data': instance.data,
-    };
-
-ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) =>
-    ScheduleResponse(
-      count: json['count'] as int?,
-      bookingInfos: (json['rows'] as List<dynamic>?)
-              ?.map((e) => BookingInfo.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-    );
-
-Map<String, dynamic> _$ScheduleResponseToJson(ScheduleResponse instance) =>
-    <String, dynamic>{
-      'count': instance.count,
-      'rows': instance.bookingInfos,
+      'data': instance.bookingInfos,
     };
 
 TutorResponseData _$TutorResponseDataFromJson(Map<String, dynamic> json) =>
@@ -154,4 +139,14 @@ Map<String, dynamic> _$TutorResponseToJson(TutorResponse instance) =>
     <String, dynamic>{
       'count': instance.count,
       'rows': instance.tutors,
+    };
+
+ManageResponse _$ManageResponseFromJson(Map<String, dynamic> json) =>
+    ManageResponse(
+      message: json['message'] as String?,
+    );
+
+Map<String, dynamic> _$ManageResponseToJson(ManageResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
     };

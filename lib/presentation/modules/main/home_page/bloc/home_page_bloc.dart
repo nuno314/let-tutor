@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:let_tutor/common/constants.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
 import 'package:let_tutor/di/di.dart';
 import 'package:let_tutor/domain/entities/pagination.entity.dart';
@@ -19,44 +20,38 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
   HomePageBloc() : super(HomePageInitial(viewModel: const _ViewModel())) {
     on<GetDataEvent>(_onGetDataEvent);
     on<LoadMoreDataEvent>(_onLoadMoreDataEvent);
+
+    on<FilterChangedEvent>(_onFilterChangedEvent);
+    on<SearchTutorEvent>(_onSearchTutorEvent);
+    on<FavoriteTutorEvent>(_onFavoriteTutorEvent);
     add(GetDataEvent());
   }
 
-  Pagination pagination = Pagination(limit: 5);
+  Pagination pagination = Pagination();
 
   Future<void> _onGetDataEvent(
     GetDataEvent event,
     Emitter<HomePageState> emit,
   ) async {
-    pagination = Pagination(limit: 5);
-    final res = await _restApi.getBookedClasses(
-      from: DateTime.now().millisecondsSinceEpoch.toString(),
-      page: '1',
-      perPage: '1',
+    pagination = Pagination();
+    final res = await _restApi.getNextBookingSchedule(
+      dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
     );
-    print('pre');
-    print(pagination.offset);
-    print(pagination.limit);
-    print(pagination.total);
     final tutorList = await _restApi.getTutorList(
-      page: pagination.firstPage.toString(),
-      perPage: pagination.limit.toString(),
+      page: pagination.firstPage,
+      perPage: pagination.limit,
+      filters: state.tutorFilter.where,
     );
-    final length = tutorList.tutors?.tutors?.length ?? 0;
+    final length = tutorList.tutors?.length ?? 0;
     pagination = Pagination(
       offset: pagination.total,
       total: pagination.total + length,
     );
-    print(pagination.offset);
-    print(pagination.limit);
-    print(pagination.total);
-    print(pagination.offset + pagination.limit - pagination.total);
-    print(pagination.canNext);
     emit(
-      state.copyWith(
+      state.copyWith<HomePageInitial>(
         viewModel: state.viewModel.copyWith(
-          tutors: tutorList.tutors?.tutors,
-          upcomingLessons: res.data?.bookingInfos,
+          tutors: tutorList.tutors,
+          upcomingLessons: res.bookingInfos,
           canLoadMore: pagination.canNext,
         ),
       ),
@@ -70,11 +65,9 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
     final res = <Teacher>[];
 
     final moreData = await _restApi.getTutorList(
-      page: pagination.currentPage.toString(),
-      perPage: pagination.limit.toString(),
-    );
+        page: pagination.currentPage, perPage: pagination.limit);
 
-    res.addAll(moreData.tutors?.tutors ?? []);
+    res.addAll(moreData.tutors ?? []);
 
     pagination = Pagination(
       offset: pagination.total,
@@ -91,5 +84,52 @@ class HomePageBloc extends AppBlocBase<HomePageEvent, HomePageState> {
         ),
       ),
     );
+  }
+
+  FutureOr<void> _onFilterChangedEvent(
+    FilterChangedEvent event,
+    Emitter<HomePageState> emit,
+  ) {
+    emit(
+      state.copyWith<FilterChangedState>(
+        viewModel: state.viewModel.copyWith(
+          tutorFilter: event.filter,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onSearchTutorEvent(
+    SearchTutorEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    pagination = Pagination();
+    final tutorList = await _restApi.getTutorList(
+      page: pagination.firstPage,
+      perPage: pagination.limit,
+      filters: state.tutorFilter.where,
+      search: event.value,
+    );
+    final length = tutorList.tutors?.length ?? 0;
+    pagination = Pagination(
+      offset: pagination.total,
+      total: pagination.total + length,
+    );
+    emit(
+      state.copyWith<HomePageInitial>(
+        viewModel: state.viewModel.copyWith(
+          tutors: tutorList.tutors,
+          canLoadMore: pagination.canNext,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onFavoriteTutorEvent(
+    FavoriteTutorEvent event,
+    Emitter<HomePageState> emit,
+  ) async {
+    await _restApi.favoriteTutor(tutorId: event.id);
+    add(GetDataEvent());
   }
 }

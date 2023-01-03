@@ -1,5 +1,4 @@
-import 'package:let_tutor/data/models/user.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'utils/data_checker.dart';
 
 part 'constants/url_constants.dart';

@@ -49,11 +49,14 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
 
   File? newAvatar;
   DateTime? _pickBirthday;
-  List<LearnTopic> learnTopics = [];
-  List<Test> testPreparations = [];
+  List<Specialty> specialties = [];
 
   final avatarValue = ValueNotifier<String?>(null);
-
+  List<Specialty> subjects = Specialty.values.sublist(1);
+  late List<bool> selectedSubjects = List.generate(
+    subjects.length,
+    (index) => false,
+  );
   @override
   void initState() {
     super.initState();

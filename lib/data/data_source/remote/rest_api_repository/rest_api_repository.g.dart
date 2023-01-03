@@ -472,28 +472,87 @@ class _RestApiRepository implements RestApiRepository {
   }
 
   @override
-  Future<TutorResponseData> getTutorList({
-    page = '',
-    perPage = '',
+  Future<TutorResponse> getTutorList({
+    page = 1,
+    perPage = 12,
+    search,
+    filters,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final _data = {
+      'page': page,
+      'perPage': perPage,
+      'search': search,
+      'filters': filters,
+    };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<TutorResponseData>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<TutorResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tutor/search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TutorResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ScheduleResponseData> getNextBookingSchedule({dateTime}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {'dateTime': dateTime};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ScheduleResponseData>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'tutor/more?perPage=$perPage&page=$page',
+              '/booking/next',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TutorResponseData.fromJson(_result.data!);
+    final value = ScheduleResponseData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ManageResponse> favoriteTutor({tutorId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {'tutorId': tutorId};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ManageResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/manageFavoriteTutor',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ManageResponse.fromJson(_result.data!);
     return value;
   }
 

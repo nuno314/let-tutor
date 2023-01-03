@@ -13,7 +13,7 @@ class Pagination {
 
   bool get canNext => offset + limit == total;
 
-  int get currentPage => total ~/ limit;
+  int get currentPage => total ~/ limit + 1;
 
   int get firstPage => 1;
 

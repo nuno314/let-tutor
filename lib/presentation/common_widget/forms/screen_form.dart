@@ -44,7 +44,7 @@ class ScreenForm extends StatefulWidget {
     this.extentions,
     this.showBackButton = true,
     this.floatingActionButton,
-    required this.trans,
+      required this.trans,
   }) : super(key: key);
 
   @override
@@ -144,7 +144,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                         widget.title!,
                         style: _theme.textTheme.headline3?.copyWith(
                           color: textColor,
-                          fontSize: 24,
+                          fontSize: 20,
                         ),
                       ),
                       SizedBox(

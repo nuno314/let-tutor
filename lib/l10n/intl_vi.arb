@@ -147,5 +147,9 @@
   "pet": "PET",
   "ielts": "IELTS",
   "toefl": "TOEFL",
-  "toeic": "TOEIC"
+  "toeic": "TOEIC",
+  "youHaveNoUpcomingLesson": "Bạn không có buổi học nào",
+  "specialty": "Chuyên môn",
+  "nationality": "Quốc tịch",
+  "availableTutoringTime": "Thời gian dạy kèm có lịch trống"
 }

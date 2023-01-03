@@ -1,7 +1,6 @@
 part of 'histories_bloc.dart';
 
 class _ViewModel {
-  //TODO: Update to your model
   final List<Document> data;
   final bool canLoadMore;
 
@@ -11,7 +10,7 @@ class _ViewModel {
   });
 
   _ViewModel copyWith({
-    //TODO: Update to your model
+    //
     List<Document>? data,
     bool? canLoadMore,
   }) {

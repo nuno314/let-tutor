@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:let_tutor/presentation/modules/app.dart';
 
 import 'shadow.dart';
 import 'theme_color.dart';

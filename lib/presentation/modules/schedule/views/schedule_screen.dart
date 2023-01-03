@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:let_tutor/data/models/document.dart';
-import 'package:let_tutor/data/models/session.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/theme/shadow.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
@@ -31,7 +30,6 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
 
   @override

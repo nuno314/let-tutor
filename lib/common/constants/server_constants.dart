@@ -121,31 +121,6 @@ extension LevelEnumEtx on LevelEnum {
   }
 }
 
-extension LearnTopicEtx on LearnTopic {
-  static List<LearnTopic> getAll() {
-    return [
-      LearnTopic(id: 1, key: '', name: 'English for Kids'),
-      LearnTopic(id: 2, key: '', name: 'Business English'),
-      LearnTopic(id: 3, key: '', name: 'Conversational English')
-    ];
-  }
-}
-
-extension TestPreparations on Test {
-  static List<Test> getAll() {
-    return [
-      Test(id: 1, key: 'starters', name: 'STARTERS'),
-      Test(id: 2, key: 'movers', name: 'MOVERS'),
-      Test(id: 3, key: 'flyers', name: 'FLYERS'),
-      Test(id: 4, key: 'ket', name: 'KET'),
-      Test(id: 5, key: 'pet', name: 'PET'),
-      Test(id: 6, key: 'ielts', name: 'IELTS'),
-      Test(id: 7, key: 'toefl', name: 'TOEFL'),
-      Test(id: 8, key: 'toeic', name: 'TOEIC'),
-    ];
-  }
-}
-
 enum PaymentType {
   buy,
   cancel,
@@ -181,6 +156,144 @@ extension PaymentTypeEtx on PaymentType {
         return trans.book;
       case PaymentType.cancel:
         return trans.cancelBooking;
+    }
+  }
+}
+
+enum Specialty {
+  all,
+  kidEnglish,
+  businessEnglish,
+  conversational,
+  starters,
+  movers,
+  flyers,
+  ket,
+  pet,
+  ielts,
+  toefl,
+  toeic,
+  ;
+
+  static Map<String, Specialty> jsonMap = {
+    'english-for-kids': kidEnglish,
+    'business-english': businessEnglish,
+    'conversational-english': conversational,
+    'starters': starters,
+    'movers': movers,
+    'flyers': flyers,
+    'ket': ket,
+    'pet': pet,
+    'ielts': ielts,
+    'toefl': toefl,
+    'toeic': toeic,
+  };
+
+  String get id {
+    final Map<Specialty, String> map = {
+      all: 'all',
+      kidEnglish: 'english-for-kids',
+      businessEnglish: 'business-english',
+      conversational: 'conversational-english',
+      starters: 'starters',
+      movers: 'movers',
+      flyers: 'flyers',
+      ket: 'ket',
+      pet: 'pet',
+      ielts: 'ielts',
+      toefl: 'toefl',
+      toeic: 'toeic',
+    };
+    return map[this]!;
+  }
+
+  String? get learnTopicCode {
+    final Map<Specialty, String?> map = {
+      all: '0',
+      kidEnglish: '3',
+      businessEnglish: '4',
+      conversational: '5',
+    };
+    return map[this] ?? null;
+  }
+
+  String? get testPreparationCode {
+    final Map<Specialty, String?> map = {
+      starters: '1',
+      movers: '2',
+      flyers: '3',
+      ket: '4',
+      pet: '5',
+      ielts: '6',
+      toefl: '7',
+      toeic: '8',
+    }..removeWhere((key, value) => value == null);
+    return map[this] ?? null;
+  }
+
+  String localized(AppLocalizations trans) {
+    switch (this) {
+      case Specialty.all:
+        return trans.all;
+      case Specialty.kidEnglish:
+        return trans.englishForKids;
+      case Specialty.businessEnglish:
+        return trans.englishForBusiness;
+      case Specialty.conversational:
+        return trans.conversational;
+      case Specialty.starters:
+        return trans.starters;
+      case Specialty.movers:
+        return trans.movers;
+      case Specialty.flyers:
+        return trans.flyers;
+      case Specialty.ket:
+        return trans.ket;
+      case Specialty.pet:
+        return trans.pet;
+      case Specialty.ielts:
+        return trans.ielts;
+      case Specialty.toefl:
+        return trans.toefl;
+      case Specialty.toeic:
+        return trans.toeic;
+    }
+  }
+}
+
+enum TutorNationality {
+  foreign,
+  vietnamese,
+  native,
+}
+
+extension TutorNationalityExt on TutorNationality {
+  Map<String, dynamic> get toJson {
+    switch (this) {
+      case TutorNationality.foreign:
+        return {
+          'isVietnamese': false,
+          'isNative': false,
+        };
+      case TutorNationality.vietnamese:
+        return {
+          'isVietnamese': true,
+        };
+      case TutorNationality.native:
+        return {
+          'isNative': true,
+        };
+    }
+  }
+
+  String localized(AppLocalizations trans) {
+    switch (this) {
+      case TutorNationality.foreign:
+        return trans.foreignTutor;
+      case TutorNationality.vietnamese:
+        return trans.vietnameseTutor;
+      case TutorNationality.native:
+        return trans.nativeEnglishTutor;
     }
   }
 }

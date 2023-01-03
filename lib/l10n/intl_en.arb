@@ -147,5 +147,9 @@
   "pet": "PET",
   "ielts": "IELTS",
   "toefl": "TOEFL",
-  "toeic": "TOEIC"
+  "toeic": "TOEIC",
+  "youHaveNoUpcomingLesson": "You have no upcoming lesson",
+  "specialty": "Specialty",
+  "nationality": "Nationality",
+  "availableTutoringTime": "Available tutoring time"
 }

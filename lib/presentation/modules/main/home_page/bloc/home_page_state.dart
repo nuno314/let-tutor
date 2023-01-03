@@ -2,7 +2,7 @@ part of 'home_page_bloc.dart';
 
 class _ViewModel {
   final List<Teacher> tutors;
-  final TutorListFilter? tutorFilter;
+  final TutorListFilter tutorFilter;
   final List<BookingInfo> upcomingLessons;
   final bool canLoadMore;
 
@@ -43,11 +43,18 @@ abstract class HomePageState {
 
   List<Teacher> get tutors => viewModel.tutors;
   List<BookingInfo> get upcomingLessons => viewModel.upcomingLessons;
-  TutorListFilter? get tutorFilter => viewModel.tutorFilter;
+  TutorListFilter get tutorFilter => viewModel.tutorFilter;
+  List<Specialty> get specialties => viewModel.tutorFilter.specialties;
 }
 
 class HomePageInitial extends HomePageState {
   HomePageInitial({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class FilterChangedState extends HomePageState {
+  FilterChangedState({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -58,6 +65,9 @@ final _factories = <
   _ViewModel viewModel,
 )>{
   HomePageInitial: (viewModel) => HomePageInitial(
+        viewModel: viewModel,
+      ),
+  FilterChangedState: (viewModel) => FilterChangedState(
         viewModel: viewModel,
       ),
 };

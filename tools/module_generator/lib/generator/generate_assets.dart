@@ -27,7 +27,6 @@ Future<void> generateAsset({
     final dir = Directory(p);
 
     final List<FileSystemEntity> entities = await dir.list().toList();
-    print(entities);
     for (final f in entities.whereType<File>()) {
       final fileName = f.path.split('/').last.split('.').first;
       listAssets.add(AssetFile(
@@ -40,7 +39,6 @@ Future<void> generateAsset({
   var svgContentFile = '';
   var imageContentFile = '';
   var otherContentFile = '';
-  print(listAssets);
   for (final a in listAssets) {
     var append = '';
 

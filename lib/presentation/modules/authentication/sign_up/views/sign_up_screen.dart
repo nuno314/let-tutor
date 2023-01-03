@@ -64,7 +64,6 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    final _size = MediaQuery.of(context).size;
     return BlocConsumer<SignUpBloc, SignUpState>(
       listener: _blocListener,
       builder: (context, state) {

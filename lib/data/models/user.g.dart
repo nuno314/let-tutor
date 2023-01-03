@@ -22,6 +22,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       testPreparations: (json['testPreparations'] as List<dynamic>?)
           ?.map((e) => Test.fromJson(e as Map<String, dynamic>))
           .toList(),
+      specialties: (json['specialties'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$SpecialtyEnumMap, e))
+          .toList(),
       requireNote: json['requireNote'] as String?,
     );
 
@@ -37,8 +40,25 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'level': instance.level,
       'learnTopics': instance.learnTopics,
       'testPreparations': instance.testPreparations,
+      'specialties':
+          instance.specialties?.map((e) => _$SpecialtyEnumMap[e]!).toList(),
       'requireNote': instance.requireNote,
     };
+
+const _$SpecialtyEnumMap = {
+  Specialty.all: 'all',
+  Specialty.kidEnglish: 'kidEnglish',
+  Specialty.businessEnglish: 'businessEnglish',
+  Specialty.conversational: 'conversational',
+  Specialty.starters: 'starters',
+  Specialty.movers: 'movers',
+  Specialty.flyers: 'flyers',
+  Specialty.ket: 'ket',
+  Specialty.pet: 'pet',
+  Specialty.ielts: 'ielts',
+  Specialty.toefl: 'toefl',
+  Specialty.toeic: 'toeic',
+};
 
 LearnTopic _$LearnTopicFromJson(Map<String, dynamic> json) => LearnTopic(
       id: json['id'] as int?,

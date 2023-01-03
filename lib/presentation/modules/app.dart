@@ -23,7 +23,6 @@ class App extends StatefulWidget {
 }
 
 class _MyAppState extends State<App> {
-
   @override
   void initState() {
     super.initState();
@@ -34,12 +33,11 @@ class _MyAppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) =>  injector.get<AppDataBloc>(),
+          create: (_) => injector.get<AppDataBloc>(),
         ),
       ],
       child: BlocBuilder<AppDataBloc, AppData?>(
         builder: (context, appData) {
-          print(appData?.locale);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: appData?.themeData ?? buildLightTheme().data,

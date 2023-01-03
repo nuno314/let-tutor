@@ -5,9 +5,13 @@ extension HomePageAction on _HomePageScreenState {
     BuildContext context,
     HomePageState state,
   ) {
-    _refreshController
-      ..refreshCompleted()
-      ..loadComplete();
+    if (state is FilterChangedState) {
+      _refreshController.requestRefresh();
+    } else {
+      _refreshController
+        ..refreshCompleted()
+        ..loadComplete();
+    }
   }
 
   void onRefresh() {
@@ -23,6 +27,14 @@ extension HomePageAction on _HomePageScreenState {
       context,
       RouteList.tutorFilter,
       arguments: bloc.state.tutorFilter,
-    );
+    ).then((value) {
+      if (value != null) {
+        bloc.add(FilterChangedEvent(value as TutorListFilter));
+      }
+    });
+  }
+
+  void onTapTutorFavorite(Teacher tutor) {
+    bloc.add(FavoriteTutorEvent(tutor.id));
   }
 }

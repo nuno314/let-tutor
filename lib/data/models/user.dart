@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
+import 'package:let_tutor/common/constants.dart';
 
 part 'user.g.dart';
 
@@ -18,6 +18,7 @@ class User {
   String? level;
   List<LearnTopic>? learnTopics;
   List<Test>? testPreparations;
+  List<Specialty>? specialties;
   String? requireNote;
   User({
     this.id,
@@ -31,6 +32,7 @@ class User {
     this.level,
     this.learnTopics,
     this.testPreparations,
+    this.specialties,
     this.requireNote,
   });
 
@@ -45,24 +47,29 @@ class User {
         'phone': this.phoneNumber,
         'birthday': this.birthday,
         'level': this.level,
-        'learnTopics': this.learnTopics?.map((e) => e.id).toList(),
-        'testPreparations': this.testPreparations?.map((e) => e.id).toList(),
+        'learnTopics': this.specialties?.map((e) => e.learnTopicCode).toList()
+          ?..removeWhere((element) => element == null),
+        'testPreparations':
+            this.specialties?.map((e) => e.testPreparationCode).toList()
+              ?..removeWhere((element) => element == null),
         'requireNote': this.requireNote,
       };
 
-  User copyWith(
-      {String? id,
-      String? email,
-      String? name,
-      String? avatar,
-      String? country,
-      String? phoneNumber,
-      bool? isPhoneActivated,
-      String? birthday,
-      String? level,
-      List<LearnTopic>? learnTopics,
-      List<Test>? testPreparations,
-      String? requireNote}) {
+  User copyWith({
+    String? id,
+    String? email,
+    String? name,
+    String? avatar,
+    String? country,
+    String? phoneNumber,
+    bool? isPhoneActivated,
+    String? birthday,
+    String? level,
+    List<LearnTopic>? learnTopics,
+    List<Test>? testPreparations,
+    String? requireNote,
+    List<Specialty>? specialties,
+  }) {
     return User(
       id: id ?? this.id,
       email: email ?? this.email,
@@ -76,6 +83,7 @@ class User {
       learnTopics: learnTopics ?? this.learnTopics,
       testPreparations: testPreparations ?? this.testPreparations,
       requireNote: requireNote ?? this.requireNote,
+      specialties: specialties ?? this.specialties,
     );
   }
 

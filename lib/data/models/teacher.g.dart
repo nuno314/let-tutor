@@ -29,6 +29,7 @@ Teacher _$TeacherFromJson(Map<String, dynamic> json) => Teacher(
       json['specialties'] as String?,
       json['price'] as int?,
       json['isOnline'] as bool?,
+      json['isfavoritetutor'] as String?,
     );
 
 Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
@@ -54,4 +55,5 @@ Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
       'specialties': instance.specialties,
       'price': instance.price,
       'isOnline': instance.isOnline,
+      'isfavoritetutor': instance.isFavoriteTutor,
     };

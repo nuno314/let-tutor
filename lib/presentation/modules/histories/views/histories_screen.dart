@@ -26,7 +26,6 @@ class _HistoriesScreenState extends StateBase<HistoriesScreen> {
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
 
   @override

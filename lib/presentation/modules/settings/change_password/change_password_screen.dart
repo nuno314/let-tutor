@@ -14,7 +14,7 @@ import '../../../theme/theme_color.dart';
 part 'change_password.action.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
+  const ChangePasswordScreen();
 
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();

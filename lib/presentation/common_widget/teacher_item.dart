@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:let_tutor/presentation/extentions/extention.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
 import '../../data/models/teacher.dart';
@@ -9,16 +10,18 @@ import 'cache_network_image_wrapper.dart';
 class TeacherItem extends StatelessWidget {
   final Teacher teacher;
   final TextTheme textTheme;
+  final void Function()? onTapFavorite;
   const TeacherItem({
     required this.teacher,
     required this.textTheme,
+    this.onTapFavorite,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.all(
@@ -48,13 +51,13 @@ class TeacherItem extends StatelessWidget {
                         child: CachedNetworkImageWrapper.item(
                           url: teacher.avatar ?? '',
                           fit: BoxFit.cover,
-                          width: 68,
-                          height: 68,
+                          width: 50,
+                          height: 50,
                         ),
                       ),
                       Positioned(
-                        bottom: 5,
-                        left: 55,
+                        bottom: 2,
+                        left: 38,
                         child: Container(
                           width: 10,
                           height: 10,
@@ -81,7 +84,7 @@ class TeacherItem extends StatelessWidget {
                       Text(
                         teacher.name ?? '--',
                         style: textTheme.bodyText1?.copyWith(
-                          fontSize: 16,
+                          fontSize: 14,
                         ),
                       ),
                       const SizedBox(
@@ -102,6 +105,7 @@ class TeacherItem extends StatelessWidget {
                           ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
+                      style: textTheme.bodyText1?.copyWith(fontSize: 12),
                     ),
                   const SizedBox(
                     height: 0,
@@ -118,10 +122,13 @@ class TeacherItem extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              Icon(
-                Icons.favorite_outline,
-                color: AppColor.red,
-                size: 30,
+              InkWell(
+                onTap: onTapFavorite,
+                child: Icon(
+                  teacher.isFavorite ? Icons.favorite : Icons.favorite_outline,
+                  color: AppColor.red,
+                  size: 16,
+                ),
               )
             ],
           ),
@@ -132,7 +139,7 @@ class TeacherItem extends StatelessWidget {
           Text(
             teacher.bio ?? '--',
             style: textTheme.bodyText2?.copyWith(
-              fontSize: 14,
+              fontSize: 12,
             ),
           ),
           SizedBox(
@@ -161,9 +168,10 @@ class TeacherItem extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        'Đặt lịch',
-                        style: textTheme.bodyText2?.copyWith(
+                        translate(context).book,
+                        style: textTheme.bodyText1?.copyWith(
                           color: AppColor.primaryColor,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -181,6 +189,7 @@ class TeacherItem extends StatelessWidget {
     return Icon(
       Icons.star,
       color: color,
+      size: 16,
     );
   }
 }

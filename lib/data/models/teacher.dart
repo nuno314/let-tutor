@@ -26,6 +26,8 @@ class Teacher {
   final String? specialties;
   final int? price;
   final bool? isOnline;
+  @JsonKey(name: 'isfavoritetutor')
+  final String? isFavoriteTutor;
 
   factory Teacher.fromJson(Map<String, dynamic> json) =>
       _$TeacherFromJson(json);
@@ -53,7 +55,15 @@ class Teacher {
     this.specialties,
     this.price,
     this.isOnline,
+    this.isFavoriteTutor,
   );
 
   Map<String, dynamic> toJson() => _$TeacherToJson(this);
+
+  bool get isFavorite => isFavoriteTutor == '1';
+}
+
+@JsonSerializable()
+class FavoriteTeacher {
+  
 }

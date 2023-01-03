@@ -107,9 +107,10 @@ class TransactionResponse {
 
 @JsonSerializable()
 class ScheduleResponseData extends ResponseData {
-  ScheduleResponse? data;
+  @JsonKey(name: 'data')
+  List<BookingInfo>? bookingInfos;
   ScheduleResponseData({
-    this.data,
+    this.bookingInfos,
   });
   factory ScheduleResponseData.fromJson(Map<String, dynamic> json) =>
       _$ScheduleResponseDataFromJson(json);
@@ -118,25 +119,11 @@ class ScheduleResponseData extends ResponseData {
 }
 
 @JsonSerializable()
-class ScheduleResponse {
-  int? count;
-  @JsonKey(name: 'rows')
-  List<BookingInfo>? bookingInfos;
-  ScheduleResponse({
-    this.count,
-    this.bookingInfos = const [],
-  });
-
-  factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>
-      _$ScheduleResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ScheduleResponseToJson(this);
-}
-
-@JsonSerializable()
 class TutorResponseData {
   @JsonKey(name: 'tutors')
   TutorResponse? tutors;
+  @JsonKey(name: 'favoriteTutor')
+  List<Teacher>? favoriteTutors;
   TutorResponseData({
     this.tutors,
   });
@@ -160,4 +147,17 @@ class TutorResponse {
       _$TutorResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TutorResponseToJson(this);
+}
+
+@JsonSerializable()
+class ManageResponse {
+  String? message;
+  ManageResponse({
+    this.message,
+  });
+
+  factory ManageResponse.fromJson(Map<String, dynamic> json) =>
+      _$ManageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ManageResponseToJson(this);
 }

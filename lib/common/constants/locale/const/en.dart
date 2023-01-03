@@ -1,6 +1,5 @@
 import '../app_locale.dart';
 
-// TODO: translate
 class ENAppConstantLocalization extends AppConstantLocalization {
   @override
   String get avatar => 'Hình đại diện';
