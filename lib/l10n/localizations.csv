@@ -92,6 +92,7 @@ invalidBirthday,Vui lòng chọn ngày sinh,Please select your birthday
 invalidLevel,Vui lòng chọn trình độ,Please select your level
 invalidWantToLearn,Vui lòng chọn ít nhất một môn học,Please select at least one subject
 language,Ngôn ngữ,Language
+languages,Ngôn ngữ,Languages
 system,Hệ thống,System
 currentPassword,Mật khẩu hiện tại,Current password
 incorrectCurrentPassword,Mật khẩu hiện tại không đúng,Incorrect current password
@@ -154,6 +155,12 @@ ielts,IELTS,IELTS
 toefl,TOEFL,TOEFL
 toeic,TOEIC,TOEIC
 youHaveNoUpcomingLesson,Bạn không có buổi học nào,You have no upcoming lesson
-specialty,Chuyên môn,Specialty
+specialty,Chuyên ngành,Specialty
 nationality,Quốc tịch,Nationality
 availableTutoringTime,Thời gian dạy kèm có lịch trống,Available tutoring time
+favorite,Yêu thích,Favorite
+report,Báo cáo,Report
+reviews,Xem đánh giá,Reviews
+interests,Sở thích,Interests
+teachingExperience,Kinh nghiệm giảng dạy,Teaching Experience
+detail,Chi tiết,Detail

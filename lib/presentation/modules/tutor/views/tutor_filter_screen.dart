@@ -36,9 +36,6 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
 
   late AppLocalizations trans;
 
-  late DateTime? from = widget.filter.from;
-  late DateTime? to = widget.filter.to;
-
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
@@ -55,12 +52,11 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildTutorFilters(),
                   Text(
                     trans.nationality,
                     style: textTheme.bodyText1?.copyWith(
@@ -120,10 +116,6 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
                 Navigator.pop(
                   context,
                   widget.filter.copyWith(
-                    dateRange: DateRange(
-                      from: from,
-                      to: to,
-                    ),
                     specialties: specialties,
                     nationalities: nationalities,
                   ),
@@ -133,59 +125,6 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildTutorFilters() {
-    return Column(
-      children: [
-        SizedBox(
-          height: 25,
-        ),
-        _buildStudyFilter(),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildStudyFilter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          trans.availableTutoringTime,
-          style: textTheme.bodyText1?.copyWith(
-            fontSize: 14,
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        DateInputCalendarPicker(
-          onDateSelected: (date) {
-            from = date;
-          },
-          hint: trans.selectDate,
-          monthStr: trans.month,
-          title: trans.fromDate,
-          initial: from,
-          calendarIcon: Assets.svg.icCalendar,
-        ),
-        const SizedBox(height: 12),
-        DateInputCalendarPicker(
-          onDateSelected: (date) {
-            to = date;
-          },
-          hint: trans.selectDate,
-          monthStr: trans.month,
-          title: trans.toDate,
-          initial: to,
-          calendarIcon: Assets.svg.icCalendar,
-        ),
-      ],
     );
   }
 

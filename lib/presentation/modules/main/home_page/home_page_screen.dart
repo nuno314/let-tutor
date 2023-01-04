@@ -16,6 +16,7 @@ import '../../../common_widget/export.dart';
 import '../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../common_widget/teacher_item.dart';
 import '../../../extentions/extention.dart';
+import '../../tutor/views/tutor_screen.dart';
 import 'bloc/home_page_bloc.dart';
 
 part 'home_page.action.dart';
@@ -263,10 +264,13 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
             ),
           ),
           ...tutors
-              .map((e) => TeacherItem(
-                    onTapFavorite: () => onTapTutorFavorite(e),
-                    teacher: e,
-                    textTheme: textTheme,
+              .map((e) => InkWell(
+                    onTap: () => onTapBookCourse(e),
+                    child: TeacherItem(
+                      onTapFavorite: () => onTapTutorFavorite(e),
+                      teacher: e,
+                      textTheme: textTheme,
+                    ),
                   ))
               .toList(),
         ],

@@ -88,6 +88,7 @@
   "invalidLevel": "Vui lòng chọn trình độ",
   "invalidWantToLearn": "Vui lòng chọn ít nhất một môn học",
   "language": "Ngôn ngữ",
+  "languages": "Ngôn ngữ",
   "system": "Hệ thống",
   "currentPassword": "Mật khẩu hiện tại",
   "incorrectCurrentPassword": "Mật khẩu hiện tại không đúng",
@@ -149,7 +150,13 @@
   "toefl": "TOEFL",
   "toeic": "TOEIC",
   "youHaveNoUpcomingLesson": "Bạn không có buổi học nào",
-  "specialty": "Chuyên môn",
+  "specialty": "Chuyên ngành",
   "nationality": "Quốc tịch",
-  "availableTutoringTime": "Thời gian dạy kèm có lịch trống"
+  "availableTutoringTime": "Thời gian dạy kèm có lịch trống",
+  "favorite": "Yêu thích",
+  "report": "Báo cáo",
+  "reviews": "Xem đánh giá",
+  "interests": "Sở thích",
+  "teachingExperience": "Kinh nghiệm giảng dạy",
+  "detail": "Chi tiết"
 }

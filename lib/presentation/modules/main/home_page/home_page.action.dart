@@ -34,7 +34,15 @@ extension HomePageAction on _HomePageScreenState {
     });
   }
 
+  void onTapBookCourse(Teacher tutor) {
+    Navigator.pushNamed(
+      context,
+      RouteList.tutorDetail,
+      arguments: TutorArgs(tutor: tutor),
+    );
+  }
+
   void onTapTutorFavorite(Teacher tutor) {
-    bloc.add(FavoriteTutorEvent(tutor.id));
+    bloc.add(FavoriteTutorEvent(tutor.userId));
   }
 }

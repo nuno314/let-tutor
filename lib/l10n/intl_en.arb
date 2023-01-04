@@ -88,6 +88,7 @@
   "invalidLevel": "Please select your level",
   "invalidWantToLearn": "Please select at least one subject",
   "language": "Language",
+  "languages": "Languages",
   "system": "System",
   "currentPassword": "Current password",
   "incorrectCurrentPassword": "Incorrect current password",
@@ -151,5 +152,11 @@
   "youHaveNoUpcomingLesson": "You have no upcoming lesson",
   "specialty": "Specialty",
   "nationality": "Nationality",
-  "availableTutoringTime": "Available tutoring time"
+  "availableTutoringTime": "Available tutoring time",
+  "favorite": "Favorite",
+  "report": "Report",
+  "reviews": "Reviews",
+  "interests": "Interests",
+  "teachingExperience": "Teaching Experience",
+  "detail": "Detail"
 }

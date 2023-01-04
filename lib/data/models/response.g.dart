@@ -95,6 +95,47 @@ Map<String, dynamic> _$TransactionResponseToJson(
       'count': instance.count,
     };
 
+ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) =>
+    ScheduleResponse(
+      schedules: (json['data'] as List<dynamic>?)
+          ?.map((e) =>
+              ScheduleResponseByTutor.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ScheduleResponseToJson(ScheduleResponse instance) =>
+    <String, dynamic>{
+      'data': instance.schedules,
+    };
+
+ScheduleResponseByTutor _$ScheduleResponseByTutorFromJson(
+        Map<String, dynamic> json) =>
+    ScheduleResponseByTutor(
+      id: json['id'] as String?,
+      tutorId: json['tutorId'] as String?,
+      startTimestamp: json['startTimestamp'] as int?,
+      endTimestamp: json['endTimestamp'] as int?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      isBooked: json['isBooked'] as bool?,
+      scheduleDetails: (json['scheduleDetails'] as List<dynamic>?)
+          ?.map((e) => Schedule.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ScheduleResponseByTutorToJson(
+        ScheduleResponseByTutor instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'tutorId': instance.tutorId,
+      'startTimestamp': instance.startTimestamp,
+      'endTimestamp': instance.endTimestamp,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'isBooked': instance.isBooked,
+      'scheduleDetails': instance.scheduleDetails,
+    };
+
 ScheduleResponseData _$ScheduleResponseDataFromJson(
         Map<String, dynamic> json) =>
     ScheduleResponseData(
@@ -120,11 +161,14 @@ TutorResponseData _$TutorResponseDataFromJson(Map<String, dynamic> json) =>
       tutors: json['tutors'] == null
           ? null
           : TutorResponse.fromJson(json['tutors'] as Map<String, dynamic>),
-    );
+    )..favoriteTutors = (json['favoriteTutor'] as List<dynamic>?)
+        ?.map((e) => Teacher.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$TutorResponseDataToJson(TutorResponseData instance) =>
     <String, dynamic>{
       'tutors': instance.tutors,
+      'favoriteTutor': instance.favoriteTutors,
     };
 
 TutorResponse _$TutorResponseFromJson(Map<String, dynamic> json) =>

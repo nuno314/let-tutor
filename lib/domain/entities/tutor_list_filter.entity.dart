@@ -8,14 +8,12 @@ class TutorListFilter {
   final List<Teacher> teachers;
   final List<Specialty> specialties;
   final List<TutorNationality> nationalities;
-  final DateRange? dateRange;
 
   const TutorListFilter({
     this.teachersFilter = const [],
     this.teachers = const [],
     this.specialties = const [],
     this.nationalities = const [],
-    this.dateRange,
   });
 
   TutorListFilter copyWith({
@@ -29,7 +27,6 @@ class TutorListFilter {
       teachersFilter: teachersFilter ?? this.teachersFilter,
       teachers: teachers ?? this.teachers,
       specialties: specialties ?? this.specialties,
-      dateRange: dateRange ?? this.dateRange,
       nationalities: nationalities ?? this.nationalities,
     );
   }
@@ -39,19 +36,15 @@ class TutorListFilter {
     List<Teacher>? teachers,
     List<Specialty>? specialties,
     List<TutorNationality>? nationalities,
-    DateRange? dateRange,
   }) {
     return TutorListFilter(
       teachersFilter: teachersFilter ?? this.teachersFilter,
       teachers: teachers ?? [],
       specialties: specialties ?? [],
-      dateRange: dateRange,
       nationalities: nationalities ?? [],
     );
   }
 
-  DateTime? get from => dateRange?.from;
-  DateTime? get to => dateRange?.to;
 
   Map<String, dynamic> get where => {
         if (specialties.isNotEmpty)

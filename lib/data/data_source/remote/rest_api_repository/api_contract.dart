@@ -16,9 +16,10 @@ class ApiContract {
   static const String paymentHistory = 'payment/history';
   static const String paymentStatistics = 'payment/statistics';
   static const String referrals = 'user/referrals';
-  static const String bookedClasses =
-      '/booking/list/student?page={page}&perPage={perPage}&dateTimeLte={to}&dateTimeGte={from}&orderBy={orderBy}&sortBy={sortBy}';
   static const String tutorList = 'tutor/search';
-  static const String nextBookingSchedule = '/booking/next';
-  static const String favoriteTutor = '/user/manageFavoriteTutor';
+  static const String nextBookingSchedule = 'booking/next';
+  static const String favoriteTutor = 'user/manageFavoriteTutor';
+  static const String schedule =
+      'schedule?tutorId={tutorId}&startTimestamp={startTimestamp}&endTimestamp={endTimestamp}';
+  static const String booking = 'booking';
 }

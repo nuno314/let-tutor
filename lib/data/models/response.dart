@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:let_tutor/common/utils.dart';
 import 'package:let_tutor/data/models/payment.dart';
+import 'package:let_tutor/data/models/schedule.dart';
 import 'package:let_tutor/data/models/statistic.dart';
 import 'package:let_tutor/data/models/teacher.dart';
 import 'package:let_tutor/data/models/user.dart';
@@ -103,6 +104,45 @@ class PaymentResponse {
 @JsonSerializable()
 class TransactionResponse {
   int? count;
+}
+
+@JsonSerializable()
+class ScheduleResponse {
+  @JsonKey(name: 'data')
+  List<ScheduleResponseByTutor>? schedules;
+  ScheduleResponse({
+    this.schedules,
+  });
+
+   factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleResponseToJson(this);
+}
+
+@JsonSerializable()
+class ScheduleResponseByTutor {
+  String? id;
+  String? tutorId;
+  int? startTimestamp;
+  int? endTimestamp;
+  DateTime? createdAt;
+  bool? isBooked;
+  List<Schedule>? scheduleDetails;
+  ScheduleResponseByTutor({
+    this.id,
+    this.tutorId,
+    this.startTimestamp,
+    this.endTimestamp,
+    this.createdAt,
+    this.isBooked,
+    this.scheduleDetails,
+  });
+
+   factory ScheduleResponseByTutor.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleResponseByTutorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleResponseByTutorToJson(this);
 }
 
 @JsonSerializable()

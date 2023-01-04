@@ -71,16 +71,6 @@ abstract class RestApiRepository {
   @GET(ApiContract.referrals)
   Future<List<User>?> getReferrals();
 
-  @GET(ApiContract.bookedClasses)
-  Future<ScheduleResponseData> getBookedClasses({
-    @Path() String page = '',
-    @Path() String perPage = '',
-    @Path() String from = '',
-    @Path() String to = '',
-    @Path() String orderBy = 'meeting',
-    @Path() String sortBy = 'desc',
-  });
-
   @POST(ApiContract.tutorList)
   Future<TutorResponse> getTutorList({
     @Field() int page = 1,
@@ -97,5 +87,18 @@ abstract class RestApiRepository {
   @POST(ApiContract.favoriteTutor)
   Future<ManageResponse> favoriteTutor({
     @Field() String? tutorId,
+  });
+
+  @GET(ApiContract.schedule)
+  Future<ScheduleResponse> getSchedule({
+    @Path() String? tutorId,
+    @Path() int? startTimestamp,
+    @Path() int? endTimestamp,
+  });
+
+  @POST(ApiContract.booking)
+  Future<ScheduleResponseData> bookClass({
+    @Field() List<String>? scheduleDetailIds,
+    @Field() String? note,
   });
 }
