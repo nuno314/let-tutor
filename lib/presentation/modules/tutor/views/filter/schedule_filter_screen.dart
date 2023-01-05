@@ -1,19 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:let_tutor/common/constants.dart';
 import 'package:let_tutor/domain/entities/date_range.entity.dart';
-import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../domain/entities/schedule_filter.entity.dart';
-import '../../../../generated/assets.dart';
-import '../../../common_widget/box_color.dart';
-import '../../../common_widget/date_picker/calendar_date_picker.dart';
-import '../../../extentions/extention.dart';
-import '../../../theme/theme_button.dart';
-import '../../../theme/theme_color.dart';
+import '../../../../../domain/entities/schedule_filter.entity.dart';
+import '../../../../../generated/assets.dart';
+import '../../../../common_widget/date_picker/calendar_date_picker.dart';
+import '../../../../extentions/extention.dart';
+import '../../../../theme/theme_button.dart';
+import '../../../../theme/theme_color.dart';
 
 class ScheduleFilterScreen extends StatefulWidget {
   final ScheduleFilter filter;
@@ -133,23 +130,30 @@ class _ScheduleFilterScreenState extends State<ScheduleFilterScreen> {
       children: [
         DateInputCalendarPicker(
           onDateSelected: (date) {
-            from = date;
+            setState(() {
+              from = date;
+            });
           },
           hint: trans.selectDate,
           monthStr: trans.month,
           title: trans.fromDate,
           initial: from,
+          maxDate: to,
+          minDate: DateTime.now(),
           calendarIcon: Assets.svg.icCalendar,
         ),
         const SizedBox(height: 12),
         DateInputCalendarPicker(
           onDateSelected: (date) {
-            to = date;
+            setState(() {
+              to = date;
+            });
           },
           hint: trans.selectDate,
           monthStr: trans.month,
           title: trans.toDate,
           initial: to,
+          minDate: from,
           calendarIcon: Assets.svg.icCalendar,
         ),
       ],

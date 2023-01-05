@@ -13,6 +13,7 @@ import '../../../common/constants.dart';
 import '../../../common/services/auth_service.dart';
 import '../../../common/utils.dart';
 import '../../../di/di.dart';
+import '../../models/user.dart';
 import '../local/local_data_manager.dart';
 import 'interceptor/auth_interceptor.dart';
 import 'interceptor/header_interceptor.dart';
@@ -32,6 +33,7 @@ class AppApiService {
   }
 
   LocalDataManager get localDataManager => injector.get();
+  User? get currentUser => localDataManager.currentUser;
 
   void _config() {
     _setupDioClient();

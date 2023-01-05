@@ -10,7 +10,7 @@ extension TutorInfoPage on _TutorScreenState {
           children: [
             const SizedBox(height: 16),
             if (tutor?.video.isNotNullOrEmpty == true) _buildTutorVideo(),
-            ..._buildTutorInfo(),
+            ..._buildTutorInfo(state),
             _buildGeneralInfo(),
           ],
         ),
@@ -18,7 +18,8 @@ extension TutorInfoPage on _TutorScreenState {
     );
   }
 
-  List<Widget> _buildTutorInfo() {
+  List<Widget> _buildTutorInfo(TutorState state) {
+    print(state.feedbacks);
     return [
       BoxColor(
         color: AppColor.white,
@@ -96,7 +97,7 @@ extension TutorInfoPage on _TutorScreenState {
               _buildInfoButton(
                 iconData: Icons.star_outline,
                 title: trans.reviews,
-                onTap: _onTapFavorite,
+                onTap: _onTapReviews,
               ),
             ],
           ),

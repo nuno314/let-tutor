@@ -20,4 +20,6 @@ class RouteList {
   static const String tutorFilter = '/tutorFilter';
   static const String tutorDetail = '/tutorDetail';
   static const String scheduleFilter = '/scheduleFilter';
+  static const String payment = '/payment';
+  static const String feedback = '/feedback';
 }

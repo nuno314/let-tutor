@@ -158,5 +158,11 @@
   "reviews": "Reviews",
   "interests": "Interests",
   "teachingExperience": "Teaching Experience",
-  "detail": "Detail"
+  "detail": "Detail",
+  "payment": "Payment",
+  "bookingTime": "Booking time",
+  "balance": "Balance",
+  "price": "Price",
+  "notes": "Notes",
+  "youHaveLessonsLeft": "You have %s lessons left"
 }

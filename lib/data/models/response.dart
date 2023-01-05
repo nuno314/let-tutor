@@ -108,13 +108,13 @@ class TransactionResponse {
 
 @JsonSerializable()
 class ScheduleResponse {
-  @JsonKey(name: 'data')
+  @JsonKey(name: 'scheduleOfTutor')
   List<ScheduleResponseByTutor>? schedules;
   ScheduleResponse({
     this.schedules,
   });
 
-   factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>
+  factory ScheduleResponse.fromJson(Map<String, dynamic> json) =>
       _$ScheduleResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ScheduleResponseToJson(this);
@@ -139,7 +139,7 @@ class ScheduleResponseByTutor {
     this.scheduleDetails,
   });
 
-   factory ScheduleResponseByTutor.fromJson(Map<String, dynamic> json) =>
+  factory ScheduleResponseByTutor.fromJson(Map<String, dynamic> json) =>
       _$ScheduleResponseByTutorFromJson(json);
 
   Map<String, dynamic> toJson() => _$ScheduleResponseByTutorToJson(this);
@@ -200,4 +200,33 @@ class ManageResponse {
       _$ManageResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ManageResponseToJson(this);
+}
+
+@JsonSerializable()
+class FeedbackResponse {
+  @JsonKey(name: 'data')
+  FeedbackResponseData? data;
+
+  FeedbackResponse({this.data});
+  factory FeedbackResponse.fromJson(Map<String, dynamic> json) =>
+      _$FeedbackResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FeedbackResponseToJson(this);
+
+  List<Feedback> get feedbacks => data?.feedbacks ?? [];
+}
+
+@JsonSerializable()
+class FeedbackResponseData {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<Feedback>? feedbacks;
+  FeedbackResponseData({
+    this.count,
+    this.feedbacks,
+  });
+  factory FeedbackResponseData.fromJson(Map<String, dynamic> json) =>
+      _$FeedbackResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FeedbackResponseDataToJson(this);
 }

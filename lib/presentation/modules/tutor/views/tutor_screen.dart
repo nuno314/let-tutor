@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
+import 'package:let_tutor/data/models/schedule.dart';
+import 'package:let_tutor/di/di.dart';
+import 'package:let_tutor/presentation/common_widget/schedule_item.dart';
+import 'package:let_tutor/presentation/modules/tutor/views/payment/payment_screen.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:let_tutor/common/utils.dart';
@@ -43,7 +48,7 @@ class TutorScreen extends StatefulWidget {
 class _TutorScreenState extends StateBase<TutorScreen> {
   final _pageController = PageController();
   final infoRefreshController = RefreshController();
-  final bookingRefreshController = RefreshController();
+  final bookingRefreshController = RefreshController(initialRefresh: true);
 
   @override
   TutorBloc get bloc => BlocProvider.of(context);
@@ -86,7 +91,6 @@ class _TutorScreenState extends StateBase<TutorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(tutor?.id);
     _themeData = Theme.of(context);
     trans = translate(context);
     return BlocConsumer<TutorBloc, TutorState>(

@@ -101,4 +101,11 @@ abstract class RestApiRepository {
     @Field() List<String>? scheduleDetailIds,
     @Field() String? note,
   });
+
+   @GET(ApiContract.tutorFeedback)
+  Future<FeedbackResponse> getTutorFeedback({
+    @Path() String? tutorId,
+    @Path() int? page,
+    @Path() int? perPage,
+  });
 }

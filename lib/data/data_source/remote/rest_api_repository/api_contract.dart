@@ -22,4 +22,6 @@ class ApiContract {
   static const String schedule =
       'schedule?tutorId={tutorId}&startTimestamp={startTimestamp}&endTimestamp={endTimestamp}';
   static const String booking = 'booking';
+  static const String tutorFeedback =
+      'feedback/v2/{tutorId}?page={page}&perPage={perPage}';
 }

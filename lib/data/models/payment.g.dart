@@ -63,3 +63,15 @@ Map<String, dynamic> _$BookingInfoToJson(BookingInfo instance) =>
       'createdAt': instance.createdAt?.toIso8601String(),
       'scheduleDetailInfo': instance.schedule,
     };
+
+Wallet _$WalletFromJson(Map<String, dynamic> json) => Wallet(
+      amount: json['amount'] as String?,
+      isBlocked: json['isBlocked'] as bool?,
+      bonus: json['bonus'] as int?,
+    );
+
+Map<String, dynamic> _$WalletToJson(Wallet instance) => <String, dynamic>{
+      'amount': instance.amount,
+      'isBlocked': instance.isBlocked,
+      'bonus': instance.bonus,
+    };

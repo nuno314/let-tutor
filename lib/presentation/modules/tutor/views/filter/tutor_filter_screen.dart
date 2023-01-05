@@ -2,17 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:let_tutor/common/constants.dart';
-import 'package:let_tutor/domain/entities/date_range.entity.dart';
 import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../generated/assets.dart';
-import '../../../common_widget/box_color.dart';
-import '../../../common_widget/date_picker/calendar_date_picker.dart';
-import '../../../extentions/extention.dart';
-import '../../../theme/theme_button.dart';
-import '../../../theme/theme_color.dart';
+import '../../../../common_widget/box_color.dart';
+import '../../../../extentions/extention.dart';
+import '../../../../theme/theme_button.dart';
+import '../../../../theme/theme_color.dart';
 
 class TutorFilterScreen extends StatefulWidget {
   final TutorListFilter filter;
@@ -163,7 +160,6 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
             specialties
               ..clear()
               ..addAll(gs);
-            print(specialties);
           });
         },
         text: e.localized(trans),
@@ -200,7 +196,6 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
             nationalities
               ..clear()
               ..addAll(gs);
-            print(nationalities);
           });
         },
         text: e.localized(trans),

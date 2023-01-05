@@ -21,10 +21,8 @@ class SplashBloc extends AppBlocBase<SplashEvent, SplashState> {
     SplashInitialEvent event,
     Emitter<SplashState> emitter,
   ) async {
-    print('go');
     await _configServices();
     // await _configRepo.getAppSetting();
-    print('done');
 
     emitter(SplashFinishState(
       isLoggedIn ? RouteList.dashboard : RouteList.signIn,

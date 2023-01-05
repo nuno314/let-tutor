@@ -64,6 +64,7 @@ class AppAuthService implements AuthService {
     if (res?.token?.isValid == false) {
       throw RefreshTokenException();
     }
+    _localDataManager.notifyUserChanged(res?.user);
 
     await _localDataManager.setAccessToken(res?.token?.accessToken);
 

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:let_tutor/data/models/schedule.dart';
@@ -69,4 +68,20 @@ class BookingInfo {
       _$BookingInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$BookingInfoToJson(this);
+}
+
+@JsonSerializable()
+class Wallet {
+  String? amount;
+  bool? isBlocked;
+  int? bonus;
+  Wallet({
+    this.amount,
+    this.isBlocked,
+    this.bonus,
+  });
+  factory Wallet.fromJson(Map<String, dynamic> json) =>
+      _$WalletFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WalletToJson(this);
 }

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:let_tutor/common/constants.dart';
+import 'package:let_tutor/data/models/payment.dart';
 
 part 'user.g.dart';
 
@@ -19,6 +20,8 @@ class User {
   List<LearnTopic>? learnTopics;
   List<Test>? testPreparations;
   List<Specialty>? specialties;
+  @JsonKey(name: 'walletInfo')
+  Wallet? wallet;
   String? requireNote;
   User({
     this.id,
@@ -33,6 +36,7 @@ class User {
     this.learnTopics,
     this.testPreparations,
     this.specialties,
+    this.wallet,
     this.requireNote,
   });
 

@@ -97,7 +97,7 @@ Map<String, dynamic> _$TransactionResponseToJson(
 
 ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) =>
     ScheduleResponse(
-      schedules: (json['data'] as List<dynamic>?)
+      schedules: (json['scheduleOfTutor'] as List<dynamic>?)
           ?.map((e) =>
               ScheduleResponseByTutor.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -105,7 +105,7 @@ ScheduleResponse _$ScheduleResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ScheduleResponseToJson(ScheduleResponse instance) =>
     <String, dynamic>{
-      'data': instance.schedules,
+      'scheduleOfTutor': instance.schedules,
     };
 
 ScheduleResponseByTutor _$ScheduleResponseByTutorFromJson(
@@ -193,4 +193,32 @@ ManageResponse _$ManageResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ManageResponseToJson(ManageResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
+    };
+
+FeedbackResponse _$FeedbackResponseFromJson(Map<String, dynamic> json) =>
+    FeedbackResponse(
+      data: json['data'] == null
+          ? null
+          : FeedbackResponseData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$FeedbackResponseToJson(FeedbackResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+FeedbackResponseData _$FeedbackResponseDataFromJson(
+        Map<String, dynamic> json) =>
+    FeedbackResponseData(
+      count: json['count'] as int?,
+      feedbacks: (json['rows'] as List<dynamic>?)
+          ?.map((e) => Feedback.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$FeedbackResponseDataToJson(
+        FeedbackResponseData instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.feedbacks,
     };

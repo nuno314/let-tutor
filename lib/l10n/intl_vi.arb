@@ -158,5 +158,11 @@
   "reviews": "Xem đánh giá",
   "interests": "Sở thích",
   "teachingExperience": "Kinh nghiệm giảng dạy",
-  "detail": "Chi tiết"
+  "detail": "Chi tiết",
+  "payment": "Thanh toán",
+  "bookingTime": "Thời gian đặt lịch",
+  "balance": "Số dư",
+  "price": "Giá",
+  "notes": "Ghi chú",
+  "youHaveLessonsLeft": "Bạn còn %s buổi học"
 }

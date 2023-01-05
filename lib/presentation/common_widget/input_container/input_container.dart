@@ -38,6 +38,7 @@ class InputContainer extends StatefulWidget {
   final void Function()? onEditingComplete;
   final double prefixIconSize;
   final double suffixIconSize;
+  final EdgeInsetsGeometry? titlePadding;
 
   const InputContainer({
     Key? key,
@@ -75,6 +76,7 @@ class InputContainer extends StatefulWidget {
     this.textInputAction,
     this.prefixIconSize = 16.0,
     this.suffixIconSize = 16.0,
+    this.titlePadding,
   }) : super(key: key);
 
   @override
@@ -199,26 +201,29 @@ class _InputContainerState extends State<InputContainer> {
         if (widget.title?.isNotEmpty == true) {
           body = Column(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: RichText(
-                  text: TextSpan(
-                    text: widget.titleStyle != null
-                        ? widget.title!
-                        : widget.title!.toUpperCase(),
-                    style: widget.titleStyle ??
-                        themeData.textTheme.bodyText1?.copyWith(
-                          fontSize: 12,
-                        ),
-                    children: [
-                      if (widget.required == true)
-                        TextSpan(
-                          text: ' *',
-                          style: themeData.textTheme.headline6!.copyWith(
-                            color: Colors.red,
+              Padding(
+                padding: widget.titlePadding ?? const EdgeInsets.all(0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      text: widget.titleStyle != null
+                          ? widget.title!
+                          : widget.title!.toUpperCase(),
+                      style: widget.titleStyle ??
+                          themeData.textTheme.bodyText1?.copyWith(
+                            fontSize: 12,
                           ),
-                        ),
-                    ],
+                      children: [
+                        if (widget.required == true)
+                          TextSpan(
+                            text: ' *',
+                            style: themeData.textTheme.headline6!.copyWith(
+                              color: Colors.red,
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),

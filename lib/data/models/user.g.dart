@@ -25,6 +25,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       specialties: (json['specialties'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$SpecialtyEnumMap, e))
           .toList(),
+      wallet: json['walletInfo'] == null
+          ? null
+          : Wallet.fromJson(json['walletInfo'] as Map<String, dynamic>),
       requireNote: json['requireNote'] as String?,
     );
 
@@ -42,6 +45,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'testPreparations': instance.testPreparations,
       'specialties':
           instance.specialties?.map((e) => _$SpecialtyEnumMap[e]!).toList(),
+      'walletInfo': instance.wallet,
       'requireNote': instance.requireNote,
     };
 

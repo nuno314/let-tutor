@@ -3,6 +3,7 @@ part of 'schedule_bloc.dart';
 class _ViewModel {
   final List<Session> sessions;
   final List<Document> documents;
+  final List<Schedule> schedules;
   const _ViewModel({
     this.sessions = const [],
     this.documents = const [],

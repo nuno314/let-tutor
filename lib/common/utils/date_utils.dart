@@ -41,7 +41,7 @@ class DateUtils {
   ];
 
   static const List<String> dateWithWeekdayFormat = [
-    D,
+    DD,
     ', ',
     dd,
     '/',

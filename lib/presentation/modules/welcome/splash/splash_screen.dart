@@ -44,7 +44,6 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           final nextScreen = state.nextScreen;
-          print(nextScreen);
           if (nextScreen == null) {
             return;
           }

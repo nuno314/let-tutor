@@ -19,3 +19,15 @@ class ApplyScheduleFilter extends TutorEvent {
 
   ApplyScheduleFilter(this.filter);
 }
+
+class BookScheduleEvent extends TutorEvent {
+  final Schedule schedule;
+  final String? note;
+
+  BookScheduleEvent(
+    this.schedule,
+    this.note,
+  );
+}
+
+class GetReviewsEvent extends TutorEvent {}

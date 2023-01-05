@@ -109,7 +109,6 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                     ValueListenableBuilder<String?>(
                       valueListenable: avatarValue,
                       builder: (context, avatar, snapshot) {
-                        print(avatar);
                         return CircleImageOutline(
                           image: avatar ?? '',
                           borderColor: AppColor.primaryColor,
@@ -307,7 +306,6 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
       crop: true,
     ).show();
     if (file != null) {
-      print(file);
       avatarValue.value = file.path;
       newAvatar = file;
     }
