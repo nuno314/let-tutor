@@ -222,3 +222,35 @@ Map<String, dynamic> _$FeedbackResponseDataToJson(
       'count': instance.count,
       'rows': instance.feedbacks,
     };
+
+BookingInfoResponse _$BookingInfoResponseFromJson(Map<String, dynamic> json) =>
+    BookingInfoResponse(
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : BookingInfoResponseData.fromJson(
+              json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$BookingInfoResponseToJson(
+        BookingInfoResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+BookingInfoResponseData _$BookingInfoResponseDataFromJson(
+        Map<String, dynamic> json) =>
+    BookingInfoResponseData(
+      count: json['count'] as int?,
+      schedules: (json['rows'] as List<dynamic>?)
+          ?.map((e) => BookingInfo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$BookingInfoResponseDataToJson(
+        BookingInfoResponseData instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.schedules,
+    };

@@ -102,10 +102,23 @@ abstract class RestApiRepository {
     @Field() String? note,
   });
 
-   @GET(ApiContract.tutorFeedback)
+  @GET(ApiContract.tutorFeedback)
   Future<FeedbackResponse> getTutorFeedback({
     @Path() String? tutorId,
     @Path() int? page,
     @Path() int? perPage,
+  });
+
+  @GET(ApiContract.bookedSchedule)
+  Future<BookingInfoResponse> getBookedSchedule({
+    @Path() int? from,
+    @Path() int? page,
+    @Path() int? perPage,
+  });
+
+  @DELETE(ApiContract.deleteBookedSchedule)
+  Future<ManageResponse> deleteBookedSchedule({
+    @Field() String? scheduleDetailId,
+    @Field() Map<String, dynamic>? cancelInfo,
   });
 }

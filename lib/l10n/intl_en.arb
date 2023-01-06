@@ -164,5 +164,11 @@
   "balance": "Balance",
   "price": "Price",
   "notes": "Notes",
-  "youHaveLessonsLeft": "You have %s lessons left"
+  "youHaveLessonsLeft": "You have %s lessons left",
+  "goToMeeting": "Go to meeting",
+  "rescheduleAtAnotherTime": "Reschedule at another time",
+  "busyAtThatTime": "Busy at that time",
+  "askedByTheTutor": "Asked by the tutor",
+  "other": "Other",
+  "whatWasTheReason": "What was the reason you cancel this booking?"
 }

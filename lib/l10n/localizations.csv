@@ -170,3 +170,9 @@ balance,Số dư,Balance
 price,Giá,Price
 notes,Ghi chú,Notes
 youHaveLessonsLeft,Bạn còn %s buổi học,You have %s lessons left
+goToMeeting,Vào buổi học,Go to meeting
+rescheduleAtAnotherTime,Học lại vào lúc khác,Reschedule at another time
+busyAtThatTime,Thời điểm đó đang bận,Busy at that time
+askedByTheTutor,Yêu cầu của gia sư,Asked by the tutor
+other,Khác,Other
+whatWasTheReason,Lý do bạn hủy buổi học này là gì?,What was the reason you cancel this booking?

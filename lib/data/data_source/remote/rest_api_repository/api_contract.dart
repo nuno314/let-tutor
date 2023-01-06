@@ -24,4 +24,7 @@ class ApiContract {
   static const String booking = 'booking';
   static const String tutorFeedback =
       'feedback/v2/{tutorId}?page={page}&perPage={perPage}';
+  static const String bookedSchedule =
+      'booking/list/student?page={page}&perPage={perPage}&dateTimeGte={from}&orderBy=meeting&sortBy=asc';
+  static const String deleteBookedSchedule = 'booking/schedule-detail';
 }

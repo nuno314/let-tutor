@@ -164,5 +164,11 @@
   "balance": "Số dư",
   "price": "Giá",
   "notes": "Ghi chú",
-  "youHaveLessonsLeft": "Bạn còn %s buổi học"
+  "youHaveLessonsLeft": "Bạn còn %s buổi học",
+  "goToMeeting": "Vào buổi học",
+  "rescheduleAtAnotherTime": "Học lại vào lúc khác",
+  "busyAtThatTime": "Thời điểm đó đang bận",
+  "askedByTheTutor": "Yêu cầu của gia sư",
+  "other": "Khác",
+  "whatWasTheReason": "Lý do bạn hủy buổi học này là gì?"
 }

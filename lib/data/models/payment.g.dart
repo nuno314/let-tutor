@@ -43,6 +43,7 @@ BookingInfo _$BookingInfoFromJson(Map<String, dynamic> json) => BookingInfo(
       scheduleDetailId: json['scheduleDetailId'] as String?,
       tutorMeetingLink: json['tutorMeetingLink'] as String?,
       studentMeetingLink: json['studentMeetingLink'] as String?,
+      studentRequest: json['studentRequest'] as String?,
       isDeleted: json['isDeleted'] as bool?,
       createdAt: json['createdAt'] == null
           ? null
@@ -59,6 +60,7 @@ Map<String, dynamic> _$BookingInfoToJson(BookingInfo instance) =>
       'scheduleDetailId': instance.scheduleDetailId,
       'tutorMeetingLink': instance.tutorMeetingLink,
       'studentMeetingLink': instance.studentMeetingLink,
+      'studentRequest': instance.studentRequest,
       'isDeleted': instance.isDeleted,
       'createdAt': instance.createdAt?.toIso8601String(),
       'scheduleDetailInfo': instance.schedule,

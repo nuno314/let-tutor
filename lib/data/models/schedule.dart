@@ -4,8 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/teacher.dart';
 
-import 'user.dart';
-
 part 'schedule.g.dart';
 
 @JsonSerializable()
@@ -20,6 +18,8 @@ class Schedule {
   List<BookingInfo>? bookingInfos;
   Teacher? tutorInfo;
   bool? isBooked;
+  bool? isDeleted;
+  Schedule? scheduleInfo;
 
   Schedule({
     this.id,
@@ -31,6 +31,7 @@ class Schedule {
     this.bookingInfos,
     this.tutorInfo,
     this.isBooked,
+    this.scheduleInfo,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) =>

@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:let_tutor/data/models/document.dart';
+import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
+import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
 import 'package:let_tutor/presentation/theme/shadow.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
@@ -23,6 +25,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends StateBase<ScheduleScreen> {
+  final controller = RefreshController(initialRefresh: true);
   @override
   ScheduleBloc get bloc => BlocProvider.of(context);
 
@@ -39,42 +42,84 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
     return BlocConsumer<ScheduleBloc, ScheduleState>(
       listener: _blocListener,
       builder: (context, state) {
-        return ScreenForm(
-            showHeaderImage: false,
-            showBackButton: false,
-            trans: trans,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 16,
-              ),
-              child: CustomScrollView(
-                physics: const BouncingScrollPhysics(),
-                slivers: <Widget>[
-                  SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildTitle(),
-                        SizedBox(
-                          height: 32,
+        final bookings = state.schedules;
+
+        return SmartRefresherWrapper.build(
+          controller: controller,
+          enablePullUp: state.canLoadMore,
+          onRefresh: onRefresh,
+          onLoading: onLoading,
+          child: ScreenForm(
+              headerColor: AppColor.primaryColor,
+              bgColor: AppColor.scaffoldColor,
+              showHeaderImage: false,
+              showBackButton: false,
+              trans: trans,
+              title: trans.bookingTime,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 16,
+                ),
+                child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: <Widget>[
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildTitle(),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          _buildLatestBook(state),
+                        ],
+                      ),
+                    ),
+                    if (bookings.isEmpty) ...[
+                      SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              Assets.svg.icEmptySchedule,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Text(trans.noSession),
+                          ],
                         ),
-                        _buildLatestBook(state),
-                        _buildLessonSession(state),
-                      ],
+                      ),
+                      SliverFillRemaining(
+                        hasScrollBody: false,
+                        fillOverscroll: true,
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          child: Wrap(children: [_buildBottomButton(context)]),
+                        ),
+                      ),
+                    ],
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: BookingInfoItem(
+                            booking: bookings.elementAt(index),
+                            textTheme: textTheme,
+                            trans: trans,
+                            onTapCancel: () =>
+                                onTapCancel(bookings.elementAt(index)),
+                            onTapJoinMeeting: () =>
+                                onTapJoinMeeting(bookings.elementAt(index)),
+                          ),
+                        ),
+                        childCount: bookings.length,
+                      ),
                     ),
-                  ),
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    fillOverscroll: true,
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Wrap(children: [_buildBottomButton(context)]),
-                    ),
-                  ),
-                ],
-              ),
-            ));
+                  ],
+                ),
+              )),
+        );
       },
     );
   }
@@ -89,12 +134,12 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
             height: 100,
           ),
           const SizedBox(
-            height: 16,
+            height: 4,
           ),
           Text(
             trans.schedule,
             style: textTheme.bodyText1?.copyWith(
-              fontSize: 16,
+              fontSize: 14,
             ),
           )
         ],
@@ -109,35 +154,6 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
       buttonTitle: trans.bookALesson,
       padding: const EdgeInsets.all(0),
       onTap: onBookSchedule,
-    );
-  }
-
-  Widget _buildLessonSession(ScheduleState state) {
-    if (state.sessions.isEmpty) {
-      return Center(
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              Assets.svg.icEmptySchedule,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(trans.noSession),
-          ],
-        ),
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          trans.latestBook,
-          style: textTheme.bodyText1?.copyWith(
-            fontSize: 14,
-          ),
-        ),
-      ],
     );
   }
 

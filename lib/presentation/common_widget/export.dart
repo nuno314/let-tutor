@@ -21,3 +21,4 @@ export 'menu_item_view.dart';
 export 'selection_dialog.dart';
 export 'selection_item.dart';
 export 'text_scale_fixed.dart';
+export 'booking_info_item.dart';

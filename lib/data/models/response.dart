@@ -230,3 +230,38 @@ class FeedbackResponseData {
 
   Map<String, dynamic> toJson() => _$FeedbackResponseDataToJson(this);
 }
+
+@JsonSerializable()
+class BookingInfoResponse {
+  String? message;
+  @JsonKey(name: 'data')
+  BookingInfoResponseData? data;
+
+  BookingInfoResponse({
+    this.message,
+    this.data,
+  });
+
+  factory BookingInfoResponse.fromJson(Map<String, dynamic> json) =>
+      _$BookingInfoResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookingInfoResponseToJson(this);
+
+  List<BookingInfo>? get schedules => data?.schedules;
+}
+
+@JsonSerializable()
+class BookingInfoResponseData {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<BookingInfo>? schedules;
+  BookingInfoResponseData({
+    this.count,
+    this.schedules,
+  });
+
+  factory BookingInfoResponseData.fromJson(Map<String, dynamic> json) =>
+      _$BookingInfoResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookingInfoResponseDataToJson(this);
+}

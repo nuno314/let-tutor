@@ -50,6 +50,7 @@ class BookingInfo {
   String? scheduleDetailId;
   String? tutorMeetingLink;
   String? studentMeetingLink;
+  String? studentRequest;
   bool? isDeleted;
   DateTime? createdAt;
   @JsonKey(name: 'scheduleDetailInfo')
@@ -59,6 +60,7 @@ class BookingInfo {
     this.scheduleDetailId,
     this.tutorMeetingLink,
     this.studentMeetingLink,
+    this.studentRequest,
     this.isDeleted,
     this.createdAt,
     this.schedule,
@@ -80,8 +82,7 @@ class Wallet {
     this.isBlocked,
     this.bonus,
   });
-  factory Wallet.fromJson(Map<String, dynamic> json) =>
-      _$WalletFromJson(json);
+  factory Wallet.fromJson(Map<String, dynamic> json) => _$WalletFromJson(json);
 
   Map<String, dynamic> toJson() => _$WalletToJson(this);
 }

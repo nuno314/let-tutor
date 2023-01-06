@@ -24,7 +24,10 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
           ? null
           : Teacher.fromJson(json['tutorInfo'] as Map<String, dynamic>),
       isBooked: json['isBooked'] as bool?,
-    );
+      scheduleInfo: json['scheduleInfo'] == null
+          ? null
+          : Schedule.fromJson(json['scheduleInfo'] as Map<String, dynamic>),
+    )..isDeleted = json['isDeleted'] as bool?;
 
 Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
       'id': instance.id,
@@ -36,4 +39,6 @@ Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
       'bookingInfo': instance.bookingInfos,
       'tutorInfo': instance.tutorInfo,
       'isBooked': instance.isBooked,
+      'isDeleted': instance.isDeleted,
+      'scheduleInfo': instance.scheduleInfo,
     };
