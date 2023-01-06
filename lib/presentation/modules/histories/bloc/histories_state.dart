@@ -1,21 +1,21 @@
 part of 'histories_bloc.dart';
 
 class _ViewModel {
-  final List<Document> data;
-  final bool canLoadMore;
-
+  final List<BookingInfo> bookings;
+  final bool? canLoadMore;
   const _ViewModel({
-    this.canLoadMore = false,
-    this.data = const [],
+    this.bookings = const [],
+    this.canLoadMore,
   });
 
   _ViewModel copyWith({
-    //
-    List<Document>? data,
+    List<Session>? sessions,
+    List<Document>? documents,
+    List<BookingInfo>? bookings,
     bool? canLoadMore,
   }) {
     return _ViewModel(
-      data: data ?? this.data,
+      bookings: bookings ?? this.bookings,
       canLoadMore: canLoadMore ?? this.canLoadMore,
     );
   }
@@ -33,10 +33,19 @@ abstract class HistoriesState {
       viewModel ?? this.viewModel,
     );
   }
+
+  List<BookingInfo> get bookings => viewModel.bookings;
+  bool get canLoadMore => viewModel.canLoadMore ?? false;
 }
 
 class HistoriesInitial extends HistoriesState {
   HistoriesInitial({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class FeedbackTutorState extends HistoriesState {
+  FeedbackTutorState({
     _ViewModel viewModel = const _ViewModel(),
   }) : super(viewModel);
 }
@@ -47,6 +56,9 @@ final _factories = <
   _ViewModel viewModel,
 )>{
   HistoriesInitial: (viewModel) => HistoriesInitial(
+        viewModel: viewModel,
+      ),
+  FeedbackTutorState: (viewModel) => FeedbackTutorState(
         viewModel: viewModel,
       ),
 };

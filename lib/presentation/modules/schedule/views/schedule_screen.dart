@@ -42,80 +42,25 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
     return BlocConsumer<ScheduleBloc, ScheduleState>(
       listener: _blocListener,
       builder: (context, state) {
-        final bookings = state.schedules;
-
-        return SmartRefresherWrapper.build(
-          controller: controller,
-          enablePullUp: state.canLoadMore,
-          onRefresh: onRefresh,
-          onLoading: onLoading,
-          child: ScreenForm(
-              headerColor: AppColor.primaryColor,
-              bgColor: AppColor.scaffoldColor,
-              showHeaderImage: false,
-              showBackButton: false,
-              trans: trans,
-              title: trans.bookingTime,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 16,
-                ),
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: <Widget>[
-                    SliverToBoxAdapter(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildTitle(),
-                          SizedBox(
-                            height: 32,
-                          ),
-                          _buildLatestBook(state),
-                        ],
-                      ),
-                    ),
-                    if (bookings.isEmpty) ...[
-                      SliverToBoxAdapter(
-                        child: Column(
-                          children: [
-                            SvgPicture.asset(
-                              Assets.svg.icEmptySchedule,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Text(trans.noSession),
-                          ],
-                        ),
-                      ),
-                      SliverFillRemaining(
-                        hasScrollBody: false,
-                        fillOverscroll: true,
-                        child: Container(
-                          alignment: Alignment.bottomCenter,
-                          child: Wrap(children: [_buildBottomButton(context)]),
-                        ),
-                      ),
-                    ],
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: BookingInfoItem(
-                            booking: bookings.elementAt(index),
-                            textTheme: textTheme,
-                            trans: trans,
-                            onTapCancel: () =>
-                                onTapCancel(bookings.elementAt(index)),
-                            onTapJoinMeeting: () =>
-                                onTapJoinMeeting(bookings.elementAt(index)),
-                          ),
-                        ),
-                        childCount: bookings.length,
-                      ),
-                    ),
+        return ScreenForm(
+          headerColor: AppColor.primaryColor,
+          bgColor: AppColor.scaffoldColor,
+          showHeaderImage: false,
+          showBackButton: false,
+          trans: trans,
+          title: trans.bookingTime,
+          child: SmartRefresherWrapper.build(
+              controller: controller,
+              enablePullUp: state.canLoadMore,
+              onRefresh: onRefresh,
+              onLoading: onLoading,
+              child: SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    ..._buildListing(state),
                   ],
                 ),
               )),
@@ -182,5 +127,49 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
         Text(document.title ?? '--'),
       ]),
     );
+  }
+
+  List<Widget> _buildListing(ScheduleState state) {
+    final bookings = state.schedules;
+    return [
+      _buildTitle(),
+      _buildLatestBook(state),
+      if (bookings.isEmpty) ...[
+        const SizedBox(
+          height: 32,
+        ),
+        SvgPicture.asset(
+          Assets.svg.icEmptySchedule,
+        ),
+        Text(
+          trans.noSession,
+          style: textTheme.bodyText2?.copyWith(
+            fontSize: 14,
+          ),
+        ),
+        const SizedBox(
+          height: 150,
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Wrap(children: [_buildBottomButton(context)]),
+        ),
+      ],
+      ListView.separated(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => BookingInfoItem(
+          booking: bookings.elementAt(index),
+          textTheme: textTheme,
+          trans: trans,
+          onTapCancel: () => onTapCancel(bookings.elementAt(index)),
+          onTapJoinMeeting: () => onTapJoinMeeting(bookings.elementAt(index)),
+        ),
+        separatorBuilder: (context, index) => const SizedBox(
+          height: 8,
+        ),
+        itemCount: bookings.length,
+      ),
+    ];
   }
 }

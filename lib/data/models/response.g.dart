@@ -254,3 +254,61 @@ Map<String, dynamic> _$BookingInfoResponseDataToJson(
       'count': instance.count,
       'rows': instance.schedules,
     };
+
+CourseResponse _$CourseResponseFromJson(Map<String, dynamic> json) =>
+    CourseResponse(
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : CourseResponseData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CourseResponseToJson(CourseResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+CourseResponseData _$CourseResponseDataFromJson(Map<String, dynamic> json) =>
+    CourseResponseData(
+      count: json['count'] as int?,
+      courses: (json['rows'] as List<dynamic>?)
+          ?.map((e) => Course.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CourseResponseDataToJson(CourseResponseData instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.courses,
+    };
+
+CategoryResponse _$CategoryResponseFromJson(Map<String, dynamic> json) =>
+    CategoryResponse(
+      message: json['message'] as String?,
+      data: json['data'] == null
+          ? null
+          : CategoryResponseData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+CategoryResponseData _$CategoryResponseDataFromJson(
+        Map<String, dynamic> json) =>
+    CategoryResponseData(
+      count: json['count'] as int?,
+      categories: (json['rows'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$CategoryResponseDataToJson(
+        CategoryResponseData instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'rows': instance.categories,
+    };

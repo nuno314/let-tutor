@@ -34,7 +34,7 @@ class ScheduleBloc extends AppBlocBase<ScheduleEvent, ScheduleState> {
     final res = await _restApi.getBookedSchedule(
       page: pagination.firstPage,
       perPage: pagination.limit,
-      from: DateTime.now().toUtc().millisecondsSinceEpoch,
+      from: DateTime.now().toUtc().millisecondsSinceEpoch.toString(),
     );
     final schedules = res.schedules ?? [];
     pagination = Pagination(
@@ -59,7 +59,7 @@ class ScheduleBloc extends AppBlocBase<ScheduleEvent, ScheduleState> {
     final res = await _restApi.getBookedSchedule(
       page: pagination.currentPage,
       perPage: pagination.limit,
-      from: DateTime.now().toUtc().millisecondsSinceEpoch,
+      from: DateTime.now().toUtc().millisecondsSinceEpoch.toString(),
     );
     final bookings = res.schedules ?? [];
     pagination = Pagination(

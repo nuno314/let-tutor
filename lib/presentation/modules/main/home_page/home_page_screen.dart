@@ -79,13 +79,8 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
             enablePullUp: state.viewModel.canLoadMore,
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-              child: BlocConsumer<HomePageBloc, HomePageState>(
-                listener: _blocListener,
-                builder: (context, state) {
-                  return Column(
-                    children: _buildListing(state),
-                  );
-                },
+              child: Column(
+                children: _buildListing(state),
               ),
             )),
       ),

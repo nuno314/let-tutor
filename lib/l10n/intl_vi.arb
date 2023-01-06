@@ -170,5 +170,11 @@
   "busyAtThatTime": "Thời điểm đó đang bận",
   "askedByTheTutor": "Yêu cầu của gia sư",
   "other": "Khác",
-  "whatWasTheReason": "Lý do bạn hủy buổi học này là gì?"
+  "whatWasTheReason": "Lý do bạn hủy buổi học này là gì?",
+  "addARating": "Đánh giá",
+  "eBook": "Sách điện tử",
+  "interactiveEBook": "Sách điện tử tương tác",
+  "selectLevel": "Chọn cấp độ",
+  "selectCategory": "Chọn danh mục",
+  "soryByLevel": "Sắp xếp theo độ khó"
 }

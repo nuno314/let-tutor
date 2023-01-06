@@ -15,6 +15,8 @@ import '../../../common_widget/keep_alive_widget.dart';
 import '../../../common_widget/smart_image.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
+import '../../courses/courses.dart';
+import '../../histories/histories.dart';
 import '../account/account_screen.dart';
 import '../account/bloc/account_bloc.dart';
 import '../home_page/bloc/home_page_bloc.dart';
@@ -95,8 +97,18 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                     child: const ScheduleScreen(),
                   ),
                 ),
-                Container(),
-                Container(),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => HistoriesBloc(),
+                    child: const HistoriesScreen(),
+                  ),
+                ),
+                KeepAliveWidget(
+                  child: BlocProvider(
+                    create: (context) => CoursesBloc(),
+                    child: const CoursesScreen(),
+                  ),
+                ),
                 KeepAliveWidget(
                   child: BlocProvider(
                     create: (context) => AccountBloc(),

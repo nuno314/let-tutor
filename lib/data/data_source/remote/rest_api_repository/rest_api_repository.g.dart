@@ -615,9 +615,10 @@ class _RestApiRepository implements RestApiRepository {
 
   @override
   Future<BookingInfoResponse> getBookedSchedule({
-    from,
+    from = '',
     page,
     perPage,
+    to = '',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -632,7 +633,7 @@ class _RestApiRepository implements RestApiRepository {
     )
             .compose(
               _dio.options,
-              'booking/list/student?page=$page&perPage=$perPage&dateTimeGte=$from&orderBy=meeting&sortBy=asc',
+              'booking/list/student?page=$page&perPage=$perPage&dateTimeGte=$from&dateTimeLte=$to&orderBy=meeting&sortBy=asc',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -669,6 +670,133 @@ class _RestApiRepository implements RestApiRepository {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ManageResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ManageResponse> feedBackTutor({
+    userId,
+    rating = 5,
+    content,
+    bookingId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'userId': userId,
+      'rating': rating,
+      'content': content,
+      'bookingId': bookingId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ManageResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'user/feedbackTutor',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ManageResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CourseResponse> getCourses({filter = ''}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CourseResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'course?$filter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CourseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CategoryResponse> getCategories() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CategoryResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'content-category',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CategoryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CourseResponse> getEBooks({filter = ''}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CourseResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'e-book?$filter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CourseResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CourseResponse> getInteractiveEBooks({filter = ''}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CourseResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'material/interactive-e-book?$filter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CourseResponse.fromJson(_result.data!);
     return value;
   }
 

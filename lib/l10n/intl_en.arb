@@ -170,5 +170,11 @@
   "busyAtThatTime": "Busy at that time",
   "askedByTheTutor": "Asked by the tutor",
   "other": "Other",
-  "whatWasTheReason": "What was the reason you cancel this booking?"
+  "whatWasTheReason": "What was the reason you cancel this booking?",
+  "addARating": "Add a rating",
+  "eBook": "E-book",
+  "interactiveEBook": "Interactive E-book",
+  "selectLevel": "Select level",
+  "selectCategory": "Select category",
+  "soryByLevel": "Sort by level"
 }

@@ -2,6 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:let_tutor/common/utils.dart';
+import 'package:let_tutor/data/models/course.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/schedule.dart';
 import 'package:let_tutor/data/models/statistic.dart';
@@ -264,4 +265,68 @@ class BookingInfoResponseData {
       _$BookingInfoResponseDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$BookingInfoResponseDataToJson(this);
+}
+
+@JsonSerializable()
+class CourseResponse {
+  String? message;
+  CourseResponseData? data;
+  CourseResponse({
+    this.message,
+    this.data,
+  });
+  factory CourseResponse.fromJson(Map<String, dynamic> json) =>
+      _$CourseResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CourseResponseToJson(this);
+
+  List<Course>? get courses => data?.courses;
+}
+
+@JsonSerializable()
+class CourseResponseData {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<Course>? courses;
+  CourseResponseData({
+    this.count,
+    this.courses,
+  });
+
+  factory CourseResponseData.fromJson(Map<String, dynamic> json) =>
+      _$CourseResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CourseResponseDataToJson(this);
+}
+
+@JsonSerializable()
+class CategoryResponse {
+  String? message;
+  CategoryResponseData? data;
+  CategoryResponse({
+    this.message,
+    this.data,
+  });
+  factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$CategoryResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategoryResponseToJson(this);
+
+  List<Category>? get categories => data?.categories;
+}
+
+@JsonSerializable()
+class CategoryResponseData {
+  int? count;
+  @JsonKey(name: 'rows')
+  List<Category>? categories;
+  CategoryResponseData({
+    this.count,
+    this.categories,
+  });
+
+  factory CategoryResponseData.fromJson(Map<String, dynamic> json) =>
+      _$CategoryResponseDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategoryResponseDataToJson(this);
 }

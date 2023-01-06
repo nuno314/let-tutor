@@ -25,6 +25,11 @@ class ApiContract {
   static const String tutorFeedback =
       'feedback/v2/{tutorId}?page={page}&perPage={perPage}';
   static const String bookedSchedule =
-      'booking/list/student?page={page}&perPage={perPage}&dateTimeGte={from}&orderBy=meeting&sortBy=asc';
+      'booking/list/student?page={page}&perPage={perPage}&dateTimeGte={from}&dateTimeLte={to}&orderBy=meeting&sortBy=asc';
   static const String deleteBookedSchedule = 'booking/schedule-detail';
+  static const String feedbackTutor = 'user/feedbackTutor';
+  static const String course = 'course?{filter}';
+  static const String eBook = 'e-book?{filter}';
+  static const String interactiveEBook = 'material/interactive-e-book?{filter}';
+  static const String category = 'content-category';
 }

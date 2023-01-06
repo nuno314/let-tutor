@@ -118,6 +118,7 @@ class _TutorScreenState extends StateBase<TutorScreen> {
             child: TabBar(
               onTap: _pageController.jumpToPage,
               labelColor: AppColor.primaryColor,
+              unselectedLabelColor: AppColor.gray8C,
               tabs: [Tab(text: trans.detail), Tab(text: trans.book)],
             ),
           ),

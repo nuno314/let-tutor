@@ -11,14 +11,20 @@ class BookingInfoItem extends StatelessWidget {
   final BookingInfo booking;
   final TextTheme textTheme;
   final dynamic trans;
-  final void Function() onTapCancel;
-  final void Function() onTapJoinMeeting;
+  final bool isDone;
+  final void Function()? onTapCancel;
+  final void Function()? onTapJoinMeeting;
+  final void Function()? onTapRating;
+  final void Function()? onTapReport;
   BookingInfoItem({
     required this.booking,
     required this.textTheme,
     required this.trans,
-    required this.onTapCancel,
-    required this.onTapJoinMeeting,
+    this.onTapCancel,
+    this.onTapJoinMeeting,
+    this.onTapRating,
+    this.onTapReport,
+    this.isDone = false,
   });
 
   Teacher? get tutor => booking.schedule?.scheduleInfo?.tutorInfo;
@@ -106,6 +112,7 @@ class BookingInfoItem extends StatelessWidget {
           Text(
             booking.studentRequest!,
             style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            textAlign: TextAlign.left,
           ),
           const SizedBox(
             height: 8,
@@ -113,31 +120,53 @@ class BookingInfoItem extends StatelessWidget {
         ],
         Row(
           children: [
-            if (DateTime.now()
-                .add(const Duration(hours: 2))
-                .isBefore(startDateTime)) ...[
+            if (isDone) ...[
               Expanded(
-                child: ThemeButton.outline(
+                child: ThemeButton.primary(
                   context: context,
-                  title: trans.cancel,
+                  title: trans.addARating,
                   constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
-                  onPressed: onTapCancel,
+                  onPressed: onTapRating,
                 ),
               ),
               const SizedBox(
                 width: 8,
               ),
-            ],
-            Expanded(
-              child: ThemeButton.primary(
-                context: context,
-                title: trans.goToMeeting,
-                constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
-                onPressed: onTapJoinMeeting,
+              Expanded(
+                child: ThemeButton.deny(
+                  context: context,
+                  title: trans.report,
+                  constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
+                  onPressed: onTapReport,
+                ),
               ),
-            ),
+            ] else ...[
+              if (DateTime.now()
+                  .add(const Duration(hours: 2))
+                  .isBefore(startDateTime)) ...[
+                Expanded(
+                  child: ThemeButton.outline(
+                    context: context,
+                    title: trans.cancel,
+                    constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
+                    onPressed: onTapCancel,
+                  ),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+              ],
+              Expanded(
+                child: ThemeButton.primary(
+                  context: context,
+                  title: trans.goToMeeting,
+                  constraints: BoxConstraints(minHeight: 40, maxHeight: 40),
+                  onPressed: onTapJoinMeeting,
+                ),
+              ),
+            ],
           ],
-        ),
+        )
       ],
     );
   }
