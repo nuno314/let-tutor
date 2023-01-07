@@ -140,5 +140,11 @@ extension ScheduleAction on _ScheduleScreenState {
     });
   }
 
-  void onTapJoinMeeting(BookingInfo elementAt) {}
+  void onTapJoinMeeting(BookingInfo info) {
+    Navigator.pushNamed(
+      context,
+      RouteList.meeting,
+      arguments: info,
+    );
+  }
 }

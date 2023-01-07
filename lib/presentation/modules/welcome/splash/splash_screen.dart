@@ -60,7 +60,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    Assets.image.imgLogin,
+                    Assets.image.imgLogo,
                   ),
                   const SizedBox(height: 12),
                   Text(

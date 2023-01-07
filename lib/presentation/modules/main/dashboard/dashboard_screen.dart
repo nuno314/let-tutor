@@ -66,7 +66,6 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
 
   TextTheme get textTheme => _themeData.textTheme;
 
-  @override
   late AppLocalizations trans;
 
   @override

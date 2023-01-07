@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:let_tutor/presentation/modules/authentication/authentication_route.dart';
 import 'package:let_tutor/presentation/modules/authentication/reset_password/reset_password.dart';
+import 'package:let_tutor/presentation/modules/meeting/meeting.dart';
 import 'package:let_tutor/presentation/modules/profile/profile.dart';
 import 'package:let_tutor/presentation/modules/settings/settings_route.dart';
 import 'package:let_tutor/presentation/modules/tutor/tutor.dart';
@@ -20,6 +21,7 @@ class RouteGenerator {
         ...SettingsRoute.getAll(settings),
         ...WalletRoute.getAll(settings),
         ...TutorRoute.getAll(settings),
+        ...MeetingRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

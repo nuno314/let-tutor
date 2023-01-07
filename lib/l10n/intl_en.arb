@@ -176,5 +176,9 @@
   "interactiveEBook": "Interactive E-book",
   "selectLevel": "Select level",
   "selectCategory": "Select category",
-  "soryByLevel": "Sort by level"
+  "soryByLevel": "Sort by level",
+  "lessonInfo": "Lesson info",
+  "audioOnly": "Audio only",
+  "audioMuted": "Audio muted",
+  "videoMuted": "Video muted"
 }

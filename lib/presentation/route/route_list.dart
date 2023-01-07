@@ -22,4 +22,5 @@ class RouteList {
   static const String scheduleFilter = '/scheduleFilter';
   static const String payment = '/payment';
   static const String feedback = '/feedback';
+  static const String meeting = '/meeting';
 }

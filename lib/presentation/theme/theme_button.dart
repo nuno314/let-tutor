@@ -74,9 +74,10 @@ class ThemeButton {
       vertical: 15,
     ),
     BoxConstraints constraints = const BoxConstraints(minHeight: 48.0),
+    Color? bgColor,
   }) =>
       RawMaterialButton(
-        fillColor: Theme.of(context).colorScheme.secondary,
+        fillColor: bgColor ?? Theme.of(context).colorScheme.secondary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),

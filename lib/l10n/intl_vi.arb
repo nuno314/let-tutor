@@ -176,5 +176,9 @@
   "interactiveEBook": "Sách điện tử tương tác",
   "selectLevel": "Chọn cấp độ",
   "selectCategory": "Chọn danh mục",
-  "soryByLevel": "Sắp xếp theo độ khó"
+  "soryByLevel": "Sắp xếp theo độ khó",
+  "lessonInfo": "Thông tin buổi học",
+  "audioOnly": "Chỉ có âm thanh",
+  "audioMuted": "Tắt âm thanh",
+  "videoMuted": "Tắt video"
 }
