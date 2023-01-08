@@ -137,7 +137,7 @@ abstract class RestApiRepository {
   });
 
   @GET(ApiContract.category)
-  Future<CategoryResponse> getCategories();
+  Future<CategoryResponseData> getCategories();
 
   @GET(ApiContract.eBook)
   Future<CourseResponse> getEBooks({

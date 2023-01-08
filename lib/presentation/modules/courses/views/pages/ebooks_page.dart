@@ -2,7 +2,6 @@ part of '../courses_screen.dart';
 
 extension EBooksPage on _CoursesScreenState {
   Widget _buildEBooksPage(CoursesState state) {
-    print(state.canLoadMoreEBooks);
     final books = state.eBooks;
     final itemW = (device.width - 16 * 2) / 2;
     final aspectRatio = 167 / 187;
@@ -18,6 +17,13 @@ extension EBooksPage on _CoursesScreenState {
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           slivers: [
+            SliverToBoxAdapter(
+              child: _buildSearch(
+                controller: _eBooksSearch,
+                debouncer: _eBooksDebouncer,
+                hint: trans.searchCourse,
+              ),
+            ),
             books.isNotEmpty
                 ? SliverGrid(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -32,8 +38,9 @@ extension EBooksPage on _CoursesScreenState {
                           aspectRatio: 137 / 100,
                           course: books.elementAt(index),
                           themeData: _themeData,
-                          onTap: (e) {},
+                          onTap: onTapBook,
                           viewNowText: trans.seeNow,
+                          isBook: true,
                         );
                       },
                       childCount: books.length,

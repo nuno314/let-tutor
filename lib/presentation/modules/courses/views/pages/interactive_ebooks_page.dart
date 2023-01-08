@@ -16,6 +16,13 @@ extension InteractiveEBooksPage on _CoursesScreenState {
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           slivers: [
+            SliverToBoxAdapter(
+              child: _buildSearch(
+                controller: _interactiveEBooksSearch,
+                debouncer: _interactiveDebouncer,
+                hint: trans.searchCourse,
+              ),
+            ),
             books.isNotEmpty
                 ? SliverGrid(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

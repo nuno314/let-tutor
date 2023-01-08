@@ -87,7 +87,6 @@ class HistoriesBloc extends AppBlocBase<HistoriesEvent, HistoriesState> {
       rating: event.rating,
       bookingId: event.bookingId,
     );
-    print(res.message);
       if (res.message?.toLowerCase().contains('success') == true) {
       emit(state.copyWith<FeedbackTutorState>());
     }

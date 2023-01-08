@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:let_tutor/data/models/course.dart';
+import 'package:let_tutor/domain/entities/courses_filter.entity.dart';
 import 'package:let_tutor/generated/assets.dart';
 import 'package:let_tutor/presentation/common_widget/course_item.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
-import 'package:let_tutor/presentation/modules/app.dart';
+import 'package:let_tutor/presentation/route/route_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common/utils/debouncer.dart';
 import '../../../base/base.dart';
+import '../../../common_widget/document_viewer/document_viewer_screen.dart';
 import '../../../common_widget/tab_page_widget.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';
@@ -50,9 +54,21 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
 
   late AppLocalizations trans;
 
-    @override
+  @override
   void initState() {
-    
+    super.initState();
+    _coursesDebouncer = Debouncer<String>(
+      const Duration(milliseconds: 500),
+      _getCoursesSearch,
+    );
+    _eBooksDebouncer = Debouncer<String>(
+      const Duration(milliseconds: 500),
+      _getEBooksSearch,
+    );
+    _interactiveDebouncer = Debouncer<String>(
+      const Duration(milliseconds: 500),
+      _getInteractiveEBooksSearch,
+    );
   }
 
   @override
@@ -63,6 +79,14 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
       listener: _blocListener,
       builder: (context, state) {
         return ScreenForm(
+          actions: [
+            IconButton(
+              onPressed: onTapFilter,
+              icon: Icon(
+                Icons.filter,
+              ),
+            ),
+          ],
           headerColor: AppColor.primaryColor,
           bgColor: AppColor.scaffoldColor,
           showHeaderImage: false,
@@ -122,10 +146,7 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
     required String hint,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 16,
-        horizontal: 16,
-      ),
+      padding: const EdgeInsets.only(bottom: 16),
       child: InputContainer(
         fillColor: AppColor.white,
         controller: controller,

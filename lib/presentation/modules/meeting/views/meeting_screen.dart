@@ -82,7 +82,6 @@ class _MeetingScreenState extends StateBase<MeetingScreen> {
   }
 
   Widget meetConfig(MeetingState state) {
-    print(state.info);
     if (state.info == null) {
       return Loading();
     }

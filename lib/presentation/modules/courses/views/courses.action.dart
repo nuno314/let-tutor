@@ -15,6 +15,12 @@ extension CoursesAction on _CoursesScreenState {
       _coursesRefreshController.requestRefresh();
       _eBooksRefreshController.requestRefresh();
       _interactiveEBooksRefreshController.requestRefresh();
+    } else if (state is ApplyCoursesFilterState) {
+      _coursesRefreshController.requestRefresh();
+    } else if (state is ApplyEBooksFilterState) {
+      _eBooksRefreshController.requestRefresh();
+    } else if (state is ApplyInteractiveEBooksFilterState) {
+      _interactiveEBooksRefreshController.requestRefresh();
     }
   }
 
@@ -42,6 +48,26 @@ extension CoursesAction on _CoursesScreenState {
     bloc.add(LoadMoreInteractiveEBooksEvent());
   }
 
+  void _getCoursesSearch(String? value) {
+    bloc.add(
+      ApplyCoursesFilterEvent(
+        bloc.state.coursesFilter.copyWith(
+          searchKey: value,
+        ),
+      ),
+    );
+  }
+
+  void _getEBooksSearch(String? value) {
+    bloc.add(
+      ApplyEBooksFilterEvent(
+        bloc.state.eBooksFilter.copyWith(
+          searchKey: value,
+        ),
+      ),
+    );
+  }
+
   void _getInteractiveEBooksSearch(String? value) {
     bloc.add(
       ApplyInteractiveEBooksFilterEvent(
@@ -50,5 +76,54 @@ extension CoursesAction on _CoursesScreenState {
         ),
       ),
     );
+  }
+
+  void onTapFilter() {
+    if (_pageController.page == 0) {
+      Navigator.pushNamed(
+        context,
+        RouteList.coursesFilter,
+        arguments: bloc.state.coursesFilter,
+      ).then((value) {
+        if (value is CoursesFilter) {
+          bloc.add(ApplyCoursesFilterEvent(value));
+        }
+      });
+    } else if (_pageController.page == 1) {
+      Navigator.pushNamed(
+        context,
+        RouteList.coursesFilter,
+        arguments: bloc.state.eBooksFilter,
+      ).then((value) {
+        if (value is CoursesFilter) {
+          bloc.add(ApplyEBooksFilterEvent(value));
+        }
+      });
+    } else if (_pageController.page == 2) {
+      Navigator.pushNamed(
+        context,
+        RouteList.coursesFilter,
+        arguments: bloc.state.interactiveEBooksFilter,
+      ).then((value) {
+        if (value is CoursesFilter) {
+          bloc.add(ApplyInteractiveEBooksFilterEvent(value));
+        }
+      });
+    }
+  }
+
+  void onTapCourse(Course course) {
+    Navigator.pushNamed(
+      context,
+      RouteList.courseDetail,
+      arguments: course,
+    );
+  }
+
+  void onTapBook(Course book) async {
+    final url = book.fileUrl!;
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    }
   }
 }

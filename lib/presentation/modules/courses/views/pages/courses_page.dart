@@ -17,13 +17,13 @@ extension CoursesPage on _CoursesScreenState {
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           slivers: [
-            // SliverToBoxAdapter(
-            //   child: _buildSearch(
-            //     controller: controller,
-            //     debouncer: debouncer,
-            //     hint: hint,
-            //   ),
-            // ),
+            SliverToBoxAdapter(
+              child: _buildSearch(
+                controller: _coursesSearch,
+                debouncer: _coursesDebouncer,
+                hint: trans.searchCourse,
+              ),
+            ),
             books.isNotEmpty
                 ? SliverGrid(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -38,7 +38,7 @@ extension CoursesPage on _CoursesScreenState {
                           aspectRatio: 137 / 100,
                           course: books.elementAt(index),
                           themeData: _themeData,
-                          onTap: (e) {},
+                          onTap: onTapCourse,
                           viewNowText: trans.seeNow,
                         );
                       },

@@ -67,7 +67,10 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
       actions: [
         IconButton(
           onPressed: onTapTutorFilter,
-          icon: Icon(Icons.list_sharp),
+          icon: Icon(
+            Icons.filter_alt,
+            color: AppColor.primaryColor,
+          ),
         )
       ],
       child: BlocConsumer<HomePageBloc, HomePageState>(

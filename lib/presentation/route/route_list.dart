@@ -23,4 +23,7 @@ class RouteList {
   static const String payment = '/payment';
   static const String feedback = '/feedback';
   static const String meeting = '/meeting';
+  static const String coursesFilter = '/coursesFilter';
+  static const String documentViewer = '/documentViewer';
+  static const String courseDetail = '/courseDetail';
 }

@@ -16,6 +16,7 @@ class Course {
   @JsonKey(name: 'course_price')
   int? coursePrice;
   bool? visible;
+  String? fileUrl;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<Topic>? topics;
@@ -28,6 +29,7 @@ class Course {
     this.level,
     this.reason,
     this.purpose,
+    this.fileUrl,
     this.defaultPrice,
     this.coursePrice,
     this.visible,

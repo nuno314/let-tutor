@@ -28,6 +28,10 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
 
     on<InitialCoursesEvent>(_onInitialCoursesEvent);
 
+    on<ApplyCoursesFilterEvent>(_onApplyCoursesFilterEvent);
+    on<ApplyEBooksFilterEvent>(_onApplyEBooksFilterEvent);
+    on<ApplyInteractiveEBooksFilterEvent>(_onApplyInteractiveEBooksFilterEvent);
+
     add(InitialCoursesEvent());
   }
 
@@ -36,6 +40,7 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     Emitter<CoursesState> emit,
   ) async {
     final categoryResponse = await _restApi.getCategories();
+    print(categoryResponse.categories);
     emit(
       state.copyWith<CoursesFilterInitial>(
         viewModel: state.viewModel.copyWith(
@@ -133,7 +138,6 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     );
 
     final ebooks = res.courses ?? [];
-    print(ebooks.length);
     final newPagination = Pagination(
       offset: Pagination().total,
       total: Pagination().total + ebooks.length,
@@ -196,7 +200,6 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     );
 
     final interactiveEbooks = res.courses ?? [];
-    print(interactiveEbooks.length);
     final newPagination = Pagination(
       offset: Pagination().total,
       total: Pagination().total + interactiveEbooks.length,
@@ -243,5 +246,40 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
         ),
       ),
     );
+  }
+
+  Future<void> _onApplyCoursesFilterEvent(
+    ApplyCoursesFilterEvent event,
+    Emitter<CoursesState> emit,
+  ) async {
+    emit(
+      state.copyWith<ApplyCoursesFilterState>(
+        viewModel: state.viewModel.copyWith(
+          coursesFilter: event.filter,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onApplyEBooksFilterEvent(
+    ApplyEBooksFilterEvent event,
+    Emitter<CoursesState> emit,
+  ) async {
+    emit(state.copyWith<ApplyEBooksFilterState>(
+      viewModel: state.viewModel.copyWith(
+        eBooksFilter: event.filter,
+      ),
+    ));
+  }
+
+  Future<void> _onApplyInteractiveEBooksFilterEvent(
+    ApplyInteractiveEBooksFilterEvent event,
+    Emitter<CoursesState> emit,
+  ) async {
+    emit(state.copyWith<ApplyInteractiveEBooksFilterState>(
+      viewModel: state.viewModel.copyWith(
+        interactiveEBooksFilter: event.filter,
+      ),
+    ));
   }
 }

@@ -6,7 +6,6 @@ import 'package:let_tutor/data/models/course.dart';
 import 'package:let_tutor/domain/entities/pagination.entity.dart';
 
 class CoursesFilter {
-  final List<Specialty> specialties;
   final List<Category> categoriesFilter;
   final List<Category> categories;
   final String? orderBy;
@@ -14,7 +13,6 @@ class CoursesFilter {
   final String? searchKey;
 
   const CoursesFilter({
-    this.specialties = const [],
     this.categoriesFilter = const [],
     this.categories = const [],
     this.orderBy,
@@ -23,6 +21,21 @@ class CoursesFilter {
   });
 
   CoursesFilter copyWith({
+    List<Category>? categoriesFilter,
+    List<Category>? categories,
+    String? orderBy,
+    Pagination? pagination,
+    String? searchKey,
+  }) =>
+      CoursesFilter(
+        categoriesFilter: categoriesFilter ?? this.categoriesFilter,
+        categories: categories ?? this.categories,
+        orderBy: orderBy ?? this.orderBy,
+        pagination: pagination ?? this.pagination,
+        searchKey: searchKey ?? this.searchKey,
+      );
+
+  CoursesFilter copyWithNullable({
     List<Specialty>? specialties,
     List<Category>? categoriesFilter,
     List<Category>? categories,
@@ -31,21 +44,16 @@ class CoursesFilter {
     String? searchKey,
   }) =>
       CoursesFilter(
-        specialties: specialties ?? this.specialties,
         categoriesFilter: categoriesFilter ?? this.categoriesFilter,
-        categories: categories ?? this.categories,
-        orderBy: orderBy ?? this.orderBy,
+        categories: categories ?? [],
+        orderBy: orderBy,
         pagination: pagination ?? this.pagination,
         searchKey: searchKey ?? this.searchKey,
       );
 
   String get filter {
     var payload = '';
-    if (specialties.isNotEmpty)
-      payload +=
-          specialties.map((e) => 'level[]=' + e.index.toString() + '&').join();
-    if (categories.isNotEmpty)
-      payload += categories.map((e) => 'level[]=' + e.id! + '&').join();
+
     if (orderBy.isNotNullOrEmpty) {
       payload += 'orderBy[]=' + orderBy! + '&';
     }
@@ -53,8 +61,11 @@ class CoursesFilter {
       payload += 'page=' + pagination!.currentPage.toString() + '&';
       payload += 'size=' + pagination!.limit.toString() + '&';
     }
+    if (categories.isNotEmpty)
+      payload +=
+          categories.map((e) => 'level[]=' + e.key!.toLowerCase() + '&').join();
     if (searchKey.isNotNullOrEmpty) {
-      payload += 'q' + searchKey! + '&';
+      payload += 'q=' + searchKey! + '&';
     }
     return payload;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/common/utils.dart';
 import 'package:let_tutor/data/models/course.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
@@ -13,6 +14,7 @@ class CourseCard extends StatelessWidget {
   final String? viewNowText;
   final Color? borderColor;
   final double aspectRatio;
+  final bool isBook;
 
   const CourseCard({
     Key? key,
@@ -22,14 +24,17 @@ class CourseCard extends StatelessWidget {
     required this.aspectRatio,
     this.viewNowText,
     this.borderColor,
+    this.isBook = false,
   }) : super(key: key);
+
+  bool get canClick => !isBook || course.fileUrl?.isNotNullOrEmpty == true;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = themeData.textTheme;
     return HighlightBoxColor(
       borderColor: borderColor,
-      onTap: () => onTap(course),
+      onTap: canClick ? () => onTap(course) : null,
       child: Column(
         children: [
           AspectRatio(
@@ -60,8 +65,8 @@ class CourseCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                InkWell(
-                  child: Container(
+                if (canClick)
+                  Container(
                     height: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -77,7 +82,6 @@ class CourseCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

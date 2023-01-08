@@ -28,6 +28,7 @@ extension HomePageAction on _HomePageScreenState {
       RouteList.tutorFilter,
       arguments: bloc.state.tutorFilter,
     ).then((value) {
+      hideKeyBoard();
       if (value != null) {
         bloc.add(FilterChangedEvent(value as TutorListFilter));
       }

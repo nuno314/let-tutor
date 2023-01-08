@@ -184,5 +184,6 @@
   "insufficientBalance": "Insufficient balance",
   "seeNow": "See now",
   "searchCourse": "Search course",
-  "searchBook": "Search book"
+  "searchBook": "Search book",
+  "document": "Document"
 }

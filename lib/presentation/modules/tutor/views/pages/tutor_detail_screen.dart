@@ -19,7 +19,6 @@ extension TutorInfoPage on _TutorScreenState {
   }
 
   List<Widget> _buildTutorInfo(TutorState state) {
-    print(state.feedbacks);
     return [
       BoxColor(
         color: AppColor.white,

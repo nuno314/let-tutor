@@ -92,6 +92,24 @@ class CoursesFilterInitial extends CoursesState {
   }) : super(viewModel);
 }
 
+class ApplyCoursesFilterState extends CoursesState {
+  ApplyCoursesFilterState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class ApplyEBooksFilterState extends CoursesState {
+  ApplyEBooksFilterState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
+class ApplyInteractiveEBooksFilterState extends CoursesState {
+  ApplyInteractiveEBooksFilterState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -101,6 +119,16 @@ final _factories = <
         viewModel: viewModel,
       ),
   CoursesFilterInitial: (viewModel) => CoursesFilterInitial(
+        viewModel: viewModel,
+      ),
+  ApplyCoursesFilterState: (viewModel) => ApplyCoursesFilterState(
+        viewModel: viewModel,
+      ),
+  ApplyEBooksFilterState: (viewModel) => ApplyEBooksFilterState(
+        viewModel: viewModel,
+      ),
+  ApplyInteractiveEBooksFilterState: (viewModel) =>
+      ApplyInteractiveEBooksFilterState(
         viewModel: viewModel,
       ),
 };
