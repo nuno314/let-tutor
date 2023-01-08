@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:let_tutor/data/data_source/remote/rest_api_repository/api_contract.dart';
 import 'package:let_tutor/data/models/response.dart';
+import 'package:let_tutor/data/models/teacher.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../models/user.dart';
@@ -147,5 +148,29 @@ abstract class RestApiRepository {
   @GET(ApiContract.interactiveEBook)
   Future<CourseResponse> getInteractiveEBooks({
     @Path() String filter = '',
+  });
+
+  @POST(ApiContract.registerTutor)
+  Future<ManageResponse> registerTutor({
+    @Field() String? name,
+    @Field() String? country = 'Vietnam',
+    @Field() String? birthday,
+    @Field() String? interests,
+    @Field() String? education,
+    @Field() String? experience,
+    @Field() String? profession,
+    @Field() String? languages,
+    @Field() String? bio,
+    @Field() String? targetStudent,
+    @Field() String? specialties,
+    @Field() String? avatar,
+    @Field() int? price,
+    @Field() int? rating,
+    @Field() String? video,
+  });
+
+  @GET(ApiContract.tutor)
+  Future<Teacher> getTutorById({
+    @Path() String? tutorId,
   });
 }

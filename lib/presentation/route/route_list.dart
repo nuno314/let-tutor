@@ -26,4 +26,6 @@ class RouteList {
   static const String coursesFilter = '/coursesFilter';
   static const String documentViewer = '/documentViewer';
   static const String courseDetail = '/courseDetail';
+  static const String registerTutor = '/registerTutor';
+  static const String registerTutorIntroVideo = '/registerTutorIntroVideo';
 }

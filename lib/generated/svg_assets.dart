@@ -18,6 +18,7 @@ class SvgAssets {
   final String icGoogle = 'assets/images/svg/ic_google.svg';
   final String icGraduationCap = 'assets/images/svg/ic_graduation_cap.svg';
   final String icHistory = 'assets/images/svg/ic_history.svg';
+  final String icIntroVideo = 'assets/images/svg/ic_intro_video.svg';
   final String icKey = 'assets/images/svg/ic_key.svg';
   final String icLogo = 'assets/images/svg/ic_logo.svg';
   final String icLogout = 'assets/images/svg/ic_logout.svg';

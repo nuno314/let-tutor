@@ -39,7 +39,10 @@ extension HomePageAction on _HomePageScreenState {
     Navigator.pushNamed(
       context,
       RouteList.tutorDetail,
-      arguments: TutorArgs(tutor: tutor),
+      arguments: TutorArgs(
+        tutor: tutor,
+        tutorId: tutor.userId,
+      ),
     );
   }
 

@@ -9,20 +9,28 @@ extension TutorAction on _TutorScreenState {
     } else if (state is FeedbackState) {
       Navigator.pushNamed(context, RouteList.feedback,
           arguments: state.feedbacks);
+    } else if (state is GetTutorState) {
+      print(state.tutor?.video);
+      vpController.dispose();
+      vpController = VideoPlayerController.network(
+        tutor.video ?? '',
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+      );
+      vpController.addListener(() {});
+      vpController.setLooping(true);
+      vpController.initialize();
     }
   }
 
   void onRefresh() {
-    bloc.add(GetDataEvent());
-  }
-
-  void loadMore() {
-    bloc.add(LoadMoreDataEvent());
+    bloc.add(GetTutorInfoEvent(
+      id: tutor.userId ?? '',
+    ));
   }
 
   void onRefreshBooking() {
     bloc.add(GetScheduleByTutorIdEvent(
-      tutor?.userId ?? '',
+      widget.args.tutorId ?? '',
     ));
   }
 
@@ -38,7 +46,9 @@ extension TutorAction on _TutorScreenState {
     });
   }
 
-  void _onTapFavorite() {}
+  void _onTapFavorite() {
+    bloc.add(FavoriteTeacherEvent());
+  }
 
   void onTapBooking(Schedule schedule) async {
     showLoading();

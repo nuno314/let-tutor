@@ -59,6 +59,8 @@ class _TutorScreenState extends StateBase<TutorScreen> {
 
   late AppLocalizations trans;
 
+  Teacher get tutor => bloc.state.tutor ?? widget.args.tutor!;
+
   @override
   void hideLoading() {
     infoRefreshController
@@ -74,19 +76,21 @@ class _TutorScreenState extends StateBase<TutorScreen> {
   final refreshController = RefreshController(initialRefresh: false);
   late VideoPlayerController vpController;
 
-  late Teacher? tutor = widget.args.tutor;
   @override
   void initState() {
     vpController = VideoPlayerController.network(
-      widget.args.tutor?.video ?? '',
+      tutor.video ?? '',
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
-    vpController.addListener(() {
-      setState(() {});
-    });
+    vpController.addListener(() {});
     vpController.setLooping(true);
     vpController.initialize();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -139,5 +143,11 @@ class _TutorScreenState extends StateBase<TutorScreen> {
         )
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    vpController.dispose();
+    super.dispose();
   }
 }

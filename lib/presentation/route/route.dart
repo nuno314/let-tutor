@@ -10,6 +10,7 @@ import 'package:let_tutor/presentation/modules/wallet/wallet.dart';
 
 import '../common_widget/text_scale_fixed.dart';
 import '../modules/main/main_route.dart';
+import '../modules/register_tutor/register_tutor_route.dart';
 import '../modules/welcome/welcome_route.dart';
 
 class RouteGenerator {
@@ -24,6 +25,7 @@ class RouteGenerator {
         ...TutorRoute.getAll(settings),
         ...MeetingRoute.getAll(settings),
         ...CoursesRoute.getAll(settings),
+        ...RegisterTutorRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

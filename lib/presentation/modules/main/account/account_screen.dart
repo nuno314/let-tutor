@@ -80,35 +80,10 @@ class _AccountScreenState extends StateBase<AccountScreen> {
                   ),
                   _settingItem(
                     divider: ItemDivider.line,
-                    itemBorder: ItemBorder.none,
-                    iconPath: Assets.svg.icBookMedical,
-                    title: trans.buyLessons,
-                    callback: () {
-                      _refreshController
-                        ..refreshCompleted()
-                        ..loadComplete();
-                    },
-                  ),
-                  _settingItem(
-                    divider: ItemDivider.line,
-                    itemBorder: ItemBorder.none,
-                    iconPath: Assets.svg.icChalkboardTeacher,
-                    title: trans.tutor,
-                    callback: () {},
-                  ),
-                  _settingItem(
-                    divider: ItemDivider.line,
-                    itemBorder: ItemBorder.none,
-                    iconPath: Assets.svg.icBookOpen,
-                    title: trans.myCourses,
-                    callback: () {},
-                  ),
-                  _settingItem(
-                    divider: ItemDivider.line,
                     itemBorder: ItemBorder.bottom,
                     iconPath: Assets.svg.icUserGraduate,
                     title: trans.becomeATutor,
-                    callback: () {},
+                    callback: onBecomeATutor,
                   ),
                   const SizedBox(
                     height: 50,
@@ -128,6 +103,9 @@ class _AccountScreenState extends StateBase<AccountScreen> {
                     callback: () {
                       logout();
                     },
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),

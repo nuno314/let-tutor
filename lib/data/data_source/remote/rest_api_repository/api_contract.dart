@@ -32,4 +32,6 @@ class ApiContract {
   static const String eBook = 'e-book?{filter}';
   static const String interactiveEBook = 'material/interactive-e-book?{filter}';
   static const String category = 'content-category';
+  static const String registerTutor = 'tutor/register';
+  static const String tutor = 'tutor/:tutorId';
 }

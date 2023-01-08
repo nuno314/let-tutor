@@ -33,6 +33,13 @@ extension AccountAction on _AccountScreenState {
     );
   }
 
+  void onBecomeATutor() {
+    Navigator.pushNamed(
+      context,
+      RouteList.registerTutor,
+    );
+  }
+
   void logout() {
     doLogout().then(
       (value) {

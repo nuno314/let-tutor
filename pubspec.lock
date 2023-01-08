@@ -1748,6 +1748,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.3"
+  video_uploader:
+    dependency: "direct main"
+    description:
+      name: video_uploader
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   wakelock:
     dependency: transitive
     description:

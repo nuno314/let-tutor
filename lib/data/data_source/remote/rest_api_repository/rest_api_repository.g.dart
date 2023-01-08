@@ -800,6 +800,87 @@ class _RestApiRepository implements RestApiRepository {
     return value;
   }
 
+  @override
+  Future<ManageResponse> registerTutor({
+    name,
+    country = 'Vietnam',
+    birthday,
+    interests,
+    education,
+    experience,
+    profession,
+    languages,
+    bio,
+    targetStudent,
+    specialties,
+    avatar,
+    price,
+    rating,
+    video,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'name': name,
+      'country': country,
+      'birthday': birthday,
+      'interests': interests,
+      'education': education,
+      'experience': experience,
+      'profession': profession,
+      'languages': languages,
+      'bio': bio,
+      'targetStudent': targetStudent,
+      'specialties': specialties,
+      'avatar': avatar,
+      'price': price,
+      'rating': rating,
+      'video': video,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ManageResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tutor/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ManageResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<Teacher> getTutorById({tutorId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Teacher>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tutor/:tutorId',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = Teacher.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

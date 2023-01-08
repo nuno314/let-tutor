@@ -1,10 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'tutor_bloc.dart';
 
 abstract class TutorEvent {}
 
-class GetDataEvent extends TutorEvent {}
-
-class LoadMoreDataEvent extends TutorEvent {}
+class GetTutorInfoEvent extends TutorEvent {
+  String id;
+  GetTutorInfoEvent({
+    required this.id,
+  });
+}
 
 class GetScheduleByTutorIdEvent extends TutorEvent {
   final String id;
@@ -31,3 +35,5 @@ class BookScheduleEvent extends TutorEvent {
 }
 
 class GetReviewsEvent extends TutorEvent {}
+
+class FavoriteTeacherEvent extends TutorEvent {}

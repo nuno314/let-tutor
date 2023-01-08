@@ -4,12 +4,13 @@ extension TutorInfoPage on _TutorScreenState {
   Widget _buildTutorInfoPage(TutorState state) {
     return SmartRefresherWrapper.build(
       controller: infoRefreshController,
+      onRefresh: onRefresh,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             const SizedBox(height: 16),
-            if (tutor?.video.isNotNullOrEmpty == true) _buildTutorVideo(),
+            if (tutor.video.isNotNullOrEmpty == true) _buildTutorVideo(),
             ..._buildTutorInfo(state),
             _buildGeneralInfo(),
           ],
@@ -32,7 +33,7 @@ extension TutorInfoPage on _TutorScreenState {
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: CachedNetworkImageWrapper.avatar(
-                  url: tutor?.avatar ?? '',
+                  url: tutor.avatar ?? '',
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,
@@ -43,7 +44,7 @@ extension TutorInfoPage on _TutorScreenState {
                 child: Column(
                   children: [
                     Text(
-                      tutor?.name ?? '--',
+                      tutor.name ?? '--',
                       style: textTheme.bodyText1?.copyWith(
                         fontSize: 14,
                         color: AppColor.primaryColor,
@@ -53,7 +54,7 @@ extension TutorInfoPage on _TutorScreenState {
                       height: 8,
                     ),
                     Text(
-                      tutor?.bio ?? '--',
+                      tutor.bio ?? '--',
                       style: textTheme.bodyText2?.copyWith(
                         fontSize: 12,
                         color: AppColor.grayAD,
@@ -81,7 +82,7 @@ extension TutorInfoPage on _TutorScreenState {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildInfoButton(
-                iconData: tutor?.isFavorite == true
+                iconData: tutor.isFavorite == true
                     ? Icons.favorite
                     : Icons.favorite_outline,
                 title: trans.favorite,
@@ -148,15 +149,15 @@ extension TutorInfoPage on _TutorScreenState {
 
   Widget _buildGeneralInfo() {
     final infos = [
-      {trans.languages: tutor?.language},
+      {trans.languages: tutor.language},
       {
-        trans.specialty: tutor?.specialties
+        trans.specialty: tutor.specialties
             ?.split(',')
             .map((e) => Specialty.jsonMap[e]?.localized(trans) ?? e)
             .join(', '),
       },
-      {trans.interests: tutor?.interests},
-      {trans.teachingExperience: tutor?.experience}
+      {trans.interests: tutor.interests},
+      {trans.teachingExperience: tutor.experience}
     ];
     return BoxColor(
       color: AppColor.white,

@@ -62,7 +62,7 @@ enterPhoneNumber,Nhập số điện thoại,Enter phone number
 enterPassword,Nhập mật khẩu,Nhập mật khẩu
 invalidPhoneNumber,Số điện thoại không hợp lệ,Invalid phone number
 incorrectPhoneNumberOrPassword,Số điện thoại hoặc mật khẩu không đúng,Incorrect phone number or password
-phoneNumberNotExist,Số điện thoại không tồn tại, Phone number does not exist
+phoneNumberNotExist,Số điện thoại không tồn tại,Phone number does not exist
 phoneNumber,Số điện thoại,Phone number
 pleaseEnterPhoneNumberToResetPassword,Vui lòng nhập số điện thoại để đặt lại mật khẩu,Please enter phone number to reset password
 emailSendSuccess,Gửi Email thành công,Email sent successfully
@@ -191,3 +191,27 @@ seeNow,Xem ngay,See now
 searchCourse,Tìm kiếm khóa học,Search course
 searchBook,Tìm kiếm sách,Search book
 document,Tài liệu,Document
+setUpYourTutorProfile,Thiết lập hồ sơ gia sư của bạn,Set up your tutor profile
+setUpYourTutorProfileDescription,Hồ sơ gia sư của bạn là cơ hội tiếp cận với học viên trên Tutoring. Bạn có thể sửa lại sau tại trang hồ sơ cá nhân.,Your tutor profile is your chance to market yourself to students on Tutoring. You can make edits later on your profile settings page.
+basicInfo,Thông tin cơ bản,Basic info
+doNotSharePersonalInformation,Vui lòng không chia sẻ bất cứ thông tin cá nhân trong hồ sơ của bạn.,Please do not share your personal information in your profile.
+education,Học vấn,Education
+profession,Nghề nghiệp hiện tại hoặc trước đây,Current or Previous Profession
+introduction,Giới thiệu bản thân,Introduction
+bestAtTeaching,Tôi giỏi nhất trong việc dạy những học viên,I am best at teaching students who are
+students,Học sinh,Students
+studentsWillSee,Đây là điều đầu tiên mà học viên nhìn thấy khi tìm kiếm gia sư.,This is the first thing students will see when looking for tutors.
+next,Tiếp theo,Next
+introductionDescription,"Hãy để học viên biết những gì họ có thể mong đợi từ khoá học của bạn bằng việc quay lại video điểm nhấn về việc dạy, chuyên môn và tính cách của bạn. Học viên có thể lo lắng khi nói chuyện với người bản xứ, vì vậy sẽ thực sự hữu ích khi có một video thân thiện giới thiệu bản thân và mời học viên gọi điện cho bạn.","Let students know what they can expect from a lesson with you by recording a video highlighting your teaching style, expertise and personality. Students can be nervous to speak with a foreigner, so it really helps to have a friendly video that introduces yourself and invites students to call you."
+introductionVideo,Video giới thiệu,Introduction video
+completeProfile,Hoàn thành hồ sơ,Complete profile
+tips,Một số mẹo hữu dụng:,A few helpful tips:
+findQuiet,1. Tìm một không gian trong lành và yên tĩnh,1. Find a clean and quiet space
+smile,"2. Cười thật tự nhiên, nhìn vào camera",2. Smile and look at the camera
+dressSmart,3. Ăn mặc lịch sự,3. Dress smart
+speakLong,4. Nói trong khoảng 1-3 phút,4. Speak for 1-3 minutes
+brandYourself,5. Tạo thương hiệu cho bản thân và tận hưởng!,5. Brand yourself and have fun!
+chooseVideo,Chọn video,Choose video
+done,Hoàn thành,Done
+previous,Trở lại,Previous
+pleaseNoEmpty,Vui lòng không để trống,Please do not leave empty

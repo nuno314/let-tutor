@@ -32,10 +32,12 @@ class TutorBloc extends AppBlocBase<TutorEvent, TutorState> {
             ),
           ),
         )) {
+    on<GetTutorInfoEvent>(_onGetTutorInfoEvent);
     on<GetScheduleByTutorIdEvent>(_onGetScheduleByTutorIdEvent);
     on<ApplyScheduleFilter>(_onApplyScheduleFilter);
     on<BookScheduleEvent>(_onBookScheduleEvent);
     on<GetReviewsEvent>(_onGetReviewEvent);
+    on<FavoriteTeacherEvent>(_onFavoriteTeacherEvent);
   }
   Pagination pagination = Pagination();
 
@@ -117,6 +119,25 @@ class TutorBloc extends AppBlocBase<TutorEvent, TutorState> {
         viewModel: state.viewModel.copyWith(
           feedbacks: res.feedbacks,
         ),
+      ),
+    );
+  }
+
+  Future<void> _onFavoriteTeacherEvent(
+    FavoriteTeacherEvent event,
+    Emitter<TutorState> emit,
+  ) async {}
+
+  Future<void> _onGetTutorInfoEvent(
+    GetTutorInfoEvent event,
+    Emitter<TutorState> emit,
+  ) async {
+    print(event.id);
+    final res = await _restApi.getTutorById(tutorId: event.id);
+    print(res);
+    emit(
+      state.copyWith<GetTutorState>(
+        viewModel: state.viewModel.copyWith(tutor: res),
       ),
     );
   }

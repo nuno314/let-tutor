@@ -71,6 +71,12 @@ class FeedbackState extends TutorState {
   }) : super(viewModel);
 }
 
+class GetTutorState extends TutorState {
+  GetTutorState({
+    _ViewModel viewModel = const _ViewModel(),
+  }) : super(viewModel);
+}
+
 final _factories = <
     Type,
     Function(
@@ -86,6 +92,9 @@ final _factories = <
         viewModel: viewModel,
       ),
   FeedbackState: (viewModel) => FeedbackState(
+        viewModel: viewModel,
+      ),
+  GetTutorState: (viewModel) => GetTutorState(
         viewModel: viewModel,
       ),
 };
