@@ -10,7 +10,6 @@ class _ViewModel {
 
   _ViewModel copyWith({
     List<Session>? sessions,
-    List<Document>? documents,
     List<BookingInfo>? bookings,
     bool? canLoadMore,
   }) {

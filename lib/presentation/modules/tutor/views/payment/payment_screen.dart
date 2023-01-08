@@ -113,13 +113,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     context: context,
                     title: trans.payment,
                     padding: const EdgeInsets.all(0),
-                    onPressed: () => Navigator.pop(
-                      context,
-                      PaymentResult(
-                        true,
-                        controller.text,
-                      ),
-                    ),
+                    onPressed: () =>
+                        wallet.amount.isNotNullOrEmpty && wallet.amount != '0'
+                            ? Navigator.pop(
+                                context,
+                                PaymentResult(
+                                  true,
+                                  controller.text,
+                                ),
+                              )
+                            : showNoticeDialog(
+                                context: context,
+                                message: trans.insufficientBalance,
+                                title: trans.payment,
+                                titleBtn: trans.confirm,
+                              ),
                   ),
                 )
               ],
@@ -181,6 +189,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Widget _buildWalletInfo() {
+    final amount = wallet.amount ?? '';
     return Container(
       decoration: BoxDecoration(
         boxShadow: boxShadowlight,
@@ -212,7 +221,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   sprintf(
                     trans.youHaveLessonsLeft,
                     [
-                      wallet.amount?.substring(0, wallet.amount!.length - 5) ??
+                      wallet.amount?.substring(
+                              0,
+                              amount.length > 100000
+                                  ? amount.length - 5
+                                  : amount.length) ??
                           ''
                     ],
                   ),

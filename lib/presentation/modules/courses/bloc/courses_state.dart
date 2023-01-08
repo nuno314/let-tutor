@@ -1,32 +1,53 @@
 part of 'courses_bloc.dart';
 
 class _ViewModel {
-  final CoursesFilter filter;
+  final CoursesFilter coursesFilter;
   final List<Course> courses;
+  final bool canLoadMoreCourses;
+
+  final CoursesFilter eBooksFilter;
   final List<Course> eBooks;
+  final bool canLoadMoreEBooks;
+
+  final CoursesFilter interactiveEBooksFilter;
   final List<Course> interactiveEBooks;
-  final bool canLoadMore;
+  final bool canLoadMoreInteractiveEBooks;
+
   const _ViewModel({
-    this.filter = const CoursesFilter(),
+    this.coursesFilter = const CoursesFilter(),
+    this.eBooksFilter = const CoursesFilter(),
+    this.interactiveEBooksFilter = const CoursesFilter(),
     this.courses = const [],
     this.eBooks = const [],
     this.interactiveEBooks = const [],
-    this.canLoadMore = false,
+    this.canLoadMoreCourses = false,
+    this.canLoadMoreEBooks = false,
+    this.canLoadMoreInteractiveEBooks = false,
   });
 
   _ViewModel copyWith({
-    CoursesFilter? filter,
+    CoursesFilter? coursesFilter,
+    CoursesFilter? eBooksFilter,
+    CoursesFilter? interactiveEBooksFilter,
     List<Course>? courses,
     List<Course>? eBooks,
     List<Course>? interactiveEBooks,
-    bool? canLoadMore,
+    bool? canLoadMoreCourses,
+    bool? canLoadMoreEBooks,
+    bool? canLoadMoreInteractiveEBooks,
   }) {
     return _ViewModel(
-      filter: filter ?? this.filter,
+      coursesFilter: coursesFilter ?? this.coursesFilter,
+      eBooksFilter: eBooksFilter ?? this.eBooksFilter,
+      interactiveEBooksFilter:
+          interactiveEBooksFilter ?? this.interactiveEBooksFilter,
       courses: courses ?? this.courses,
       eBooks: eBooks ?? this.eBooks,
       interactiveEBooks: interactiveEBooks ?? this.interactiveEBooks,
-      canLoadMore: canLoadMore ?? this.canLoadMore,
+      canLoadMoreCourses: canLoadMoreCourses ?? this.canLoadMoreCourses,
+      canLoadMoreEBooks: canLoadMoreEBooks ?? this.canLoadMoreEBooks,
+      canLoadMoreInteractiveEBooks:
+          canLoadMoreInteractiveEBooks ?? this.canLoadMoreInteractiveEBooks,
     );
   }
 }
@@ -44,12 +65,19 @@ abstract class CoursesState {
     );
   }
 
-  CoursesFilter get filter => viewModel.filter;
+  CoursesFilter get coursesFilter => viewModel.coursesFilter;
+  CoursesFilter get eBooksFilter => viewModel.eBooksFilter;
+  CoursesFilter get interactiveEBooksFilter =>
+      viewModel.interactiveEBooksFilter;
+
   List<Course> get courses => viewModel.courses;
   List<Course> get eBooks => viewModel.eBooks;
   List<Course> get interactiveEBooks => viewModel.interactiveEBooks;
 
-  bool get canLoadMore => viewModel.canLoadMore;
+  bool get canLoadMoreCourses => viewModel.canLoadMoreCourses;
+  bool get canLoadMoreEBooks => viewModel.canLoadMoreEBooks;
+  bool get canLoadMoreInteractiveEBooks =>
+      viewModel.canLoadMoreInteractiveEBooks;
 }
 
 class CoursesInitial extends CoursesState {

@@ -180,5 +180,9 @@
   "lessonInfo": "Lesson info",
   "audioOnly": "Audio only",
   "audioMuted": "Audio muted",
-  "videoMuted": "Video muted"
+  "videoMuted": "Video muted",
+  "insufficientBalance": "Insufficient balance",
+  "seeNow": "See now",
+  "searchCourse": "Search course",
+  "searchBook": "Search book"
 }

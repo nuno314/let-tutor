@@ -3,17 +3,59 @@ part of '../courses_screen.dart';
 extension CoursesPage on _CoursesScreenState {
   Widget _buildCoursePage(CoursesState state) {
     final books = state.courses;
-
+    final itemW = (device.width - 16 * 2) / 2;
+    final aspectRatio = 167 / 187;
+    final imageH = itemW / aspectRatio;
     return SmartRefresherWrapper.build(
       controller: _coursesRefreshController,
       onRefresh: onCoursesRefresh,
       onLoading: onCoursesLoading,
+      enablePullUp: state.canLoadMoreCourses,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: CustomScrollView(
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
-          slivers: [],
+          slivers: [
+            // SliverToBoxAdapter(
+            //   child: _buildSearch(
+            //     controller: controller,
+            //     debouncer: debouncer,
+            //     hint: hint,
+            //   ),
+            // ),
+            books.isNotEmpty
+                ? SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      mainAxisExtent: imageH,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return CourseCard(
+                          aspectRatio: 137 / 100,
+                          course: books.elementAt(index),
+                          themeData: _themeData,
+                          onTap: (e) {},
+                          viewNowText: trans.seeNow,
+                        );
+                      },
+                      childCount: books.length,
+                      semanticIndexOffset: 2,
+                    ),
+                  )
+                : SliverToBoxAdapter(
+                    child: Center(
+                      child: EmptyData(
+                        icon: SvgPicture.asset(
+                          Assets.svg.icEmptySchedule,
+                        ),
+                      ),
+                    ),
+                  )
+          ],
         ),
       ),
     );

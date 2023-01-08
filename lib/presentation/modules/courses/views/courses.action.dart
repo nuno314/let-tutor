@@ -13,6 +13,8 @@ extension CoursesAction on _CoursesScreenState {
       ..loadComplete();
     if (state is CoursesFilterInitial) {
       _coursesRefreshController.requestRefresh();
+      _eBooksRefreshController.requestRefresh();
+      _interactiveEBooksRefreshController.requestRefresh();
     }
   }
 
@@ -38,5 +40,15 @@ extension CoursesAction on _CoursesScreenState {
 
   void onInteractiveEBooksLoading() {
     bloc.add(LoadMoreInteractiveEBooksEvent());
+  }
+
+  void _getInteractiveEBooksSearch(String? value) {
+    bloc.add(
+      ApplyInteractiveEBooksFilterEvent(
+        bloc.state.interactiveEBooksFilter.copyWith(
+          searchKey: value,
+        ),
+      ),
+    );
   }
 }

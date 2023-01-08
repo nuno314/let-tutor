@@ -2,11 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
-import 'package:let_tutor/data/models/document.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/di/di.dart';
 
-import '../../../../data/models/schedule.dart';
 import '../../../../data/models/session.dart';
 import '../../../../domain/entities/pagination.entity.dart';
 import '../../../base/base.dart';

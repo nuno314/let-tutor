@@ -4,8 +4,13 @@ import '../extentions/extention.dart';
 
 class EmptyData extends StatelessWidget {
   final Function()? onTap;
+  final Widget? icon;
 
-  const EmptyData({Key? key, this.onTap}) : super(key: key);
+  const EmptyData({
+    Key? key,
+    this.onTap,
+    this.icon,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,10 +20,12 @@ class EmptyData extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              Icons.hourglass_empty_rounded,
-              size: MediaQuery.of(context).size.width / 3,
-            ),
+            icon != null
+                ? icon!
+                : Icon(
+                    Icons.hourglass_empty_rounded,
+                    size: MediaQuery.of(context).size.width / 3,
+                  ),
             const SizedBox(height: 8),
             Text(
               translate(context).noData,

@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:let_tutor/data/models/document.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
 import 'package:let_tutor/presentation/route/route_list.dart';
-import 'package:let_tutor/presentation/theme/shadow.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
@@ -103,38 +101,10 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
     );
   }
 
-  Widget _buildLatestBook(ScheduleState state) {
-    if (state.documents.isEmpty) {
-      return SizedBox();
-    }
-    return Column(
-      children: [
-        Text(
-          trans.latestBook,
-          style: textTheme.bodyText1,
-        ),
-        ...state.documents.map((e) => BookItem(e)).toList(),
-      ],
-    );
-  }
-
-  Widget BookItem(Document document) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: boxShadowlight,
-        color: AppColor.white,
-      ),
-      child: Column(children: [
-        Text(document.title ?? '--'),
-      ]),
-    );
-  }
-
   List<Widget> _buildListing(ScheduleState state) {
     final bookings = state.schedules;
     return [
       _buildTitle(),
-      _buildLatestBook(state),
       if (bookings.isEmpty) ...[
         const SizedBox(
           height: 32,

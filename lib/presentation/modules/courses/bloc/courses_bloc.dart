@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
@@ -38,7 +39,15 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     emit(
       state.copyWith<CoursesFilterInitial>(
         viewModel: state.viewModel.copyWith(
-          filter: state.filter.copyWith(
+          coursesFilter: state.coursesFilter.copyWith(
+            categoriesFilter: categoryResponse.categories,
+            pagination: Pagination(),
+          ),
+          eBooksFilter: state.eBooksFilter.copyWith(
+            categoriesFilter: categoryResponse.categories,
+            pagination: Pagination(),
+          ),
+          interactiveEBooksFilter: state.interactiveEBooksFilter.copyWith(
             categoriesFilter: categoryResponse.categories,
             pagination: Pagination(),
           ),
@@ -52,20 +61,28 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     Emitter<CoursesState> emit,
   ) async {
     final res = await _restApi.getCourses(
-      filter: state.filter.filter,
+      filter: state.coursesFilter
+          .copyWith(
+            pagination: Pagination(
+              limit: 10,
+            ),
+          )
+          .filter,
     );
-    final previousPagination = Pagination();
+
     final courses = res.courses ?? [];
+    final newPagination = Pagination(
+      offset: Pagination().total,
+      total: Pagination().total + courses.length,
+      limit: 10,
+    );
     emit(
       state.copyWith<CoursesInitial>(
         viewModel: state.viewModel.copyWith(
           courses: courses,
-          canLoadMore: state.filter.pagination?.canNext,
-          filter: state.filter.copyWith(
-            pagination: Pagination(
-              offset: previousPagination.total,
-              total: previousPagination.total + courses.length,
-            ),
+          canLoadMoreCourses: newPagination.canNext,
+          coursesFilter: state.coursesFilter.copyWith(
+            pagination: newPagination,
           ),
         ),
       ),
@@ -77,20 +94,24 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
     Emitter<CoursesState> emit,
   ) async {
     final res = await _restApi.getCourses(
-      filter: state.filter.filter,
+      filter: state.coursesFilter.filter,
     );
-    final previousPagination = state.filter.pagination!;
     final courses = res.courses ?? [];
+    final newPagination = Pagination(
+      offset: state.coursesFilter.pagination!.total,
+      total: state.coursesFilter.pagination!.total + courses.length,
+      limit: 10,
+    );
     emit(
       state.copyWith<CoursesInitial>(
         viewModel: state.viewModel.copyWith(
-          courses: courses,
-          canLoadMore: state.filter.pagination?.canNext,
-          filter: state.filter.copyWith(
-            pagination: Pagination(
-              offset: previousPagination.total,
-              total: previousPagination.total + courses.length,
-            ),
+          courses: [
+            ...state.courses,
+            ...courses,
+          ],
+          canLoadMoreCourses: newPagination.canNext,
+          coursesFilter: state.coursesFilter.copyWith(
+            pagination: newPagination,
           ),
         ),
       ),
@@ -100,20 +121,127 @@ class CoursesBloc extends AppBlocBase<CoursesEvent, CoursesState> {
   Future<void> _onGetEBooksEvent(
     GetEBooksEvent event,
     Emitter<CoursesState> emit,
-  ) async {}
+  ) async {
+    final res = await _restApi.getEBooks(
+      filter: state.eBooksFilter
+          .copyWith(
+            pagination: Pagination(
+              limit: 10,
+            ),
+          )
+          .filter,
+    );
+
+    final ebooks = res.courses ?? [];
+    print(ebooks.length);
+    final newPagination = Pagination(
+      offset: Pagination().total,
+      total: Pagination().total + ebooks.length,
+      limit: 10,
+    );
+    emit(
+      state.copyWith<CoursesInitial>(
+        viewModel: state.viewModel.copyWith(
+          eBooks: ebooks,
+          canLoadMoreEBooks: newPagination.canNext,
+          eBooksFilter: state.eBooksFilter.copyWith(
+            pagination: newPagination,
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> _onLoadMoreEBooksEvent(
     LoadMoreEBooksEvent event,
     Emitter<CoursesState> emit,
-  ) async {}
+  ) async {
+    final res = await _restApi.getEBooks(
+      filter: state.eBooksFilter.filter,
+    );
+    final ebooks = res.courses ?? [];
+    final newPagination = Pagination(
+      offset: state.eBooksFilter.pagination!.total,
+      total: state.eBooksFilter.pagination!.total + ebooks.length,
+      limit: 10,
+    );
+    emit(
+      state.copyWith<CoursesInitial>(
+        viewModel: state.viewModel.copyWith(
+          eBooks: [
+            ...state.eBooks,
+            ...ebooks,
+          ],
+          canLoadMoreEBooks: newPagination.canNext,
+          eBooksFilter: state.eBooksFilter.copyWith(
+            pagination: newPagination,
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> _onGetInteractiveEBooksEvent(
     GetInteractiveEBooksEvent event,
     Emitter<CoursesState> emit,
-  ) async {}
+  ) async {
+    final res = await _restApi.getInteractiveEBooks(
+      filter: state.interactiveEBooksFilter
+          .copyWith(
+            pagination: Pagination(
+              limit: 10,
+            ),
+          )
+          .filter,
+    );
+
+    final interactiveEbooks = res.courses ?? [];
+    print(interactiveEbooks.length);
+    final newPagination = Pagination(
+      offset: Pagination().total,
+      total: Pagination().total + interactiveEbooks.length,
+      limit: 10,
+    );
+    emit(
+      state.copyWith<CoursesInitial>(
+        viewModel: state.viewModel.copyWith(
+          interactiveEBooks: interactiveEbooks,
+          canLoadMoreInteractiveEBooks: newPagination.canNext,
+          interactiveEBooksFilter: state.interactiveEBooksFilter.copyWith(
+            pagination: newPagination,
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> _onLoadMoreInteractiveEBooksEvent(
     LoadMoreInteractiveEBooksEvent event,
     Emitter<CoursesState> emit,
-  ) async {}
+  ) async {
+    final res = await _restApi.getInteractiveEBooks(
+      filter: state.interactiveEBooksFilter.filter,
+    );
+    final interactiveEbooks = res.courses ?? [];
+    final newPagination = Pagination(
+      offset: state.interactiveEBooksFilter.pagination!.total,
+      total: state.interactiveEBooksFilter.pagination!.total +
+          interactiveEbooks.length,
+      limit: 10,
+    );
+    emit(
+      state.copyWith<CoursesInitial>(
+        viewModel: state.viewModel.copyWith(
+          interactiveEBooks: [
+            ...state.interactiveEBooks,
+            ...interactiveEbooks,
+          ],
+          canLoadMoreInteractiveEBooks: newPagination.canNext,
+          interactiveEBooksFilter: state.interactiveEBooksFilter.copyWith(
+            pagination: newPagination,
+          ),
+        ),
+      ),
+    );
+  }
 }

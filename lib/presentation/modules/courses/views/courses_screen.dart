@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:let_tutor/generated/assets.dart';
+import 'package:let_tutor/presentation/common_widget/course_item.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
+import 'package:let_tutor/presentation/modules/app.dart';
 
+import '../../../../common/utils/debouncer.dart';
 import '../../../base/base.dart';
 import '../../../common_widget/tab_page_widget.dart';
 import '../../../extentions/extention.dart';
@@ -28,6 +33,14 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
   final _eBooksRefreshController = RefreshController();
   final _interactiveEBooksRefreshController = RefreshController();
 
+  final _coursesSearch = InputContainerController();
+  final _eBooksSearch = InputContainerController();
+  final _interactiveEBooksSearch = InputContainerController();
+
+  late final Debouncer _coursesDebouncer;
+  late final Debouncer _eBooksDebouncer;
+  late final Debouncer _interactiveDebouncer;
+
   @override
   CoursesBloc get bloc => BlocProvider.of(context);
 
@@ -36,6 +49,11 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
   TextTheme get textTheme => _themeData.textTheme;
 
   late AppLocalizations trans;
+
+    @override
+  void initState() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +113,41 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildSearch({
+    required InputContainerController controller,
+    required Debouncer debouncer,
+    required String hint,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 16,
+        horizontal: 16,
+      ),
+      child: InputContainer(
+        fillColor: AppColor.white,
+        controller: controller,
+        hint: hint,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        onTextChanged: (text) {
+          debouncer.value = text;
+        },
+        suffixIcon: InkWell(
+            onTap: () {
+              controller.setText = '';
+              debouncer.value = '';
+            },
+            child: Icon(Icons.clear)),
+        suffixIconPadding: const EdgeInsets.only(
+          right: 14,
+          left: 12,
+        ),
+        onSubmitted: (p0) => debouncer.value = p0,
+      ),
     );
   }
 }
