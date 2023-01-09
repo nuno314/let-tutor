@@ -116,55 +116,6 @@ class _SignInScreenState extends StateBase<SignInScreen> {
     );
   }
 
-  // Widget _buildLanguageSelection() {
-  //   final languageList = [
-  //     DropdownLanguageArgs(
-  //       title: trans.vietnamese,
-  //       iconPath: Assets.svg.icVietnam,
-  //     ),
-  //     DropdownLanguageArgs(
-  //       title: trans.english,
-  //       iconPath: Assets.svg.icUs,
-  //     ),
-  //   ];
-  //   var _selectedLanguage = languageList[0];
-
-  //   return DropdownButtonHideUnderline(
-  //     child: ButtonTheme(
-  //       alignedDropdown: true,
-  //       child: DropdownButton<DropdownLanguageArgs>(
-  //         value: _selectedLanguage,
-  //         items: languageList
-  //             .map(
-  //               (e) => DropdownMenuItem<DropdownLanguageArgs>(
-  //                 child: Container(
-  //                   width: 100,
-  //                   child: Row(
-  //                     mainAxisSize: MainAxisSize.min,
-  //                     children: [
-  //                       Text(e.title),
-  //                       Spacer(),
-  //                       SvgPicture.asset(
-  //                         e.iconPath,
-  //                         height: 35,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 value: e,
-  //               ),
-  //             )
-  //             .toList(),
-  //         onChanged: (value) {
-  //           setState(() {
-  //             _selectedLanguage = value as DropdownLanguageArgs;
-  //           });
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
-
   Widget _buildLoginBanner() {
     return Column(
       children: [
@@ -213,6 +164,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           InputContainer(
             title: trans.password,
             controller: _passwordController,
+            isPassword: true,
           ),
         ],
       ),

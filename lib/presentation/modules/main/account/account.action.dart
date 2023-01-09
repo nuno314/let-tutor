@@ -16,28 +16,28 @@ extension AccountAction on _AccountScreenState {
       if (value is User) {
         _refreshController.requestRefresh();
       }
-    });
+    }).then((value) => hideKeyBoard());
   }
 
   void onMyWallet() {
     Navigator.pushNamed(
       context,
       RouteList.wallet,
-    );
+    ).then((value) => hideKeyBoard());
   }
 
   void onSettings() {
     Navigator.pushNamed(
       context,
       RouteList.settings,
-    );
+    ).then((value) => hideKeyBoard());
   }
 
   void onBecomeATutor() {
     Navigator.pushNamed(
       context,
       RouteList.registerTutor,
-    );
+    ).then((value) => hideKeyBoard());
   }
 
   void logout() {

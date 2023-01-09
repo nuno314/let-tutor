@@ -83,7 +83,8 @@ class _CoursesScreenState extends StateBase<CoursesScreen> {
             IconButton(
               onPressed: onTapFilter,
               icon: Icon(
-                Icons.filter,
+                Icons.filter_alt,
+                color: AppColor.white,
               ),
             ),
           ],

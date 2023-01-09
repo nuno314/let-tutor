@@ -191,42 +191,44 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
                       ),
                       height: 60,
                       child: InkWell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: CachedNetworkImageWrapper.avatar(
-                                url: info.schedule?.tutorInfo?.avatar ?? '',
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.cover,
+                        child: Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: CachedNetworkImageWrapper.avatar(
+                                  url: info.schedule?.tutorInfo?.avatar ?? '',
+                                  height: 50,
+                                  width: 50,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.svg.icYoutube,
-                                  width: 30,
-                                  color: AppColor.red,
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  trans.enterLessonRoom,
-                                  style: textTheme.bodyText1?.copyWith(
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    Assets.svg.icYoutube,
+                                    width: 30,
                                     color: AppColor.red,
-                                    fontSize: 12,
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    trans.enterLessonRoom,
+                                    style: textTheme.bodyText1?.copyWith(
+                                      color: AppColor.red,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
