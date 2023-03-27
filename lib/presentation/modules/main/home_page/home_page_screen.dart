@@ -146,7 +146,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
         children: [
           Text(
             info != null ? trans.upcomingLesson : trans.youHaveNoUpcomingLesson,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 18,
               color: AppColor.white,
             ),
@@ -163,7 +163,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
                     children: [
                       Text(
                         date,
-                        style: textTheme.bodyText1?.copyWith(
+                        style: textTheme.bodyLarge?.copyWith(
                           color: AppColor.white,
                           fontSize: 16,
                         ),
@@ -171,7 +171,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
                       ),
                       Text(
                         period,
-                        style: textTheme.bodyText2?.copyWith(
+                        style: textTheme.bodyMedium?.copyWith(
                           color: AppColor.white,
                           fontSize: 14,
                         ),
@@ -220,7 +220,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
                                   ),
                                   Text(
                                     trans.enterLessonRoom,
-                                    style: textTheme.bodyText1?.copyWith(
+                                    style: textTheme.bodyLarge?.copyWith(
                                       color: AppColor.red,
                                       fontSize: 12,
                                     ),
@@ -259,7 +259,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
           ),
           Text(
             trans.recommendedTutors,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
           ),
@@ -282,7 +282,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
     return InputContainer(
       title: trans.findATutor,
       controller: _searchController,
-      titleStyle: textTheme.bodyText1?.copyWith(
+      titleStyle: textTheme.bodyLarge?.copyWith(
         fontSize: 14,
       ),
       fillColor: AppColor.white,

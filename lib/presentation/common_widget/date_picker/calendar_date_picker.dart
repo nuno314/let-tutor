@@ -106,7 +106,7 @@ class _DateInputCalendarPickerState extends State<DateInputCalendarPicker> {
           ),
           child: Text(
             widget.title,
-            style: textTheme.subtitle1?.copyWith(
+            style: textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -120,7 +120,7 @@ class _DateInputCalendarPickerState extends State<DateInputCalendarPicker> {
               Expanded(
                 child: Text(
                   select?.toNormalDateFormat() ?? widget.hint ?? '',
-                  style: textTheme.bodyText1?.copyWith(
+                  style: textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.normal,
                     color:
                         select != null ? Colors.black : AppColor.subText,
@@ -207,7 +207,7 @@ class TableCalendarDatePicker extends StatelessWidget {
           return Center(
             child: Text(
               dateLocale.daysShort[day.weekday - 1],
-              style: textTheme.subtitle2,
+              style: textTheme.titleSmall,
             ),
           );
         },

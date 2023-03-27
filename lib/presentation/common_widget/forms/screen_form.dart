@@ -142,7 +142,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                       ),
                       Text(
                         widget.title!,
-                        style: _theme.textTheme.headline3?.copyWith(
+                        style: _theme.textTheme.displaySmall?.copyWith(
                           color: textColor,
                           fontSize: 20,
                         ),
@@ -155,7 +155,7 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
                       const SizedBox(height: 4),
                       Text(
                         widget.des ?? '',
-                        style: _theme.textTheme.subtitle2?.copyWith(
+                        style: _theme.textTheme.titleSmall?.copyWith(
                           color: desTextColor,
                         ),
                       ),

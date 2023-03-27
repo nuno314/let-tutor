@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 
-import '../../../../data/data_source/remote/app_api_service.dart';
 import '../../../../di/di.dart';
 import '../../../base/base.dart';
 import '../../../common_bloc/app_data_bloc.dart';
@@ -12,7 +11,6 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends AppBlocBase<SettingsEvent, SettingsState> {
-  final _apiSerivce = injector.get<AppApiService>();
   final _appDataBloc = injector.get<AppDataBloc>();
 
   SettingsBloc() : super(SettingsInitial(viewModel: const _ViewModel())) {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
+import 'package:let_tutor/data/data_source/remote/rest_api_repository/rest_api_repository.dart';
 import 'package:let_tutor/data/models/schedule.dart';
 import 'package:let_tutor/data/models/teacher.dart';
 import 'package:let_tutor/di/di.dart';
@@ -15,8 +16,8 @@ part 'tutor_event.dart';
 part 'tutor_state.dart';
 
 class TutorBloc extends AppBlocBase<TutorEvent, TutorState> {
-  final _restApi = injector.get<AppApiService>().client;
-  TutorBloc(Teacher? tutor)
+  var _restApi = injector.get<AppApiService>().client;
+  TutorBloc(Teacher? tutor, {RestApiRepository? restApi})
       : super(TutorInitial(
           viewModel: _ViewModel(
             tutor: tutor,
@@ -32,6 +33,7 @@ class TutorBloc extends AppBlocBase<TutorEvent, TutorState> {
             ),
           ),
         )) {
+    if (restApi != null) _restApi = restApi;
     on<GetTutorInfoEvent>(_onGetTutorInfoEvent);
     on<GetScheduleByTutorIdEvent>(_onGetScheduleByTutorIdEvent);
     on<ApplyScheduleFilter>(_onApplyScheduleFilter);

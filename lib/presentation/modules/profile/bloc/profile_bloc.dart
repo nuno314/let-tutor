@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
 import 'package:let_tutor/di/di.dart';
 
+import '../../../../data/data_source/remote/rest_api_repository/rest_api_repository.dart';
 import '../../../../data/models/user.dart';
 import '../../../base/base.dart';
 
@@ -11,9 +12,10 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
-  final _restApi = injector.get<AppApiService>();
-
-  ProfileBloc() : super(ProfileInitial(viewModel: _ViewModel())) {
+  late final _restApi;
+  ProfileBloc({required RestApiRepository restApi})
+      : super(ProfileInitial(viewModel: _ViewModel())) {
+    _restApi = restApi;
     on<GetProfileEvent>(_onProfileEvent);
     on<UpdateProfileEvent>(_onUpdateProfileEvent);
   }
@@ -22,7 +24,7 @@ class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
     GetProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    final res = await _restApi.client.getUserInfomation({});
+    final res = await _restApi.getUserInfomation({});
     emit(
       state.copyWith(
         viewModel: state.viewModel.copyWith(
@@ -36,7 +38,7 @@ class ProfileBloc extends AppBlocBase<ProfileEvent, ProfileState> {
     UpdateProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    final res = await _restApi.client.updateUserInfomation(
+    final res = await _restApi.updateUserInfomation(
       event.user.toBody(),
     );
     if (res?.user != null) {

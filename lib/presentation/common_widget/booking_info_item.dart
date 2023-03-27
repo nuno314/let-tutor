@@ -65,14 +65,14 @@ class BookingInfoItem extends StatelessWidget {
           children: [
             Text(
               startDateTime.toDateWithWeekdayFormat(context),
-              style: textTheme.bodyText1,
+              style: textTheme.bodyLarge,
             ),
             const SizedBox(
               height: 4,
             ),
             Text(
               startDateTime.toTimeFormat() + ' - ' + endDateTime.toTimeFormat(),
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 fontSize: 12,
                 color: AppColor.gray8C,
               ),
@@ -96,7 +96,7 @@ class BookingInfoItem extends StatelessWidget {
           children: [
             Text(
               tutor?.name ?? '--',
-              style: textTheme.bodyText1?.copyWith(),
+              style: textTheme.bodyLarge?.copyWith(),
             )
           ],
         ),
@@ -111,7 +111,7 @@ class BookingInfoItem extends StatelessWidget {
         if (booking.studentRequest.isNotNullOrEmpty) ...[
           Text(
             booking.studentRequest!,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.left,
           ),
           const SizedBox(

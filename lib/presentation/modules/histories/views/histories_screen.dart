@@ -91,7 +91,7 @@ class _HistoriesScreenState extends StateBase<HistoriesScreen> {
           ),
           Text(
             trans.history,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
           ),
@@ -116,7 +116,7 @@ class _HistoriesScreenState extends StateBase<HistoriesScreen> {
         ),
         Text(
           trans.noSession,
-          style: textTheme.bodyText2?.copyWith(fontSize: 14),
+          style: textTheme.bodyMedium?.copyWith(fontSize: 14),
         ),
       ],
       ListView.separated(

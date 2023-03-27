@@ -56,7 +56,7 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
                 children: [
                   Text(
                     trans.nationality,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),
@@ -66,7 +66,7 @@ class _TutorFilterScreenState extends State<TutorFilterScreen> {
                   ),
                   Text(
                     trans.specialty,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),

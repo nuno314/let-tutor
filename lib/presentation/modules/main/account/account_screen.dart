@@ -165,12 +165,12 @@ class _AccountScreenState extends StateBase<AccountScreen> {
           const SizedBox(height: 8),
           Text(
             state.user?.name ?? '--',
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
           ),
           const SizedBox(height: 4),
           Text(
             state.user?.phoneNumber ?? '--',
-            style: textTheme.bodyText2?.copyWith(
+            style: textTheme.bodyMedium?.copyWith(
               fontSize: 12,
             ),
           ),

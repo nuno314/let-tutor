@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:let_tutor/common/constants.dart';
 import 'package:let_tutor/data/models/course.dart';
 import 'package:let_tutor/domain/entities/courses_filter.entity.dart';
-import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -55,7 +54,7 @@ class _TutorFilterScreenState extends State<CoursesFilterScreen> {
                 children: [
                   Text(
                     trans.selectCategory,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),

@@ -58,7 +58,7 @@ class ScheduleItem extends StatelessWidget {
           DateTime.fromMillisecondsSinceEpoch(
             schedule.startPeriodTimestamp ?? 0,
           ).toLocal().toDateWithWeekdayFormat(context),
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             fontSize: 14,
             color: Colors.white,
           ),
@@ -72,7 +72,7 @@ class ScheduleItem extends StatelessWidget {
               DateTime.fromMillisecondsSinceEpoch(
                 schedule.endPeriodTimestamp ?? 0,
               ).toLocal().toTimeFormat(),
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             fontSize: 14,
             color: color,
           ),
@@ -88,7 +88,7 @@ class ScheduleItem extends StatelessWidget {
         color: color,
         child: Text(
           trans.book,
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             fontSize: 14,
             color: Colors.white,
           ),

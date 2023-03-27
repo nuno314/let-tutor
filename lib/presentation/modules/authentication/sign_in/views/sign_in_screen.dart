@@ -128,7 +128,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
         ),
         Text(
           trans.login,
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             color: AppColor.primaryColor,
             fontSize: 24,
           ),
@@ -137,7 +137,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             trans.bannerSlogan,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
             maxLines: 3,
@@ -181,7 +181,7 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             onTap: onResetPassword,
             child: Text(
               trans.forgetPassword,
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 fontSize: 14,
                 color: AppColor.primaryColor,
               ),
@@ -247,13 +247,13 @@ class _SignInScreenState extends StateBase<SignInScreen> {
             children: [
               Text(
                 trans.noAccount,
-                style: textTheme.bodyText2,
+                style: textTheme.bodyMedium,
               ),
               InkWell(
                 onTap: onSignUp,
                 child: Text(
                   trans.signUp,
-                  style: textTheme.bodyText2?.copyWith(
+                  style: textTheme.bodyMedium?.copyWith(
                     color: AppColor.primaryColor,
                   ),
                 ),

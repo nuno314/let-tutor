@@ -82,7 +82,7 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
           ),
           Text(
             trans.schedule,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
           )
@@ -114,7 +114,7 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
         ),
         Text(
           trans.noSession,
-          style: textTheme.bodyText2?.copyWith(
+          style: textTheme.bodyMedium?.copyWith(
             fontSize: 14,
           ),
         ),

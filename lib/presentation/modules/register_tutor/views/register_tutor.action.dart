@@ -37,7 +37,7 @@ extension RegisterTutorAction on _RegisterTutorScreenState {
           ),
           child: Text(
             getName(value),
-            style: textTheme.subtitle2?.copyWith(
+            style: textTheme.titleSmall?.copyWith(
               color: Colors.black,
             ),
           ),

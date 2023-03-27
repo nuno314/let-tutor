@@ -141,9 +141,9 @@ class _InputContainerState extends State<InputContainer> {
                   vertical: 6,
                 ),
             hintText: widget.hint,
-            hintStyle: widget.hintStyle ?? themeData.textTheme.subtitle2,
+            hintStyle: widget.hintStyle ?? themeData.textTheme.titleSmall,
             errorText: value.validation,
-            errorStyle: themeData.textTheme.subtitle1?.copyWith(
+            errorStyle: themeData.textTheme.titleMedium?.copyWith(
               color: Colors.red,
               fontSize: value.validation?.isNotEmpty == true ? null : 1,
             ),
@@ -175,14 +175,14 @@ class _InputContainerState extends State<InputContainer> {
                   )
                 : null,
             fillColor: widget.enable ? widget.fillColor : null,
-            counterStyle: themeData.textTheme.subtitle1?.copyWith(
+            counterStyle: themeData.textTheme.titleMedium?.copyWith(
               color: Colors.grey,
             ),
           ),
           keyboardType: widget.keyboardType,
           textCapitalization: widget.textCapitalization,
           style: widget.textStyle ??
-              themeData.textTheme.bodyText2?.copyWith(fontSize: 14),
+              themeData.textTheme.bodyMedium?.copyWith(fontSize: 14),
           obscureText:
               widget.isPassword && widget.controller?.isShowPass != true,
           onChanged: (text) {
@@ -211,14 +211,14 @@ class _InputContainerState extends State<InputContainer> {
                           ? widget.title!
                           : widget.title!.toUpperCase(),
                       style: widget.titleStyle ??
-                          themeData.textTheme.bodyText1?.copyWith(
+                          themeData.textTheme.bodyLarge?.copyWith(
                             fontSize: 12,
                           ),
                       children: [
                         if (widget.required == true)
                           TextSpan(
                             text: ' *',
-                            style: themeData.textTheme.headline6!.copyWith(
+                            style: themeData.textTheme.titleLarge!.copyWith(
                               color: Colors.red,
                             ),
                           ),

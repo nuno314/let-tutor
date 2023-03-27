@@ -97,7 +97,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                 children: [
                   Text(
                     trans.totalLessons,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),
@@ -106,7 +106,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                   ),
                   Text(
                     state.total!.toString(),
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 30,
                       color: AppColor.primaryColor,
                     ),
@@ -116,7 +116,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                   ),
                   Text(
                     state.firstTime ?? '',
-                    style: textTheme.bodyText2?.copyWith(
+                    style: textTheme.bodyMedium?.copyWith(
                       color: AppColor.grayAD,
                       fontSize: 12,
                     ),
@@ -153,7 +153,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                 children: [
                   Text(
                     trans.bonus,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),
@@ -162,7 +162,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                   ),
                   Text(
                     '0đ',
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 30,
                       color: AppColor.primaryColor,
                     ),
@@ -175,7 +175,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                       trans.getCommission,
                       ['5%'],
                     ),
-                    style: textTheme.bodyText2?.copyWith(
+                    style: textTheme.bodyMedium?.copyWith(
                       color: AppColor.grayAD,
                       fontSize: 12,
                     ),
@@ -188,7 +188,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                   if (state.referralCode == null) ...[
                     Text(
                       trans.referralCode,
-                      style: textTheme.bodyText1?.copyWith(
+                      style: textTheme.bodyLarge?.copyWith(
                         fontSize: 14,
                       ),
                     ),
@@ -210,7 +210,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                         ),
                         child: Text(
                           state.referralCode ?? '7GE98QO8IH',
-                          style: textTheme.bodyText1?.copyWith(
+                          style: textTheme.bodyLarge?.copyWith(
                             color: AppColor.white,
                           ),
                         ),
@@ -223,7 +223,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                   ],
                   Text(
                     trans.yourReferral,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontSize: 14,
                     ),
                   ),
@@ -237,7 +237,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                     ),
                     Text(
                       trans.noReferral,
-                      style: textTheme.bodyText2?.copyWith(
+                      style: textTheme.bodyMedium?.copyWith(
                         color: AppColor.grayAD,
                         fontSize: 12,
                       ),
@@ -273,7 +273,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
         children: [
           Text(
             trans.transactions,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
           ),
@@ -287,7 +287,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
             ),
             Text(
               trans.noTransaction,
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 color: AppColor.grayAD,
                 fontSize: 12,
               ),
@@ -318,7 +318,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                             children: [
                               Text(
                                 e.bookingInfo!.schedule!.tutorInfo!.name!,
-                                style: textTheme.bodyText1,
+                                style: textTheme.bodyLarge,
                               ),
                               SizedBox(
                                 height: 4,
@@ -326,7 +326,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                               Text(
                                 e.bookingInfo!.createdAt!
                                     .serverToNormalFullFormat(),
-                                style: textTheme.bodyText2?.copyWith(
+                                style: textTheme.bodyMedium?.copyWith(
                                   color: AppColor.grayAD,
                                   fontSize: 12,
                                 ),
@@ -349,7 +349,7 @@ class _WalletScreenState extends StateBase<WalletScreen> {
                               e.type!.localized(
                                 trans,
                               ),
-                              style: textTheme.bodyText1?.copyWith(
+                              style: textTheme.bodyLarge?.copyWith(
                                 fontSize: 12,
                                 color: e.isBook ? AppColor.green : AppColor.red,
                               ),

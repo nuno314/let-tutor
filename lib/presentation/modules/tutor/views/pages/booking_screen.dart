@@ -18,7 +18,7 @@ extension BookingPage on _TutorScreenState {
                 children: [
                   Text(
                     trans.availableTutoringTime,
-                    style: textTheme.bodyText1,
+                    style: textTheme.bodyLarge,
                   ),
                   Spacer(),
                   IconButton(
@@ -34,7 +34,7 @@ extension BookingPage on _TutorScreenState {
             SliverToBoxAdapter(
               child: Text(
                 state.filter.dateRangeToString(context),
-                style: textTheme.bodyText2?.copyWith(fontSize: 12),
+                style: textTheme.bodyMedium?.copyWith(fontSize: 12),
               ),
             ),
             SliverToBoxAdapter(

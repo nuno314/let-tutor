@@ -20,16 +20,14 @@ AppTheme buildLightTheme() {
       brightness: Brightness.light,
       primaryColorLight: AppColor.primaryColorLight,
       primaryColor: Colors.white,
-      backgroundColor: Colors.white,
       scaffoldBackgroundColor: AppColor.scaffoldBackgroundColor,
       cardColor: AppColor.cardBackground,
       textTheme: AppTextTheme.getDefaultTextTheme(),
-      colorScheme: theme.colorScheme.copyWith(
-        secondary: AppColor.primaryColor,
-      ),
       appBarTheme: theme.appBarTheme.copyWith(
         backgroundColor: Colors.white,
-      ),
+      ), colorScheme: theme.colorScheme.copyWith(
+        secondary: AppColor.primaryColor,
+      ).copyWith(background: Colors.white),
     ),
   );
 }

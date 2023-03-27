@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
 import 'package:let_tutor/di/di.dart';
-import 'package:let_tutor/envs.dart';
 
 import '../../../base/base.dart';
 
@@ -23,7 +22,7 @@ class RegisterTutorBloc
     RegisterTutorSuccessEvent event,
     Emitter<RegisterTutorState> emit,
   ) async {
-    final res = await _restApi.registerTutor(
+    await _restApi.registerTutor(
       name: me.name,
       country: me.country,
       birthday: event.birthday,

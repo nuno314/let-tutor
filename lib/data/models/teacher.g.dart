@@ -66,12 +66,6 @@ Map<String, dynamic> _$TeacherToJson(Teacher instance) => <String, dynamic>{
       'feedbacks': instance.feedbacks,
     };
 
-FavoriteTeacher _$FavoriteTeacherFromJson(Map<String, dynamic> json) =>
-    FavoriteTeacher();
-
-Map<String, dynamic> _$FavoriteTeacherToJson(FavoriteTeacher instance) =>
-    <String, dynamic>{};
-
 Feedback _$FeedbackFromJson(Map<String, dynamic> json) => Feedback(
       id: json['id'] as String?,
       bookingId: json['bookingId'] as String?,

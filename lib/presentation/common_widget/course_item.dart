@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/common/utils.dart';
 import 'package:let_tutor/data/models/course.dart';
-import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
 import 'box_color.dart';
@@ -57,7 +56,7 @@ class CourseCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     course.name ?? '--',
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
                     ),
@@ -76,7 +75,7 @@ class CourseCard extends StatelessWidget {
                       child: Text(
                         viewNowText ?? '--',
                         textAlign: TextAlign.center,
-                        style: textTheme.bodyText1?.copyWith(
+                        style: textTheme.bodyLarge?.copyWith(
                           color: AppColor.white,
                         ),
                       ),

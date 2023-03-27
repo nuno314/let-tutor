@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hive/hive.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:let_tutor/common/utils.dart';
-import 'package:let_tutor/common/utils/jwt_utils.dart';
 import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
 import 'package:let_tutor/data/models/teacher.dart';
 import 'package:let_tutor/di/di.dart';
@@ -146,7 +143,7 @@ class _MeetingScreenState extends StateBase<MeetingScreen> {
                       children: [
                         Text(
                           trans.lessonInfo,
-                          style: textTheme.bodyText1,
+                          style: textTheme.bodyLarge,
                         ),
                         Divider(
                           height: 24,
@@ -159,7 +156,7 @@ class _MeetingScreenState extends StateBase<MeetingScreen> {
                                 const SizedBox(width: 4),
                                 Text(
                                   e.keys.first,
-                                  style: textTheme.bodyText2?.copyWith(
+                                  style: textTheme.bodyMedium?.copyWith(
                                     fontSize: 14,
                                     color: AppColor.gray8C,
                                   ),
@@ -167,7 +164,7 @@ class _MeetingScreenState extends StateBase<MeetingScreen> {
                                 const Spacer(),
                                 Text(
                                   e.values.first,
-                                  style: textTheme.bodyText2
+                                  style: textTheme.bodyMedium
                                       ?.copyWith(fontSize: 14),
                                 ),
                                 const SizedBox(width: 4),

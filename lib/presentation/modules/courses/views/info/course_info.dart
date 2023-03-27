@@ -46,7 +46,7 @@ class _CourseInfoState extends State<CourseInfo> {
           ),
           Text(
             trans.document,
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           Expanded(
@@ -67,7 +67,7 @@ class _CourseInfoState extends State<CourseInfo> {
                         children: [
                           Text(
                             topics.elementAt(index).name ?? '--',
-                            style: textTheme.bodyText1?.copyWith(
+                            style: textTheme.bodyLarge?.copyWith(
                               color: AppColor.white,
                             ),
                           ),

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 import '../../common/utils.dart';
@@ -73,75 +73,79 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return ValueListenableBuilder<int?>(
-        valueListenable: idxNotifier,
-        builder: (ctx, value, w) {
-          final itemWidth = constraints.maxWidth / widget.items!.length;
-          return Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  boxShadow: boxShadowlight,
-                  color: Colors.white,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return ValueListenableBuilder<int?>(
+          valueListenable: idxNotifier,
+          builder: (ctx, value, w) {
+            final itemWidth = constraints.maxWidth / widget.items!.length;
+            return Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    boxShadow: boxShadowlight,
+                    color: Colors.white,
+                  ),
+                  padding: const EdgeInsets.only(
+                    bottom: 16,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: widget.items!.mapIndex<Widget>((item, idx) {
+                      if (item.isOver == true) {
+                        return SizedBox(width: itemWidth);
+                      }
+                      return SizedBox(
+                        width: itemWidth,
+                        child: BottomItem(
+                          item: item,
+                          onPressed: () async {
+                            if (idx != value &&
+                                await widget.onItemSelection?.call(idx) ==
+                                    true) {
+                              idxNotifier.value = idx;
+                            }
+                          },
+                          selected: idx == value,
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).padding.bottom,
+                  ),
+                  child: Row(
+                    children: widget.items!.mapIndex<Widget>((item, idx) {
+                      if (item.isOver != true) {
+                        return SizedBox(width: itemWidth);
+                      }
+                      return SizedBox(
+                        width: itemWidth,
+                        child: BottomItem(
+                          item: item,
+                          iconSize: itemWidth * 0.9,
+                          onPressed: () async {
+                            if (idx != value &&
+                                await widget.onItemSelection?.call(idx) ==
+                                    true) {
+                              idxNotifier.value = idx;
+                            }
+                          },
+                          selected: idx == value,
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.items!.mapIndex<Widget>((item, idx) {
-                    if (item.isOver == true) {
-                      return SizedBox(width: itemWidth);
-                    }
-                    return SizedBox(
-                      width: itemWidth,
-                      child: BottomItem(
-                        item: item,
-                        onPressed: () async {
-                          if (idx != value &&
-                              await widget.onItemSelection?.call(idx) == true) {
-                            idxNotifier.value = idx;
-                          }
-                        },
-                        selected: idx == value,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
-                ),
-                child: Row(
-                  children: widget.items!.mapIndex<Widget>((item, idx) {
-                    if (item.isOver != true) {
-                      return SizedBox(width: itemWidth);
-                    }
-                    return SizedBox(
-                      width: itemWidth,
-                      child: BottomItem(
-                        item: item,
-                        iconSize: itemWidth * 0.9,
-                        onPressed: () async {
-                          if (idx != value &&
-                              await widget.onItemSelection?.call(idx) == true) {
-                            idxNotifier.value = idx;
-                          }
-                        },
-                        selected: idx == value,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }
 
@@ -173,7 +177,7 @@ class BottomItem extends StatelessWidget {
       '''BottomBarItemData.selectedIcon supported [String, IconData, Widget, NULL]''',
     );
     final count = item.badgeCount ?? 0;
-    final theme = Theme.of(context);
+    final theme = context.theme;
     return InkWell(
       onTap: onPressed,
       child: Padding(
@@ -183,17 +187,17 @@ class BottomItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Badge(
+            badges.Badge(
               showBadge: count > 0,
               badgeContent: Text(
                 '${min(count, 99)}${count > 99 ? '+' : ''}',
-                style: theme.textTheme.subtitle1?.copyWith(
-                  fontSize: count > 99 ? 8 : 10,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontSize: 12,
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              padding: EdgeInsets.all(count > 9 ? 3 : 5),
-              animationType: BadgeAnimationType.scale,
+             
               child: _buildIcon(),
             ),
             const SizedBox(height: 3),
@@ -234,14 +238,14 @@ class BottomItem extends StatelessWidget {
   }
 
   TextStyle _getTextStyle(BuildContext context) {
-    final theme = Theme.of(context);
+    final theme = context.theme;
     if (selected) {
-      return theme.textTheme.subtitle1!.copyWith(
+      return theme.textTheme.titleMedium!.copyWith(
         color: AppColor.primaryColor,
         fontWeight: FontWeight.w600,
       );
     } else {
-      return theme.textTheme.subtitle1!.copyWith(
+      return theme.textTheme.titleMedium!.copyWith(
         color: const Color(0xff8C8C8C),
         fontWeight: FontWeight.w400,
       );

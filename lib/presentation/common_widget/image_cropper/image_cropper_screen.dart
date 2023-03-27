@@ -104,7 +104,7 @@ class _ImageCropperScreenState extends State<ImageCropperScreen> {
                           onPressed: _close,
                           child: Text(
                             localization.cancel,
-                            style: textTheme.bodyText2?.copyWith(
+                            style: textTheme.bodyMedium?.copyWith(
                               color: Colors.white,
                             ),
                           ),
@@ -113,7 +113,7 @@ class _ImageCropperScreenState extends State<ImageCropperScreen> {
                           onPressed: _cropImage,
                           child: Text(
                             localization.confirm,
-                            style: textTheme.bodyText2?.copyWith(
+                            style: textTheme.bodyMedium?.copyWith(
                               color: Colors.white,
                             ),
                           ),

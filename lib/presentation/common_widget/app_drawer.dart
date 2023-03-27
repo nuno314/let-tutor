@@ -118,7 +118,7 @@ class _AppDrawerState extends State<AppDrawer> {
               flex: 3,
               child: Text(
                 title,
-                style: textTheme.bodyText1?.copyWith(
+                style: textTheme.bodyLarge?.copyWith(
                   fontSize: 20,
                 ),
               ),

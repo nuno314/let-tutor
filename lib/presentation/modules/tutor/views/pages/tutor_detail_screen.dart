@@ -45,7 +45,7 @@ extension TutorInfoPage on _TutorScreenState {
                   children: [
                     Text(
                       tutor.name ?? '--',
-                      style: textTheme.bodyText1?.copyWith(
+                      style: textTheme.bodyLarge?.copyWith(
                         fontSize: 14,
                         color: AppColor.primaryColor,
                       ),
@@ -55,7 +55,7 @@ extension TutorInfoPage on _TutorScreenState {
                     ),
                     Text(
                       tutor.bio ?? '--',
-                      style: textTheme.bodyText2?.copyWith(
+                      style: textTheme.bodyMedium?.copyWith(
                         fontSize: 12,
                         color: AppColor.grayAD,
                       ),
@@ -120,7 +120,7 @@ extension TutorInfoPage on _TutorScreenState {
         ),
         Text(
           title,
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             fontSize: 12,
             color: color,
           ),
@@ -186,14 +186,14 @@ extension TutorInfoPage on _TutorScreenState {
         Expanded(
           child: Text(
             title ?? '--',
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
           ),
         ),
         Expanded(
             child: Text(
           content ?? '--',
           textAlign: TextAlign.right,
-          style: textTheme.bodyText2?.copyWith(fontSize: 14),
+          style: textTheme.bodyMedium?.copyWith(fontSize: 14),
         )),
       ],
     );

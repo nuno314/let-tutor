@@ -9,104 +9,104 @@ class AppTextTheme {
   );
 
   static TextTheme getDefaultTextTheme() => const TextTheme(
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryColor,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryText,
         ),
-        headline5: TextStyle(
+        headlineSmall: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryText,
         ),
-        headline6: TextStyle(
+        titleLarge: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
           color: AppColor.subText,
         ),
-        subtitle1: TextStyle(
+        titleMedium: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.normal,
           color: AppColor.subText,
         ),
-        subtitle2: TextStyle(
+        titleSmall: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: AppColor.subText,
         ),
-        bodyText1: TextStyle(
+        bodyLarge: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryText,
         ),
-        bodyText2: TextStyle(
+        bodyMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
           color: AppColor.primaryText,
         ),
-        caption: TextStyle(
+        bodySmall: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryText,
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       );
   static TextTheme getDefaultTextThemeDark() => const TextTheme(
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryColor,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w500,
           color: AppColor.primaryDarkText,
         ),
-        headline5: TextStyle(
+        headlineSmall: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,
           color: AppColor.primaryDarkText,
         ),
-        headline6: TextStyle(
+        titleLarge: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w500,
           color: AppColor.primaryDarkText,
         ),
-        subtitle1: TextStyle(
+        titleMedium: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: AppColor.subDarkText,
         ),
-        subtitle2: TextStyle(
+        titleSmall: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.normal,
           color: AppColor.subDarkText,
         ),
-        bodyText1: TextStyle(
+        bodyLarge: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
           color: AppColor.primaryDarkText,
         ),
-        bodyText2: TextStyle(
+        bodyMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
           color: AppColor.primaryDarkText,
         ),
-        caption: TextStyle(
+        bodySmall: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: AppColor.primaryDarkText,
         ),
-        button: TextStyle(
+        labelLarge: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.normal,
           color: AppColor.primaryDarkText,

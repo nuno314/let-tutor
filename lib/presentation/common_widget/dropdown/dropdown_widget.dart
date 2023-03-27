@@ -72,7 +72,7 @@ class DropdownWidget<T> extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   hint ?? '',
-                  style: themeData.textTheme.subtitle2,
+                  style: themeData.textTheme.titleSmall,
                 ),
               ),
               decoration: InputDecoration(
@@ -88,7 +88,7 @@ class DropdownWidget<T> extends StatelessWidget {
                   vertical: 6,
                 ),
                 errorText: value.validation,
-                errorStyle: themeData.textTheme.subtitle1,
+                errorStyle: themeData.textTheme.titleMedium,
                 prefixIcon: hasPrefixIcon
                     ? Padding(
                         padding: prefixIconPadding ??
@@ -118,12 +118,12 @@ class DropdownWidget<T> extends StatelessWidget {
           if (required)
             TextSpan(
               text: ' *',
-              style: themeData.textTheme.bodyText1?.copyWith(
+              style: themeData.textTheme.bodyLarge?.copyWith(
                 color: Colors.red,
               ),
             ),
         ],
-        style: themeData.textTheme.subtitle2?.copyWith(
+        style: themeData.textTheme.titleSmall?.copyWith(
           fontWeight: FontWeight.w700,
         ),
       ),

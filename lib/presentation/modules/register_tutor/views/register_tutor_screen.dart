@@ -184,7 +184,7 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
             children: [
               Text(
                 trans.setUpYourTutorProfile,
-                style: textTheme.bodyText1,
+                style: textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -192,7 +192,7 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
               ),
               Text(
                 trans.setUpYourTutorProfileDescription,
-                style: textTheme.bodyText2?.copyWith(
+                style: textTheme.bodyMedium?.copyWith(
                   fontSize: 12,
                   color: AppColor.gray8C,
                 ),
@@ -215,7 +215,7 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
                 children: [
                   Text(
                     trans.basicInfo,
-                    style: textTheme.bodyText1,
+                    style: textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 2),
@@ -248,13 +248,13 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
       children: [
         Text(
           'CV',
-          style: textTheme.bodyText1,
+          style: textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           trans.doNotSharePersonalInformation,
-          style: textTheme.bodyText2?.copyWith(
+          style: textTheme.bodyMedium?.copyWith(
             fontSize: 12,
             color: AppColor.red,
           ),
@@ -290,7 +290,7 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
       children: [
         Text(
           trans.languages,
-          style: textTheme.bodyText1,
+          style: textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
@@ -311,13 +311,13 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
       children: [
         Text(
           trans.students,
-          style: textTheme.bodyText1,
+          style: textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           trans.studentsWillSee,
-          style: textTheme.bodyText2
+          style: textTheme.bodyMedium
               ?.copyWith(fontSize: 12, color: AppColor.primaryColor),
           textAlign: TextAlign.center,
         ),
@@ -330,13 +330,13 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
         const SizedBox(height: 8),
         Text(
           trans.bestAtTeaching,
-          style: textTheme.bodyText1,
+          style: textTheme.bodyLarge,
         ),
         _buildLevelFilter(),
         const SizedBox(height: 8),
         Text(
           trans.specialty,
-          style: textTheme.bodyText1,
+          style: textTheme.bodyLarge,
         ),
         _buildGroupFilter()
       ],
@@ -354,7 +354,7 @@ class _RegisterTutorScreenState extends StateBase<RegisterTutorScreen> {
       controller: controller,
       title: title,
       required: true,
-      titleStyle: textTheme.bodyText1,
+      titleStyle: textTheme.bodyLarge,
       onTap: onTap,
       suffixIcon: showSuffixIcon && controller.text?.isNotEmpty == true
           ? InkWell(

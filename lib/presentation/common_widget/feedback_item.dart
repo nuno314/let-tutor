@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:let_tutor/common/utils.dart';
 import 'package:let_tutor/data/models/teacher.dart' as fb;
 import 'package:let_tutor/presentation/common_widget/cache_network_image_wrapper.dart';
-import 'package:let_tutor/presentation/modules/app.dart';
 
 import 'package:let_tutor/presentation/theme/shadow.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
@@ -58,7 +57,7 @@ class FeedbackItem extends StatelessWidget {
           children: [
             Text(
               feedback.firstInfo?.name ?? '--',
-              style: textTheme.bodyText1?.copyWith(),
+              style: textTheme.bodyLarge?.copyWith(),
             ),
             const SizedBox(
               height: 4,
@@ -78,7 +77,7 @@ class FeedbackItem extends StatelessWidget {
             ),
             Text(
               feedback.updatedAt?.toLocal().serverToNormalFullFormat() ?? '--',
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 fontSize: 12,
                 color: AppColor.gray8C,
               ),
@@ -89,7 +88,7 @@ class FeedbackItem extends StatelessWidget {
         const Spacer(),
         Text(
           feedback.content ?? '--',
-          style: textTheme.bodyText2?.copyWith(
+          style: textTheme.bodyMedium?.copyWith(
             fontSize: 12,
             color: AppColor.gray8C,
           ),

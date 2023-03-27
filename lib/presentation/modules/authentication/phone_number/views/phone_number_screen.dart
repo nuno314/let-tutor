@@ -77,7 +77,7 @@ class _PhoneNumberScreenState extends StateBase<PhoneNumberScreen> {
         ),
         Text(
           trans.login,
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             color: AppColor.primaryColor,
             fontSize: 24,
           ),
@@ -86,7 +86,7 @@ class _PhoneNumberScreenState extends StateBase<PhoneNumberScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             'Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.',
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
             maxLines: 3,
@@ -131,7 +131,7 @@ class _PhoneNumberScreenState extends StateBase<PhoneNumberScreen> {
             onTap: onForgotPassword,
             child: Text(
               trans.forgetPassword,
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 fontSize: 14,
                 color: AppColor.primaryColor,
               ),

@@ -94,14 +94,14 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
       children: [
         Text(
           trans.resetPassword,
-          style: textTheme.bodyText1?.copyWith(fontSize: 30),
+          style: textTheme.bodyLarge?.copyWith(fontSize: 30),
         ),
         SizedBox(
           height: 16,
         ),
         Text(
           trans.pleaseEnterEmailToResetPassword,
-          style: textTheme.bodyText2?.copyWith(
+          style: textTheme.bodyMedium?.copyWith(
             fontSize: 18,
           ),
           textAlign: TextAlign.center,
@@ -115,14 +115,14 @@ class _ResetPasswordScreenState extends StateBase<ResetPasswordScreen> {
       children: [
         Text(
           trans.resetPassword,
-          style: textTheme.bodyText1?.copyWith(fontSize: 30),
+          style: textTheme.bodyLarge?.copyWith(fontSize: 30),
         ),
         SizedBox(
           height: 16,
         ),
         Text(
           trans.pleaseEnterPhoneNumberToResetPassword,
-          style: textTheme.bodyText2?.copyWith(
+          style: textTheme.bodyMedium?.copyWith(
             fontSize: 18,
           ),
           textAlign: TextAlign.center,

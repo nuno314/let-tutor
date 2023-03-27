@@ -72,9 +72,6 @@ class Teacher {
 }
 
 @JsonSerializable()
-class FavoriteTeacher {}
-
-@JsonSerializable()
 class Feedback {
   String? id;
   String? bookingId;

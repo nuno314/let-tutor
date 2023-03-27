@@ -8,11 +8,11 @@ import 'theme_color.dart';
 class ThemeButton {
   ThemeButton._();
   static TextStyle? getTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.button;
+    return Theme.of(context).textTheme.labelLarge;
   }
 
   static TextStyle? getTextStyleNormal(BuildContext context) {
-    return Theme.of(context).textTheme.bodyText2?.copyWith(
+    return Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 14,
           color: AppColor.primaryText,
@@ -197,7 +197,7 @@ class ThemeButton {
                       if (title?.isNotEmpty == true)
                         Text(
                           title ?? '',
-                          style: theme.textTheme.bodyText1?.copyWith(
+                          style: theme.textTheme.bodyLarge?.copyWith(
                             fontSize: 18,
                           ),
                         ),
@@ -209,7 +209,7 @@ class ThemeButton {
                         Expanded(
                           child: Text(
                             content ?? '',
-                            style: theme.textTheme.bodyText1?.copyWith(
+                            style: theme.textTheme.bodyLarge?.copyWith(
                               fontSize: 18,
                             ),
                             textAlign: TextAlign.right,
@@ -227,7 +227,7 @@ class ThemeButton {
                       ),
                       Text(
                         '* $description',
-                        style: theme.textTheme.subtitle1?.copyWith(
+                        style: theme.textTheme.titleMedium?.copyWith(
                           fontSize: 12,
                         ),
                       ),

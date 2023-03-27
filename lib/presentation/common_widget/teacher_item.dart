@@ -83,7 +83,7 @@ class TeacherItem extends StatelessWidget {
                     children: [
                       Text(
                         teacher.name ?? '--',
-                        style: textTheme.bodyText1?.copyWith(
+                        style: textTheme.bodyLarge?.copyWith(
                           fontSize: 14,
                         ),
                       ),
@@ -105,7 +105,7 @@ class TeacherItem extends StatelessWidget {
                           ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: textTheme.bodyText1?.copyWith(fontSize: 12),
+                      style: textTheme.bodyLarge?.copyWith(fontSize: 12),
                     ),
                   const SizedBox(
                     height: 0,
@@ -138,7 +138,7 @@ class TeacherItem extends StatelessWidget {
           ),
           Text(
             teacher.bio ?? '--',
-            style: textTheme.bodyText2?.copyWith(
+            style: textTheme.bodyMedium?.copyWith(
               fontSize: 12,
             ),
           ),
@@ -169,7 +169,7 @@ class TeacherItem extends StatelessWidget {
                       ),
                       Text(
                         translate(context).book,
-                        style: textTheme.bodyText1?.copyWith(
+                        style: textTheme.bodyLarge?.copyWith(
                           color: AppColor.primaryColor,
                           fontSize: 12,
                         ),

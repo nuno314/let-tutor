@@ -48,7 +48,7 @@ extension ScheduleAction on _ScheduleScreenState {
           return AlertDialog(
             title: Text(
               trans.cancelBooking,
-              style: textTheme.bodyText1?.copyWith(color: AppColor.red),
+              style: textTheme.bodyLarge?.copyWith(color: AppColor.red),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -56,14 +56,14 @@ extension ScheduleAction on _ScheduleScreenState {
               children: [
                 Text(
                   trans.whatWasTheReason,
-                  style: textTheme.bodyText1?.copyWith(fontSize: 14),
+                  style: textTheme.bodyLarge?.copyWith(fontSize: 14),
                 ),
                 DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: reason,
                     icon: const Icon(Icons.expand_circle_down_outlined),
                     elevation: 16,
-                    style: textTheme.bodyText2
+                    style: textTheme.bodyMedium
                         ?.copyWith(fontSize: 14, color: AppColor.gray8C),
                     onChanged: (String? value) {
                       // This is called when the user selects an item.
@@ -84,7 +84,7 @@ extension ScheduleAction on _ScheduleScreenState {
                 InputContainer(
                   controller: controller,
                   title: trans.notes,
-                  titleStyle: textTheme.bodyText1,
+                  titleStyle: textTheme.bodyLarge,
                 ),
                 const SizedBox(
                   height: 32,

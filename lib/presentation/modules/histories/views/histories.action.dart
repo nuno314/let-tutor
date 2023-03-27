@@ -41,7 +41,7 @@ extension HistoriesAction on _HistoriesScreenState {
             title: Text(
               trans.addARating,
               style:
-                  textTheme.bodyText1?.copyWith(color: AppColor.primaryColor),
+                  textTheme.bodyLarge?.copyWith(color: AppColor.primaryColor),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -69,7 +69,7 @@ extension HistoriesAction on _HistoriesScreenState {
                 InputContainer(
                   controller: controller,
                   title: trans.notes,
-                  titleStyle: textTheme.bodyText1,
+                  titleStyle: textTheme.bodyLarge,
                 ),
                 const SizedBox(
                   height: 32,

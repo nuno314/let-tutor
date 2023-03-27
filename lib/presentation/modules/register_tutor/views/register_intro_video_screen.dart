@@ -126,13 +126,13 @@ class _RegisterTutorIntroVideoScreenState
             children: [
               Text(
                 trans.introduction,
-                style: textTheme.bodyText1,
+                style: textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 trans.introductionDescription,
-                style: textTheme.bodyText2?.copyWith(
+                style: textTheme.bodyMedium?.copyWith(
                   fontSize: 14,
                   color: AppColor.gray8C,
                 ),
@@ -157,37 +157,37 @@ class _RegisterTutorIntroVideoScreenState
         children: [
           Text(
             trans.tips,
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 9),
           Text(
             trans.findQuiet,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             trans.smile,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             trans.dressSmart,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             trans.speakLong,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
             trans.brandYourself,
-            style: textTheme.bodyText2?.copyWith(fontSize: 14),
+            style: textTheme.bodyMedium?.copyWith(fontSize: 14),
             textAlign: TextAlign.center,
           ),
         ],

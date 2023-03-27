@@ -105,6 +105,13 @@ class PaymentResponse {
 @JsonSerializable()
 class TransactionResponse {
   int? count;
+  TransactionResponse({
+    this.count,
+  });
+  factory TransactionResponse.fromJson(Map<String, dynamic> json) =>
+      _$TransactionResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TransactionResponseToJson(this);
 }
 
 @JsonSerializable()

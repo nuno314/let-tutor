@@ -1,8 +1,6 @@
 export 'after_layout.dart';
 export 'cache_network_image_wrapper.dart';
 export 'circle_image.dart';
-export 'custom_bottom_navigation_bar.dart';
-export 'custom_bottom_navigation_bar.dart';
 export 'custom_switch.dart';
 export 'custom_tabbar.dart';
 export 'dropdown/dropdown_widget.dart';

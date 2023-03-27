@@ -13,7 +13,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common/utils/debouncer.dart';
 import '../../../base/base.dart';
-import '../../../common_widget/document_viewer/document_viewer_screen.dart';
 import '../../../common_widget/tab_page_widget.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_color.dart';

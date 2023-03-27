@@ -138,14 +138,14 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
         ),
         Text(
           user?.name ?? '',
-          style: textTheme.bodyText1?.copyWith(fontSize: 14),
+          style: textTheme.bodyLarge?.copyWith(fontSize: 14),
         ),
         SizedBox(
           height: 10,
         ),
         Text(
           user?.id ?? '',
-          style: textTheme.bodyText2?.copyWith(fontSize: 12),
+          style: textTheme.bodyMedium?.copyWith(fontSize: 12),
         ),
         SizedBox(
           height: 10,
@@ -234,7 +234,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                   ),
                   child: Text(
                     trans.verified,
-                    style: textTheme.bodyText1?.copyWith(
+                    style: textTheme.bodyLarge?.copyWith(
                       color: AppColor.green,
                     ),
                   ),

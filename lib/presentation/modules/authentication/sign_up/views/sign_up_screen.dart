@@ -88,7 +88,7 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
                       onTap: onSignIn,
                       child: Text(
                         trans.login,
-                        style: textTheme.bodyText2?.copyWith(
+                        style: textTheme.bodyMedium?.copyWith(
                           color: AppColor.primaryColor,
                         ),
                       ),
@@ -115,7 +115,7 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
         ),
         Text(
           trans.signUp,
-          style: textTheme.bodyText1?.copyWith(
+          style: textTheme.bodyLarge?.copyWith(
             color: AppColor.primaryColor,
             fontSize: 30,
           ),
@@ -124,7 +124,7 @@ class _SignUpScreenState extends StateBase<SignUpScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             'Phát triển kỹ năng tiếng Anh nhanh nhất bằng cách học 1 kèm 1 trực tuyến theo mục tiêu và lộ trình dành cho riêng bạn.',
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
             maxLines: 3,

@@ -47,11 +47,11 @@ class ThemeDialog {
     final showAndroidDialog = () => AlertDialog(
           title: Text(
             title,
-            style: theme.textTheme.headline5,
+            style: theme.textTheme.headlineSmall,
           ),
           content: Text(
             message,
-            style: theme.textTheme.bodyText2,
+            style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -63,7 +63,7 @@ class ThemeDialog {
               child: Text(
                 leftBtn ?? cancel,
                 style: styleLeftBtn ??
-                    theme.textTheme.button?.copyWith(
+                    theme.textTheme.labelLarge?.copyWith(
                       color: AppColor.primaryColor,
                     ),
               ),
@@ -76,7 +76,7 @@ class ThemeDialog {
               child: Text(
                 rightBtn ?? confirm,
                 style: styleRightBtn ??
-                    theme.textTheme.button?.copyWith(
+                    theme.textTheme.labelLarge?.copyWith(
                       color: AppColor.primaryColor,
                     ),
               ),
@@ -104,7 +104,7 @@ class ThemeDialog {
           child: Text(
             title,
             style: style ??
-                theme.textTheme.button!.copyWith(
+                theme.textTheme.labelLarge!.copyWith(
                   color: Colors.blue,
                   fontWeight: FontWeight.normal,
                 ),
@@ -115,11 +115,11 @@ class ThemeDialog {
       return CupertinoAlertDialog(
         title: Text(
           title,
-          style: theme.textTheme.headline5,
+          style: theme.textTheme.headlineSmall,
         ),
         content: Text(
           message,
-          style: theme.textTheme.bodyText2,
+          style: theme.textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
@@ -165,11 +165,11 @@ class ThemeDialog {
     final showAndroidDialog = () => AlertDialog(
           title: Text(
             title ?? inform,
-            style: theme.textTheme.headline5,
+            style: theme.textTheme.headlineSmall,
           ),
           content: Text(
             message,
-            style: theme.textTheme.bodyText2,
+            style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
           actions: [
@@ -192,7 +192,7 @@ class ThemeDialog {
         title: Text(title ?? inform),
         content: Text(
           message,
-          style: theme.textTheme.bodyText2,
+          style: theme.textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
         actions: <Widget>[
@@ -223,13 +223,13 @@ class ThemeDialog {
         title: RichText(
           text: TextSpan(
             text: title,
-            style: theme.textTheme.headline5,
+            style: theme.textTheme.headlineSmall,
             children: [
               if (subTitle?.isNotEmpty == true)
                 TextSpan(text: '\n\n', children: [
                   TextSpan(
                     text: subTitle,
-                    style: theme.textTheme.headline5!.copyWith(
+                    style: theme.textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -290,7 +290,7 @@ class ThemeDialog {
               },
               child: Text(
                 e.key,
-                style: theme.textTheme.headline5?.copyWith(
+                style: theme.textTheme.headlineSmall?.copyWith(
                   color: Colors.blue,
                   fontWeight: FontWeight.normal,
                 ),
@@ -301,7 +301,7 @@ class ThemeDialog {
         ],
         title: Text(
           title,
-          style: theme.textTheme.subtitle2?.copyWith(
+          style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
@@ -309,7 +309,7 @@ class ThemeDialog {
         message: subTitle?.isNotEmpty == true
             ? Text(
                 subTitle!,
-                style: theme.textTheme.subtitle1,
+                style: theme.textTheme.titleMedium,
                 textAlign: TextAlign.center,
               )
             : null,
@@ -322,7 +322,7 @@ class ThemeDialog {
           },
           child: Text(
             titleBottomBtn ?? '',
-            style: theme.textTheme.headline5?.copyWith(
+            style: theme.textTheme.headlineSmall?.copyWith(
               color: Colors.blue,
               fontWeight: FontWeight.normal,
             ),
@@ -375,7 +375,7 @@ class ThemeDialog {
                     Expanded(
                       child: Text(
                         title ?? '',
-                        style: theme.textTheme.headline5,
+                        style: theme.textTheme.headlineSmall,
                       ),
                     ),
                     IconButton(

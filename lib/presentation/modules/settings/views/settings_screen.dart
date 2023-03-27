@@ -62,7 +62,7 @@ class _SettingsScreenState extends StateBase<SettingsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             trans.system,
-            style: textTheme.bodyText1?.copyWith(fontSize: 12),
+            style: textTheme.bodyLarge?.copyWith(fontSize: 12),
           ),
         ),
         const SizedBox(height: 8),
@@ -74,7 +74,7 @@ class _SettingsScreenState extends StateBase<SettingsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             trans.account,
-            style: textTheme.bodyText1?.copyWith(fontSize: 12),
+            style: textTheme.bodyLarge?.copyWith(fontSize: 12),
           ),
         ),
         const SizedBox(height: 8),
@@ -107,7 +107,7 @@ class _SettingsScreenState extends StateBase<SettingsScreen> {
           ),
           Text(
             name,
-            style: textTheme.bodyText1?.copyWith(
+            style: textTheme.bodyLarge?.copyWith(
               fontSize: 14,
             ),
           ),
@@ -129,7 +129,7 @@ class _SettingsScreenState extends StateBase<SettingsScreen> {
           children: [
             Text(
               title,
-              style: textTheme.bodyText2?.copyWith(
+              style: textTheme.bodyMedium?.copyWith(
                 fontSize: 14,
               ),
             ),

@@ -66,7 +66,7 @@ extension ProfileAction on _ProfileScreenState {
                     ),
                     child: Text(
                       e.description(),
-                      style: textTheme.bodyText1?.copyWith(
+                      style: textTheme.bodyLarge?.copyWith(
                         color: AppColor.primaryColor,
                         fontSize: 12,
                       ),
@@ -126,7 +126,7 @@ extension ProfileAction on _ProfileScreenState {
                         ),
                         child: Text(
                           e.localized(trans),
-                          style: textTheme.bodyText1?.copyWith(
+                          style: textTheme.bodyLarge?.copyWith(
                             color: selectedSubjects[index]
                                 ? AppColor.white
                                 : AppColor.primaryColor,
@@ -213,7 +213,7 @@ extension ProfileAction on _ProfileScreenState {
           ),
           child: Text(
             getName(value),
-            style: textTheme.subtitle2?.copyWith(
+            style: textTheme.titleSmall?.copyWith(
               color: Colors.black,
             ),
           ),

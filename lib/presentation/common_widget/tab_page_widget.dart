@@ -91,7 +91,7 @@ class _TabPageWidgetState extends State<TabPageWidget> {
 
   void onDefaultTabCreated(BuildContext context) {
     if (tabController == null) {
-      DefaultTabController.of(context)?.let((that) {
+      DefaultTabController.of(context).let((that) {
         tabController = that;
         widget.onViewCreated?.call(
           tabController!,

@@ -154,11 +154,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Text(
                 trans.bookingTime,
-                style: textTheme.bodyText1,
+                style: textTheme.bodyLarge,
               ),
               Text(
                 widget.args.tutor.name!,
-                style: textTheme.bodyText1?.copyWith(color: AppColor.green),
+                style: textTheme.bodyLarge?.copyWith(color: AppColor.green),
               ),
             ],
           ),
@@ -178,7 +178,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 DateTime.fromMillisecondsSinceEpoch(
                   schedule.startPeriodTimestamp ?? 0,
                 ).toLocal().toDateWithWeekdayFormat(context),
-            style: textTheme.bodyText2?.copyWith(
+            style: textTheme.bodyMedium?.copyWith(
               fontSize: 12,
               color: AppColor.gray8C,
             ),
@@ -202,7 +202,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         children: [
           Text(
             trans.myWallet,
-            style: textTheme.bodyText1,
+            style: textTheme.bodyLarge,
           ),
           Divider(
             height: 12,
@@ -212,7 +212,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Text(
                 trans.balance,
-                style: textTheme.bodyText2?.copyWith(
+                style: textTheme.bodyMedium?.copyWith(
                   fontSize: 14,
                 ),
               ),
@@ -230,7 +230,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ],
                   ),
                   textAlign: TextAlign.right,
-                  style: textTheme.bodyText2?.copyWith(
+                  style: textTheme.bodyMedium?.copyWith(
                     fontSize: 14,
                   ),
                 ),
@@ -244,7 +244,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             children: [
               Text(
                 trans.price,
-                style: textTheme.bodyText2?.copyWith(
+                style: textTheme.bodyMedium?.copyWith(
                   fontSize: 14,
                 ),
               ),
@@ -252,7 +252,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 child: Text(
                   '1 ' + trans.lesson,
                   textAlign: TextAlign.right,
-                  style: textTheme.bodyText2?.copyWith(
+                  style: textTheme.bodyMedium?.copyWith(
                     fontSize: 14,
                   ),
                 ),
@@ -265,7 +265,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           InputContainer(
             controller: controller,
             title: trans.notes,
-            titleStyle: textTheme.bodyText1,
+            titleStyle: textTheme.bodyLarge,
             fillColor: AppColor.white,
             maxLines: 5,
             contentPadding: const EdgeInsets.symmetric(
