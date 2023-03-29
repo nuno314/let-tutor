@@ -49,7 +49,6 @@ class _PaymentScreenState extends State<FeedbackScreen> {
         slivers: [
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              
               (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: FeedbackItem(

@@ -1,10 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart' as dio_p;
-import 'package:let_tutor/data/data_source/remote/app_api_service.dart';
 import 'package:let_tutor/data/models/user.dart';
-import 'package:let_tutor/di/di.dart';
 import 'package:mockito/mockito.dart';
 import 'package:let_tutor/data/data_source/remote/rest_api_repository/rest_api_repository.dart';
 import 'package:http/http.dart' as http;

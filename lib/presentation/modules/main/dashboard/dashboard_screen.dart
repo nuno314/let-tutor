@@ -19,7 +19,6 @@ import '../../courses/courses.dart';
 import '../../histories/histories.dart';
 import '../account/account_screen.dart';
 import '../account/bloc/account_bloc.dart';
-import '../home_page/bloc/home_page_bloc.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'dashboard_constant.dart';
 
@@ -85,10 +84,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
               controller: _pageController,
               children: [
                 KeepAliveWidget(
-                  child: BlocProvider(
-                    create: (context) => HomePageBloc(),
-                    child: const HomePageScreen(),
-                  ),
+                  child: const HomePageScreen(),
                 ),
                 KeepAliveWidget(
                   child: BlocProvider(

@@ -1,9 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:countries_utils/countries_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:let_tutor/common/constants.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
@@ -11,25 +12,21 @@ import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
 import '../../../../data/models/user.dart';
-import '../../../base/base.dart';
 import '../../../common_widget/custom_cupertino_date_picker.dart';
 import '../../../extentions/extention.dart';
-import '../bloc/profile_bloc.dart';
+import '../provider/profile_provider.dart';
 import '/common/utils.dart';
 
 part 'profile.action.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends ConsumerStatefulWidget {
+  const ProfileScreen();
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends StateBase<ProfileScreen> {
-  @override
-  ProfileBloc get bloc => BlocProvider.of(context);
-
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   double get avatarSize => 96;
 
   late ThemeData _themeData;
@@ -37,6 +34,8 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
   TextTheme get textTheme => _themeData.textTheme;
 
   late AppLocalizations trans;
+
+  late User? _user;
 
   final _nameController = InputContainerController();
   final _emailController = InputContainerController();
@@ -57,40 +56,42 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     subjects.length,
     (index) => false,
   );
+
+  late ProfileProvider provider;
+
   @override
   void initState() {
+    provider = ref.read(profileProvider.notifier)..getUserInformation();
     super.initState();
-    loadData();
   }
 
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: _blocListener,
-      builder: (context, state) {
-        return ScreenForm(
-          headerColor: AppColor.primaryColor,
-          bgColor: AppColor.scaffoldColor,
-          title: trans.account,
-          showHeaderImage: false,
-          trans: trans,
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                _buildProfileInfo(state.user),
-                _buildInfoForm(state.user),
-              ],
-            ),
+    final state = ref.watch(profileProvider);
+    _user = state.user;
+    avatarValue.value = _user?.avatar;
+
+    print(_user);
+    return ScreenForm(
+        headerColor: AppColor.primaryColor,
+        bgColor: AppColor.scaffoldColor,
+        title: trans.account,
+        showHeaderImage: false,
+        trans: trans,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              _buildProfileInfo(context),
+              _buildInfoForm(context),
+            ],
           ),
-        );
-      },
-    );
+        ));
   }
 
-  Widget _buildProfileInfo(User? user) {
+  Widget _buildProfileInfo(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -102,7 +103,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               GestureDetector(
-                onTap: tapEditAvatar,
+                onTap: () => tapEditAvatar(context),
                 child: Stack(
                   alignment: AlignmentDirectional.bottomEnd,
                   children: [
@@ -137,14 +138,14 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
           height: 10,
         ),
         Text(
-          user?.name ?? '',
+          _user?.name ?? '',
           style: textTheme.bodyLarge?.copyWith(fontSize: 14),
         ),
         SizedBox(
           height: 10,
         ),
         Text(
-          user?.id ?? '',
+          _user?.id ?? '',
           style: textTheme.bodyMedium?.copyWith(fontSize: 12),
         ),
         SizedBox(
@@ -166,7 +167,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
     );
   }
 
-  Widget _buildInfoForm(User? user) {
+  Widget _buildInfoForm(BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -199,7 +200,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 readOnly: true,
                 controller: _countryController,
                 title: trans.country,
-                onTap: showSelectNationDialog,
+                onTap: () => showSelectNationDialog(context),
               ),
               SizedBox(
                 height: 20,
@@ -209,37 +210,17 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 controller: _phoneNumberController,
                 title: trans.phoneNumber,
                 onTextChanged: (p0) {
-                  if (p0 != user?.phoneNumber) {
-                    setState(() {
-                      user?.isPhoneActivated = false;
-                    });
-                  } else {
-                    setState(() {
-                      user?.isPhoneActivated = true;
-                    });
-                  }
+                  // if (p0 != user?.phoneNumber) {
+                  //   setState(() {
+                  //     user?.isPhoneActivated = false;
+                  //   });
+                  // } else {
+                  //   setState(() {
+                  //     user?.isPhoneActivated = true;
+                  //   });
+                  // }
                 },
               ),
-              if (user?.isPhoneActivated == true) ...[
-                SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColor.green,
-                    ),
-                    color: AppColor.greenB7EB8F,
-                  ),
-                  child: Text(
-                    trans.verified,
-                    style: textTheme.bodyLarge?.copyWith(
-                      color: AppColor.green,
-                    ),
-                  ),
-                ),
-              ],
               SizedBox(
                 height: 20,
               ),
@@ -247,7 +228,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 required: true,
                 title: trans.dateOfBirth,
                 controller: _dobController,
-                onTap: _showBirthdayPicker,
+                onTap: () => _showBirthdayPicker(context),
               ),
               SizedBox(
                 height: 20,
@@ -256,7 +237,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 required: true,
                 title: trans.level,
                 controller: _levelController,
-                onTap: showLevelDialog,
+                onTap: () => showLevelDialog(context),
                 readOnly: true,
               ),
               SizedBox(
@@ -270,7 +251,7 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
                 title: trans.wantToLearn,
                 required: true,
                 readOnly: true,
-                onTap: showWantToLearnDialog,
+                onTap: () => showWantToLearnDialog(context),
               ),
               SizedBox(
                 height: 20,
@@ -293,13 +274,13 @@ class _ProfileScreenState extends StateBase<ProfileScreen> {
           context,
           isWithShadown: false,
           buttonTitle: trans.saveChanges,
-          onTap: () => saveChanges(user),
+          onTap: () => saveChanges(_user),
         ),
       ],
     );
   }
 
-  void tapEditAvatar() async {
+  void tapEditAvatar(BuildContext context) async {
     final file = await ImagePicker(
       context,
       trans.changeAvatar,

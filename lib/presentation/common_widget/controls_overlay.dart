@@ -4,8 +4,7 @@ import 'package:video_player/video_player.dart';
 class ControlsOverlay extends StatefulWidget {
   final VideoPlayerController controller;
 
-  const ControlsOverlay({Key? key, required this.controller})
-      : super(key: key);
+  const ControlsOverlay({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<ControlsOverlay> createState() => _ControlsOverlayState();

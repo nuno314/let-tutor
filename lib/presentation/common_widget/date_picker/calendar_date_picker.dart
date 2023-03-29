@@ -122,8 +122,7 @@ class _DateInputCalendarPickerState extends State<DateInputCalendarPicker> {
                   select?.toNormalDateFormat() ?? widget.hint ?? '',
                   style: textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.normal,
-                    color:
-                        select != null ? Colors.black : AppColor.subText,
+                    color: select != null ? Colors.black : AppColor.subText,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

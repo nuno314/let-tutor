@@ -40,7 +40,6 @@ class LoginFailedState extends SignInState {
   }) : super(viewModel);
 }
 
-
 final _factories = <
     Type,
     Function(

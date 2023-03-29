@@ -12,5 +12,4 @@ class ResetByEmailEvent extends ResetPasswordEvent {
   final String email;
 
   ResetByEmailEvent(this.email);
-
 }

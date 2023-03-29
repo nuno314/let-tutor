@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/config.dart';
 import 'common/utils.dart';
@@ -18,7 +19,7 @@ class AppDelegate {
     ]);
 
     return runZonedGuarded(() async {
-      runApp(const App());
+      runApp(ProviderScope(child: const App()));
     }, (Object error, StackTrace stack) {
       LogUtils.e('Error from runZonedGuarded', error, stack);
     });

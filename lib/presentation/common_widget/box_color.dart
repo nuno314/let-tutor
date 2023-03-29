@@ -122,8 +122,7 @@ class ChipItem extends StatelessWidget {
         child: Text(
           text,
           style: selected
-              ? textTheme.bodyLarge
-                  ?.copyWith(color: AppColor.primaryColor)
+              ? textTheme.bodyLarge?.copyWith(color: AppColor.primaryColor)
               : textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),

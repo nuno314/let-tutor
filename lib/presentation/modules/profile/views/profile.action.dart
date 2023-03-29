@@ -1,24 +1,7 @@
 part of 'profile_screen.dart';
 
 extension ProfileAction on _ProfileScreenState {
-  void _blocListener(BuildContext context, ProfileState state) {
-    _nameController.text = state.user?.name;
-    _emailController.text = state.user?.email;
-    _countryController.text = state.user?.country;
-    _phoneNumberController.text = state.user?.phoneNumber;
-    _dobController.text = state.user?.birthday;
-    _levelController.text = state.user?.level;
-    _wantToLearnController.text = state.user?.wantToLearn;
-    avatarValue.value = state.user?.avatar;
-    _scheduleController.text = state.user?.requireNote;
-
-    if (state is UpdateProfileSuccess) {
-      hideLoading();
-      Navigator.pop(context, state.user);
-    }
-  }
-
-  void _showBirthdayPicker() {
+  void _showBirthdayPicker(BuildContext context) {
     showCupertinoCustomDatePicker(
       context,
       _pickBirthday ?? DateTime.now(),
@@ -30,11 +13,7 @@ extension ProfileAction on _ProfileScreenState {
     );
   }
 
-  void loadData() {
-    bloc.add(GetProfileEvent());
-  }
-
-  void showLevelDialog() {
+  void showLevelDialog(BuildContext context) {
     showDialog(
       useRootNavigator: true,
       useSafeArea: true,
@@ -85,7 +64,7 @@ extension ProfileAction on _ProfileScreenState {
     });
   }
 
-  void showWantToLearnDialog() {
+  void showWantToLearnDialog(BuildContext context) {
     showDialog(
       useRootNavigator: true,
       useSafeArea: true,
@@ -183,9 +162,8 @@ extension ProfileAction on _ProfileScreenState {
     ).then((value) {});
   }
 
-  void showSelectNationDialog() {
+  void showSelectNationDialog(BuildContext context) {
     final countries = Countries.all();
-    hideKeyBoard();
     showDialog(
       context: context,
       builder: (ctx) {
@@ -193,6 +171,7 @@ extension ProfileAction on _ProfileScreenState {
           countries,
           (item) => item.name!,
           (p0) => _countryController.text = p0.name,
+          ctx,
         );
       },
     );
@@ -202,6 +181,7 @@ extension ProfileAction on _ProfileScreenState {
     List<T> items,
     String Function(T) getName,
     Function(T) onSelected,
+    BuildContext context,
   ) {
     return SelectionDialog<T>(
       items: items,
@@ -257,21 +237,6 @@ extension ProfileAction on _ProfileScreenState {
   }
 
   void saveChanges(User? user) {
-    if (validate() == true) {
-      showLoading();
-      bloc.add(
-        UpdateProfileEvent(
-          user!.copyWith(
-            name: _nameController.text,
-            country: _countryController.text,
-            phoneNumber: _phoneNumberController.text,
-            birthday: _dobController.text,
-            level: _levelController.text,
-            specialties: specialties,
-            requireNote: _scheduleController.text,
-          ),
-        ),
-      );
-    }
+    if (validate() == true) {}
   }
 }

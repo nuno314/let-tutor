@@ -25,9 +25,12 @@ AppTheme buildLightTheme() {
       textTheme: AppTextTheme.getDefaultTextTheme(),
       appBarTheme: theme.appBarTheme.copyWith(
         backgroundColor: Colors.white,
-      ), colorScheme: theme.colorScheme.copyWith(
-        secondary: AppColor.primaryColor,
-      ).copyWith(background: Colors.white),
+      ),
+      colorScheme: theme.colorScheme
+          .copyWith(
+            secondary: AppColor.primaryColor,
+          )
+          .copyWith(background: Colors.white),
     ),
   );
 }

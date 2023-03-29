@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import 'cache_network_image_wrapper.dart';
 
-
 class SmartImage extends StatelessWidget {
   final String image;
   final double? width;

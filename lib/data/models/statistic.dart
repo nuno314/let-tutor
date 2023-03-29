@@ -10,7 +10,7 @@ class Statistic {
     this.total,
     this.time,
   });
-  
+
   factory Statistic.fromJson(Map<String, dynamic> json) =>
       _$StatisticFromJson(json);
 

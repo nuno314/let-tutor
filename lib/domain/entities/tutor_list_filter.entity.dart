@@ -45,7 +45,6 @@ class TutorListFilter {
     );
   }
 
-
   Map<String, dynamic> get where => {
         if (specialties.isNotEmpty)
           'specialties': specialties.contains(Specialty.all)

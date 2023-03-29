@@ -197,7 +197,6 @@ class BottomItem extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-             
               child: _buildIcon(),
             ),
             const SizedBox(height: 3),

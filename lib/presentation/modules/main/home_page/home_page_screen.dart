@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/teacher.dart';
-import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/generated/assets.dart';
+import 'package:let_tutor/presentation/modules/main/home_page/provider/home_page_provider.dart';
 
-import 'package:let_tutor/presentation/base/base.dart';
 import 'package:let_tutor/presentation/route/route_list.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
@@ -17,23 +16,20 @@ import '../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../common_widget/teacher_item.dart';
 import '../../../extentions/extention.dart';
 import '../../tutor/views/tutor_screen.dart';
-import 'bloc/home_page_bloc.dart';
+import 'provider/home_page_state.dart';
 
 part 'home_page.action.dart';
 
-class HomePageScreen extends StatefulWidget {
+class HomePageScreen extends ConsumerStatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
   @override
   _HomePageScreenState createState() => _HomePageScreenState();
 }
 
-class _HomePageScreenState extends StateBase<HomePageScreen> {
-  final _refreshController = RefreshController(initialRefresh: false);
+class _HomePageScreenState extends ConsumerState<HomePageScreen> {
+  final _refreshController = RefreshController(initialRefresh: true);
   final _searchController = InputContainerController();
-
-  @override
-  HomePageBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 
@@ -47,9 +43,12 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
 
   late Debouncer _debouncer;
 
+  late HomePageProvider provider;
+
   @override
   void initState() {
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
+    provider = ref.read(homePageProvider.notifier);
     super.initState();
   }
 
@@ -57,6 +56,12 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
+    final state = ref.watch(homePageProvider);
+    if (state.status == HomePageStatus.success) {
+      _refreshController
+        ..refreshCompleted()
+        ..loadComplete();
+    }
     return ScreenForm(
       trans: trans,
       showBackButton: false,
@@ -73,20 +78,17 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
           ),
         )
       ],
-      child: BlocConsumer<HomePageBloc, HomePageState>(
-        listener: _blocListener,
-        builder: (context, state) => SmartRefresherWrapper.build(
-            controller: _refreshController,
-            onRefresh: onRefresh,
-            onLoading: onLoading,
-            enablePullUp: state.viewModel.canLoadMore,
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: _buildListing(state),
-              ),
-            )),
-      ),
+      child: SmartRefresherWrapper.build(
+          controller: _refreshController,
+          onRefresh: onRefresh,
+          onLoading: onLoading,
+          enablePullUp: state.canLoadMore,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: _buildListing(state),
+            ),
+          )),
       floatingActionButton: IconButton(
         constraints: const BoxConstraints(minHeight: 84, minWidth: 84),
         icon: Container(
@@ -109,7 +111,7 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
 
   List<Widget> _buildListing(HomePageState state) {
     return [
-      _buildBanner(state.upcomingLessons.firstOrNull),
+      _buildBanner(state.upcomingLesson),
       _buildTutorList(state),
     ];
   }
@@ -301,6 +303,6 @@ class _HomePageScreenState extends StateBase<HomePageScreen> {
   }
 
   void search(String? value) {
-    bloc.add(SearchTutorEvent(value));
+    provider.searchTutor(value);
   }
 }

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' as dio_p;
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
 
@@ -21,6 +22,9 @@ import 'interceptor/logger_interceptor.dart';
 import 'rest_api_repository/rest_api_repository.dart';
 
 part 'api_service_error.dart';
+
+final restApiServiceProvider =
+    Provider((ref) => injector.get<AppApiService>().client);
 
 @Injectable()
 class AppApiService {
