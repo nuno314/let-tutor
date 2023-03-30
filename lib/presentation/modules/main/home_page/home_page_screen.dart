@@ -46,17 +46,9 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
 
   late HomePageProvider provider;
 
-  @override
-  void didChangeDependencies() {
-    print('===didChangeDependencies');
-    super.didChangeDependencies();
-  }
-
-  @override
   void initState() {
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
     provider = ref.read(homePageProvider.notifier);
-    // ref.listen<HomePageState>(homePageProvider, (previous, next) {});
     super.initState();
   }
 

@@ -13,21 +13,18 @@ class CancelBookingResult {
 }
 
 extension ScheduleAction on _ScheduleScreenState {
-  void _blocListener(BuildContext context, ScheduleState state) {
+  void onRefresh() async {
+    await provider.getSchedule();
     controller
       ..refreshCompleted()
       ..loadComplete();
-    if (state is CancelBookingState) {
-      controller.requestRefresh();
-    }
   }
 
-  void onRefresh() {
-    bloc.add(GetScheduleEvent());
-  }
-
-  void onLoading() {
-    bloc.add(LoadMoreScheduleEvent());
+  void onLoading() async {
+    await provider.loadMoreSchedule();
+    controller
+      ..refreshCompleted()
+      ..loadComplete();
   }
 
   void onBookSchedule() {}
@@ -129,13 +126,14 @@ extension ScheduleAction on _ScheduleScreenState {
           );
         },
       ),
-    ).then((value) {
+    ).then((value) async {
       if (value is CancelBookingResult && value.res == true) {
-        bloc.add(CancelBookingEvent(
-          id: booking.id!,
+        await provider.cancelBooking(
+          scheduleId: booking.id!,
           reason: value.reason!,
-          notes: value.notes ?? '',
-        ));
+          note: value.notes ?? '',
+        );
+        controller.requestRefresh();
       }
     });
   }

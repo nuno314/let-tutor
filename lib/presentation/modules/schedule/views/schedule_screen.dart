@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 import 'package:let_tutor/presentation/common_widget/smart_refresher_wrapper.dart';
+import 'package:let_tutor/presentation/modules/schedule/provider/schedule_provider.dart';
 import 'package:let_tutor/presentation/route/route_list.dart';
 import 'package:let_tutor/presentation/theme/theme_button.dart';
 import 'package:let_tutor/presentation/theme/theme_color.dart';
 
 import '../../../../generated/assets.dart';
-import '../../../base/base.dart';
 import '../../../extentions/extention.dart';
-import '../bloc/schedule_bloc.dart';
 
 part 'schedule.action.dart';
 
-class ScheduleScreen extends StatefulWidget {
+class ScheduleScreen extends ConsumerStatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
 
   @override
-  State<ScheduleScreen> createState() => _ScheduleScreenState();
+  ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
 }
 
-class _ScheduleScreenState extends StateBase<ScheduleScreen> {
+class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   final controller = RefreshController(initialRefresh: true);
-  @override
-  ScheduleBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 
@@ -34,37 +32,40 @@ class _ScheduleScreenState extends StateBase<ScheduleScreen> {
 
   late AppLocalizations trans;
 
+  late ScheduleProvider provider;
+
+  @override
+  void initState() {
+    provider = ref.read(scheduleProvider.notifier);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    return BlocConsumer<ScheduleBloc, ScheduleState>(
-      listener: _blocListener,
-      builder: (context, state) {
-        return ScreenForm(
-          headerColor: AppColor.primaryColor,
-          bgColor: AppColor.scaffoldColor,
-          showHeaderImage: false,
-          showBackButton: false,
-          trans: trans,
-          title: trans.bookingTime,
-          child: SmartRefresherWrapper.build(
-              controller: controller,
-              enablePullUp: state.canLoadMore,
-              onRefresh: onRefresh,
-              onLoading: onLoading,
-              child: SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    ..._buildListing(state),
-                  ],
-                ),
-              )),
-        );
-      },
+    final state = ref.watch(scheduleProvider);
+    return ScreenForm(
+      headerColor: AppColor.primaryColor,
+      bgColor: AppColor.scaffoldColor,
+      showHeaderImage: false,
+      showBackButton: false,
+      trans: trans,
+      title: trans.bookingTime,
+      child: SmartRefresherWrapper.build(
+          controller: controller,
+          enablePullUp: state.canLoadMore,
+          onRefresh: onRefresh,
+          onLoading: onLoading,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                ..._buildListing(state),
+              ],
+            ),
+          )),
     );
   }
 

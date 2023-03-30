@@ -1,22 +1,18 @@
-part of 'schedule_bloc.dart';
+part of 'schedule_provider.dart';
 
 class _ViewModel {
-  final List<Session> sessions;
   final List<BookingInfo> schedules;
   final bool? canLoadMore;
   const _ViewModel({
-    this.sessions = const [],
     this.schedules = const [],
     this.canLoadMore,
   });
 
   _ViewModel copyWith({
-    List<Session>? sessions,
     List<BookingInfo>? schedules,
     bool? canLoadMore,
   }) {
     return _ViewModel(
-      sessions: sessions ?? this.sessions,
       schedules: schedules ?? this.schedules,
       canLoadMore: canLoadMore ?? this.canLoadMore,
     );
@@ -36,7 +32,6 @@ abstract class ScheduleState {
     );
   }
 
-  List<Session> get sessions => viewModel.sessions;
   List<BookingInfo> get schedules => viewModel.schedules;
   bool get canLoadMore => viewModel.canLoadMore ?? false;
 }
@@ -65,3 +60,4 @@ final _factories = <
         viewModel: viewModel,
       ),
 };
+
