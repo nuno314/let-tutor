@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/data/models/teacher.dart';
+import 'package:let_tutor/domain/entities/tutor_list_filter.entity.dart';
 import 'package:let_tutor/generated/assets.dart';
 import 'package:let_tutor/presentation/modules/main/home_page/provider/home_page_provider.dart';
 
@@ -46,9 +47,16 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   late HomePageProvider provider;
 
   @override
+  void didChangeDependencies() {
+    print('===didChangeDependencies');
+    super.didChangeDependencies();
+  }
+
+  @override
   void initState() {
     _debouncer = Debouncer<String>(const Duration(milliseconds: 500), search);
     provider = ref.read(homePageProvider.notifier);
+    // ref.listen<HomePageState>(homePageProvider, (previous, next) {});
     super.initState();
   }
 
@@ -57,11 +65,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
     _themeData = Theme.of(context);
     trans = translate(context);
     final state = ref.watch(homePageProvider);
-    if (state.status == HomePageStatus.success) {
-      _refreshController
-        ..refreshCompleted()
-        ..loadComplete();
-    }
+
     return ScreenForm(
       trans: trans,
       showBackButton: false,
@@ -71,7 +75,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
       ),
       actions: [
         IconButton(
-          onPressed: onTapTutorFilter,
+          onPressed: () => onTapTutorFilter(state),
           icon: Icon(
             Icons.filter_alt,
             color: AppColor.primaryColor,
@@ -201,33 +205,38 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                 borderRadius: BorderRadius.circular(100),
                                 child: CachedNetworkImageWrapper.avatar(
                                   url: info.schedule?.tutorInfo?.avatar ?? '',
-                                  height: 50,
-                                  width: 50,
+                                  height: 24,
+                                  width: 24,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               const SizedBox(
                                 width: 8,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    Assets.svg.icYoutube,
-                                    width: 30,
-                                    color: AppColor.red,
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    trans.enterLessonRoom,
-                                    style: textTheme.bodyLarge?.copyWith(
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      Assets.svg.icYoutube,
+                                      width: 24,
                                       color: AppColor.red,
-                                      fontSize: 12,
                                     ),
-                                  )
-                                ],
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        trans.enterLessonRoom,
+                                        style: textTheme.bodyLarge?.copyWith(
+                                          color: AppColor.red,
+                                          fontSize: 12,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),

@@ -4,6 +4,7 @@ import 'package:let_tutor/data/models/teacher.dart';
 import 'package:let_tutor/presentation/modules/main/home_page/provider/home_page_state.dart';
 
 import '../../../../../domain/entities/pagination.entity.dart';
+import '../../../../../domain/entities/tutor_list_filter.entity.dart';
 import '../repository/home_page_repository.dart';
 
 final homePageProvider = StateNotifierProvider<HomePageProvider, HomePageState>(
@@ -85,6 +86,13 @@ class HomePageProvider extends StateNotifier<HomePageState> {
       status: HomePageStatus.success,
       tutors: tutorList,
       canLoadMore: pagination.canNext,
+    );
+  }
+
+  void applyFilter(TutorListFilter filter) {
+    state = state.copyWith(
+      status: HomePageStatus.filterChanged,
+      filter: filter,
     );
   }
 }
