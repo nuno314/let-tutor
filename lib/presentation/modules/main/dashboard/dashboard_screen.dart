@@ -92,10 +92,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                   child: HistoriesScreen(),
                 ),
                 KeepAliveWidget(
-                  child: BlocProvider(
-                    create: (context) => CoursesBloc(),
-                    child: const CoursesScreen(),
-                  ),
+                  child: CoursesScreen(),
                 ),
                 KeepAliveWidget(
                   child: BlocProvider(

@@ -1,4 +1,4 @@
-part of 'courses_bloc.dart';
+part of 'courses_provider.dart';
 
 class _ViewModel {
   final CoursesFilter coursesFilter;

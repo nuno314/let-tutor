@@ -1,7 +1,7 @@
 part of 'courses_screen.dart';
 
 extension CoursesAction on _CoursesScreenState {
-  void _blocListener(BuildContext context, CoursesState state) {
+  void hideLoading() {
     _coursesRefreshController
       ..refreshCompleted()
       ..loadComplete();
@@ -11,105 +11,97 @@ extension CoursesAction on _CoursesScreenState {
     _interactiveEBooksRefreshController
       ..refreshCompleted()
       ..loadComplete();
-    if (state is CoursesFilterInitial) {
-      _coursesRefreshController.requestRefresh();
-      _eBooksRefreshController.requestRefresh();
-      _interactiveEBooksRefreshController.requestRefresh();
-    } else if (state is ApplyCoursesFilterState) {
-      _coursesRefreshController.requestRefresh();
-    } else if (state is ApplyEBooksFilterState) {
-      _eBooksRefreshController.requestRefresh();
-    } else if (state is ApplyInteractiveEBooksFilterState) {
-      _interactiveEBooksRefreshController.requestRefresh();
-    }
   }
 
-  void onCoursesRefresh() {
-    bloc.add(GetCoursesEvent());
+  void onCoursesRefresh() async {
+    await provider.getCoursesEvent();
+    hideLoading();
   }
 
-  void onCoursesLoading() {
-    bloc.add(LoadMoreCoursesEvent());
+  void onCoursesLoading() async {
+    await provider.loadMoreCoursesEvent();
+    hideLoading();
   }
 
-  void onEBooksRefresh() {
-    bloc.add(GetEBooksEvent());
+  void onEBooksRefresh() async {
+    await provider.getEBooksEvent();
+    hideLoading();
   }
 
-  void onEBooksLoading() {
-    bloc.add(LoadMoreEBooksEvent());
+  void onEBooksLoading() async {
+    await provider.loadMoreEBooksEvent();
+    hideLoading();
   }
 
-  void onInteractiveEBooksRefresh() {
-    bloc.add(GetInteractiveEBooksEvent());
+  void onInteractiveEBooksRefresh() async {
+    await provider.getInteractiveEBooksEvent();
+    hideLoading();
   }
 
-  void onInteractiveEBooksLoading() {
-    bloc.add(LoadMoreInteractiveEBooksEvent());
+  void onInteractiveEBooksLoading() async {
+    await provider.loadMoreInteractiveEBooksEvent();
+    hideLoading();
   }
 
   void _getCoursesSearch(String? value) {
-    bloc.add(
-      ApplyCoursesFilterEvent(
-        bloc.state.coursesFilter.copyWith(
-          searchKey: value,
-        ),
-      ),
-    );
+    //  provider.applyCoursesFilterEvent(
+    //       bloc.state.coursesFilter.copyWith(
+    //         searchKey: value,
+    //       ),
+    //     ),
+    //   );
   }
 
   void _getEBooksSearch(String? value) {
-    bloc.add(
-      ApplyEBooksFilterEvent(
-        bloc.state.eBooksFilter.copyWith(
-          searchKey: value,
-        ),
-      ),
-    );
+    //  provider.applyEBooksFilterEvent(
+    //       bloc.state.eBooksFilter.copyWith(
+    //         searchKey: value,
+    //       ),
+    //     ),
+    //   );
   }
 
   void _getInteractiveEBooksSearch(String? value) {
-    bloc.add(
-      ApplyInteractiveEBooksFilterEvent(
-        bloc.state.interactiveEBooksFilter.copyWith(
-          searchKey: value,
-        ),
-      ),
-    );
+    //  provider.applyInteractiveEBooksFilterEvent(
+    //       bloc.state.interactiveEBooksFilter.copyWith(
+    //         searchKey: value,
+    //       ),
+    //     ),
+    //   );
   }
 
   void onTapFilter() {
-    if (_pageController.page == 0) {
-      Navigator.pushNamed(
-        context,
-        RouteList.coursesFilter,
-        arguments: bloc.state.coursesFilter,
-      ).then((value) {
-        if (value is CoursesFilter) {
-          bloc.add(ApplyCoursesFilterEvent(value));
-        }
-      });
-    } else if (_pageController.page == 1) {
-      Navigator.pushNamed(
-        context,
-        RouteList.coursesFilter,
-        arguments: bloc.state.eBooksFilter,
-      ).then((value) {
-        if (value is CoursesFilter) {
-          bloc.add(ApplyEBooksFilterEvent(value));
-        }
-      });
-    } else if (_pageController.page == 2) {
-      Navigator.pushNamed(
-        context,
-        RouteList.coursesFilter,
-        arguments: bloc.state.interactiveEBooksFilter,
-      ).then((value) {
-        if (value is CoursesFilter) {
-          bloc.add(ApplyInteractiveEBooksFilterEvent(value));
-        }
-      });
-    }
+    // if (_pageController.page == 0) {
+    //   Navigator.pushNamed(
+    //     context,
+    //     RouteList.coursesFilter,
+    //     arguments: bloc.state.coursesFilter,
+    //   ).then((value) {
+    //     if (value is CoursesFilter) {
+    //       bloc.add(ApplyCoursesFilterEvent(value));
+    //     }
+    //   });
+    // } else if (_pageController.page == 1) {
+    //   Navigator.pushNamed(
+    //     context,
+    //     RouteList.coursesFilter,
+    //     arguments: bloc.state.eBooksFilter,
+    //   ).then((value) {
+    //     if (value is CoursesFilter) {
+    //       bloc.add(ApplyEBooksFilterEvent(value));
+    //     }
+    //   });
+    // } else if (_pageController.page == 2) {
+    //   Navigator.pushNamed(
+    //     context,
+    //     RouteList.coursesFilter,
+    //     arguments: bloc.state.interactiveEBooksFilter,
+    //   ).then((value) {
+    //     if (value is CoursesFilter) {
+    //       bloc.add(ApplyInteractiveEBooksFilterEvent(value));
+    //     }
+    //   });
+    // }
   }
 
   void onTapCourse(Course course) {
