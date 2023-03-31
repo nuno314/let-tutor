@@ -10,23 +10,15 @@ class FeedbackTutorResult {
   });
 }
 
-class ReportTutorResult {}
-
 extension HistoriesAction on _HistoriesScreenState {
-  void _blocListener(BuildContext context, HistoriesState state) {
+  void onRefresh() async {
+    await provider.getHistoriesEvent();
     hideLoading();
-
-    if (state is FeedbackTutorState) {
-      controller.requestRefresh();
-    }
   }
 
-  void onRefresh() {
-    bloc.add(GetHistoriesEvent());
-  }
-
-  void onLoading() {
-    bloc.add(LoadMoreHistoriesEvent());
+  void onLoading() async {
+    await provider.loadMoreHistoriesEvent();
+    hideLoading();
   }
 
   void onTapRating(BookingInfo booking) {
@@ -108,16 +100,16 @@ extension HistoriesAction on _HistoriesScreenState {
           );
         },
       ),
-    ).then((value) {
-      hideKeyBoard();
+    ).then((value) async {
       if (value is FeedbackTutorResult) {
-        bloc.add(
-          RateBookingEvent(
-            rating: value.rating,
-            bookingId: booking.id!,
-            content: value.content,
-          ),
+        final res = await provider.rateBookingEvent(
+          rating: value.rating,
+          bookingId: booking.id!,
+          content: value.content,
         );
+        if (res) {
+          controller.requestRefresh();
+        }
       }
     });
   }

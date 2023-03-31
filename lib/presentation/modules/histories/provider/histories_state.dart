@@ -1,4 +1,4 @@
-part of 'histories_bloc.dart';
+part of 'histories_provider.dart';
 
 class _ViewModel {
   final List<BookingInfo> bookings;

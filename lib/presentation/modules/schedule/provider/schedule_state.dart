@@ -60,4 +60,3 @@ final _factories = <
         viewModel: viewModel,
       ),
 };
-

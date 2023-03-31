@@ -89,10 +89,7 @@ class _DashboardScreenState extends StateBase<DashboardScreen>
                   child: ScheduleScreen(),
                 ),
                 KeepAliveWidget(
-                  child: BlocProvider(
-                    create: (context) => HistoriesBloc(),
-                    child: const HistoriesScreen(),
-                  ),
+                  child: HistoriesScreen(),
                 ),
                 KeepAliveWidget(
                   child: BlocProvider(

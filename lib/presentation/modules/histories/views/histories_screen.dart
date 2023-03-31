@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:let_tutor/data/models/payment.dart';
 import 'package:let_tutor/presentation/common_widget/export.dart';
 
 import '../../../../generated/assets.dart';
-import '../../../base/base.dart';
 import '../../../common_widget/smart_refresher_wrapper.dart';
 import '../../../extentions/extention.dart';
 import '../../../theme/theme_button.dart';
 import '../../../theme/theme_color.dart';
-import '../bloc/histories_bloc.dart';
+import '../provider/histories_provider.dart';
 
 part 'histories.action.dart';
 
-class HistoriesScreen extends StatefulWidget {
+class HistoriesScreen extends ConsumerStatefulWidget {
   const HistoriesScreen({Key? key}) : super(key: key);
 
   @override
-  State<HistoriesScreen> createState() => _HistoriesScreenState();
+  ConsumerState<HistoriesScreen> createState() => _HistoriesScreenState();
 }
 
-class _HistoriesScreenState extends StateBase<HistoriesScreen> {
+class _HistoriesScreenState extends ConsumerState<HistoriesScreen> {
   final controller = RefreshController(initialRefresh: true);
-
-  @override
-  HistoriesBloc get bloc => BlocProvider.of(context);
 
   late ThemeData _themeData;
 
@@ -34,46 +30,48 @@ class _HistoriesScreenState extends StateBase<HistoriesScreen> {
 
   late AppLocalizations trans;
 
-  @override
+  late HistoriesProvider provider;
+
   void hideLoading() {
     controller
       ..refreshCompleted()
       ..loadComplete();
-    super.hideLoading();
+  }
+
+  @override
+  void initState() {
+    provider = ref.read(historiesProvider.notifier);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
     trans = translate(context);
-    return BlocConsumer<HistoriesBloc, HistoriesState>(
-      listener: _blocListener,
-      builder: (context, state) {
-        return ScreenForm(
-          headerColor: AppColor.primaryColor,
-          bgColor: AppColor.scaffoldColor,
-          showHeaderImage: false,
-          showBackButton: false,
-          trans: trans,
-          title: trans.history,
-          child: SmartRefresherWrapper.build(
-            controller: controller,
-            enablePullUp: state.canLoadMore,
-            onRefresh: onRefresh,
-            onLoading: onLoading,
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ..._buildListing(state),
-                ],
-              ),
-            ),
+    final state = ref.watch(historiesProvider);
+    return ScreenForm(
+      headerColor: AppColor.primaryColor,
+      bgColor: AppColor.scaffoldColor,
+      showHeaderImage: false,
+      showBackButton: false,
+      trans: trans,
+      title: trans.history,
+      child: SmartRefresherWrapper.build(
+        controller: controller,
+        enablePullUp: state.canLoadMore,
+        onRefresh: onRefresh,
+        onLoading: onLoading,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ..._buildListing(state),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
